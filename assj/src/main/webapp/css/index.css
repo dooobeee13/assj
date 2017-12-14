@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+body {
+	background:#ebecee;
+}
+
+@media ( min-width : 992px) {
+	.topline a {
+		float: right;
+		padding: 10px 20px;
+	}
+	.padding-0 {
+		padding: 0;
+	}
+}
+
+.searchline {
+	margin: 20px 0;
+}
+
+.searchline .btn {
+	background: #2e6da4;
+	color: #fff;
+	border: 2px solid #2e6da4;
+}
+
+.searchline input {
+	border: 2px solid #2e6da4;
+}
+
+.login-form {
+	padding: 10px;
+}
+
+.login-form .input-group-sm {
+	margin-bottom: 5px;
+}
+
+.login-form .checkbox {
+	color: gray;
+}
+
+.nav .active {
+	font-weight: bold;
+}
+
+.media-left img {
+	width: 54px;
+}
+
+.media {
+	border-bottom: 1px solid lightgray;
+}
+
+.tags {
+	color: #999;
+	font-size: 12px;
+	display: inline-block;
+	text-decoration: none;
+	padding-bottom: 4px;
+}
+
+.tags:nth-child(2):before {
+	content: '';
+	padding-right: 0px;
+}
+
+.tags:before {
+	content: '\b7\a0';
+	padding-right: 1px;
+}
+
+.conten {
+	background: #fff;
+	border-radius: 5px
+}
+
+.media-heading {
+	font-size: 16px;
+}
+
+.media-heading a {
+	color: #333;
+	font-weight: bold;
+}
+
+.media-body .glyphicon {
+	color: #999;
+	font-size: 12px;
+}
+
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+.navbar-default {
+	background-color: #2e6da4;
+	border-top: 3px solid #2e6da4;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+	font-size: 15px;
+	font-family: "맑은 고딕", "Malgun Gothic", 굴림, Gulim, sans-serif;
+	font-weight: 400;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: #2e6da4;
+	background-color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
+	.navbar-default .navbar-nav>.active>a:hover {
+	color: #2e6da4;
+	background-color: #fff;
+}
+
+.panel-default>.panel-heading {
+	background-color: #fff;
+}
+
+.panel-body span:before {
+	content: '';
+	padding-right: 1px;
+}
+
+.panel-body span:after {
+	content: '';
+	padding-left: 1px;
+}
+
+.searchCategory .panel {
+	height: 195px;
+	margin-bottom: 0;
+}
+
+.searchCategory {
+	display: none;
+	border: 2px solid #2e6da4;
+	left: 13px;
+}

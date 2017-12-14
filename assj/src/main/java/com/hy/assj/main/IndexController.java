@@ -1,4 +1,4 @@
-package com.hy.assj;
+package com.hy.assj.main;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
