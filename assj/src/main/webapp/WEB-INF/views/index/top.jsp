@@ -92,7 +92,7 @@
 						<div class="panel panel-default col-md-4">
 							<div class="panel-heading">학력별</div>
 							<div class="panel-body">
-								<span>고졸채용</span> <span>2·3년제 채용</span> <span>석박사채용</span> <span>부산</span>
+								<span>고졸채용</span> <span>2·3년제 채용</span> <span>4년제졸업</span> <span>석박사채용</span>
 								<span>대구</span> <span>대전</span> <span>광주</span> <span>울산</span>
 							</div>
 						</div>
