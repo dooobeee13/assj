@@ -113,7 +113,7 @@
 									<a href="#">아이디 / 비밀번호 찾기</a>
 								</p>
 								<p style="font-size: 0.9em">
-									<a href="#">아직 회원이 아니세요? 회원가입</a>
+									<a href="<c:url value='/member/register/register.do'/>">아직 회원이 아니세요? 회원가입</a>
 								</p>
 							</form>
 						</div>
