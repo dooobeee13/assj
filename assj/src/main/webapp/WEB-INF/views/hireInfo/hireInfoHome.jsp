@@ -150,6 +150,14 @@
 	    color: lightgray;
 	    cursor: pointer;
     }
+    
+    .searchCondition {
+    	padding: 10px;
+    }
+    
+    .searchCondition span.item {
+    	margin: 5px;
+    }
 </style>
 <script>
 	$(function(){
@@ -166,14 +174,16 @@
 	
 	<section class="container">
 		<div class="row">
-			<div class="col-sm-3 ">
-				<ul class="list-group">
-					<li class="list-group-item">채용정보 상세검색</li>
-					<li class="list-group-item">지역별</li>
-					<li class="list-group-item">직업별(직종)</li>
-					<li class="list-group-item">산업별(업종)</li>
-					<li class="list-group-item">학력별</li>
-				</ul>
+			<div class="col-sm-3">
+				<div>
+					<ul class="list-group">
+						<li class="list-group-item">채용정보 상세검색</li>
+						<li class="list-group-item">지역별</li>
+						<li class="list-group-item">직업별(직종)</li>
+						<li class="list-group-item">산업별(업종)</li>
+						<li class="list-group-item">학력별</li>
+					</ul>
+				</div>
 			</div>
 			<div class="col-sm-9">
 				<div>
@@ -301,14 +311,14 @@
 							</div>
 							<div class="sub_category">
 								<ul>
-									<li>서비스업</li>
-									<li>의료·제약·복지</li>
-									<li>제조·화학</li>
-									<li>판매·유통</li>
-									<li>IT·웹·통신</li>
-									<li>건설업</li>
-									<li>교육업</li>
-									<li>미디어·디자인</li>
+									<li>[직급] 사원</li>
+									<li>[직급] 주임</li>
+									<li>[직급] 계장</li>
+									<li>[직급] 대리</li>
+									<li>[직급] 과장</li>
+									<li>[직급] 차장</li>
+									<li>[직급] 부장</li>
+									<li>[직급] 감사</li>
 								</ul>
 							</div>
 						</div>
@@ -319,19 +329,30 @@
 							</div>
 							<div class="sub_category">
 								<ul>
-									<li>서비스업</li>
-									<li>의료·제약·복지</li>
-									<li>제조·화학</li>
-									<li>판매·유통</li>
-									<li>IT·웹·통신</li>
-									<li>건설업</li>
-									<li>교육업</li>
-									<li>미디어·디자인</li>
+									<li>인문/사회</li>
+									<li>어학계열</li>
+									<li>자연계열</li>
+									<li>공학계열</li>
+									<li>상경계열</li>
+									<li>사범계열</li>
+									<li>의학/예체능</li>
 								</ul>
 							</div>
 						</div>
 						
 						
+					</div>
+				</div>
+				
+				<div class="row" style="background: #fff">
+					<div class="col-sm-9 searchCondition" style="min-height: 100px">
+						<span class="item">경기>고양시<span class="glyphicon glyphicon-remove"></span></span>
+						<span class="item">IT·웹통신<span class="glyphicon glyphicon-remove"></span></span>
+						<span class="item">공학계열>컴퓨터공학<span class="glyphicon glyphicon-remove"></span></span>
+						<span class="item">대학졸업(4년)<span class="glyphicon glyphicon-remove"></span></span>
+					</div>
+					<div class="col-sm-3" style="padding: 20px 0 0 0; text-align: center" >
+						<button type="button" class="btn btn-primary btn-lg">검색하기</button>
 					</div>
 				</div>
 				

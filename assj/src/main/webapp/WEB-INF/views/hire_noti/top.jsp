@@ -1,53 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
- 	String t_userid=(String)session.getAttribute("userid");   	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainstyle.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/clear.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/layout.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mystyle.css"/>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainstyle.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clear.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mystyle.css"/>
+<script type="text/javascript" 
+	src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
+
 <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>      
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
+        
 </head>
 
 <body>	
 	<!-- 상단 띠 이미지 영역-->
-	<div id="topImg" class="top_Img" style="background:url(<%=request.getContextPath()%>/images/bg_top1.PNG)  repeat-x">
+	<div id="topImg" class="top_Img" style="background:url(${pageContext.request.contextPath}/images/bg_top1.PNG)  repeat-x">
 		&nbsp;
 	</div>
 
 	<div id="wrap">
 		<!-- header -->				
-		<header id="header">
-			<h1><a href="<%=request.getContextPath()%>/index.jsp"><img alt="로고 이미지" src="<%=request.getContextPath()%>/images/herbLogo7.jpg" height="95px" /></a></h1>
-			<%-- <nav id="headerRight">
-				<ul class="views">	
-				<!-- 로그인 안된 경우 -->
-				<%if(t_userid==null || t_userid.isEmpty()){ %>
-					<li><a href="<%=request.getContextPath()%>/login/login.jsp">로그인</a></li>
-					<li><a href="<%=request.getContextPath()%>/member/agreement.jsp">회원가입</a></li>	            
-				<%}else{ %>
-				<!-- 로그인 된 경우 -->
-					<li><a href="<%=request.getContextPath()%>/login/logout.jsp">로그아웃</a></li>
-					<li><a href="<%=request.getContextPath()%>/member/memberEdit.jsp">회원정보수정</a></li>	    
-					<li><a href="<%=request.getContextPath()%>/member/memberOut.jsp">회원탈퇴</a></li>	    
-				<%}//if %>
-				
-					<li><a href="<%=request.getContextPath()%>/shop/cart/cartList.jsp">장바구니</a></li>
-					<li><a href="<%=request.getContextPath()%>/shop/order/orderList.jsp">주문내역</a></li>
-					<li><a href="<%=request.getContextPath()%>/shop/mypage.jsp">마이페이지</a></li>
-					<li><a href="<%=request.getContextPath()%>/board/list.jsp">고객센터</a></li>					
+		<%-- <header id="header">
+			<h1><a href="<c:url value='/index.do'/>">
+			<img alt="로고 이미지" src="${pageContext.request.contextPath}/images/herbLogo7.jpg" height="95px" /></a></h1>
+			<nav id="headerRight">
+				<ul class="views">
+					<!-- 로그인 안된 경우 -->
+					<c:if test="${empty sessionScope.userid }">										
+						<li><a href="<c:url value='/login/login.do'/>">로그인</a></li>
+						<li><a href="<c:url value='/member/agreement.do'/>">회원가입</a></li>
+					</c:if>
+					
+					<!-- 로그인 된 경우 -->
+					<c:if test="${!empty sessionScope.userid }">										
+						<li><a href="<c:url value='/login/logout.do'/>">로그아웃</a></li>
+						<li><a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a></li>
+						<li><a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a></li>
+					</c:if>
+										            
+					<li><a href="<c:url value='/shop/cart/cartList.do'/>">장바구니</a></li>
+					<li><a href="<c:url value='/shop/order/orderList.do'/>">주문내역</a></li>
+					<li><a href="<c:url value='/shop/mypage.do'/>">마이페이지</a></li>
+					<li><a href="<c:url value='/board/list.do'/>">고객센터</a></li>					
 				</ul>				
-			</nav> --%>
-		</header>
+			</nav>
+		</header> --%>
 
 		<nav id="top_navi">
 			<div id='cssmenu'>
@@ -62,9 +69,17 @@
 			</div>
 		</nav>
 		
-		<!-- 라인 이미지 영역-->
-		<div id="topLine" class="top_Line" style="background:url(<%=request.getContextPath()%>/images/line6.jpg)  repeat-x;font-size:7px">
-			&nbsp;
-		</div>
-		
-	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
