@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="TStopion_div option_flo area"
 	style="width: 1189px; margin-left: 4em; margin-bottom: 4em; overflow-y: auto;">
 	<div style="height: 100%; width: 20%; float: left;">
@@ -48,14 +49,14 @@
 			</ul>
 		</div>
 	</div>
-	<div class="area-1-detail col-div-80">
+	<div class="area-1-detail col-div-80 area-Background" style="background-image: url('<c:url value="/images/backg.jpg"/>');">
 		<div class="col-div-100-100">
 			<div class="col-div-100-100"
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
-					<li class="col-li-4-br"><input class="mini-checkbox"
+					<li class="col-li-4-nb"><input class="mini-checkbox"
 						type="checkbox" id="a1-1"><label for="a1-1">강남구</label></li>
-					<li class="col-li-4-br"><input class="mini-checkbox"
+					<li class="col-li-4-nb"><input class="mini-checkbox"
 						type="checkbox" id="a1-2"><label for="a1-2">강동구</label></li>
 					<li class="col-li-4-br"><input class="mini-checkbox"
 						type="checkbox" id="a1-3"><label for="a1-3">강북구</label></li>

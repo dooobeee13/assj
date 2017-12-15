@@ -7,7 +7,7 @@
 			style="padding-left: 6em; padding-top: 2em;">
 			<h3 class="content_title">근무형태</h3>
 		</div>
-		<div class="col-div-80-100"
+		<div class="col-div-80-100 workingStyleSelect"
 			style="padding-left: 6em; padding-top: 2em;">
 			<ul>
 				<li class="col-li-4">정규직</li>

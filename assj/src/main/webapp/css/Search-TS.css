@@ -14,6 +14,7 @@ li,ul{
 }
 li{
 	padding-left:2em;
+	background:#f4f4f4;
 }
 h3{
 	margin: 0;
@@ -907,7 +908,7 @@ label{
 }
 .select{
 	border: 1px solid #5B5B5B;
-	background-color: white;
+	background:white;
 	box-sizing: border-box;
 }
 .chbox-span{
@@ -924,4 +925,10 @@ label{
 	margin-left:1.7em;
 	margin-top:1em; 
 	text-align: center;
+}
+.rankSelectVal > li{
+	background:#f4f4f4;
+}
+.area-Background{
+	background-size: contain;
 }
