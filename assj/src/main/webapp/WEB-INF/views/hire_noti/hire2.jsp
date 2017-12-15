@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><!-- 반응형 웹을위한 메타태그 -->
-<title>사람인 공고/지원자관리</title>
+<title>assj 공고/지원자관리</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainstyle.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css" />
