@@ -11,153 +11,180 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
+@media ( min-width : 992px) {
+	.topline a {
+		float: right;
+		padding: 10px 20px;
+	}
+	.padding-0 {
+		padding: 0;
+	}
+}
 
-	@media (min-width: 992px) {
-		.topline a {
-			float: right;
-			padding: 10px 20px;
-		}
-		
-		.padding-0 {
-			padding: 0;
-		}
-	}
-	
-	.searchline {
-		margin: 20px 0;
-	}
-	
-	.searchline .btn{
-		background: #2e6da4;
-		color: #fff;
-		border: 2px solid #2e6da4;
-	}
-	
-	.searchline input {
-		border: 2px solid #2e6da4;
-	}
-	
-	.nav .active {
-		font-weight: bold;
-	}
-	
-	.conten {
-		background: #fff;
-		border-radius: 5px
-	}
-	
-	footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    .navbar-default {
-    	background-color: #2e6da4;
-    	border-top: 3px solid #2e6da4;
-    }
-    
-    .navbar-default .navbar-nav>li>a {
-    	color: #fff;
-    	font-size: 15px;
-    	font-family: "맑은 고딕", "Malgun Gothic", 굴림, Gulim, sans-serif;
-    	font-weight: 400;
-	}
-	
-    .navbar-default .navbar-nav>li>a:hover {
-    	color: #2e6da4;
-    	background-color: #fff;	
-	}
-	
-	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
-    	color: #2e6da4;
-   	 	background-color: #fff;	
-    }
-    
-    .panel-default>.panel-heading {
-    	background-color: #fff;
-    }
-    
-    .panel-body span:before {
-    	content: '';
-	    padding-right: 1px;
-    }
-    .panel-body span:after {
-    	content: '';
-	    padding-left: 1px;
-    }
-    
-    .searchCategory .panel {
-    	height: 195px;
-    	margin-bottom: 0;
-    }
-    
-    .searchCategory {
-    	display: none;
-    	border: 2px solid #2e6da4;
-    	left: 13px;
-    }
-    
-    
-    
-    .sCateBt {
-    	padding-left: 0;
-    	padding-right: 0;
-    	border : 1px solid #e0e2e6
-    }
-    
-    .sCateBt .top_category {
-    	line-height: 40px; 
-    	height: 42px;
-    	background-color: #f9fafc;
-    	color: #333;
-    	font-weight: bold;
-    	cursor: pointer;
-    	padding-left: 17px;
-    }
-    
-   	.sCateBt .top_category .glyphicon {
-   		float: right;
-   		top: 15px;
-    	padding-right: 10px;
-   	}
-    
-    .sCateBt .sub_category {
-    	height: 210px; 
-    	overflow: hidden;
-    	background: #fff;
-    	
-    }
-    
-    .sCateBt .sub_category ul {
-    	list-style: none; 
-    	padding-left: 0;
-    }
-    
-     .sCateBt .sub_category ul li {
-     	padding-left: 17px;
-     	height: 32px;
-     	cursor: pointer;
-     }
-     
-     .sCateBt .sub_category ul li:hover {
-     	color: #39f;
-     }
-    
-    .scrapIcon {
-    	font-size: 16px;
-	    top: 3px;
-	    color: lightgray;
-	    cursor: pointer;
-    }
-    
-    .searchCondition {
-    	padding: 10px;
-    }
-    
-    .searchCondition span.item {
-    	margin: 5px;
-    }
+.searchline {
+	margin: 20px 0;
+}
+
+.searchline .btn {
+	background: #2e6da4;
+	color: #fff;
+	border: 2px solid #2e6da4;
+}
+
+.searchline input {
+	border: 2px solid #2e6da4;
+}
+
+.nav .active {
+	font-weight: bold;
+}
+
+.conten {
+	background: #fff;
+	border-radius: 5px
+}
+
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+.navbar-default {
+	background-color: #2e6da4;
+	border-top: 3px solid #2e6da4;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+	font-size: 15px;
+	font-family: "맑은 고딕", "Malgun Gothic", 굴림, Gulim, sans-serif;
+	font-weight: 400;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: #2e6da4;
+	background-color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
+	.navbar-default .navbar-nav>.active>a:hover {
+	color: #2e6da4;
+	background-color: #fff;
+}
+
+.panel-default>.panel-heading {
+	background-color: #fff;
+}
+
+.panel-body span:before {
+	content: '';
+	padding-right: 1px;
+}
+
+.panel-body span:after {
+	content: '';
+	padding-left: 1px;
+}
+
+.searchCategory .panel {
+	height: 195px;
+	margin-bottom: 0;
+}
+
+.searchCategory {
+	display: none;
+	border: 2px solid #2e6da4;
+	left: 13px;
+}
+
+.sCateBt {
+	padding-left: 0;
+	padding-right: 0;
+	border: 1px solid #e0e2e6
+}
+
+.sCateBt .top_category {
+	line-height: 40px;
+	height: 42px;
+	background-color: #f9fafc;
+	color: #333;
+	font-weight: bold;
+	cursor: pointer;
+	padding-left: 17px;
+}
+
+.sCateBt .top_category .glyphicon {
+	float: right;
+	top: 15px;
+	padding-right: 10px;
+}
+
+.sCateBt .sub_category {
+	height: 210px;
+	overflow-y: scroll;
+	background: #fff;
+}
+
+.sCateBt .sub_category::-webkit-scrollbar-track
+{
+	background-color: #fff;
+}
+
+.sCateBt .sub_category::-webkit-scrollbar {
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+.sCateBt .sub_category::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: rgba(0,0,0,0.1);
+}
+
+.sCateBt .sub_category ul, .sCateBt .category ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.sCateBt .sub_category ul li, .sCateBt .category ul li{
+	padding-left: 17px;
+	height: 32px;
+	cursor: pointer;
+}
+
+.sCateBt .sub_category ul li:hover {
+	color: #39f;
+}
+
+.scrapIcon {
+	font-size: 16px;
+	top: 3px;
+	color: lightgray;
+	cursor: pointer;
+}
+
+.searchCondition {
+	padding: 10px;
+}
+
+.searchCondition span.item {
+	margin: 5px;
+}
+
+.sCateBt.top .detail {
+	display: none;
+	background: #fff;
+}
+
+.sCateBt.top .on {
+	display: block;
+}
+
+.sCateBt .active{
+	background: #333;
+	color: #fff;
+}
 </style>
 <script>
 	$(function(){
@@ -165,7 +192,25 @@
 			$('.searchCategory').show();
 		},function(){
 			$('.searchCategory').hide();
+		});
+		
+		
+		$('.sCateBt .top_category').click(function(e){
+			$(this).parent().siblings().find('.top_category').removeClass('active');
+			$(this).toggleClass('active');
+			$('.sCateBt .top_category').find('span').attr('class', 'glyphicon glyphicon-chevron-down');
+			$('.sCateBt .top_category.active').find('span').attr('class', 'glyphicon glyphicon-chevron-up');
 		})
+		
+		$('.top_category').click(function(e){
+			$(this).next().next().toggleClass('on');
+			$(this).parent().siblings().find('.detail').removeClass('on');
+			if ($('.sCateBt.top').find('.on').length > 0) {
+				$('.sCateBt.top .sub_category').hide();
+			} else {
+				$('.sCateBt.top .sub_category').show();
+			}
+		});
 	})
 </script>
 </head>
@@ -188,16 +233,9 @@
 			<div class="col-sm-9">
 				<div>
 					<div class="row">
-						<div class="col-md-3 sCateBt">
+						<div class="col-md-3 sCateBt top">
 							<div class="top_category">
 								직무<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							
-							<div style="width: 403%;height: 210px;background: red; display: none; position: absolute;z-index: 1;">
-								
-							</div>
-							<div style="width: 403%;height: 210px;background: green; display: none; position: absolute;z-index: 1;">
-								
 							</div>
 							
 							<div class="sub_category">
@@ -211,9 +249,41 @@
 									<li>전문·특수직</li>
 								</ul>
 							</div>
+							
+							<div class="detail" style="width: 403%;height: 300px;z-index: 1;">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="category">
+											<ul>
+												<li>경영·사무</li>
+												<li>마케팅·무역·유통</li>
+												<li>영업·고객상담</li>
+												<li>IT·인터넷</li>
+												<li>연구개발·설계</li>
+												<li>생산·제조</li>
+												<li>전문·특수직</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-md-9">
+										<div class="category">
+											<ul>
+												<li>경영·사무</li>
+												<li>마케팅·무역·유통</li>
+												<li>영업·고객상담</li>
+												<li>IT·인터넷</li>
+												<li>연구개발·설계</li>
+												<li>생산·제조</li>
+												<li>전문·특수직</li>
+											</ul>
+										</div>
+									</div>
+								</div>	
+							</div>
+							
 						</div>
 						
-						<div class="col-md-3 sCateBt">
+						<div class="col-md-3 sCateBt top">
 							<div class="top_category">
 								근무지역<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
@@ -233,9 +303,13 @@
 									<li>경북</li>
 								</ul>
 							</div>
+							
+							<div class="detail" style="margin-left: -101%;width: 403%;height: 300px;background: green; z-index: 1;">
+							</div>
+							
 						</div>
 						
-						<div class="col-md-3 sCateBt">
+						<div class="col-md-3 sCateBt top">
 							<div class="top_category">
 								경력
 							</div>
@@ -253,7 +327,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCateBt">
+						<div class="col-md-3 sCateBt top">
 							<div class="top_category">
 								학력
 							</div>
@@ -268,6 +342,8 @@
 								</ul>
 							</div>
 						</div>
+						
+						<div class="clearfix"></div>
 						
 						<div class="col-md-3 sCateBt">
 							<div class="top_category">
@@ -345,13 +421,15 @@
 				</div>
 				
 				<div class="row" style="background: #fff">
-					<div class="col-sm-9 searchCondition" style="min-height: 100px">
-						<span class="item">경기>고양시<span class="glyphicon glyphicon-remove"></span></span>
-						<span class="item">IT·웹통신<span class="glyphicon glyphicon-remove"></span></span>
+					<div class="col-sm-10 searchCondition" style="min-height: 100px">
+						<c:forEach begin="1" end="10">
+							<button style="margin-right: 20px; background: #fff; border: 0"><span class="item">경기>고양시</span><span class="glyphicon glyphicon-remove"></span></button>
+						</c:forEach>
+						<!-- <span class="item">IT·웹통신<span class="glyphicon glyphicon-remove"></span></span>
 						<span class="item">공학계열>컴퓨터공학<span class="glyphicon glyphicon-remove"></span></span>
-						<span class="item">대학졸업(4년)<span class="glyphicon glyphicon-remove"></span></span>
+						<span class="item">대학졸업(4년)<span class="glyphicon glyphicon-remove"></span></span> -->
 					</div>
-					<div class="col-sm-3" style="padding: 20px 0 0 0; text-align: center" >
+					<div class="col-sm-2" style="padding: 20px 0 0 0; text-align: center" >
 						<button type="button" class="btn btn-primary btn-lg">검색하기</button>
 					</div>
 				</div>
