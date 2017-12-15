@@ -9,6 +9,7 @@
 </head>
 <body>
 	<script type="text/javascript">
+		alert('dd');
 		<c:if test="${!empty msg}">		
 			alert("${msg}");
 		</c:if>

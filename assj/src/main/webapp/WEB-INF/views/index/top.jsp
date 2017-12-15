@@ -101,11 +101,11 @@
 
 
 					</div></li>
-				<li><a href="#">직업별</a></li>
-				<li><a href="#">지역별</a></li>
-				<li><a href="#">menu1</a></li>
-				<li><a href="#">menu2</a></li>
-				<li><a href="#">menu3</a></li>
+				<li class="searchjob"><a href="#">직업별</a></li>
+				<li class="searchjob"><a href="#">지역별</a></li>
+				<li class="searchjob"><a href="#">menu1</a></li>
+				<li class="searchjob"><a href="#">menu2</a></li>
+				<li class="searchjob"><a href="#">menu3</a></li>
 			</ul>
 		</div>
 	</div>

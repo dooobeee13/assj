@@ -43,6 +43,56 @@
 	#btnDiv{
    		text-align:center;
    	}
+   	
+   	
+   	
+   	
+   	 #page-wrapper {
+    padding-left: 250px;
+  }
+  
+  #sidebar-wrapper {
+    position:absolute;
+    width: 220px;
+    height: 75%;
+    background: #ffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+  /* 사이드바 스타일 */
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 1.5em;
+    line-height: 2.8em;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+  }
+  
+  .sidebar-nav li a:hover {
+    color: #cccc;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,8 +103,41 @@
 </head>
 	<body>
 		<c:import url="../../index/top.jsp" />
+		<div id="page-wrapper">
+		<!-- 사이드바 -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
+				<hr>
+				<li><h4><b>무엇을 도와드릴까요?</b></h4></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>도움말</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>아이디.비밀번호 찾기</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h4><b>개인회원서비스</b></h4></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h4><b>기업회원서비스</b></h4></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 상품 안내</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>S-포인트 안내 </a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>SIAT 인적성검사 상품 </a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>기업회원 탈퇴</a></li>
+			</ul>
+		</div>
+	</div>
+		<!-- /사이드바 -->
+		
+		<!-- 본문 -->
 		<div class="container">
 			<fieldset>
+			
 				<h1>이메일 문의</h1>
 				<br>
 				<hr>

@@ -74,6 +74,8 @@
 							<div>블루홀</div>
 							<div>한화테크윈</div>
 							<div>LG화학</div>
+							<div>LG display</div>
+							<div>naver</div>
 						</div>
 					</div>
 

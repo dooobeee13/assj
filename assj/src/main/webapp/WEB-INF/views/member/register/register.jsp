@@ -141,39 +141,43 @@
     		
     		//기업회원
 			$('#cpRegister').click(function(){
-				if($('#CM_ID').val()==""){
-					alert('아이디를 입력하세요.');
-					$('#CM_ID').focus();
-					return false;
-				}else if($('#CM_PWD1').val()==""){
-					alert('비밀번호를 입력하세요.');
-					$('#CM_PWD1').focus();
-					return false;
-				}else if($('#CM_PWD1').val()!=$('#CM_PWD2').val()){
-					alert('비밀번호가 일치하지 않습니다.');
-					$('#CM_PWD2').focus();
-					return false;
-				}else if($('#CM_REGNUM').val()==""){
+				if(!$.validate_userid($('#cmId').val())){
+    				alert('아이디는 영문자나 숫자만 가능합니다.');
+    				$('#cmId').focus();
+    				return false;
+    			}else if($('#cmPwd').val()==""||$('#cmPwd').val().length<8){
+    				alert('비밀번호를 확인하세요.');
+    				$('#cmPwd').focus();
+    				return false;
+    			}else if($('#cmPwd').val()!=$('#cmPwd2').val()){
+    				alert('비밀번호가 일치하지 않습니다.');
+    				$('#cmPwd2').focus();
+    				return false;
+    			}else if($('#cmRegnum').val()==""){
 					alert('사업자 등록번호를 입력하세요.');
-					$('#CM_REGNUM').focus();
+					$('#cmRegnum').focus();
 					return false;
-				}else if($('#CM_NAME').val()==""){
+				}else if($('#cmName').val()==""){
 					alert('회사명을 입력하세요.');
-					$('#CM_NAME').focus();
+					$('#cmName').focus();
 					return false;
-				}else if($('#CM_REPRE').val()==""){
+				}else if($('#cmRepre').val()==""){
 					alert('대표자명을 입력하세요.');
-					$('#CM_REPRE').focus();
+					$('#cmRepre').focus();
 					return false;
-				}else if($('#CM_MANAGER').val()==""){
+				}else if($('#cmManager').val()==""){
 					alert('담당자를 입력하세요.');
-					$('#CM_MANAGER').focus();
+					$('#cmManager').focus();
 					return false;
-				}else if($('#CM_MGR_TEL2').val()==""||$('#CM_MGR_TEL2').val().length<8){
-					alert('담당자 전화번호를 확인하세요.');
-					$('#CM_MGR_TEL2').focus();
-					return false;
-				}else if(!($('#CpCheckbox2').is(':checked'))){
+				}else if($('#cmMgrTel2').val()==""||$('#cmMgrTel2').val().length<4){
+    				alert('휴대폰 번호를 확인해주세요.');
+    				$('#cmMgrTel2').focus();
+    				return false;
+    			}else if($('#cmMgrTel3').val()==""||$('#cmMgrTel3').val().length<4){
+    				alert('휴대폰 번호를 확인해주세요.');
+    				$('#cmMgrTel3').focus();
+    				return false;
+    			}else if(!($('#CpCheckbox2').is(':checked'))){
     				alert('약관에 동의하세요.');
     				$('#CpCheckbox2').focus();
     				return false;
@@ -365,7 +369,7 @@
 		
 		
 		<fieldset id="CompanyMember">
-			<form role="form" class="form-inline" name="frm" method="post" action="action="<c:url value='register.do' />">
+			<form role="form" class="form-inline" name="frm" method="post" action="<c:url value='cmRegister.do' />">
 	    	<hr>
 	    	<h1>기업정보 입력</h1><br>
 	    	<span class="r">※ 필수입력정보입니다.</span><br>
@@ -420,43 +424,43 @@
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmMgrTel">담당자 전화번호</label>
 					<select class="form-control" id="cmMgrTel1" name="cmMgrTel1">
-						<option>010</option>
-						<option>011</option>
-						<option>016</option>
-						<option>017</option>
-						<option>018</option>
-						<option>019</option>
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
 					</select>&nbsp;-
 					<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel2" name="cmMgrTel2">&nbsp;
 					<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel3" name="cmMgrTel3">&nbsp;
 				</div>			
 				<div class="form-group">&nbsp;
 					<label for="cmEmail">이메일</label> 
-					<input type="text" class="form-control" id="cmEmail1" name="cmEmail1">&nbsp;@
+					<input type="text" class="form-control" size="18" maxlength="20" id="cmEmail1" name="cmEmail1">&nbsp;@
 					<select class="form-control" id="cmEmail2" name="cmEmail2">
-						<option>naver.com</option>
-						<option>hanmail.net</option>
-						<option>gmail.com</option>
-						<option>nate.com</option>
-						<option>daum.net</option>
-						<option>hotmail.com</option>
-						<option>직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="nate.com">nate.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="etc">직접입력</option>
 					</select>&nbsp;
-					<input type="text" class="form-control" id="cmEmail3" name="cmEmail3">
+					<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail3" name="cmEmail3">
 				</div>
 				<div class="form-group">&nbsp;
 					<label for="ccName">기업구분</label> 
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="optionsRadios1" value="option1" checked> 인재파견
+					<input type="radio" name="ccName" id="ccName" value="인재파견" checked> 인재파견
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 헤드헌팅
+					<input type="radio" name="ccName" id="ccName" value="헤드헌팅"> 헤드헌팅
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 교육기관
+					<input type="radio" name="ccName" id="ccName" value="교육기관"> 교육기관
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 일반
+					<input type="radio" name="ccName" id="ccName" value="일반"> 일반
 					</label>
 				</div>
 				
