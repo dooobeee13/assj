@@ -49,7 +49,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="area-1-detail col-div-80 area-Background" style="background-image: url('<c:url value="/images/backg.jpg"/>');">
+	<div class="area-1-detail col-div-80 area-Background" style="background background-image: url('<c:url value="/images/backg.jpg"/>');">
 		<div class="col-div-100-100">
 			<div class="col-div-100-100"
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
