@@ -36,24 +36,24 @@
     		$('#personal').click(function(){
     			$('#PersonMember').show();
     			$('#CompanyMember').hide();
-    			$(this).css('background','#ccc');
+    			$(this).css('background','#f0ad4e');
     			$('#company').css('background','#fff');
     		});
     		
     		$('#company').click(function(){
     			$('#PersonMember').hide();
     			$('#CompanyMember').show();
-    			$(this).css('background','#ccc');
+    			$(this).css('background','#f0ad4e');
     			$('#personal').css('background','#fff');
     		});
     		
     		$('#psRegister').click(function(){
-    			if($('#memId').val()==""){
-    				alert('아이디를 입력하세요.');
+    			if(!$.validate_userid($('#memId').val())){
+    				alert('아이디는 영문자나 숫자만 가능합니다.');
     				$('#memId').focus();
     				return false;
-    			}else if($('#memPwd').val()==""){
-    				alert('비밀번호를 입력하세요.');
+    			}else if($('#memPwd').val()==""||$('#memPwd').val().length<8){
+    				alert('비밀번호를 확인하세요.');
     				$('#memPwd').focus();
     				return false;
     			}else if($('#memPwd').val()!=$('#memPwd2').val()){
@@ -95,6 +95,18 @@
     			}
 				return true;
     		});	
+    		
+    		$.validate_userid=function(userid){
+    			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+    			return pattern.test(userid);	//true이면 정규식 만족
+    											//false이면 에러
+    			
+    			/*
+    			정규식 /^[a-zA-Z0-9]+$/g
+    			a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
+    			닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
+    			*/
+    		}
     		
 			$('#cpRegister').click(function(){
 				if($('#CM_ID').val()==""){
@@ -164,6 +176,10 @@
      	.mem_register span{
      		color:blue;
      	}
+   		.mem_register #info{
+     		font-size:13px;
+     	}
+     	
  		.mem_register fieldset{
  			width:800px;
  			margin:0 auto;	
@@ -177,7 +193,7 @@
  			padding:6px;
  		}
 		.mem_register #personal{
-			background: #ddd;
+			background: #f0ad4e;
 			border:1px solid #ccc;
 		}
 		.mem_register #company{
@@ -211,10 +227,12 @@
 					<label for="memId">아이디</label> 
 					<input type="text" class="form-control" maxlength="20" id="memId" name="memId">
 					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1">
+					<span id="info">&nbsp;&nbsp;(영문이나 숫자만 입력 가능합니다)</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="memPwd">비밀번호</label> 
 					<input type="password" class="form-control" maxlength="20" id="memPwd" name="memPwd">
+					<span id="info">&nbsp;&nbsp;(8자리 이상으로 입력해주세요)</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="memPwd2">비밀번호 재확인</label> 
@@ -253,13 +271,13 @@
 					<label for="memEmail">이메일</label> 
 					<input type="text" class="form-control" size="18" maxlength="20" id="memEmail1" name="memEmail1">&nbsp;@
 					<select class="form-control" id="memEmail2" name="memEmail2">
-						<option>naver.com</option>
-						<option>hanmail.net</option>
-						<option>gmail.com</option>
-						<option>nate.com</option>
-						<option>daum.net</option>
-						<option>hotmail.com</option>
-						<option>직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="nate.com">nate.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="etc">직접입력</option>
 					</select>&nbsp;
 					<input type="text" class="form-control" size="12" maxlength="15" id="memEmail3" name="memEmail3">
 				</div>
@@ -283,10 +301,10 @@
 					&nbsp;
 					<label for="memGender">성별</label> 
 					<label class="radio-inline" id="memGender" name="memGender">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> 남자
+					<input type="radio" name="memGender" id="memGender" value="option1" checked> 남자
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 여자
+					<input type="radio" name="memGender" id="memGender" value="option1"> 여자
 					</label>
 				</div>
 				<br><br><br><br>
@@ -433,7 +451,7 @@
 			<!-- 아이디 중복확인 모달 -->
 			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" ariahidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
