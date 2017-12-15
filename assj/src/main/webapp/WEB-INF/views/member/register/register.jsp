@@ -48,37 +48,41 @@
     		});
     		
     		$('#psRegister').click(function(){
-    			if($('#mem_id').val()==""){
+    			if($('#memId').val()==""){
     				alert('아이디를 입력하세요.');
-    				$('#mem_id').focus();
+    				$('#memId').focus();
     				return false;
-    			}else if($('#mem_pwd').val()==""){
+    			}else if($('#memPwd').val()==""){
     				alert('비밀번호를 입력하세요.');
-    				$('#mem_pwd').focus();
+    				$('#memPwd').focus();
     				return false;
-    			}else if($('#mem_pwd').val()!=$('#mem_pwd2').val()){
+    			}else if($('#memPwd').val()!=$('#memPwd2').val()){
     				alert('비밀번호가 일치하지 않습니다.');
-    				$('#mem_pwd2').focus();
+    				$('#memPwd2').focus();
     				return false;
-    			}else if($('#mem_name').val()==""){
+    			}else if($('#memName').val()==""){
     				alert('이름을 입력하세요.');
-    				$('#mem_name').focus();
+    				$('#memName').focus();
     				return false;
-    			}else if($('#mem_phone2').val()==""||$('#mem_phone2').val().length<8){
+    			}else if($('#memPhone2').val()==""||$('#memPhone2').val().length<4){
     				alert('휴대폰 번호를 확인해주세요.');
-    				$('#mem_phone2').focus();
+    				$('#memPhone2').focus();
     				return false;
-    			}else if($('#mem_birth1').val()==""||$('#mem_birth1').val().length<4){
-    				alert('생년월일을 확인하세요.');
-    				$('#MEM_BIRTH1').focus();
+    			}else if($('#memPhone3').val()==""||$('#memPhone3').val().length<4){
+    				alert('휴대폰 번호를 확인해주세요.');
+    				$('#memPhone3').focus();
     				return false;
-    			}else if($('#mem_birth2').val()==""||$('#mem_birth2').val().length<2){
+    			}else if($('#memBirth1').val()==""||$('#memBirth1').val().length<4){
     				alert('생년월일을 확인하세요.');
-    				$('#mem_birth2').focus();
+    				$('#memBirth1').focus();
     				return false;
-    			}else if($('#mem_birth3').val()==""||$('#mem_birth3').val().length<2){
+    			}else if($('#memBirth2').val()==""||$('#memBirth2').val().length<2){
     				alert('생년월일을 확인하세요.');
-    				$('#mem_birth3').focus();
+    				$('#memBirth2').focus();
+    				return false;
+    			}else if($('#memBirth3').val()==""||$('#memBirth3').val().length<2){
+    				alert('생년월일을 확인하세요.');
+    				$('#memBirth3').focus();
     				return false;
     			}else if(!($('#PsCheckbox2').is(':checked'))){
     				alert('약관에 동의하세요.');
@@ -204,26 +208,26 @@
 	    	<h1>개인정보 입력</h1><br>
 	    	<span class="r">※ 필수입력정보입니다.</span><br><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_id">아이디</label> 
-					<input type="text" class="form-control" maxlength="20" id="mem_id" name="mem_id">
+					<label for="memId">아이디</label> 
+					<input type="text" class="form-control" maxlength="20" id="memId" name="memId">
 					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_pwd">비밀번호</label> 
-					<input type="password" class="form-control" maxlength="20" id="mem_pwd" name="mem_pwd">
+					<label for="memPwd">비밀번호</label> 
+					<input type="password" class="form-control" maxlength="20" id="memPwd" name="memPwd">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_pwd2">비밀번호 재확인</label> 
-					<input type="password" class="form-control" maxlength="20" id="mem_pwd2" name="mem_pwd2">	
+					<label for="memPwd2">비밀번호 재확인</label> 
+					<input type="password" class="form-control" maxlength="20" id="memPwd2" name="memPwd2">	
 				</div><br><br>
 				
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_name">이름</label> 
-					<input type="text" class="form-control" maxlength="16" id="mem_name" name="mem_name">
+					<label for="memName">이름</label> 
+					<input type="text" class="form-control" maxlength="16" id="memName" name="memName">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_phone">휴대폰 번호</label>
-					<select class="form-control" id="mem_phone1" name="mem_phone1" >
+					<label for="memPhone">휴대폰 번호</label>
+					<select class="form-control" id="memPhone1" name="memPhone1" >
 						<option>010</option>
 						<option>011</option>
 						<option>016</option>
@@ -231,23 +235,24 @@
 						<option>018</option>
 						<option>019</option>
 					</select>&nbsp;-
-					<input type="text" class="form-control" placeholder="휴대폰 번호'-'없이 입력" size="16" maxlength="8" id="mem_phone2" name="mem_phone2">&nbsp;
+					<input type="text" class="form-control"  size="8" maxlength="4" id="memPhone2" name="memPhone2">&nbsp;
+					<input type="text" class="form-control"  size="8" maxlength="4" id="memPhone3" name="memPhone3">
 				</div>
 				<div class="form-group"><span class="r">*</span>
-					<label for="mem_birth1">생년월일</label>
-					<input type="text" class="form-control" placeholder="(예시 1979)" size="6" maxlength="4" id="mem_birth1" name="mem_birth1">
-					<label for="mem_birth2" class="sr-only">월</label>
-					<input type="text" class="form-control" placeholder="(01)월" size="3" maxlength="2" id="mem_birth2" name="mem_birth2">				
-					<label for="mem_birth3" class="sr-only">일</label>
-					<input type="text" class="form-control" placeholder="(01)일" size="3" maxlength="2" id="mem_birth3" name="mem_birth3">
+					<label for="memBirth1">생년월일</label>
+					<input type="text" class="form-control" placeholder="(예시 1979)" size="6" maxlength="4" id="memBirth1" name="memBirth1">
+					<label for="memBirth2" class="sr-only">월</label>
+					<input type="text" class="form-control" placeholder="(01)월" size="3" maxlength="2" id="memBirth2" name="memBirth2">				
+					<label for="memBirth3" class="sr-only">일</label>
+					<input type="text" class="form-control" placeholder="(01)일" size="3" maxlength="2" id="memBirth3" name="memBirth3">
 					
 					
 				</div>
 				<div class="form-group">
 					&nbsp;
-					<label for="mem_email">이메일</label> 
-					<input type="text" class="form-control" size="18" maxlength="20" id="mem_email1" name="mem_email1">&nbsp;@
-					<select class="form-control" id="mem_email2" name="mem_email2">
+					<label for="memEmail">이메일</label> 
+					<input type="text" class="form-control" size="18" maxlength="20" id="memEmail1" name="memEmail1">&nbsp;@
+					<select class="form-control" id="memEmail2" name="memEmail2">
 						<option>naver.com</option>
 						<option>hanmail.net</option>
 						<option>gmail.com</option>
@@ -256,28 +261,28 @@
 						<option>hotmail.com</option>
 						<option>직접입력</option>
 					</select>&nbsp;
-					<input type="text" class="form-control" size="12" maxlength="15" id="mem_email3" name="mem_email3">
+					<input type="text" class="form-control" size="12" maxlength="15" id="memEmail3" name="memEmail3">
 				</div>
 				<div class="form-group">
 					&nbsp;
-					<label for="mem_zipcode">주소</label> 
-					<input type="text" class="form-control" placeholder="우편번호" size="10" id="mem_zipcode" name="mem_zipcode">
+					<label for="memZipcode">주소</label> 
+					<input type="text" class="form-control" placeholder="우편번호" size="10" id="memZipcode" name="memZipcode">
 					<input type="button" class="form-control" value="우편번호 검색" data-toggle="modal" data-target="#myModal2">
 				</div><br>
 				<div class="form-group">
 					&nbsp;
-					<label for="mem_addr">상세주소</label> 
-					<input type="text" class="form-control" placeholder="주소" size="38" id="mem_addr" name="mem_addr">
+					<label for="memAddr">상세주소</label> 
+					<input type="text" class="form-control" placeholder="주소" size="38" id="memAddr" name="memAddr">
 				</div><br>
 				<div class="form-group">
 					&nbsp;
-					<label for="mem_detailAddr">&nbsp;</label> 
-					<input type="text" class="form-control" placeholder="상세주소" size="38" id="mem_detailAddr" name="mem_detailAddr">
+					<label for="memDetailAddr">&nbsp;</label> 
+					<input type="text" class="form-control" placeholder="상세주소" size="38" id="memDetailAddr" name="memDetailAddr">
 				</div><br>
 				<div class="form-group">
 					&nbsp;
-					<label for="mem_gender">성별</label> 
-					<label class="radio-inline">
+					<label for="memGender">성별</label> 
+					<label class="radio-inline" id="memGender" name="memGender">
 					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> 남자
 					</label>
 					<label class="radio-inline">
@@ -289,7 +294,7 @@
 				<h1>약관 동의</h1><br>
     			<span class="r">※ 필수체크사항입니다.</span><br>
 	    		<br>
-				<p>&nbsp;&nbsp;전체 동의   <input type="checkbox" id="PsCheckbox1" value="option1"></p><br>
+				<p>&nbsp;&nbsp;전체 동의   																<input type="checkbox" id="PsCheckbox1" value="option1"></p><br>
 	    		<div id="PsChkItem">
 					<span class="r">*&nbsp;</span>개인회원 약관에 동의 <span class="r">(필수)</span>          <input type="checkbox" id="PsCheckbox2" value="option1"><br><br> 
 					<span class="r">*&nbsp;</span>개인정보 수집 및 이용에 동의 <span class="r">(필수)</span>    <input type="checkbox" id="PsCheckbox3" value="option1"><br><br> 
@@ -313,55 +318,55 @@
 	    	<span class="r">※ 필수입력정보입니다.</span><br>
 	    	<br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_ID">아이디</label> 
-					<input type="text" class="form-control" id="CM_ID" name="CM_ID">
+					<label for="cmId">아이디</label> 
+					<input type="text" class="form-control" id="cmId" name="cmId">
 					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_PWD1">비밀번호</label> 
-					<input type="password" class="form-control" id="CM_PWD1" name="CM_PWD1">
+					<label for="cmPwd">비밀번호</label> 
+					<input type="password" class="form-control" id="cmPwd" name="cmPwd">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_PWD2">비밀번호 재확인</label> 
-					<input type="password" class="form-control" id="CM_PWD2" name="CM_PWD2">	
+					<label for="cmPwd2">비밀번호 재확인</label> 
+					<input type="password" class="form-control" id="cmPwd2" name="cmPwd2">	
 				</div><br><br>
 				
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_REGNUM">사업자 등록번호</label> 
-					<input type="text" class="form-control" placeholder="사업자 등록번호" id="CM_REGNUM" name="CM_REGNUM">
+					<label for="cmRegnum">사업자 등록번호</label> 
+					<input type="text" class="form-control" placeholder="사업자 등록번호" id="cmRegnum" name="cmRegnum">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_NAME">회사명</label> 
-					<input type="text" class="form-control" id="CM_NAME" name="CM_NAME">
+					<label for="cmName">회사명</label> 
+					<input type="text" class="form-control" id="cmName" name="cmName">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_REPRE">대표자명</label> 
-					<input type="text" class="form-control" id="CM_REPRE" name="CM_REPRE">
+					<label for="cmRepre">대표자명</label> 
+					<input type="text" class="form-control" id="cmRepre" name="cmRepre">
 				</div><br><br>
 				
 				<div class="form-group">
 					&nbsp;
-					<label for="CM_ZIPCODE">주소</label> 
-					<input type="text" class="form-control" placeholder="우편번호" size="10" id="CM_ZIPCODE" name="CM_ZIPCODE">
+					<label for="cmZipcode">주소</label> 
+					<input type="text" class="form-control" placeholder="우편번호" size="10" id="cmZipcode" name="cmZipcode">
 					<input type="button" class="form-control" value="우편번호 검색" data-toggle="modal" data-target="#myModal2">
 				</div><br>
 				<div class="form-group">
 					&nbsp;
-					<label for="CM_ADDR">상세주소</label> 
-					<input type="text" class="form-control" placeholder="주소" size="38" id="CM_ADDR" name="CM_ADDR">
+					<label for="cmAddr">상세주소</label> 
+					<input type="text" class="form-control" placeholder="주소" size="38" id="cmAddr" name="cmAddr">
 				</div><br>
 				<div class="form-group">
 					&nbsp;
-					<label for="CM_DETAILADDR">&nbsp;</label> 
-					<input type="text" class="form-control" placeholder="상세주소" size="38" id="CM_DETAILADDR" name="CM_DETAILADDR">
+					<label for="cmDetailAddr">&nbsp;</label> 
+					<input type="text" class="form-control" placeholder="상세주소" size="38" id="cmDetailAddr" name="cmDetailAddr">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_MANAGER">담당자</label> 
-					<input type="text" class="form-control" id="CM_MANAGER" name="CM_MANAGER">
+					<label for="cmManager">담당자</label> 
+					<input type="text" class="form-control" id="cmManager" name="cmManager">
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
-					<label for="CM_MGR_TEL">담당자 전화번호</label>
-					<select class="form-control" id="CM_MGR_TEL1" name="CM_MGR_TEL1">
+					<label for="cmMgrTel">담당자 전화번호</label>
+					<select class="form-control" id="cmMgrTel1" name="cmMgrTel1">
 						<option>010</option>
 						<option>011</option>
 						<option>016</option>
@@ -369,12 +374,13 @@
 						<option>018</option>
 						<option>019</option>
 					</select>&nbsp;-
-					<input type="text" class="form-control" placeholder="휴대폰 번호'-'없이 입력" size="16" maxlength="8" id="CM_MGR_TEL2" name="CM_MGR_TEL2">&nbsp;
+					<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel2" name="cmMgrTel2">&nbsp;
+					<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel3" name="cmMgrTel3">&nbsp;
 				</div>			
 				<div class="form-group">&nbsp;
-					<label for="CM_EMAIL">이메일</label> 
-					<input type="text" class="form-control" id="CM_EMAIL1" name="CM_EMAIL1">&nbsp;@
-					<select class="form-control" id="CM_EMAIL2" name="CM_EMAIL2">
+					<label for="cmEmail">이메일</label> 
+					<input type="text" class="form-control" id="cmEmail1" name="cmEmail1">&nbsp;@
+					<select class="form-control" id="cmEmail2" name="cmEmail2">
 						<option>naver.com</option>
 						<option>hanmail.net</option>
 						<option>gmail.com</option>
@@ -383,12 +389,12 @@
 						<option>hotmail.com</option>
 						<option>직접입력</option>
 					</select>&nbsp;
-					<input type="text" class="form-control" id="CM_EMAIL3" name="CM_EMAIL3">
+					<input type="text" class="form-control" id="cmEmail3" name="cmEmail3">
 				</div>
 				<div class="form-group">&nbsp;
-					<label for="CC_NAME">기업구분</label> 
+					<label for="ccName">기업구분</label> 
 					<label class="radio-inline">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> 인재파견
+					<input type="radio" name="ccName" id="optionsRadios1" value="option1" checked> 인재파견
 					</label>
 					<label class="radio-inline">
 					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 헤드헌팅

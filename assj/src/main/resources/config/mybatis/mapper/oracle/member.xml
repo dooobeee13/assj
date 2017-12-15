@@ -10,7 +10,7 @@
 		insert into member(mem_no,mem_name,mem_id,mem_pwd,mem_email,
 		mem_birth,mem_phone,mem_zipcode,mem_addr,mem_detailAddr,mem_gender)
 		values(#{mem_no},#{mem_name},#{mem_id},#{mem_pwd},#{mem_email},
-		#{mem_birth},#{mem_phone},#{mem_zipcode},#{mem_addr},#{mem_detailAddr,#{mem_gender})
+		#{mem_birth},#{mem_phone},#{mem_zipcode},#{mem_addr},#{mem_detailAddr},#{mem_gender})
 	</insert>
 </mapper>
 
