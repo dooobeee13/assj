@@ -31,16 +31,9 @@ public class RegisterController {
 	}
 	
 	@RequestMapping(value="/register.do",method=RequestMethod.POST)
-	public String register_post(@ModelAttribute MemberVO vo,
-			@RequestParam String mem_phone1,@RequestParam String mem_phone2,@RequestParam String mem_phone3,
-			@RequestParam String mem_birth1,@RequestParam String mem_birth2,@RequestParam String mem_birth3,
-			@RequestParam String mem_email1,@RequestParam String mem_email2,@RequestParam String mem_email3,
-			Model model) {
+	public String register_post(@ModelAttribute MemberVO vo,Model model) {
 		
 		logger.info("회원가입 화면(post)");
-		
-		vo.phone();
-		
 		
 		int result=memberService.insertMemMember(vo);
 		
