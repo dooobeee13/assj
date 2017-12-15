@@ -9,14 +9,15 @@ public class MemberVO {
 	private int memNo;        
 	private String memName;        
 	private String memId;        
-	private String memPwd;  
+	private String memPwd;
+	private String memPwd2;
 	
 	private String memEmail;      
 	private String memEmail1;      
 	private String memEmail2;      
 	private String memEmail3; 
 	
-	private Timestamp memBirth;
+	private Date memBirth;
 	private String memBirth1;
 	private String memBirth2;
 	private String memBirth3;
@@ -31,11 +32,10 @@ public class MemberVO {
     private String memDetailAddr; 
     
     private String memGender;     
-    private Timestamp memRegdate;   
-    private Timestamp memLastdate;
+    private Date memRegdate;   
+    private Date memLastdate;
     private String memSnsType;
     private String memSnsId;
-    
     
 	public int getMemNo() {
 		return memNo;
@@ -60,6 +60,12 @@ public class MemberVO {
 	}
 	public void setMemPwd(String memPwd) {
 		this.memPwd = memPwd;
+	}
+	public String getMemPwd2() {
+		return memPwd2;
+	}
+	public void setMemPwd2(String memPwd2) {
+		this.memPwd2 = memPwd2;
 	}
 	public String getMemEmail() {
 		if(memEmail1==null || memEmail1.isEmpty()){
@@ -94,25 +100,24 @@ public class MemberVO {
 	public void setMemEmail3(String memEmail3) {
 		this.memEmail3 = memEmail3;
 	}
-	public Timestamp getMemBirth() {
+	public Date getMemBirth() {
 		if(memBirth1!=null && memBirth2!=null && memBirth3!=null) {
 			String birth=memBirth1+memBirth2+memBirth3;
 			
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-			
-			
-			/*try {
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+
+			try {
 				memBirth = sdf.parse(birth);
 			} catch (ParseException e) {
 				e.printStackTrace();
-			} */
+			} 
 		}
-		return (Timestamp) memBirth;
+		return memBirth;
 	}
-	public void setMemBirth(Timestamp memBirth) {
+	public void setMemBirth(Date memBirth) {
+		
 		this.memBirth = memBirth;
 	}
-
 	public String getMemBirth1() {
 		return memBirth1;
 	}
@@ -132,9 +137,13 @@ public class MemberVO {
 		this.memBirth3 = memBirth3;
 	}
 	public String getMemPhone() {
+		if((memPhone2!=null&&!memPhone2.isEmpty()) && (memPhone3!=null&&!memPhone3.isEmpty())) {
+			memPhone=memPhone1+"-"+memPhone2+"-"+memPhone3;			
+		}
 		return memPhone;
 	}
 	public void setMemPhone(String memPhone) {
+		
 		this.memPhone = memPhone;
 	}
 	public String getMemPhone1() {
@@ -179,16 +188,16 @@ public class MemberVO {
 	public void setMemGender(String memGender) {
 		this.memGender = memGender;
 	}
-	public Timestamp getMemRegdate() {
+	public Date getMemRegdate() {
 		return memRegdate;
 	}
-	public void setMemRegdate(Timestamp memRegdate) {
+	public void setMemRegdate(Date memRegdate) {
 		this.memRegdate = memRegdate;
 	}
-	public Timestamp getMemLastdate() {
+	public Date getMemLastdate() {
 		return memLastdate;
 	}
-	public void setMemLastdate(Timestamp memLastdate) {
+	public void setMemLastdate(Date memLastdate) {
 		this.memLastdate = memLastdate;
 	}
 	public String getMemSnsType() {
@@ -204,19 +213,18 @@ public class MemberVO {
 		this.memSnsId = memSnsId;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "MemberVO [memNo=" + memNo + ", memName=" + memName + ", memId=" + memId + ", memPwd=" + memPwd
-				+ ", memEmail=" + memEmail + ", memEmail1=" + memEmail1 + ", memEmail2=" + memEmail2 + ", memEmail3="
-				+ memEmail3 + ", memBirth=" + memBirth + ", memBirth1=" + memBirth1 + ", memBirth2=" + memBirth2
-				+ ", memBirth3=" + memBirth3 + ", memPhone=" + memPhone + ", memPhone1=" + memPhone1 + ", memPhone2="
-				+ memPhone2 + ", memPhone3=" + memPhone3 + ", memZipcode=" + memZipcode + ", memAddr=" + memAddr
-				+ ", memDetailAddr=" + memDetailAddr + ", memGender=" + memGender + ", memRegdate=" + memRegdate
-				+ ", memLastdate=" + memLastdate + ", memSnsType=" + memSnsType + ", memSnsId=" + memSnsId + "]";
+				+ ", memPwd2=" + memPwd2 + ", memEmail=" + memEmail + ", memEmail1=" + memEmail1 + ", memEmail2="
+				+ memEmail2 + ", memEmail3=" + memEmail3 + ", memBirth=" + memBirth + ", memBirth1=" + memBirth1
+				+ ", memBirth2=" + memBirth2 + ", memBirth3=" + memBirth3 + ", memPhone=" + memPhone + ", memPhone1="
+				+ memPhone1 + ", memPhone2=" + memPhone2 + ", memPhone3=" + memPhone3 + ", memZipcode=" + memZipcode
+				+ ", memAddr=" + memAddr + ", memDetailAddr=" + memDetailAddr + ", memGender=" + memGender
+				+ ", memRegdate=" + memRegdate + ", memLastdate=" + memLastdate + ", memSnsType=" + memSnsType
+				+ ", memSnsId=" + memSnsId + "]";
 	}
-    
-    
+
 	
 	
 	

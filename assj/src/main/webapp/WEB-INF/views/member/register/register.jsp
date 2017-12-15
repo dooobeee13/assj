@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>개인/기업회원 가입</title> 
     <!-- Bootstrap -->
-     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../../js/bootstrap.min.js"></script>
@@ -17,36 +17,22 @@
     <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     
     <script type="text/javascript">
-    	$(document).ready(function(){
-    		$('#PsCheckbox1').change(function(){
-    			if (this.checked) {
-    				$('#PsChkItem [type=checkbox]').prop('checked', true);
-   				} else {
-    				$('#PsChkItem [type=checkbox]').prop('checked', false);
-   				}
-    		});
-    		$('#CpCheckbox1').change(function(){
-    			if (this.checked) {
-    				$('#CpChkItem [type=checkbox]').prop('checked', true);
-   				} else {
-    				$('#CpChkItem [type=checkbox]').prop('checked', false);
-   				}
-    		});
-			
+    	$(document).ready(function(){	
+    		//개인회원가입,기업회원가입 버튼 클릭시 아래 정보 바뀌기
     		$('#personal').click(function(){
     			$('#PersonMember').show();
     			$('#CompanyMember').hide();
     			$(this).css('background','#f0ad4e');
     			$('#company').css('background','#fff');
     		});
-    		
     		$('#company').click(function(){
     			$('#PersonMember').hide();
     			$('#CompanyMember').show();
     			$(this).css('background','#f0ad4e');
     			$('#personal').css('background','#fff');
     		});
-    		
+    			
+    		//유효성 검사
     		$('#psRegister').click(function(){
     			if(!$.validate_userid($('#memId').val())){
     				alert('아이디는 영문자나 숫자만 가능합니다.');
@@ -86,7 +72,7 @@
     				return false;
     			}else if(!($('#PsCheckbox2').is(':checked'))){
     				alert('약관에 동의하세요.');
-    				$('#PsCheckbox2').focus();
+					$('#PsCheckbox2').focus();
     				return false;
     			}else if(!($('#PsCheckbox3').is(':checked'))){
     				alert('약관에 동의하세요.');
@@ -96,10 +82,12 @@
 				return true;
     		});	
     		
+    		//아이디 정규식으로 받기
     		$.validate_userid=function(userid){
     			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
-    			return pattern.test(userid);	//true이면 정규식 만족
-    											//false이면 에러
+    			return pattern.test(userid);	
+    			//true이면 정규식 만족
+    			//false이면 에러
     			
     			/*
     			정규식 /^[a-zA-Z0-9]+$/g
@@ -108,6 +96,50 @@
     			*/
     		}
     		
+    		//중복검사 버튼 클릭시 검사창에 뿌려주기
+    		$('#dupli').click(function(){
+    			var id=$('#memId').val();
+    			$('#dupliId').val(id);
+    		});
+    		
+    		//검색버튼 클릭해서 Controller로 넘기기 (ajax)
+			$("#search").click(function(e){ 
+				if($('#dupliId').val()==null ||$('#dupliId').val()==""){
+    				alert('아이디를 입력해주세요');
+    				$('#dupliId').focus();
+    				return false;
+    			}
+				
+				$.ajax({url: "/assj/member/register/dupli.do?dupliId=" + $('#dupliId').val(), 
+			    	 success: function(result){
+	        				if (result == "true") {
+		        				$('.checkMessage').html('<span class="r">사용 불가능한 아이디입니다</span>');
+		        			} else {
+		        				$('.checkMessage').html('<span>사용가능한 아이디 입니다</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="사용하기"></button>');
+		        			}
+	    			 }
+			    });
+				
+			});
+    		
+    		//약관동의
+    		$('#PsCheckbox1').change(function(){
+    			if (this.checked) {
+    				$('#PsChkItem [type=checkbox]').prop('checked', true);
+   				} else {
+    				$('#PsChkItem [type=checkbox]').prop('checked', false);
+   				}
+    		});
+    		$('#CpCheckbox1').change(function(){
+    			if (this.checked) {
+    				$('#CpChkItem [type=checkbox]').prop('checked', true);
+   				} else {
+    				$('#CpChkItem [type=checkbox]').prop('checked', false);
+   				}
+    		});
+    		
+    		
+    		//기업회원
 			$('#cpRegister').click(function(){
 				if($('#CM_ID').val()==""){
 					alert('아이디를 입력하세요.');
@@ -152,6 +184,7 @@
     			}			
 			});
     		
+			
     		
     	});
     	
@@ -170,7 +203,7 @@
     	.mem_register h1{
     		font-weight:bold;
     	}
-    	.mem_register .r{
+    	.mem_register .r,#r{
     		color:red;
     	}
      	.mem_register span{
@@ -202,6 +235,7 @@
 		.mem_register #CompanyMember{
 			display:none;
 		}
+	
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -226,7 +260,7 @@
 				<div class="form-group"><span class="r">*</span>
 					<label for="memId">아이디</label> 
 					<input type="text" class="form-control" maxlength="20" id="memId" name="memId">
-					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1">
+					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1" id="dupli">
 					<span id="info">&nbsp;&nbsp;(영문이나 숫자만 입력 가능합니다)</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
@@ -246,12 +280,12 @@
 				<div class="form-group"><span class="r">*</span>
 					<label for="memPhone">휴대폰 번호</label>
 					<select class="form-control" id="memPhone1" name="memPhone1" >
-						<option>010</option>
-						<option>011</option>
-						<option>016</option>
-						<option>017</option>
-						<option>018</option>
-						<option>019</option>
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
 					</select>&nbsp;-
 					<input type="text" class="form-control"  size="8" maxlength="4" id="memPhone2" name="memPhone2">&nbsp;
 					<input type="text" class="form-control"  size="8" maxlength="4" id="memPhone3" name="memPhone3">
@@ -279,7 +313,7 @@
 						<option value="hotmail.com">hotmail.com</option>
 						<option value="etc">직접입력</option>
 					</select>&nbsp;
-					<input type="text" class="form-control" size="12" maxlength="15" id="memEmail3" name="memEmail3">
+					<input type="text" class="form-control" size="12" maxlength="15" id="memEmail3" name="memEmail3" style="visibility:hidden">
 				</div>
 				<div class="form-group">
 					&nbsp;
@@ -300,11 +334,11 @@
 				<div class="form-group">
 					&nbsp;
 					<label for="memGender">성별</label> 
-					<label class="radio-inline" id="memGender" name="memGender">
-					<input type="radio" name="memGender" id="memGender" value="option1" checked> 남자
+					<label class="radio-inline">
+					<input type="radio" name="memGender" id="memGender" value="남자" checked> 남자
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="memGender" id="memGender" value="option1"> 여자
+					<input type="radio" name="memGender" id="memGender" value="여자"> 여자
 					</label>
 				</div>
 				<br><br><br><br>
@@ -326,6 +360,7 @@
 		   			<button type="submit" class="btn btn-primary btn-lg" id="psRegister">회원가입 완료</button>
 				</div>
 			</form>
+			<input type ="hidden" name="chkId" id="chkId">
 		</fieldset>
 		
 		
@@ -455,14 +490,20 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">
-							<span ariahidden="true">&times;</span><span class="sr-only">Close</span>
+							<span ariahidden="true">&times;</span>
+							<span class="sr-only">Close</span>
 						</button>
-						<h2 class="modal-title" id="myModalLabel">&nbsp;아이디 중복검사</h2>
+						<h2 class="modal-title" id="myModalLabel">&nbsp;아이디 중복검사</h2>					
+					</div>
+					<div class="modal-body">
 						<div class="input-group">
-						     <span class="input-group-addon"> <span class="glyphicon glyphicon-hand-right"> </span> </span>
-						     <input type="text" class="form-control" placeholder="아이디">
-						     <span class="input-group-btn"> <button class="btn btn-default" type="button">검색</button> </span>
-						</div><br><br><br><br>
+							 <span class="input-group-addon"> <span class="glyphicon glyphicon-hand-right"> </span> </span>
+						 	 <input type="text" class="form-control" id="dupliId">
+							 <span class="input-group-btn"> <button class="btn btn-default" type="submit" id="search">검색</button> </span>
+						</div>
+					</div>
+					<div class="modal-footer" style="text-align:left">
+						<div class="checkMessage"></div>
 					</div>
 				
 				</div>
@@ -501,8 +542,6 @@
 					<span>예) 분당 주공,  연수동 주공3차<br></span>
 					사서함명 + 번호<br>
 					<span>예) 분당우체국사서함 1~100<br></span></p>
-				</div>
-				<div class="modal-footer">
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->

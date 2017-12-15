@@ -4,14 +4,18 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
 	<insert id="insertMemMember" parameterType="MemberVO">
-		<selectKey keyProperty="mem_no" resultType="int" order="BEFORE">
+		<selectKey keyProperty="memNo" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
 		</selectKey>
-		insert into member(mem_no,mem_name,mem_id,mem_pwd,mem_email,
-		mem_birth,mem_phone,mem_zipcode,mem_addr,mem_detailAddr,mem_gender)
-		values(#{mem_no},#{mem_name},#{mem_id},#{mem_pwd},#{mem_email},
-		#{mem_birth},#{mem_phone},#{mem_zipcode},#{mem_addr},#{mem_detailAddr},#{mem_gender})
+		insert into member(mem_No,mem_name,mem_id,mem_pwd,mem_email,mem_birth,mem_phone,mem_zipcode,mem_addr,mem_detailAddr,mem_gender)
+		values(#{memNo},#{memName},#{memId},#{memPwd},#{memEmail},#{memBirth},#{memPhone},#{memZipcode},#{memAddr},#{memDetailAddr},#{memGender})
 	</insert>
+	
+	<select id="duplicationId" parameterType="string" resultType="int">
+		select count(*) from member where mem_id=#{memId}
+	</select>
+	
+	
 </mapper>
 
 
