@@ -365,7 +365,7 @@
 		
 		
 		<fieldset id="CompanyMember">
-			<form role="form" class="form-inline" name="frm" method="post" action="<c:url value='/member/memWrite.do' />">
+			<form role="form" class="form-inline" name="frm" method="post" action="action="<c:url value='register.do' />">
 	    	<hr>
 	    	<h1>기업정보 입력</h1><br>
 	    	<span class="r">※ 필수입력정보입니다.</span><br>

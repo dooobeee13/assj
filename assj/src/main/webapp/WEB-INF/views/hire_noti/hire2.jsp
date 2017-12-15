@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><!-- 반응형 웹을위한 메타태그 -->
-<title>사람인 공고/지원자관리</title>
+<title>assj 공고/지원자관리</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainstyle.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css" />
@@ -17,9 +17,7 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet"> 
 <style type="text/css">
-	#nnn{
-		padding: 50px,50px,30px,50px;
-	}
+
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,13 +32,13 @@
 	<h1 class="text-center">전체공고 / 지원자 관리</h1>
 
 	<section style="padding-left: 200px">
-	<ul class="nav nav-tabs" id="nnn">
+	<ul class="nav nav-tabs" id="">
 		<li><a href="#">진행중(0건)</a></li>
 		<li><a href="#">대기(0건)</a></li>
 		<li><a href="#">마감(0건)</a></li>
 		<li><a href="#">미완성(0건)</a></li>
 		<li><a href="#">전체(0건)</a></li>
-		<input type="button" value="채용공고 등록" >
+		<input type="button" class="btn btn-primary btn-md" value="채용공고 등록" onClick="self.location='hire1.do';">
 	</ul>
 	</section>
 	<nav>
@@ -58,6 +56,9 @@
 			</ul>
 		</div>
 	</nav>
-
+	<nav>
+	
+	
+	</nav>
 </body>
 </html>

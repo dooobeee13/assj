@@ -12,32 +12,29 @@
 			<div class="col-div-100-80">
 				<div class="col-div-100-50"
 					style="padding-top: 1em; padding-left: 1em; text-align: center;">
-					<input id="career" class="mini-checkbox" type="checkbox"><label
-						for="career">경력</label> <input id="newcomer" class="mini-checkbox"
-						type="checkbox"><label for="newcomer">신입</label> <input
-						id="none" class="mini-checkbox" type="checkbox"><label
-						for="none">무관</label>
+					<label><input id="career" class="mini-checkbox" type="checkbox">경력</label> 
+					<label><input id="newcomer" class="mini-checkbox" type="checkbox">신입</label>
+					 <label for="none"><input id="none" class="mini-checkbox" type="checkbox">무관</label>
 				</div>
-				<div class="col-div-100-50"
-					style="padding-top: 0.5em; text-align: center;">
-					<select class="one-list">
-						<option>선택</option>
-						<option>1년 이상</option>
-						<option>2년 이상</option>
-						<option>3년 이상</option>
-						<option>4년 이상</option>
-						<option>5년 이상</option>
-						<option>6년 이상</option>
-						<option>7년 이상</option>
-					</select> ~ <select class="one-list">
-						<option>선택</option>
-						<option>1년 이하</option>
-						<option>2년 이하</option>
-						<option>3년 이하</option>
-						<option>4년 이하</option>
-						<option>5년 이하</option>
-						<option>6년 이하</option>
-						<option>7년 이하</option>
+				<div class="col-div-100-50" style="padding-top: 0.5em; text-align: center;">
+					<select class="one-list" id="CareerDayStart">
+						<option value="0">선택</option>
+						<option value="1">1년 이상</option>
+						<option value="2">2년 이상</option>
+						<option value="3">3년 이상</option>
+						<option value="4">4년 이상</option>
+						<option value="5">5년 이상</option>
+						<option value="6">6년 이상</option>
+						<option value="7">7년 이상</option>
+					</select> ~ <select class="one-list" id="CareerDayEnd">
+						<option value="0">선택</option>
+						<option value="1">1년 이하</option>
+						<option value="2">2년 이하</option>
+						<option value="3">3년 이하</option>
+						<option value="4">4년 이하</option>
+						<option value="5">5년 이하</option>
+						<option value="6">6년 이하</option>
+						<option value="7">7년 이하</option>
 					</select>
 				</div>
 			</div>
@@ -50,13 +47,12 @@
 			<div class="col-div-100-80">
 				<div class="col-div-100-50"
 					style="padding-top: 1em; padding-left: 1em; text-align: center;">
-					<input id="m" class="mini-checkbox" type="checkbox"><label
-						for="m">남자</label> <input id="f" class="mini-checkbox"
-						type="checkbox"><label for="f">여자</label>
+					<label ><input id="m" class="mini-checkbox" type="checkbox" value="M">남자</label> 
+					<label ><input id="f" class="mini-checkbox" type="checkbox" value="F">여자</label>
 				</div>
 				<div class="col-div-100-50"
 					style="padding-top: 0.5em; text-align: center;">
-					<select class="one-list">
+					<select class="one-list" id="oldStart">
 						<option>선택</option>
 						<option>20살</option>
 						<option>21살</option>
@@ -65,7 +61,7 @@
 						<option>24살</option>
 						<option>25살</option>
 						<option>26살</option>
-					</select> ~ <select class="one-list">
+					</select> ~ <select class="one-list" id="oldEnd">
 						<option>선택</option>
 						<option>20살</option>
 						<option>21살</option>
@@ -87,7 +83,6 @@
 		<div class="col-div-100-20"
 			style="text-align: center; padding-top: 1em; padding-left: 1.5em;">
 			<input id="domestic" type="checkbox"><label for="domestic">국내</label>
-			<input id="overseas" type="checkbox"><label for="overseas">국외</label>
 		</div>
 		<div class="col-div-100-50"
 			style="text-align: center; padding-left: 7.5em;">
