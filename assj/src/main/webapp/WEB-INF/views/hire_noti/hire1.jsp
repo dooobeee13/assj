@@ -156,16 +156,17 @@
 					<td>직급/직책</td>
 					<td>
 						<div>
-
-							<input type="checkbox" value="option1">
-							대리</label> <label class="checkbox-inline"> <input
-								type="checkbox" id="inlineCheckbox2" value="option2"> 과장
-							</label> <label class="checkbox-inline"> <input type="checkbox"
-								id="inlineCheckbox3" value="option3"> 부장
+							<label class="checkbox-inline">
+				
+							<input type="checkbox" value="option1"> 대리</label> <label
+								class="checkbox-inline"> <input type="checkbox"
+								id="inlineCheckbox2" value="option2"> 과장
+							</label> <label class="checkbox-inline"> <input
+								type="checkbox" id="inlineCheckbox3" value="option3"> 부장
 							</label> <br>
 							<button class="btn btn-primary btn-lg" data-toggle="modal"
 								data-target="#rank_position">상세보기</button>
-						
+
 						</div>
 
 					</td>
@@ -427,6 +428,10 @@
 
 			</table>
 		</div>
+
+		
+			<input type="button" class="btn btn-primary btn-lg" value="채용공고 등록" onClick="self.location='hire2.do';">
+		
 	</fieldset>
 	
 	

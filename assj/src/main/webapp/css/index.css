@@ -142,3 +142,10 @@ footer {
 	border: 2px solid #2e6da4;
 	left: 13px;
 }
+
+footer{
+	text-align: center;
+}
+#footerBtn{
+	background-color:#ebecee;	
+}

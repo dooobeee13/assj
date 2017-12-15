@@ -13,5 +13,17 @@ public class MemberServiceImpl implements MemberService{
 	public int insertMemMember(MemberVO vo) {
 		return memberDao.insertMemMember(vo);
 	}
-	
+
+	@Override
+	public boolean duplicationId(String memId) {
+		int result=memberDao.duplicationId(memId);
+		if(result>0) {
+			return true;  //해당 아이디 존재
+		}else {
+			return false; //해당아이디 없음
+		}
+		
+	}
+
+
 }

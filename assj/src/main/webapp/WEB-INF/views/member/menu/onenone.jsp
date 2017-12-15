@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +21,9 @@
 		});
 	});
 </script>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<script src="../../js/bootstrap.min.js"></script>
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
 	h1{
 		font-weight:bold;
@@ -29,6 +32,7 @@
 		width:800px;
 		margin:0 auto;	
 		padding:20px;
+		background-color:#ffff;
 	}
 	label{
 		width:150px;
@@ -48,6 +52,7 @@
     <![endif]-->
 </head>
 	<body>
+		<c:import url="../../index/top.jsp" />
 		<div class="container">
 			<fieldset>
 				<h1>이메일 문의</h1>
@@ -123,5 +128,6 @@
 				   	</div>
 			</fieldset>	
 		</div>
+		<c:import url="../../index/footer.jsp" />    
 	</body>
 </html>
