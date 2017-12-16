@@ -13,6 +13,16 @@ public class CmMemberDAOMabatis extends SqlSessionDaoSupport
 	public int insertCmMemMember(CmMemberVO vo) {
 		return getSqlSession().insert(namespace+".insertCmMemMember",vo);
 	}
+
+	@Override
+	public String selectPwd(String cmId) {
+		return getSqlSession().selectOne(namespace+".selectPwdByUserid",cmId);
+	}
+
+	@Override
+	public CmMemberVO selectMember(String cmId) {
+		return getSqlSession().selectOne(namespace+".selectMember",cmId);
+	}
 	
 	
 

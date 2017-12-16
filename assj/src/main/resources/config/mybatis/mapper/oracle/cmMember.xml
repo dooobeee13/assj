@@ -11,6 +11,15 @@
 		values(#{cmNo},#{cmId},#{cmPwd},#{cmRegnum},#{cmName},#{cmRepre},#{cmManager},#{cmMgrTel},#{cmAddr},#{cmDetailAddr},#{cmZipcode},#{cmEmail})
 	</insert>
 	
+	<select id="selectPwdByUserid" parameterType="string" resultType="string">
+		select CM_PWD from comp_member where CM_ID=#{cmId}
+	</select>
+	
+	<select id="selectMember" parameterType="string" resultType="CmMemberVO">
+		select * from comp_member where CM_ID=#{cmId}
+	</select>
+	
+	
 </mapper>
 
 

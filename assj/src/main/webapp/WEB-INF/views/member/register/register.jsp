@@ -22,13 +22,13 @@
     		$('#personal').click(function(){
     			$('#PersonMember').show();
     			$('#CompanyMember').hide();
-    			$(this).css('background','#f0ad4e');
+    			$(this).css('background','#c6dbe6');
     			$('#company').css('background','#fff');
     		});
     		$('#company').click(function(){
     			$('#PersonMember').hide();
     			$('#CompanyMember').show();
-    			$(this).css('background','#f0ad4e');
+    			$(this).css('background','#c6dbe6');
     			$('#personal').css('background','#fff');
     		});
     			
@@ -50,7 +50,7 @@
     				alert('이름을 입력하세요.');
     				$('#memName').focus();
     				return false;
-    			}else if($('#memPhone2').val()==""||$('#memPhone2').val().length<4){
+    			}else if($('#memPhone2').val()==""||$('#memPhone2').val().length<3){
     				alert('휴대폰 번호를 확인해주세요.');
     				$('#memPhone2').focus();
     				return false;
@@ -69,6 +69,11 @@
     			}else if($('#memBirth3').val()==""||$('#memBirth3').val().length<2){
     				alert('생년월일을 확인하세요.');
     				$('#memBirth3').focus();
+    				return false;
+    			}else if(($('#memEmail1').val()==""||$('#memEmail1').val().length<1)
+    					||($('#memEmail2').val()=="etc" && $('#memEmail1').val()=="")){
+    				alert('이메일을 확인하세요.');
+    				$('#memEmail1').focus();
     				return false;
     			}else if(!($('#PsCheckbox2').is(':checked'))){
     				alert('약관에 동의하세요.');
@@ -232,8 +237,8 @@
  			padding:6px;
  		}
 		.mem_register #personal{
-			background: #d79117;
-			border:1px solid #ccc;
+			background: #c6dbe6;
+			border:1px solid #c6dbe6;
 		}
 		.mem_register #company{
 			background: #fff;
@@ -260,7 +265,17 @@
 	        text-align: left;
 	        vertical-align: middle;
 		}
-
+		input[type=checkbox]
+		{
+			  /* Double-sized Checkboxes */
+			  -ms-transform: scale(1.5); /* IE */
+			  -moz-transform: scale(1.5); /* FF */
+			  -webkit-transform: scale(1.5); /* Safari and Chrome */
+			  -o-transform: scale(1.5); /* Opera */
+			  padding: 10px;
+			  margin:5px;
+			  vertical-align: middle;
+		}
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -325,8 +340,7 @@
 					
 					
 				</div>
-				<div class="form-group">
-					&nbsp;
+				<div class="form-group"><span class="r">*</span>
 					<label for="memEmail">이메일</label> 
 					<input type="text" class="form-control" size="18" maxlength="20" id="memEmail1" name="memEmail1">&nbsp;@
 					<select class="form-control" id="memEmail2" name="memEmail2">
@@ -360,7 +374,7 @@
 					&nbsp;
 					<label for="memGender">성별</label> 
 					<label class="radio-inline">
-					<input type="radio" name="memGender" id="memGender" value="남자" checked> 남자
+					<input type="radio" name="memGender" id="memGender" value="남자"> 남자
 					</label>
 					<label class="radio-inline">
 					<input type="radio" name="memGender" id="memGender" value="여자"> 여자
@@ -493,7 +507,7 @@
 				<div class="form-group">&nbsp;
 					<label for="ccName">기업구분</label> 
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="ccName" value="인재파견" checked> 인재파견
+					<input type="radio" name="ccName" id="ccName" value="인재파견"> 인재파견
 					</label>
 					<label class="radio-inline">
 					<input type="radio" name="ccName" id="ccName" value="헤드헌팅"> 헤드헌팅

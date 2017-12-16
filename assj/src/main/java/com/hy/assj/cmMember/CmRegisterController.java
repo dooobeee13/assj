@@ -41,11 +41,7 @@ public class CmRegisterController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
-		return "common/message";
-		
-		
-		
-		
+		return "common/message";	
 	}
 	
 	

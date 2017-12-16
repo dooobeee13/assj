@@ -38,7 +38,7 @@ public class MenuController {
 	public String psService3() {
 		logger.info("이직준비 화면");
 		
-		return "member/menu/psService2";
+		return "member/menu/psService3";
 	}
 	
 }
