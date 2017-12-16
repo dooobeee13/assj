@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,29 +10,41 @@
 <title>취업준비</title>
 <!-- Bootstrap -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <script type="text/javascript">
-     </script>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+</script>
 <style type="text/css">
 	.container{
-		margin:0 auto;
+		margin:0 auto;	
 	}
-	img{
+	#psService{
+		background-color:#ffff;
+	}
+	#psService img{
 		width:100%;
 	}
-	table{
+	#psService table{
 		width:100%;
 	}
-	#picDiv{
+	#psService #picDiv{
 		text-align:center;
 	}
-	#picDiv img{
-		width:20%;	
+	#psService #picDiv img{
+		width:25%;	
 	}
+	fieldset{
+		width:1200px;
+		height:600px;
+		margin:0 auto;	
+		background-color:#ffff;
+	}
+
+ 
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,14 +54,21 @@
     <![endif]-->
 </head>
 	<body>
+	<c:import url="../../index/top.jsp" />
+	
 		<div class="container">
-			<img src="../images/취업 성공 가이드.png" alt="취업성공가이드">
-			<br><br><br><br><br>
-			<div id="picDiv">
-				<a href="psService2.jsp"><img src="../images/취업준비.png" alt="취업준비"></a>
-						   <img src="../images/공백.png" alt="공백">
-				<a href="psService3.jsp"><img src="../images/이직준비.png" alt="이직준비"></a>
-			</div>
+			<fieldset>
+				<div id="psService">
+				<img src="<c:url value='/images/취업 성공 가이드.png'/>" alt="취업성공가이드">
+					<br><br><br>
+					<div id="picDiv">
+						<a href="<c:url value='/member/menu/psService2.do'/>"><img src="<c:url value='/images/취업준비.png'/>" alt="취업준비"></a>
+								   <img src="<c:url value='/images/공백.png'/>" alt="공백">
+						<a href="<c:url value='/member/menu/psService3.do'/>"><img src="<c:url value='/images/이직준비.png'/>" alt="이직준비"></a>
+					</div>
+				</div>
+			</fieldset>
 		</div>
+	<c:import url="../../index/footer.jsp" />
 	</body>
 </html>

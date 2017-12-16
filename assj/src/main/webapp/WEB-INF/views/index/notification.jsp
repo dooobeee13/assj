@@ -35,7 +35,7 @@
 	}
 </style>
 <div class="row sidemargin0">
-	<c:forEach begin="1" end="8">
+	<c:forEach begin="1" end="12">
 		<div class="panel panel-default col-md-3 notiItem">
 			<div class="panel-heading notiTitle text-center"><img src="//img11.jobkorea.kr/Images/Logo/180/u/t/utopia10_180.gif?20171213170002" alt="교보정보통신" ></div>
 			<div class="panel-body">

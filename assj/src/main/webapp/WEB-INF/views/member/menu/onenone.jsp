@@ -29,32 +29,30 @@
 		font-weight:bold;
 	}
 	fieldset {
-		width:800px;
+		width:720px;
 		margin:0 auto;	
 		padding:20px;
 		background-color:#ffff;
 	}
 	label{
-		width:150px;
+		width:134px;
 	}
 	.titleTD{
-		width:100px;
+		width:130px;
 	}
 	#btnDiv{
    		text-align:center;
    	}
    	
-   	
-   	
-   	
+
    	 #page-wrapper {
-    padding-left: 250px;
+    padding-left: 380px;
   }
   
   #sidebar-wrapper {
     position:absolute;
-    width: 220px;
-    height: 75%;
+    width: 190px;
+    height: 63%;
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
@@ -74,8 +72,8 @@
   }
   
   .sidebar-nav li {
-    text-indent: 1.5em;
-    line-height: 2.8em;
+    text-indent: 0.8em;
+    line-height: 2.2em;
   }
   
   .sidebar-nav li a {
@@ -109,7 +107,7 @@
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
 				<hr>
-				<li><h4><b>무엇을 도와드릴까요?</b></h4></li>
+				<li><h5><b>무엇을 도와드릴까요?</b></h5></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>도움말</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
@@ -119,12 +117,12 @@
 			</ul>
 			<hr>
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h4><b>개인회원서비스</b></h4></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
+				<li class="sidebar-brand"><h5><b>개인회원서비스</b></h5></li>
+				<li><a href="<c:url value='/member/menu/psService.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
 			</ul>
 			<hr>
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h4><b>기업회원서비스</b></h4></li>
+				<li class="sidebar-brand"><h5><b>기업회원서비스</b></h5></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 상품 안내</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>S-포인트 안내 </a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>SIAT 인적성검사 상품 </a></li>
@@ -144,13 +142,14 @@
 				<br>
 				<br>
 				※ 평일 17시 이전에 보내주신 문의는 당일 답변을 원칙으로 합니다.<br>
-				&nbsp;&nbsp;그 외 시간에 문의하신 내용은 다음 근무시간에 답변해드리겠습니다. (평일 17시 이후 : 다음날 / 주말 : 다음주 월요일)<br>
+				&nbsp;&nbsp;그 외 시간에 문의하신 내용은 다음 근무시간에 답변해드리겠습니다.<br>
+				&nbsp;&nbsp;(평일 17시 이후 : 다음날 / 주말 : 다음주 월요일)<br>
 				<br>
 				<form role="form" class="form-inline">
 					<table class="table table-bordered">
 						<tr>
 							<td class="titleTD">제목</td>
-							<td><input type="text" class="form-control" size="80"></td>
+							<td><input type="text" class="form-control" size="76"></td>
 						</tr>
 						<tr>
 							<td class="titleTD">분류</td>
@@ -194,7 +193,7 @@
 						</tr>
 						<tr>
 							<td class="titleTD">내용</td>
-							<td><textarea rows="10" cols="84"></textarea></td>
+							<td><textarea rows="10" cols="80"></textarea></td>
 						</tr>
 					</table>
 					<div class="well well-lg">
@@ -202,7 +201,7 @@
 						- 수집 목적 : 문의에 따른 원활한 상담 제공<br>
 						- 보유 기간 : 문의처리 후 1년간 보관
 					</div><br>
-					<input type="checkbox" id="CpCheckbox5" value="option1">&nbsp;&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다.
+					&nbsp;&nbsp;<input type="checkbox" id="CpCheckbox5" value="option1">&nbsp;&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다.
 					<br><br><br>
 				</form>	
 					<div id="btnDiv">

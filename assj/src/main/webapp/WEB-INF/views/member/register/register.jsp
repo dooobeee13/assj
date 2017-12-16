@@ -189,6 +189,8 @@
 			});
     		
 			
+
+				
     		
     	});
     	
@@ -230,7 +232,7 @@
  			padding:6px;
  		}
 		.mem_register #personal{
-			background: #f0ad4e;
+			background: #d79117;
 			border:1px solid #ccc;
 		}
 		.mem_register #company{
@@ -239,7 +241,26 @@
 		.mem_register #CompanyMember{
 			display:none;
 		}
-	
+
+		.modal {
+       		 text-align: center;
+		}
+		 
+		@media screen and (min-width: 768px) { 
+	        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+	        }
+		}
+		 
+		.modal-dialog {
+	        display: inline-block;
+	        text-align: left;
+	        vertical-align: middle;
+		}
+
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -358,13 +379,34 @@
 					<p>&nbsp;&nbsp;마케팅 정보 수신 동의 - SMS/MMS (선택)                                      <input type="checkbox" id="PsCheckbox5" value="option1"></p><br>
 					<p>&nbsp;&nbsp;개인정보 제 3자 제공 및 위탁사항 이용약관  </p><br> 
 				</div>
-					<hr>
+				
 				
 				<div class="form-group" id="btnDiv">
 		   			<button type="submit" class="btn btn-primary btn-lg" id="psRegister">회원가입 완료</button>
 				</div>
 			</form>
 			<input type ="hidden" name="chkId" id="chkId">
+			
+			<hr>
+					<article>
+						<h1>회원약관</h1>
+						<br><br>
+						<span class="r">*</span>&nbsp;<b>개인회원 약관</b> <span class="r">&nbsp;(필수)</span>
+						<iframe src="<c:url value='/inc2/provision.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<span class="r">*</span>&nbsp;<b>개인정보 수집 및 이용</b> <span class="r">&nbsp;(필수)</span>
+						<iframe src="<c:url value='/inc2/provision2.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<b>개인정보 제 3자 제공 및 위탁사항 이용약관</b>
+						<iframe src="<c:url value='/inc2/provision3.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<b>마케팅 정보 수신</b> (선택) 
+						<iframe src="<c:url value='/inc2/provision4.html'/>" 
+						width="680px" height="200px"></iframe>
+					</article>
 		</fieldset>
 		
 		
@@ -484,7 +526,34 @@
 		   			<button type="submit" class="btn btn-primary btn-lg" id="cpRegister">회원가입 완료</button>
 				</div>
 			</form>
+			
+			<article>
+						<h1>회원약관</h1>
+						<br><br>
+						<span class="r">*</span>&nbsp;<b>개인회원 약관</b> <span class="r">&nbsp;(필수)</span>
+						<iframe src="<c:url value='/inc2/provision.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<span class="r">*</span>&nbsp;<b>개인정보 수집 및 이용</b> <span class="r">&nbsp;(필수)</span>
+						<iframe src="<c:url value='/inc2/provision2.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<b>개인정보 제 3자 제공 및 위탁사항 이용약관</b>
+						<iframe src="<c:url value='/inc2/provision3.html'/>" 
+						width="680px" height="200px"></iframe>
+						<br><br>
+						<b>마케팅 정보 수신</b> (선택) 
+						<iframe src="<c:url value='/inc2/provision4.html'/>" 
+						width="680px" height="200px"></iframe>
+					</article>
+			
 		</fieldset>
+		
+		
+		
+
+
+
 			
 			
 			<!-- 아이디 중복확인 모달 -->

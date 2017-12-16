@@ -13,7 +13,7 @@
 </script>	
 <header>
 	<div class="topline">
-		<a href="">로그인</a> <a href="<c:url value='/member/register/register.do'/>">회원가입</a>
+		<a href="<c:url value='/member/register/register.do'/>">회원가입</a> <a href="">로그인</a>
 		<div class="clearfix"></div>
 	</div>
 	<div class="searchline container-fluid">
@@ -103,9 +103,9 @@
 					</div></li>
 				<li class="searchjob"><a href="#">직업별</a></li>
 				<li class="searchjob"><a href="#">지역별</a></li>
-				<li class="searchjob"><a href="#">menu1</a></li>
-				<li class="searchjob"><a href="#">menu2</a></li>
-				<li class="searchjob"><a href="#">menu3</a></li>
+				<li class="searchjob"><a href="#">기업별</a></li>
+				<li class="searchjob"><a href="#">전공별</a></li>
+				<li class="searchjob"><a href="#">학력별</a></li>
 			</ul>
 		</div>
 	</div>

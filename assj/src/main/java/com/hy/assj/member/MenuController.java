@@ -19,4 +19,26 @@ public class MenuController {
 		
 		return "member/menu/onenone";	
 	}
+	
+	@RequestMapping("/psService.do")
+	public String psService() {
+		logger.info("개인회원 서비스 화면");
+		
+		return "member/menu/psService";
+	}
+	
+	@RequestMapping("/psService2.do")
+	public String psService2() {
+		logger.info("취업준비 화면");
+		
+		return "member/menu/psService2";
+	}
+	
+	@RequestMapping("/psService3.do")
+	public String psService3() {
+		logger.info("이직준비 화면");
+		
+		return "member/menu/psService2";
+	}
+	
 }
