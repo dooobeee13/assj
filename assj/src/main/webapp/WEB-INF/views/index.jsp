@@ -11,7 +11,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
-
 </head>
 <body>
 	<c:import url="index/top.jsp" />
@@ -83,58 +82,73 @@
 			</div>
 			<div class="col-md-3">
 				<div class="conten" style="padding:5px">
-					<ul class="nav nav-tabs">
+					<ul class="nav nav-tabs" id="MemberChoice">
 					   <li class="active"><a data-toggle="tab" href="#individual">개인회원</a></li>
-					   <li><a data-toggle="tab" href="#company">기업회원</a></li>
+					   <li ><a data-toggle="tab" href="#company">기업회원</a></li>
 					</ul>
 
 					<div class="tab-content">
 						<div id="individual" class="tab-pane active">
-							<form class="login-form">
-								<div class="form-group input-group-sm has-feedback">
-									<span class="glyphicon glyphicon-user form-control-feedback"
-										aria-hidden="true"></span> <input type="text"
-										class="form-control " placeholder="아이디">
-								</div>
-								<div class="form-group input-group-sm has-feedback">
-									<input type="password" class="form-control" placeholder="비밀번호">
-									<span class="glyphicon glyphicon-lock form-control-feedback"
-										aria-hidden="true"></span>
-								</div>
-								<div class="input-group-sm">
-									<div class="checkbox">
-										<label> <input type="checkbox"> 아이디 저장
-										</label>
+							<form class="login-form" method="post" action="<c:url value='/index.do'/>">
+								
+								<c:if test="${empty sessionScope.memId}">
+									<div class="form-group input-group-sm has-feedback">
+										<span class="glyphicon glyphicon-user form-control-feedback"
+											aria-hidden="true"></span> 
+											<input type="text" class="form-control " placeholder="아이디" id="memId" name="memId">
 									</div>
-								</div>
-								<div class="form-group">
-									<input type="submit" class="btn btn-primary btn-sm btn-block"
-										value="로그인">
-								</div>
-								<p style="font-size: 0.9em">
-									<a href="#">아이디 / 비밀번호 찾기</a>
-								</p>
-								<p style="font-size: 0.9em">
-									<a href="<c:url value='/member/register/register.do'/>">아직 회원이 아니세요? 회원가입</a>
-								</p>
+									<div class="form-group input-group-sm has-feedback">
+										<input type="password" class="form-control" placeholder="비밀번호" id="memPwd" name="memPwd">
+										<span class="glyphicon glyphicon-lock form-control-feedback"
+											aria-hidden="true"></span>
+									</div>	
+									<div class="input-group-sm">
+										<div class="checkbox" >
+											<label> <input type="checkbox"  name="chkSaveId" id="chkSaveId"> 아이디 저장
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인" id="loginBtn">
+									</div>
+									<p style="font-size: 0.9em">
+										<a href="#">아이디 / 비밀번호 찾기</a>
+									</p>
+									<p style="font-size: 0.9em">
+										<a href="<c:url value='/member/register/register.do'/>">아직 회원이 아니세요? 회원가입</a>
+									</p>
+								</c:if>
+								<c:if test="${!empty sessionScope.memId}">
+									<b>${sessionScope.memName}</b>님 <a href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default btn-sm">로그아웃</button>
+									<hr>
+									<div id="memMenu">
+										&nbsp;<span class="smFont">==입사지원 ? | 스크랩 ? | 관심기업 ?==</span>
+										 <p>=========================
+											=========================
+											=========================
+											=========================
+											=========================</p>
+									</div>
+								</c:if>
+								
 							</form>
 						</div>
 						
 						<div id="company" class="tab-pane">
-							<form class="login-form">
+							<form class="login-form" method="post" action="<c:url value='/index2.do'/>">
 								<div class="form-group input-group-sm has-feedback">
 									<span class="glyphicon glyphicon-user form-control-feedback"
 										aria-hidden="true"></span> <input type="text"
-										class="form-control " placeholder="아이디">
+										class="form-control " placeholder="아이디" id="cmId" name="cmId">
 								</div>
 								<div class="form-group input-group-sm has-feedback">
-									<input type="password" class="form-control" placeholder="비밀번호">
+									<input type="password" class="form-control" placeholder="비밀번호" id="cmPwd" name="cmPwd">
 									<span class="glyphicon glyphicon-lock form-control-feedback"
 										aria-hidden="true"></span>
 								</div>
 								<div class="input-group-sm">
 									<div class="checkbox">
-										<label> <input type="checkbox"> 아이디 저장
+										<label> <input type="checkbox" name="chkSaveId" id="chkSaveId"> 아이디 저장
 										</label>
 									</div>
 								</div>

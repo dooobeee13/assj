@@ -13,8 +13,16 @@
 </script>	
 <header>
 	<div class="topline">
-		<a href="<c:url value='/member/register/register.do'/>">회원가입</a> <a href="">로그인</a>
-		<div class="clearfix"></div>
+	<c:if test="${!empty sessionScope.memId}">	
+		<a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a>								
+		<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a>
+		<a href="<c:url value='/login/logout.do'/>">로그아웃</a>
+	</c:if>
+	<c:if test="${empty sessionScope.memId}">
+		<a href="<c:url value='/member/register/register.do'/>">회원가입</a> 
+		<a href="">로그인</a>
+	</c:if>
+	<div class="clearfix"></div>
 	</div>
 	<div class="searchline container-fluid">
 		<div class="row">

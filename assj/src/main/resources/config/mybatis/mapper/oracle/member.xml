@@ -14,8 +14,14 @@
 	<select id="duplicationId" parameterType="string" resultType="int">
 		select count(*) from member where mem_id=#{memId}
 	</select>
+
+	<select id="selectPwdByUserid" parameterType="string" resultType="string">
+		select MEM_PWD from member where MEM_ID=#{memId}
+	</select>
 	
-	
+	<select id="selectMember" parameterType="string" resultType="MemberVO">
+		select * from member where MEM_ID=#{memId}
+	</select>
 </mapper>
 
 

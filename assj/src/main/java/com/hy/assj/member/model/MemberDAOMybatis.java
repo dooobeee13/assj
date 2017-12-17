@@ -20,4 +20,15 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace+".duplicationId",memId);
 	}
 
+	@Override
+	public String selectPwd(String memId) {
+		return getSqlSession().selectOne(namespace+".selectPwdByUserid",memId);
+	}
+
+	@Override
+	public MemberVO selectMember(String memId) {
+		return getSqlSession().selectOne(namespace+".selectMember",memId);
+	}
+
+	
 }

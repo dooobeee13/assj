@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <title>message.jsp</title>
 </head>
 <body>
 	<script type="text/javascript">
-		alert('dd');
 		<c:if test="${!empty msg}">		
 			alert("${msg}");
 		</c:if>
