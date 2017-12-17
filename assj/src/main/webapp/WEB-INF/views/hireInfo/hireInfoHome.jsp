@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 @media ( min-width : 992px) {
 	.topline a {
@@ -98,13 +99,16 @@ footer {
 	left: 13px;
 }
 
-.sCateBt {
+
+
+
+.sCategory {
 	padding-left: 0;
 	padding-right: 0;
 	border: 1px solid #e0e2e6
 }
 
-.sCateBt .top_category {
+.sCategory .sCateTitle {
 	line-height: 40px;
 	height: 42px;
 	background-color: #f9fafc;
@@ -114,46 +118,52 @@ footer {
 	padding-left: 17px;
 }
 
-.sCateBt .top_category .glyphicon {
+.sCategory .sCateTitle .glyphicon {
 	float: right;
 	top: 15px;
 	padding-right: 10px;
 }
 
-.sCateBt .sub_category {
+.sCategory .sCateName {
 	height: 210px;
 	overflow-y: scroll;
 	background: #fff;
+	padding-top: 15px;
 }
 
-.sCateBt .sub_category::-webkit-scrollbar-track
+.sCategory .thinScroll::-webkit-scrollbar-track
 {
 	background-color: #fff;
 }
 
-.sCateBt .sub_category::-webkit-scrollbar {
+.sCategory .thinScroll::-webkit-scrollbar {
 	width: 5px;
 	background-color: #F5F5F5;
 }
 
-.sCateBt .sub_category::-webkit-scrollbar-thumb {
+.sCategory .thinScroll::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 	background-color: rgba(0,0,0,0.1);
 }
 
-.sCateBt .sub_category ul, .sCateBt .category ul {
+.sCategory .detail .category {
+	padding-top: 15px;
+}
+
+
+.sCategory .sCateName ul, .sCategory .detail .category ul {
 	list-style: none;
 	padding-left: 0;
 }
 
-.sCateBt .sub_category ul li, .sCateBt .category ul li{
+.sCategory .sCateName ul li, .sCategory .detail .category ul li{
 	padding-left: 17px;
 	height: 32px;
 	cursor: pointer;
 }
 
-.sCateBt .sub_category ul li:hover {
+.sCategory .sCateName ul li:hover {
 	color: #39f;
 }
 
@@ -172,16 +182,16 @@ footer {
 	margin: 5px;
 }
 
-.sCateBt.top .detail {
+.sCategory.top .detail {
 	display: none;
 	background: #fff;
 }
 
-.sCateBt.top .on {
+.sCategory.top .on {
 	display: block;
 }
 
-.sCateBt .active{
+.sCategory .active{
 	background: #333;
 	color: #fff;
 }
@@ -195,20 +205,20 @@ footer {
 		});
 		
 		
-		$('.sCateBt .top_category').click(function(e){
-			$(this).parent().siblings().find('.top_category').removeClass('active');
+		$('.sCategory .sCateTitle').click(function(e){
+			$(this).parent().siblings().find('.sCateTitle').removeClass('active');
 			$(this).toggleClass('active');
-			$('.sCateBt .top_category').find('span').attr('class', 'glyphicon glyphicon-chevron-down');
-			$('.sCateBt .top_category.active').find('span').attr('class', 'glyphicon glyphicon-chevron-up');
+			$('.sCategory .sCateTitle').find('span').attr('class', 'glyphicon glyphicon-chevron-down');
+			$('.sCategory .sCateTitle.active').find('span').attr('class', 'glyphicon glyphicon-chevron-up');
 		})
 		
-		$('.top_category').click(function(e){
+		$('.sCateTitle').click(function(e){
 			$(this).next().next().toggleClass('on');
 			$(this).parent().siblings().find('.detail').removeClass('on');
-			if ($('.sCateBt.top').find('.on').length > 0) {
-				$('.sCateBt.top .sub_category').hide();
+			if ($('.sCategory.top').find('.on').length > 0) {
+				$('.sCategory.top .sCateName').hide();
 			} else {
-				$('.sCateBt.top .sub_category').show();
+				$('.sCategory.top .sCateName').show();
 			}
 		});
 	})
@@ -233,12 +243,12 @@ footer {
 			<div class="col-sm-9">
 				<div>
 					<div class="row">
-						<div class="col-md-3 sCateBt top">
-							<div class="top_category">
+						<div class="col-md-3 sCategory top">
+							<div class="sCateTitle">
 								직무<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
 							
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>경영·사무</li>
 									<li>마케팅·무역·유통</li>
@@ -253,7 +263,7 @@ footer {
 							<div class="detail" style="width: 403%;height: 300px;z-index: 1;">
 								<div class="row">
 									<div class="col-md-3">
-										<div class="category">
+										<div class="category thinScroll">
 											<ul>
 												<li>경영·사무</li>
 												<li>마케팅·무역·유통</li>
@@ -266,15 +276,15 @@ footer {
 										</div>
 									</div>
 									<div class="col-md-9">
-										<div class="category">
+										<div class="category thinScroll">
 											<ul>
-												<li>경영·사무</li>
-												<li>마케팅·무역·유통</li>
-												<li>영업·고객상담</li>
-												<li>IT·인터넷</li>
-												<li>연구개발·설계</li>
-												<li>생산·제조</li>
-												<li>전문·특수직</li>
+												<li class="col-md-6">경영·사무</li>
+												<li class="col-md-6">마케팅·무역·유통</li>
+												<li class="col-md-6">영업·고객상담</li>
+												<li class="col-md-6">IT·인터넷</li>
+												<li class="col-md-6">연구개발·설계</li>
+												<li class="col-md-6">생산·제조</li>
+												<li class="col-md-6">전문·특수직</li>
 											</ul>
 										</div>
 									</div>
@@ -283,37 +293,15 @@ footer {
 							
 						</div>
 						
-						<div class="col-md-3 sCateBt top">
-							<div class="top_category">
-								근무지역<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							<div class="sub_category">
-								<ul>
-									<li>서울</li>
-									<li>경기</li>
-									<li>인천</li>
-									<li>부산</li>
-									<li>대구</li>
-									<li>광주</li>
-									<li>대전</li>
-									<li>울산</li>
-									<li>세종</li>
-									<li>강원</li>
-									<li>경남</li>
-									<li>경북</li>
-								</ul>
-							</div>
-							
-							<div class="detail" style="margin-left: -101%;width: 403%;height: 300px;background: green; z-index: 1;">
-							</div>
-							
+						<div class="col-md-3 sCategory top">
+							<c:import url="/hireInfo/areaList.do" />
 						</div>
 						
-						<div class="col-md-3 sCateBt top">
-							<div class="top_category">
+						<div class="col-md-3 sCategory top">
+							<div class="sCateTitle">
 								경력
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>신입</li>
 									<li>1~3년</li>
@@ -327,11 +315,11 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCateBt top">
-							<div class="top_category">
+						<div class="col-md-3 sCategory top">
+							<div class="sCateTitle">
 								학력
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>대학교졸업(4년)</li>
 									<li>대학졸업(2,3년)</li>
@@ -345,11 +333,11 @@ footer {
 						
 						<div class="clearfix"></div>
 						
-						<div class="col-md-3 sCateBt">
-							<div class="top_category">
+						<div class="col-md-3 sCategory">
+							<div class="sCateTitle">
 								기업형태
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>대기업</li>
 									<li>중견기업</li>
@@ -363,11 +351,11 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCateBt">
-							<div class="top_category">
+						<div class="col-md-3 sCategory">
+							<div class="sCateTitle">
 								업종<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>서비스업</li>
 									<li>의료·제약·복지</li>
@@ -381,11 +369,11 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCateBt">
-							<div class="top_category">
+						<div class="col-md-3 sCategory">
+							<div class="sCateTitle">
 								직급/직책
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>[직급] 사원</li>
 									<li>[직급] 주임</li>
@@ -399,11 +387,11 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCateBt">
-							<div class="top_category">
+						<div class="col-md-3 sCategory">
+							<div class="sCateTitle">
 								전공<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
-							<div class="sub_category">
+							<div class="sCateName thinScroll">
 								<ul>
 									<li>인문/사회</li>
 									<li>어학계열</li>
