@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//전공
 public class MajorVO {
 
 	private int majorNo;

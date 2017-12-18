@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//경력
 public class CareerVO {
 	
 	private int carrerNo;

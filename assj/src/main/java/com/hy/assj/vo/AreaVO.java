@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//지역
 public class AreaVO {
 
 	private int areaNo;

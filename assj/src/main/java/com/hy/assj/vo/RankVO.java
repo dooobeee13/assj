@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//직급
 public class RankVO {
 
 	private int rankNo;

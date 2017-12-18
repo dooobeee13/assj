@@ -5,6 +5,17 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.hy.assj.vo.AreaVO;
+import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.CompScaleVO;
+import com.hy.assj.vo.EducationVO;
+import com.hy.assj.vo.EmpTypeVO;
+import com.hy.assj.vo.MajorVO;
+import com.hy.assj.vo.OccupationVO;
+import com.hy.assj.vo.PositionVO;
+import com.hy.assj.vo.RankVO;
+import com.hy.assj.vo.SectorsVO;
+
 @Repository
 public class HireInfoDAOMybatis extends SqlSessionDaoSupport implements HireInfoDAO {
 

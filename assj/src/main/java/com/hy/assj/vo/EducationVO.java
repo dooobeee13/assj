@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//학력
 public class EducationVO {
 	
 	private int eduNo;

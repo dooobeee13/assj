@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//고용형태
 public class EmpTypeVO {
 
 	private int etNo;

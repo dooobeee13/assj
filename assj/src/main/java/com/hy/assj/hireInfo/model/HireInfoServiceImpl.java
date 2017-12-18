@@ -8,6 +8,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hy.assj.vo.AreaVO;
+import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.CompScaleVO;
+import com.hy.assj.vo.EducationVO;
+import com.hy.assj.vo.EmpTypeVO;
+import com.hy.assj.vo.MajorVO;
+import com.hy.assj.vo.OccupationVO;
+import com.hy.assj.vo.PositionVO;
+import com.hy.assj.vo.RankVO;
+import com.hy.assj.vo.SectorsVO;
+
 @Service
 public class HireInfoServiceImpl implements HireInfoService {
 
