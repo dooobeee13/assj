@@ -102,6 +102,7 @@ footer {
 
 
 
+
 .sCategory {
 	padding-left: 0;
 	padding-right: 0;
@@ -182,7 +183,7 @@ footer {
 	margin: 5px;
 }
 
-.sCategory.top .detail {
+.sCategory .detail {
 	display: none;
 	background: #fff;
 }
@@ -195,6 +196,15 @@ footer {
 	background: #333;
 	color: #fff;
 }
+
+.sCategory.bottom .sCateName {
+	display: none;
+}
+
+.careerInput {
+	width: 40px;
+}
+
 </style>
 <script>
 	$(function(){
@@ -229,7 +239,7 @@ footer {
 	
 	<section class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-md-3">
 				<div>
 					<ul class="list-group">
 						<li class="list-group-item">채용정보 상세검색</li>
@@ -240,57 +250,11 @@ footer {
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-md-9">
 				<div>
 					<div class="row">
 						<div class="col-md-3 sCategory top">
-							<div class="sCateTitle">
-								직무<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>경영·사무</li>
-									<li>마케팅·무역·유통</li>
-									<li>영업·고객상담</li>
-									<li>IT·인터넷</li>
-									<li>연구개발·설계</li>
-									<li>생산·제조</li>
-									<li>전문·특수직</li>
-								</ul>
-							</div>
-							
-							<div class="detail" style="width: 403%;height: 300px;z-index: 1;">
-								<div class="row">
-									<div class="col-md-3">
-										<div class="category thinScroll">
-											<ul>
-												<li>경영·사무</li>
-												<li>마케팅·무역·유통</li>
-												<li>영업·고객상담</li>
-												<li>IT·인터넷</li>
-												<li>연구개발·설계</li>
-												<li>생산·제조</li>
-												<li>전문·특수직</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-md-9">
-										<div class="category thinScroll">
-											<ul>
-												<li class="col-md-6">경영·사무</li>
-												<li class="col-md-6">마케팅·무역·유통</li>
-												<li class="col-md-6">영업·고객상담</li>
-												<li class="col-md-6">IT·인터넷</li>
-												<li class="col-md-6">연구개발·설계</li>
-												<li class="col-md-6">생산·제조</li>
-												<li class="col-md-6">전문·특수직</li>
-											</ul>
-										</div>
-									</div>
-								</div>	
-							</div>
-							
+							<c:import url="/hireInfo/occupationList.do" />
 						</div>
 						
 						<div class="col-md-3 sCategory top">
@@ -298,6 +262,31 @@ footer {
 						</div>
 						
 						<div class="col-md-3 sCategory top">
+							<c:import url="/hireInfo/careerList.do" />
+						</div>
+						
+						<div class="col-md-3 sCategory top">
+							<c:import url="/hireInfo/educationList.do" />
+						</div>
+						
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/sectorsList.do" />
+						</div>
+						
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/rankList.do" />
+						</div>
+						
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/majorList.do" />
+						</div>
+						
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/compScaleList.do" />
+						</div>
+						
+						
+						<!-- <div class="col-md-5ths sCategory top">
 							<div class="sCateTitle">
 								경력
 							</div>
@@ -315,7 +304,7 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCategory top">
+						<div class="col-md-5ths sCategory top">
 							<div class="sCateTitle">
 								학력
 							</div>
@@ -331,9 +320,8 @@ footer {
 							</div>
 						</div>
 						
-						<div class="clearfix"></div>
 						
-						<div class="col-md-3 sCategory">
+						<div class="col-md-5ths sCategory">
 							<div class="sCateTitle">
 								기업형태
 							</div>
@@ -351,7 +339,7 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCategory">
+						<div class="col-md-5ths sCategory">
 							<div class="sCateTitle">
 								업종<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
@@ -369,7 +357,7 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCategory">
+						<div class="col-md-5ths sCategory">
 							<div class="sCateTitle">
 								직급/직책
 							</div>
@@ -387,7 +375,7 @@ footer {
 							</div>
 						</div>
 						
-						<div class="col-md-3 sCategory">
+						<div class="col-md-5ths sCategory">
 							<div class="sCateTitle">
 								전공<span class="glyphicon glyphicon-chevron-down"></span>
 							</div>
@@ -402,7 +390,7 @@ footer {
 									<li>의학/예체능</li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 						
 						
 					</div>
