@@ -54,8 +54,10 @@ public class IndexController {
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
-			session.setAttribute("memId", memVo.getMemId());
-			session.setAttribute("memName", memVo.getMemName());
+			/*session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());*/
+			session.setAttribute("memberVO", memVo);
+			
 			
 			//[2] 쿠키에 저장
 			Cookie ck = new Cookie("ck_userid", memVo.getMemId());
