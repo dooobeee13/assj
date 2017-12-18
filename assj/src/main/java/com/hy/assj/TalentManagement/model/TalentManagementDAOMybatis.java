@@ -18,4 +18,9 @@ public class TalentManagementDAOMybatis extends SqlSessionDaoSupport implements 
 	public List<Map<Integer, String>> selectPosition() {
 		return getSqlSession().selectList(namespace+".selectPosition");
 	}
+
+	@Override
+	public List<Map<Integer, String>> selectEmpType() {
+		return getSqlSession().selectList(namespace+".selectEmpType");
+	}
 }

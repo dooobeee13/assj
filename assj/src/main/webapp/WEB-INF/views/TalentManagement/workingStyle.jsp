@@ -10,17 +10,10 @@
 		<div class="col-div-80-100 workingStyleSelect"
 			style="padding-left: 6em; padding-top: 2em;">
 			<ul>
-				<li class="col-li-4">정규직</li>
-				<li class="col-li-4">계약직</li>
-				<li class="col-li-4">병역특례</li>
-				<li class="col-li-4" style="clear: both">인턴직</li>
-				<li class="col-li-4">정규직</li>
-				<li class="col-li-4">아르바이트</li>
-				<li class="col-li-4" style="clear: both">파견직</li>
-				<li class="col-li-4">위촉직</li>
-				<li class="col-li-4">프리랜서</li>
-				<li class="col-li-4" style="clear: both">교육생</li>
-				<li class="col-li-4">별정직</li>
+			<c:forEach var="i" begin="0" end="7" step="1">
+					<c:set var="map" value="${empTypelist[i] }"></c:set>
+						<li class="col-li-4" value=${map['etName'] }>${map['etName']</li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>
@@ -30,18 +23,28 @@
 			<h3 class="content_title">희망급여</h3>
 		</div>
 		<div class="col-div-80-100" style="padding-left: 6em;">
-			<select class="one-list">
-				<option>전체</option>
-				<option>1400만원 이상</option>
-				<option>1600만원 이상</option>
-				<option>1800만원 이상</option>
-				<option>2000만원 이상</option>
-			</select> ~ <select class="one-list">
-				<option>전체</option>
-				<option>1400만원 이하</option>
-				<option>1600만원 이하</option>
-				<option>1800만원 이하</option>
-				<option>2000만원 이하</option>
+			<select id="resumeSalStart" class="one-list">
+				<option value="0">전체</option>
+				<option value="1400">1400만원 이상</option>
+				<option value="1600">1600만원 이상</option>
+				<option value="1800">1800만원 이상</option>
+				<option value="2000">2000만원 이상</option>
+				<option value="3000">3000만원 이상</option>
+				<option value="4000">4000만원 이상</option>
+				<option value="5000">5000만원 이상</option>
+				<option value="6000">6000만원 이상</option>
+				<option value="9000">9000만원 이상</option>
+			</select> ~ <select id="resumeSalEnd" class="one-list">
+				<option value="0">전체</option>
+				<option value="1400">1400만원 이하</option>
+				<option value="1600">1600만원 이하</option>
+				<option value="1800">1800만원 이하</option>
+				<option value="2000">2000만원 이하</option>
+				<option value="3000">3000만원 이하</option>
+				<option value="4000">4000만원 이하</option>
+				<option value="5000">5000만원 이하</option>
+				<option value="6000">6000만원 이하</option>
+				<option value="9000">9000만원 이하</option>
 			</select>&nbsp;&nbsp; <input type="checkbox" id="desi"><label
 				for="desi" style="vertical-align: super;">면접 후 결정</label>&nbsp; <input
 				type="checkbox" id="frole"><label for="frole"

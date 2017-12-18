@@ -24,6 +24,11 @@ public class TalentManagementServiceImpl implements TalentManagementService {
 	public List<Map<Integer, String>> selectPosition() {
 		return tmDao.selectPosition();
 	}
+
+	@Override
+	public List<Map<Integer, String>> selectEmpType() {
+		return tmDao.selectEmpType();
+	}
 	
 	
 }

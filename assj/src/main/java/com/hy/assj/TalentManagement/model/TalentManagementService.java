@@ -7,4 +7,6 @@ public interface TalentManagementService {
 	public List<Map<Integer, String>> selectRank();
 	
 	public List<Map<Integer, String>> selectPosition();
+	
+	public List<Map<Integer, String>> selectEmpType();
 }
