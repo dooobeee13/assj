@@ -5,17 +5,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메인화면</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.carousel').carousel({interval:3000})
+	});
+</script>
 </head>
 <body>
 	<c:import url="index/top.jsp" />
-	
-	<section class="container">
+	<!-- 슬라이드 -->
+	<fieldset id="slide">
+	<ul>
+	<div id="carousel-example-generic" class="carousel slide">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="5"></li>
+		</ol>
+		<!-- Carousel items -->
+			<div class="carousel-inner" style="width:400px">
+				<div class="item active">
+					<img src="<c:url value='/images/slide1.png'/>" alt="slide1">
+				</div>
+				<div class="item">
+					<img src="<c:url value='/images/slide2.png'/>" alt="slide2">
+				</div>
+				<div class="item">
+					<img src="<c:url value='/images/slide3.png'/>" alt="slide3">
+				</div>
+				<div class="item">
+					<img src="<c:url value='/images/slide4.png'/>" alt="slide4">
+				</div>
+				<div class="item">
+					<img src="<c:url value='/images/slide5.png'/>" alt="slide5">
+				</div>
+				<div class="item">
+					<img src="<c:url value='/images/slide6.png'/>" alt="slide6">
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<!-- 슬라이드 끝 -->
+		<section class="container">
 		<div class="row">
 			<div class="col-md-7">
 				<div class="conten">
@@ -80,8 +121,11 @@
 
 				</div>
 			</div>
+			
 			<div class="col-md-3">
 				<div class="conten" style="padding:5px">
+					<c:if test="${empty sessionScope.cmMemberVO.cmId}">
+					<c:if test="${empty sessionScope.memberVO.memId}">
 					<ul class="nav nav-tabs" id="MemberChoice">
 					   <li class="active"><a data-toggle="tab" href="#individual">개인회원</a></li>
 					   <li ><a data-toggle="tab" href="#company">기업회원</a></li>
@@ -90,12 +134,13 @@
 					<div class="tab-content">
 						<div id="individual" class="tab-pane active">
 							<form class="login-form" method="post" action="<c:url value='/index.do'/>">
-								
-								<c:if test="${empty sessionScope.memId}">
 									<div class="form-group input-group-sm has-feedback">
 										<span class="glyphicon glyphicon-user form-control-feedback"
 											aria-hidden="true"></span> 
-											<input type="text" class="form-control " placeholder="아이디" id="memId" name="memId">
+											<input type="text" class="form-control " placeholder="아이디" id="memId" name="memId" 
+											<c:if test="${!empty cookie.ck_memId.value}">
+												value="${cookie.ck_memId.value}"
+											</c:if>>
 									</div>
 									<div class="form-group input-group-sm has-feedback">
 										<input type="password" class="form-control" placeholder="비밀번호" id="memPwd" name="memPwd">
@@ -104,7 +149,10 @@
 									</div>	
 									<div class="input-group-sm">
 										<div class="checkbox" >
-											<label> <input type="checkbox"  name="chkSaveId" id="chkSaveId"> 아이디 저장
+											<label> <input type="checkbox"  name="chkSaveId" id="chkSaveId"
+											<c:if test="${!empty cookie.ck_memId.value}">
+												checked
+											</c:if>> 아이디 저장
 											</label>
 										</div>
 									</div>
@@ -116,21 +164,7 @@
 									</p>
 									<p style="font-size: 0.9em">
 										<a href="<c:url value='/member/register/register.do'/>">아직 회원이 아니세요? 회원가입</a>
-									</p>
-								</c:if>
-								<c:if test="${!empty sessionScope.memId}">
-									<b>${sessionScope.memName}</b>님 <a href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default btn-sm">로그아웃</button>
-									<hr>
-									<div id="memMenu">
-										&nbsp;<span class="smFont">==입사지원 ? | 스크랩 ? | 관심기업 ?==</span>
-										 <p>=========================
-											=========================
-											=========================
-											=========================
-											=========================</p>
-									</div>
-								</c:if>
-								
+									</p>			
 							</form>
 						</div>
 						
@@ -139,7 +173,9 @@
 								<div class="form-group input-group-sm has-feedback">
 									<span class="glyphicon glyphicon-user form-control-feedback"
 										aria-hidden="true"></span> <input type="text"
-										class="form-control " placeholder="아이디" id="cmId" name="cmId">
+										class="form-control " placeholder="아이디" id="cmId" name="cmId" <c:if test="${!empty cookie.ck_cmId.value}">
+												value="${cookie.ck_cmId.value}"
+											</c:if>>
 								</div>
 								<div class="form-group input-group-sm has-feedback">
 									<input type="password" class="form-control" placeholder="비밀번호" id="cmPwd" name="cmPwd">
@@ -148,7 +184,9 @@
 								</div>
 								<div class="input-group-sm">
 									<div class="checkbox">
-										<label> <input type="checkbox" name="chkSaveId" id="chkSaveId"> 아이디 저장
+										<label> <input type="checkbox" name="chkSaveId2" id="chkSaveId2" <c:if test="${!empty cookie.ck_cmId.value}">
+												checked
+											</c:if>>아이디 저장
 										</label>
 									</div>
 								</div>
@@ -160,22 +198,51 @@
 									<a href="#">아이디 / 비밀번호 찾기</a>
 								</p>
 								<p style="font-size: 0.9em">
-									<a href="#">기업회원으로 가입하세요</a>
+									<a href="<c:url value='/member/register/register.do'/>" id="comp">기업회원으로 가입하세요</a>
 								</p>
 							</form>
 						</div>
 					</div>
-
+					</c:if>
+					</c:if>
+					<c:if test="${!empty sessionScope.memberVO.memId}">
+							<br>
+							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 <a href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<c:url value='/logout.do'/>"><button type="button" class="btn btn-default btn-sm">로그아웃</button></a>
+							<hr>
+							<div id="memMenu">
+								&nbsp;<span class="smFont">==입사지원 ? | 스크랩 ? | 관심기업 ?==</span>
+								 <p>=========================
+									=========================
+									=========================
+									=========================
+									=========================</p>
+							</div>
+					</c:if>
+					<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
+							<br>
+							<b>&nbsp;&nbsp;&nbsp;${sessionScope.cmMemberVO.cmName}</b>님 <a href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<c:url value='/logout2.do'/>"><button type="button" class="btn btn-default btn-sm">로그아웃</button></a>
+							<hr>
+							<div id="memMenu">
+								&nbsp;<span class="smFont">진행공고 ? | 마감공고 ? | 입사지원 ? |</span>
+								 <p>=========================
+									=========================
+									=========================
+									=========================
+									=========================</p>
+							</div>
+					</c:if>
+				</div>
 
 				</div>
 			</div>
-		</div>
+		
 	</section>
 	
 	<section class="container" style="margin-top:20px; margin-bottom: 20px">
 		<c:import url="index/notification.jsp" />
 	</section>
-
+	
 	<c:import url="index/footer.jsp" />
+
 </body>
 </html>

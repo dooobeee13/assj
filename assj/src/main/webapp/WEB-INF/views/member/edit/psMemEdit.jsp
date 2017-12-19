@@ -1,36 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>    
   	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <title>개인회원 수정</title> 
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../js/bootstrap.min.js"></script>
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     <style type="text/css">
-    	h1{
+    	#psMemEdit h1{
     		font-weight:bold;
     	}
-    	span{
+    	#psMemEdit span{
      		color:red;
      	}
-     	.container{
-     		width:800px;
+     	#psMemEdit {
+     		width:720px;
+     		padding:20px;
+    		margin:0 auto;	
+     		background-color:#ffff;
      	}
-     	fieldset{
- 			width:600px;
- 			margin:0 auto;	
- 			padding:20px;
- 			text-align:center;
+     	#psMemEdit fieldset{
+	 		width:600px;
+	 		margin:0 auto;
+			padding:20px;
+			background-color:#dde6f7;
  		}
- 		table{
+ 		#psMemEdit table{
  			margin:0 auto;	
  			width:300px;
  			text-align:left;
  		}
- 		td{
+ 		#psMemEdit td{
  			padding:8px;
  		}
     </style>
@@ -42,7 +49,9 @@
     <![endif]-->
   </head>
   <body>
+ 	 <c:import url="../../index/top.jsp" />
     <div class="container">
+   		 <div id="psMemEdit">
     	<h1>개인정보 수정</h1>
     	<br>
     	<hr>
@@ -53,23 +62,29 @@
     		<br><br><br>
     		<h1>비밀번호 재확인</h1>
     		<br><br>
-    		<form>
+    		<form name=frm method="post" action="<c:url value='/member/edit/psMemEdit.do'/>">
     			<table>
     				<tr>
-	    				<td><label for="Name">이름</label></td> 
-						<td><h4><b>홍길동(hong123)</b></h4></td>
+	    				<td><label for="memName">이름</label></td> 
+						<td><h4><b>
+						<c:if test="${!empty sessionScope.memberVO}">
+							${sessionScope.memberVO.memName}(${sessionScope.memberVO.memId})	
+						</c:if>
+						</b></h4></td>
 					</tr>
     				<tr>
-    					<td><label for="pwd">비밀번호</label></td> 
-						<td><input type="password" class="form-control"></td>
+    					<td><label for="memPwd">비밀번호</label></td> 
+						<td><input type="password" class="form-control" id="memPwd" name="memPwd"></td>
     				</tr>
     				<tr>
-    					<td colspan="2"><button type="button" class="btn btn-primary btn-lg btn-block">회원확인</button></td>
+    					<td colspan="2"><button type="submit" class="btn btn-primary btn-lg btn-block">회원확인</button></td>
     				</tr>
     			</table>
     		</form>
     	</fieldset>
     </div>    
+    </div>
+    <c:import url="../../index/footer.jsp" />
 </body>
 </html>
     

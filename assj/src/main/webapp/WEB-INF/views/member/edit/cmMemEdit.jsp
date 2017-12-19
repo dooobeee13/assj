@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>    
@@ -11,39 +12,57 @@
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+     <script src="../../js/bootstrap.min.js"></script>
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#cmEmail2').change(function(){
+    			if($(this).val()=='etc'){
+    				//$('#memEmail3').css('visibility','visible');
+    				//console.log($('#memEmail3').attr('style'));
+    				$('#cmEmail3').attr('style','visibility: visible');
+    			}else{
+    				$('#cmEmail3').css('visibility','hidden');
+    			}	
+    		});
+		});
+	</script>
     <style type="text/css">
-    	span{
+    	#cmMemEdit span{
      		color:blue;
      	}
-     	.container{
-    		width:800px;
+     	#cmMemEdit{
+    		width:720px;
+     		padding:20px;
+    		margin:0 auto;	
+     		background-color:#ffff;
     	}
-   		fieldset{
- 			width:700px;
- 			margin:0 auto;	
+   		#cmMemEdit fieldset{
+ 			width:650px;
+	 		margin:0 auto;
+			padding:20px;
+			background-color:#f6f9ff;
  		}
-		.titleTD{
+		#cmMemEdit .titleTD{
 			width:160px;
-			background-color:#gray;
 		}
-		#btnDiv{
+		#cmMemEdit #btnDiv{
 			text-align:center;
 			margin:0 auto;
 		}
-		p{
+		#cmMemEdit p{
 			font-size:12px;
 		}
-		.r{
+		#cmMemEdit .r{
     		color:red;
     	}
-    	.modal-header{
-    		background-color:silver;
-    	}
-    	h1{
+    	#cmMemEdit h1{
     		font-weight:bold;
     	}
+    	.modal-body table{
+			background-color:#f6f9ff;
+		}
     </style>
      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,64 +72,68 @@
     <![endif]-->
   </head>
   <body>
+   <c:import url="../../index/top.jsp" />
     <div class="container">
+    	<div id="cmMemEdit">
     	<h1>기업정보 수정</h1>
     	<br>
 		<hr>
 		<br>
     	<br><br>
     	<fieldset>
-    	<h4><b><span>밀밭손국수</span> 님,안녕하세요.</b><br></h4>
+    	<h4><b><span><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmName}</c:if></span> 님,안녕하세요.</b><br></h4>
 	    	<form role="form" class="form-inline">
 					<table class="table">
 						<tr>
-							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;아이디</td>
-							<td>samsung</td>			
+							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;아이디</td>
+							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmId}</c:if></td>			
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;사업자등록번호</td>
-							<td>510-05-65408 <input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
+							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmRegnum}&nbsp;&nbsp;</c:if><input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;기업구분</td>
-							<td>일반기업 구분은 임의로 변경할 수 없습니다. 변경을 원하시는 경우,<br>
-							고객센터로 연락해주세요.<br>
-							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<a href="#">기업 구분 수정요청</a></td>		
+							<td>일반기업 구분은 임의로 변경할 수 없습니다.<br> 
+							변경을 원하시는 경우,고객센터로 연락해주세요.<br>
+							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<br><a href="#">기업 구분 수정요청</a></td>		
 						</tr>
 				</table><br><br>
 				<h4><b>인사담당자 정보</b></h4>
 				<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자</td>
-							<td>이용진</td>				
+							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmManager}</c:if></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자 전화번호</td>
 							<td>
-							<select class="form-control">
-								<option>010</option>
-								<option>011</option>
-								<option>016</option>
-								<option>017</option>
-								<option>019</option>
+							<select class="form-control" id="cmMgrTel1" name="cmMgrTel1">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
 							</select>&nbsp;-
-							<input type="text" class="form-control" placeholder="휴대폰 번호'-'없이 입력" size="16" maxlength="8">&nbsp;
+							<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel2" name="cmMgrTel2">&nbsp;
+							<input type="text" class="form-control" size="8" maxlength="4" id="cmMgrTel3" name="cmMgrTel3">&nbsp;
 							</td>
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;이메일</td>
 							<td>
-							<input type="text" class="form-control" size="18">&nbsp;@
-							<select class="form-control">
-								<option>naver.com</option>
-								<option>hanmail.net</option>
-								<option>gmail.com</option>
-								<option>nate.com</option>
-								<option>daum.net</option>
-								<option>hotmail.com</option>
-								<option>직접입력</option>
+							<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail1" name="cmEmail1">&nbsp;@
+							<select class="form-control" id="cmEmail2" name="cmEmail2">
+								<option value="naver.com">naver.com</option>
+								<option value="hanmail.net">hanmail.net</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="daum.net">daum.net</option>
+								<option value="hotmail.com">hotmail.com</option>
+								<option value="etc">직접입력</option>
 							</select>&nbsp;
-							<input type="text" class="form-control" size="18">
+							<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail3" name="cmEmail3" style="visibility:hidden">
 							</td>		
 						</tr>
 				</table><br><br>
@@ -125,19 +148,21 @@
 					<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;회사명</td>
-							<td><input type="text" class="form-control"></td>				
+							<td><input type="text" class="form-control" 
+							<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmName}"</c:if>></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;대표자명</td>
-							<td><input type="text" class="form-control"></td>
+							<td><input type="text" class="form-control"
+							<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmRepre}"</c:if>></td>
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사주소</td>
 							<td>
-								<input type="text" class="form-control" placeholder="우편번호" size="10">
+								<input type="text" class="form-control" placeholder="우편번호" size="10" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmZipcode}"</c:if>>
 								<input type="button" class="form-control" value="우편번호 검색" data-toggle="modal" data-target="#ZipModal">
-								<input type="text" class="form-control" placeholder="주소" size="38" >
-								<input type="text" class="form-control" placeholder="상세주소" size="38">
+								<input type="text" class="form-control" placeholder="주소" size="38" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmAddr}"</c:if>>
+								<input type="text" class="form-control" placeholder="상세주소" size="38" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmDetailAddr}"</c:if>>
 							</td>		
 						</tr>
 						<tr>
@@ -212,7 +237,7 @@
 
 				</div>
 				<div class="modal-body">
-					<b>기업인증 또는 사업자등록번호 변경 신청을 위해 사업자등록증 사본을 첨부해 보내주시기<br>
+					<b>사업자등록번호 변경 신청을 위해 사업자등록증 사본을 첨부해 보내주시기<br>
 					바랍니다.</b>
 					<br><br>
 					업무시간: 월~금 09:00~18:00(주말, 공휴일 휴무)
@@ -220,33 +245,20 @@
 					<table class="table table-bordered">
 						<tr>
 							<td class="titleTD">아이디</td>
-							<td>yjlee13</td>				
+							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmId}</c:if></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">기업명</td>
-							<td>밀밭손국수</td>
+							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmName}</c:if></td>
 						</tr>
 						<tr>
 							<td class="titleTD">사업자<br>등록번호</td>
-							<td>510-05-65408</td>		
+							<td><input type="text" class="form-control" id="cmRegnum" name="cmRegnum"
+								<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmRegnum}"</c:if>></td>		
 						</tr>	
 						<tr>
 							<td class="titleTD">인증상태</td>
 							<td>인증</td>		
-						</tr>	
-						<tr>
-							<td class="titleTD">구분</td>
-							<td>
-								<div class="form-group">
-								&nbsp;
-									<label class="radio-inline">
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> 사업자등록번호 변경신청
-									</label>
-									<label class="radio-inline">
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"> 기업인증 신청 
-									</label>
-								</div>
-							</td>		
 						</tr>	
 						<tr>
 							<td class="titleTD">담당자명</td>
@@ -312,6 +324,7 @@
 	</div>
 	<!-- 모달 전체 윈도우 -->
 	
-	
+	 </div>
+	 <c:import url="../../index/footer.jsp" />
 </body>
 </html>

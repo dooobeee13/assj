@@ -24,7 +24,7 @@ public class CmMemberVO {
 	private String cmEmail3;
 	private Date cmRegdate;             
 	private int ccNo;                   
-	private int csNo;
+	private Integer csNo;
 	
 	
 	public int getCmNo() {
@@ -126,7 +126,7 @@ public class CmMemberVO {
 		if(cmEmail1==null || cmEmail1.isEmpty()){
 			cmEmail="";
 		}else {
-			if(cmEmail2=="etc") {
+			if(cmEmail2.equals("etc")) {
 				cmEmail=cmEmail1+"@"+cmEmail3;
 			}else {
 				cmEmail=cmEmail1+"@"+cmEmail2;
@@ -167,10 +167,10 @@ public class CmMemberVO {
 	public void setCcNo(int ccNo) {
 		this.ccNo = ccNo;
 	}
-	public int getCsNo() {
+	public Integer getCsNo() {
 		return csNo;
 	}
-	public void setCsNo(int csNo) {
+	public void setCsNo(Integer csNo) {
 		this.csNo = csNo;
 	}
 	@Override

@@ -9,4 +9,5 @@ public interface CmMemberService {
 	public int insertCmMemMember(CmMemberVO vo);
 	public int loginCheck(String cmId, String cmPwd);
 	public CmMemberVO selectMember(String cmId);
+	public int cmMemberOut(String cmId);
 }

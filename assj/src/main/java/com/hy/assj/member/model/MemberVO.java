@@ -68,15 +68,12 @@ public class MemberVO {
 		this.memPwd2 = memPwd2;
 	}
 	public String getMemEmail() {
-		if(memEmail1==null || memEmail1.isEmpty()){
-			memEmail="";
+		if(memEmail2.equals("etc")) {
+			memEmail=memEmail1+"@"+memEmail3;
 		}else {
-			if(memEmail2=="etc") {
-				memEmail=memEmail1+"@"+memEmail3;
-			}else {
-				memEmail=memEmail1+"@"+memEmail2;
-			}
+			memEmail=memEmail1+"@"+memEmail2;
 		}
+		
 		return memEmail;
 	}
 	public void setMemEmail(String memEmail) {

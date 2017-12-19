@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     
     <script type="text/javascript">
+    	$(window).load(function(){
+    		   $("select option[value='naver.com']").attr("selected", true);
+    	});
+    
     	$(document).ready(function(){	
     		//개인회원가입,기업회원가입 버튼 클릭시 아래 정보 바뀌기
     		$('#personal').click(function(){
@@ -70,8 +74,12 @@
     				alert('생년월일을 확인하세요.');
     				$('#memBirth3').focus();
     				return false;
+    			}else if(!$.validate_userid($('#memEmail1').val())){
+    				alert('이메일을 확인하세요.');
+    				$('#memEmail1').focus();
+    				return false;
     			}else if(($('#memEmail1').val()==""||$('#memEmail1').val().length<1)
-    					||($('#memEmail2').val()=="etc" && $('#memEmail1').val()=="")){
+    					|| ($('#memEmail2').val()=='etc' && ($('#memEmail3').val()==""||$('#memEmail3').val().length<1))){
     				alert('이메일을 확인하세요.');
     				$('#memEmail1').focus();
     				return false;
@@ -82,6 +90,10 @@
     			}else if(!($('#PsCheckbox3').is(':checked'))){
     				alert('약관에 동의하세요.');
     				$('#PsCheckbox3').focus();
+    				return false;
+    			}else if($('#chkId').val()!='Y'){
+    				alert('아이디 중복체크를 해주세요.');
+    				$('#dupli').focus();
     				return false;
     			}
 				return true;
@@ -105,6 +117,23 @@
     		$('#dupli').click(function(){
     			var id=$('#memId').val();
     			$('#dupliId').val(id);
+    			
+    			if(!$.validate_userid($('#memId').val())){
+    				alert('아이디는 영문자나 숫자만 가능합니다.');
+    				$('#memId').focus();
+    				return false;
+    			}
+    		});
+    		
+    		$('#dupli2').click(function(){
+    			var id=$('#cmId').val();
+    			$('#dupliId').val(id);
+    			
+    			if(!$.validate_userid($('#cmId').val())){
+    				alert('아이디는 영문자나 숫자만 가능합니다.');
+    				$('#cmId').focus();
+    				return false;
+    			}
     		});
     		
     		//검색버튼 클릭해서 Controller로 넘기기 (ajax)
@@ -113,12 +142,13 @@
     				alert('아이디를 입력해주세요');
     				$('#dupliId').focus();
     				return false;
-    			}
+   				}
 				
+				$('#chkId').val('');
 				$.ajax({url: "/assj/member/register/dupli.do?dupliId=" + $('#dupliId').val(), 
 			    	 success: function(result){
 	        				if (result == "true") {
-		        				$('.checkMessage').html('<span class="r">사용 불가능한 아이디입니다</span>');
+		        				$('.checkMessage').html('<div><span class="r">사용 불가능한 아이디입니다</span>');
 		        			} else {
 		        				$('.checkMessage').html('<span>사용가능한 아이디 입니다</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="사용하기"></button>');
 		        			}
@@ -126,6 +156,26 @@
 			    });
 				
 			});
+    		
+    		//이메일 직접입력시 텍스트창 보여주기
+    		$('#memEmail2').change(function(){
+    			if($(this).val()=='etc'){
+    				//$('#memEmail3').css('visibility','visible');
+    				//console.log($('#memEmail3').attr('style'));
+    				$('#memEmail3').attr('style','visibility: visible');
+    			}else{
+    				$('#memEmail3').css('visibility','hidden');
+    			}	
+    		});
+    		$('#cmEmail2').change(function(){
+    			if($(this).val()=='etc'){
+    				//$('#memEmail3').css('visibility','visible');
+    				//console.log($('#memEmail3').attr('style'));
+    				$('#cmEmail3').attr('style','visibility: visible');
+    			}else{
+    				$('#cmEmail3').css('visibility','hidden');
+    			}	
+    		});
     		
     		//약관동의
     		$('#PsCheckbox1').change(function(){
@@ -158,11 +208,11 @@
     				alert('비밀번호가 일치하지 않습니다.');
     				$('#cmPwd2').focus();
     				return false;
-    			}else if($('#cmRegnum').val()==""){
-					alert('사업자 등록번호를 입력하세요.');
-					$('#cmRegnum').focus();
-					return false;
-				}else if($('#cmName').val()==""){
+    			}else if(!$.validate_userRegnum($('#cmRegnum').val())){
+    				alert('사업자 등록번호는 숫자나 (-)만 가능합니다.');
+    				$('#cmRegnum').focus();
+    				return false;
+    			}else if($('#cmName').val()==""){
 					alert('회사명을 입력하세요.');
 					$('#cmName').focus();
 					return false;
@@ -174,7 +224,7 @@
 					alert('담당자를 입력하세요.');
 					$('#cmManager').focus();
 					return false;
-				}else if($('#cmMgrTel2').val()==""||$('#cmMgrTel2').val().length<4){
+				}else if($('#cmMgrTel2').val()==""||$('#cmMgrTel2').val().length<3){
     				alert('휴대폰 번호를 확인해주세요.');
     				$('#cmMgrTel2').focus();
     				return false;
@@ -193,8 +243,37 @@
     			}			
 			});
     		
+			//아이디 정규식으로 받기
+    		$.validate_userRegnum=function(userRegnum){
+    			var pattern = new RegExp(/^[0-9-]+$/g);
+    			return pattern.test(userRegnum);	
+    			//true이면 정규식 만족
+    			//false이면 에러
+    			
+    			/*
+    			정규식 /^[a-zA-Z0-9]+$/g
+    			a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
+    			닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
+    			*/
+    		}
+    		
+			//사용하기 버튼 클릭시
+			$(document).on('click', '.checkMessage input[type=button]', function(){
+				$('#memId').val($('#dupliId').val());
+				$('#chkId').val('Y');
+				$('#myModal1').modal('hide');
+				
+			});
+			$(document).on('click', '.checkMessage input[type=button]', function(){
+				$('#cmId').val($('#dupliId').val());
+				$('#chkId2').val('Y');
+				$('#myModal1').modal('hide');
+			});
 			
-
+			//모달 닫을때마다 메시지 리셋
+			$('#myModal1').on('hide.bs.modal', function (e) {
+				$('#myModal1 .checkMessage').empty();
+			});
 				
     		
     	});
@@ -301,12 +380,12 @@
 					<label for="memId">아이디</label> 
 					<input type="text" class="form-control" maxlength="20" id="memId" name="memId">
 					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1" id="dupli">
-					<span id="info">&nbsp;&nbsp;(영문이나 숫자만 입력 가능합니다)</span>
+					<span id="info">&nbsp;&nbsp;( 영문이나 숫자만 입력 가능합니다 )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="memPwd">비밀번호</label> 
 					<input type="password" class="form-control" maxlength="20" id="memPwd" name="memPwd">
-					<span id="info">&nbsp;&nbsp;(8자리 이상으로 입력해주세요)</span>
+					<span id="info">&nbsp;&nbsp;( 8자리 이상으로 입력해주세요 )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="memPwd2">비밀번호 재확인</label> 
@@ -332,12 +411,12 @@
 				</div>
 				<div class="form-group"><span class="r">*</span>
 					<label for="memBirth1">생년월일</label>
-					<input type="text" class="form-control" placeholder="(예시 1979)" size="6" maxlength="4" id="memBirth1" name="memBirth1">
+					<input type="text" class="form-control" size="6" maxlength="4" id="memBirth1" name="memBirth1">
 					<label for="memBirth2" class="sr-only">월</label>
-					<input type="text" class="form-control" placeholder="(01)월" size="3" maxlength="2" id="memBirth2" name="memBirth2">				
+					<input type="text" class="form-control" size="3" maxlength="2" id="memBirth2" name="memBirth2">				
 					<label for="memBirth3" class="sr-only">일</label>
-					<input type="text" class="form-control" placeholder="(01)일" size="3" maxlength="2" id="memBirth3" name="memBirth3">
-					
+					<input type="text" class="form-control" size="3" maxlength="2" id="memBirth3" name="memBirth3">
+					<span id="info">&nbsp;&nbsp;( 예시:[1980]년 [01]월 [01]일 )</span>
 					
 				</div>
 				<div class="form-group"><span class="r">*</span>
@@ -374,10 +453,10 @@
 					&nbsp;
 					<label for="memGender">성별</label> 
 					<label class="radio-inline">
-					<input type="radio" name="memGender" id="memGender" value="남자"> 남자
+					<input type="radio" name="memGender" value="남자"> 남자
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="memGender" id="memGender" value="여자"> 여자
+					<input type="radio" name="memGender" value="여자"> 여자
 					</label>
 				</div>
 				<br><br><br><br>
@@ -433,11 +512,13 @@
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmId">아이디</label> 
 					<input type="text" class="form-control" id="cmId" name="cmId">
-					<input type="button" class="form-control" value="중복검사" data-toggle="modal" data-target="#myModal1">
+					<input type="button" class="form-control" value="중복검사" id="dupli2" data-toggle="modal" data-target="#myModal1">
+					<span id="info">&nbsp;&nbsp;( 영문이나 숫자만 입력 가능합니다 )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmPwd">비밀번호</label> 
 					<input type="password" class="form-control" id="cmPwd" name="cmPwd">
+					<span id="info">&nbsp;&nbsp;( 8자리 이상으로 입력해주세요 )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmPwd2">비밀번호 재확인</label> 
@@ -446,7 +527,8 @@
 				
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmRegnum">사업자 등록번호</label> 
-					<input type="text" class="form-control" placeholder="사업자 등록번호" id="cmRegnum" name="cmRegnum">
+					<input type="text" class="form-control" id="cmRegnum" name="cmRegnum">
+					<span id="info">&nbsp;&nbsp;( 예시:[510-05-65408] )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmName">회사명</label> 
@@ -502,25 +584,23 @@
 						<option value="hotmail.com">hotmail.com</option>
 						<option value="etc">직접입력</option>
 					</select>&nbsp;
-					<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail3" name="cmEmail3">
+					<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail3" name="cmEmail3" style="visibility:hidden">
 				</div>
 				<div class="form-group">&nbsp;
-					<label for="ccName">기업구분</label> 
+					<label for="ccNo">기업구분</label> 
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="ccName" value="인재파견"> 인재파견
+					<input type="radio" name="ccNo" value="1"> 일반
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="ccName" value="헤드헌팅"> 헤드헌팅
+					<input type="radio" name="ccNo" value="2"> 인재파견
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="ccName" value="교육기관"> 교육기관
+					<input type="radio" name="ccNo" value="3"> 헤드헌팅
 					</label>
 					<label class="radio-inline">
-					<input type="radio" name="ccName" id="ccName" value="일반"> 일반
+					<input type="radio" name="ccNo" value="4"> 교육기관
 					</label>
 				</div>
-				
-			
 				<br><br><br><br>
 				<hr>
 				<h1>약관 동의</h1><br>
@@ -539,6 +619,8 @@
 				<div class="form-group" id="btnDiv">
 		   			<button type="submit" class="btn btn-primary btn-lg" id="cpRegister">회원가입 완료</button>
 				</div>
+				
+				<input type ="hidden" name="chkId2" id="chkId2">
 			</form>
 			
 			<article>

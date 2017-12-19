@@ -5,4 +5,5 @@ public interface MemberDAO {
 	public int duplicationId(String memId);
 	public String selectPwd(String memId);
 	public MemberVO selectMember(String memId);
+	public int memberOut(String memId);
 }
