@@ -87,7 +87,7 @@ public class HireInfoServiceImpl implements HireInfoService {
 		for (MajorVO vo : majorList) {
 			if (vo.getMajorTopNo() == 0) {
 				map.get("topCategory").add(vo);
-				map.put("subCategory-" + vo.getMajorTopNo(), new ArrayList<>());
+				map.put("subCategory-" + vo.getMajorNo(), new ArrayList<>());
 			} else {
 				try {
 					map.get("subCategory-" + vo.getMajorTopNo()).add(vo);

@@ -8,37 +8,40 @@
 		<ul>
 			<c:set var="topCateogryList" value="${map['topCategory']}" />
 			<c:forEach var="vo" items="${topCateogryList}">
-				<li>${vo.occuName}</li>
+				<li class="step1" data-no="${vo.occuNo}">${vo.occuName}</li>
 			</c:forEach>
 		</ul>
 	</div>
 
-	<div class="detail"
-		style="margin-left: -101%; width: 403%; height: 300px; background: #fff; z-index: 1;">
+	<div class="detail thinScroll">
 		<div class="row tab">
-			<div class="col-md-3">
-				<div class="category thinScroll">
+			<div class="col-md-5">
+				<div class="category thinScroll top">
 					<ul>
 						<c:forEach var="vo" items="${topCateogryList}">
-							<li><a href="#aTabs-${vo.occuNo}">${vo.occuName}</a></li>
+							<li class="col-md-6"><a href="#aTabs-${vo.occuNo}"><label class="chklabel">${vo.occuName}</label></a></li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-9">
-				<div class="category thinScroll">
+			<div class="col-md-7">
+				<div class="category thinScroll sub">
 					<c:forEach var="top" items="${topCateogryList}">
 						<c:set var="subKey" value="subCategory-${top.occuNo}"/>
-						<ul id="aTabs-${i.occuNo}">
+						<ul id="aTabs-${top.occuNo}">
 							<c:forEach var="vo" items="${map[subKey]}">
-								<li>${vo.occuName}</li>
-							</c:forEach>
+								<li class="col-md-6"><input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}"> 
+									<label class="chklabel" data-name="${top.occuName}>${vo.occuName}" for="occupation-${vo.occuNo}">
+										<span>${vo.occuName}</span>
+									</label>
+								</li>
+						</c:forEach>
 						</ul>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
 		<script>
-			$('.tab').tabs();
+			/* $('.tab').tabs({active: -1}); */
 		</script>
 	</div>

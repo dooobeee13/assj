@@ -34,11 +34,11 @@ public class HireInfoDAOTest {
 //		List<CompScaleVO> list = dao.selectCompScale();
 //		List<EducationVO> list = dao.selectEducation();
 //		List<EmpTypeVO> list = dao.selectEmpType();
-//		List<MajorVO> list = dao.selectMajor();
+		List<MajorVO> list = dao.selectMajor();
 //		List<OccupationVO> list = dao.selectOccupation();
 //		List<PositionVO> list = dao.selectPosition();
 //		List<RankVO> list = dao.selectRank();
-		List<SectorsVO> list = dao.selectSectors();
+//		List<SectorsVO> list = dao.selectSectors();
 		printList(list);
 		printSize(list);
 	}

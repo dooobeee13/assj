@@ -55,15 +55,16 @@ public class HireInfoController {
 	
 	@RequestMapping("/rankList.do")
 	public String rankList(Model model) {
-		model.addAttribute("list", hireInfoService.getRankList());
+		model.addAttribute("rankList", hireInfoService.getRankList());
+		model.addAttribute("positionList", hireInfoService.getPositionList());
 		
 		return "hireInfo/category/rankCategory";
 	}
 	
 	@RequestMapping("/compScaleList.do")
 	public String compScaleList(Model model) {
-		model.addAttribute("list", hireInfoService.getCompScaleList());		
-		
+		model.addAttribute("csList", hireInfoService.getCompScaleList());		
+		model.addAttribute("etList", hireInfoService.getEmpTypeList());
 		return "hireInfo/category/compScaleCategory";
 	}
 	
@@ -81,7 +82,7 @@ public class HireInfoController {
 		return "hireInfo/category/careerCategory";
 	}
 	
-	@RequestMapping("/empTypeList.do")
+	/*@RequestMapping("/empTypeList.do")
 	public String empTypeList(Model model) {
 		model.addAttribute("list", hireInfoService.getEmpTypeList());
 		
@@ -93,6 +94,6 @@ public class HireInfoController {
 		model.addAttribute("list", hireInfoService.getPositionList());
 		
 		return "hireInfo/category/postionCategory";
-	}
+	}*/
 	
 }
