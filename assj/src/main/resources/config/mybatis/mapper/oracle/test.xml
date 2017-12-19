@@ -4,8 +4,6 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.test">
 	
-	
-	
 </mapper>
 
 

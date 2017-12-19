@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//기업규모
 public class CompScaleVO {
 
 	private int csNo;

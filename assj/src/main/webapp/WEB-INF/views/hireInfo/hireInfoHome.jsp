@@ -102,6 +102,7 @@ footer {
 
 
 
+
 .sCategory {
 	padding-left: 0;
 	padding-right: 0;
@@ -149,6 +150,8 @@ footer {
 
 .sCategory .detail .category {
 	padding-top: 15px;
+	height: 280px;
+	overflow-y: scroll;
 }
 
 
@@ -163,8 +166,57 @@ footer {
 	cursor: pointer;
 }
 
+.sCategory .detail .category label{
+	line-height: 32px;
+	width: 100%;
+	display: inline-block;
+	text-decoration: none;
+	color: #333;
+}
+
+.sCategory .detail .category label:hover {
+	color: #39f;
+	font-weight: bold;
+}
+
+.sCategory .detail .category.top {
+	border-right: 1px solid #d3d3d3;
+}
+
+.sCategory .detail .category.top a:focus {
+	outline: 0;
+}
+
+.sCategory .detail .selected {
+	background: #f1f8ff;
+}
+
+.sCategory .detail .selected label {
+	font-weight: bold;
+	color: #39f;
+}
+
+.sCategory .detail .selected a:after {
+	content: '';
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 14px;
+    height: 25px;
+    background: url(/assj/images/spr.png) no-repeat 0px -10px;
+    
+}
+
 .sCategory .sCateName ul li:hover {
 	color: #39f;
+}
+
+.sCategory .category .rTitle {
+	padding-left: 17px;
+	font-size: 16px; 
+	border-bottom: 1px solid lightgray; 
+	padding-bottom: 10px; 
+	font-weight: bold
 }
 
 .scrapIcon {
@@ -182,12 +234,25 @@ footer {
 	margin: 5px;
 }
 
-.sCategory.top .detail {
-	display: none;
-	background: #fff;
+.searchCondition button{
+	margin-right: 20px; 
+	background: #fff; 
+	border: 0;
 }
 
-.sCategory.top .on {
+.sCategory .detail {
+	display: none;
+	background: #fff;
+	z-index: 1;
+	width: 403%;
+}
+
+.sCategory .detail .row {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.sCategory .on {
 	display: block;
 }
 
@@ -195,6 +260,31 @@ footer {
 	background: #333;
 	color: #fff;
 }
+
+.careerInput {
+	width: 40px;
+}
+
+.sc_chk {
+	display: none;
+}
+
+.chklabel {
+	cursor: inherit;
+	font-weight: normal;
+}
+
+.category.sub .chklabel span {
+    padding: 5px 10px;
+}
+
+.category.sub .chklabel.check span {
+	border: 1px solid #3399ff;
+    border-radius: 5px;
+    color: #3399ff;
+    font-weight: bold;
+}
+
 </style>
 <script>
 	$(function(){
@@ -213,7 +303,7 @@ footer {
 		})
 		
 		$('.sCateTitle').click(function(e){
-			$(this).next().next().toggleClass('on');
+			$(this).parent().find('.detail').toggleClass('on');
 			$(this).parent().siblings().find('.detail').removeClass('on');
 			if ($('.sCategory.top').find('.on').length > 0) {
 				$('.sCategory.top .sCateName').hide();
@@ -221,6 +311,14 @@ footer {
 				$('.sCategory.top .sCateName').show();
 			}
 		});
+		
+		$('.searchCondition').on('click', 'button', function(){
+			var id = $(this).data('id');
+			$('#' + id).trigger('click');
+			$(this).remove();
+			$('.category.sub .chklabel[for='+ id +']').removeClass('check');
+		});
+		
 	})
 </script>
 </head>
@@ -229,7 +327,7 @@ footer {
 	
 	<section class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-md-3">
 				<div>
 					<ul class="list-group">
 						<li class="list-group-item">채용정보 상세검색</li>
@@ -240,182 +338,49 @@ footer {
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-md-9">
 				<div>
 					<div class="row">
-						<div class="col-md-3 sCategory top">
-							<div class="sCateTitle">
-								직무<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>경영·사무</li>
-									<li>마케팅·무역·유통</li>
-									<li>영업·고객상담</li>
-									<li>IT·인터넷</li>
-									<li>연구개발·설계</li>
-									<li>생산·제조</li>
-									<li>전문·특수직</li>
-								</ul>
-							</div>
-							
-							<div class="detail" style="width: 403%;height: 300px;z-index: 1;">
-								<div class="row">
-									<div class="col-md-3">
-										<div class="category thinScroll">
-											<ul>
-												<li>경영·사무</li>
-												<li>마케팅·무역·유통</li>
-												<li>영업·고객상담</li>
-												<li>IT·인터넷</li>
-												<li>연구개발·설계</li>
-												<li>생산·제조</li>
-												<li>전문·특수직</li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-md-9">
-										<div class="category thinScroll">
-											<ul>
-												<li class="col-md-6">경영·사무</li>
-												<li class="col-md-6">마케팅·무역·유통</li>
-												<li class="col-md-6">영업·고객상담</li>
-												<li class="col-md-6">IT·인터넷</li>
-												<li class="col-md-6">연구개발·설계</li>
-												<li class="col-md-6">생산·제조</li>
-												<li class="col-md-6">전문·특수직</li>
-											</ul>
-										</div>
-									</div>
-								</div>	
-							</div>
-							
+						<div class="col-md-3 sCategory top occu">
+							<c:import url="/hireInfo/occupationList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory top">
+						<div class="col-md-3 sCategory top area">
 							<c:import url="/hireInfo/areaList.do" />
 						</div>
 						
 						<div class="col-md-3 sCategory top">
-							<div class="sCateTitle">
-								경력
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>신입</li>
-									<li>1~3년</li>
-									<li>4~6년</li>
-									<li>7~9년</li>
-									<li>10~15년</li>
-									<li>16~20년</li>
-									<li>21년 이상</li>
-									<li>경력무관</li>
-								</ul>
-							</div>
+							<c:import url="/hireInfo/careerList.do" />
 						</div>
 						
 						<div class="col-md-3 sCategory top">
-							<div class="sCateTitle">
-								학력
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>대학교졸업(4년)</li>
-									<li>대학졸업(2,3년)</li>
-									<li>대학원 석사졸업</li>
-									<li>대학원 박사졸업</li>
-									<li>고등학교졸업</li>
-									<li>학력무관</li>
-								</ul>
-							</div>
+							<c:import url="/hireInfo/educationList.do" />
 						</div>
-						
 						<div class="clearfix"></div>
-						
-						<div class="col-md-3 sCategory">
-							<div class="sCateTitle">
-								기업형태
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>대기업</li>
-									<li>중견기업</li>
-									<li>강소기업</li>
-									<li>중소기업</li>
-									<li>외국계(법인/투자)</li>
-									<li>코스닥</li>
-									<li>벤처</li>
-									<li>코스피</li>
-								</ul>
-							</div>
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/sectorsList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory">
-							<div class="sCateTitle">
-								업종<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>서비스업</li>
-									<li>의료·제약·복지</li>
-									<li>제조·화학</li>
-									<li>판매·유통</li>
-									<li>IT·웹·통신</li>
-									<li>건설업</li>
-									<li>교육업</li>
-									<li>미디어·디자인</li>
-								</ul>
-							</div>
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/rankList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory">
-							<div class="sCateTitle">
-								직급/직책
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>[직급] 사원</li>
-									<li>[직급] 주임</li>
-									<li>[직급] 계장</li>
-									<li>[직급] 대리</li>
-									<li>[직급] 과장</li>
-									<li>[직급] 차장</li>
-									<li>[직급] 부장</li>
-									<li>[직급] 감사</li>
-								</ul>
-							</div>
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/majorList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory">
-							<div class="sCateTitle">
-								전공<span class="glyphicon glyphicon-chevron-down"></span>
-							</div>
-							<div class="sCateName thinScroll">
-								<ul>
-									<li>인문/사회</li>
-									<li>어학계열</li>
-									<li>자연계열</li>
-									<li>공학계열</li>
-									<li>상경계열</li>
-									<li>사범계열</li>
-									<li>의학/예체능</li>
-								</ul>
-							</div>
+						<div class="col-md-3 sCategory bottom">
+							<c:import url="/hireInfo/compScaleList.do" />
 						</div>
-						
 						
 					</div>
 				</div>
 				
-				<div class="row" style="background: #fff">
+				<div class="row clearfix" style="background: #fff">
 					<div class="col-sm-10 searchCondition" style="min-height: 100px">
-						<c:forEach begin="1" end="10">
-							<button style="margin-right: 20px; background: #fff; border: 0"><span class="item">경기>고양시</span><span class="glyphicon glyphicon-remove"></span></button>
-						</c:forEach>
-						<!-- <span class="item">IT·웹통신<span class="glyphicon glyphicon-remove"></span></span>
-						<span class="item">공학계열>컴퓨터공학<span class="glyphicon glyphicon-remove"></span></span>
-						<span class="item">대학졸업(4년)<span class="glyphicon glyphicon-remove"></span></span> -->
+						<%-- <c:forEach begin="1" end="10">
+							<button style=""><span class="item">경기>고양시</span><span class="glyphicon glyphicon-remove"></span></button>
+						</c:forEach> --%>
 					</div>
 					<div class="col-sm-2" style="padding: 20px 0 0 0; text-align: center" >
 						<button type="button" class="btn btn-primary btn-lg">검색하기</button>

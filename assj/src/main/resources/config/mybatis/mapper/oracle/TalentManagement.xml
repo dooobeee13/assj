@@ -10,6 +10,10 @@
 	<select id="selectPosition" resultType="map">
 		select * from position
 	</select>
+	
+	<select id="selectEmpType" resultType="map">
+		select * from EMP_TYPE
+	</select>
 </mapper>
 
 

@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//직종
 public class OccupationVO {
 
 	private int occuNo;

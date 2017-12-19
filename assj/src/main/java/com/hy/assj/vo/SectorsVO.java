@@ -1,5 +1,6 @@
-package com.hy.assj.hireInfo.model;
+package com.hy.assj.vo;
 
+//업종
 public class SectorsVO {
 	
 	private int secNo;

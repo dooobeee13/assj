@@ -20,9 +20,9 @@ public class TalentManagementController {
 	@Autowired
 	private TalentManagementService tmService;
 	
-	@RequestMapping(value="/TalentManagement/final-main.do")
-	public void Main() {
-		
+	@RequestMapping(value="/TalentManagement/final-main.do",method=RequestMethod.GET)
+	public String Main() {
+		return "TalentManagement/final-main";
 	}
 	
 	@RequestMapping(value="/TalentManagement/all.do")
@@ -66,13 +66,20 @@ public class TalentManagementController {
 		return "TalentManagement/rank";
 	}
 	
-	@RequestMapping(value="/TalentManagement/sectors.do")
-	public void sectors() {
-		
+	@RequestMapping(value="/TalentManagement/sectors.do",method=RequestMethod.GET)
+	public void sectors(Model model) {
+		logger.info("");
 	}
 	
-	@RequestMapping(value="/TalentManagement/workingStyle.do")
-	public void workingStyle() {
+	@RequestMapping(value="/TalentManagement/workingStyle.do",method=RequestMethod.GET)
+	public String workingStyle(Model model) {
+		logger.info("wrokingStyle.do get()메서드 호출");
+		List<Map<Integer, String>> empTypelist = tmService.selectEmpType();
+		logger.info("empTypelist.size()={}",empTypelist);
+		
+		model.addAttribute("empTypelist",empTypelist);
+		
+		return "TalentManagement/workingStyle";
 		
 	}
 	
