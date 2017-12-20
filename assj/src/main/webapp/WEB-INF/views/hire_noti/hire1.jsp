@@ -211,6 +211,13 @@
 					
 				</tr>
 				<tr >
+					<td>자격요건</td>
+					<td>
+						<textarea id="ta11"  title="자격요건" placeholder="자격요건을 입력해주세요." maxlength="300"></textarea>
+					</td>
+					
+				</tr>
+				<tr >
 					<td>성별</td>
 					<td>
 					<input type="radio" id="collect_3" name="collect"
