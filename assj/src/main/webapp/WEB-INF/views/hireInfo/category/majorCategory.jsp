@@ -25,7 +25,7 @@
 						<ul id="aTabs-${top.majorNo}">
 							<c:forEach var="vo" items="${map[subKey]}">
 								<li class="col-md-4">
-									<input type="checkbox" class="sc_chk" id="major-${vo.majorNo}"> 
+									<input type="checkbox" class="sc_chk" id="major-${vo.majorNo}" name="major" value="${vo.majorNo}"> 
 									<label class="chklabel" data-name="${top.majorName}>${vo.majorName}" for="major-${vo.majorNo}">
 										<span>${vo.majorName}</span>
 									</label>

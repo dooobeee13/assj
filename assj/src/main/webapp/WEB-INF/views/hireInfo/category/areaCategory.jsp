@@ -8,7 +8,7 @@
 			$(this).parent().parent().addClass('selected');
 		});
 		
-		$('.category.sub .chklabel').click(function(){
+		$('.category.sub .chklabel, .sCateName .cLi .chklabel').click(function(){
 			var id = $(this).attr('for');
 			if ($('.searchCondition').find('button[data-id='+ id +']').length == 0) {
 				$(this).addClass('check');
@@ -59,7 +59,7 @@
 						<ul id="aTabs-${top.areaNo}">
 							<c:forEach var="vo" items="${map[subKey]}">
 								<li class="col-md-4">
-									<input type="checkbox" class="sc_chk" id="area-${vo.areaNo}">
+									<input type="checkbox" class="sc_chk" name="area" value="${vo.areaNo}" id="area-${vo.areaNo}">
 									<label class="chklabel" data-name="${top.areaName}>${vo.areaName}" for="area-${vo.areaNo}"><span>${vo.areaName}</span></label>
 								</li>
 							</c:forEach>

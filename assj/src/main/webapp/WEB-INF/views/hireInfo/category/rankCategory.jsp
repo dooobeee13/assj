@@ -20,7 +20,7 @@
 					<ul>
 						<c:forEach var="vo" items="${rankList}">
 							<li>
-								<input type="checkbox" class="sc_chk" id="rank-${vo.rankNo}"> 
+								<input type="checkbox" class="sc_chk" id="rank-${vo.rankNo}" name="rank" value="${vo.rankNo}"> 
 								<label class="chklabel" data-name="직급:${vo.rankName}" for="rank-${vo.rankNo}">
 									<span>${vo.rankName}</span>
 								</label>
@@ -35,7 +35,7 @@
 					<ul>
 						<c:forEach var="vo" items="${positionList}">
 							<li>
-								<input type="checkbox" class="sc_chk" id="rank-${vo.positionNo}"> 
+								<input type="checkbox" class="sc_chk" id="rank-${vo.positionNo}" name="position" value="${vo.positionNo}"> 
 								<label class="chklabel" data-name="직책:${vo.positionName}" for="position-${vo.positionNo}">
 									<span>${vo.positionName}</span>
 								</label>
@@ -49,37 +49,37 @@
 				<div>
 					<ul>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-1"> 
+							<input type="checkbox" class="sc_chk" id="sal-1" name="sal" value=""> 
 							<label class="chklabel" data-name="~2000만원" for="sal-1">
 								<span>~ 2000만원</span>
 							</label>
 						</li>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-2"> 
+							<input type="checkbox" class="sc_chk" id="sal-2" name="sal" value=""> 
 							<label class="chklabel" data-name="2000~2500만원" for="sal-2">
 								<span>2000 ~ 2500만원</span>
 							</label>
 						</li>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-3"> 
+							<input type="checkbox" class="sc_chk" id="sal-3" name="sal" value=""> 
 							<label class="chklabel" data-name="2500~3000만원" for="sal-3">
 								<span>2500 ~ 3000만원</span>
 							</label>
 						</li>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-4"> 
+							<input type="checkbox" class="sc_chk" id="sal-4" name="sal" value=""> 
 							<label class="chklabel" data-name="3000~4000만원" for="sal-4">
 								<span>3000 ~ 4000만원</span>
 							</label>
 						</li>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-5"> 
+							<input type="checkbox" class="sc_chk" id="sal-5" name="sal" value=""> 
 							<label class="chklabel" data-name="3000~4000만원" for="sal-5">
 								<span>3000 ~ 4000만원</span>
 							</label>
 						</li>
 						<li>
-							<input type="checkbox" class="sc_chk" id="sal-6"> 
+							<input type="checkbox" class="sc_chk" id="sal-6" name="sal" value=""> 
 							<label class="chklabel" data-name="5000만원~" for="sal-6">
 								<span>5000만원 ~ </span>
 							</label>
