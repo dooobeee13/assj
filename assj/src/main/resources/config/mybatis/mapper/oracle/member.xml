@@ -22,6 +22,11 @@
 	<select id="selectMember" parameterType="string" resultType="MemberVO">
 		select * from member where MEM_ID=#{memId}
 	</select>
+	
+	<delete id="memberOut" parameterType="string">
+		delete from member where mem_id=#{memId}
+	</delete>
+	
 </mapper>
 
 

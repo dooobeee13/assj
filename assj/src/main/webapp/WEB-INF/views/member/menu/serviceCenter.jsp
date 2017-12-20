@@ -7,51 +7,46 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>기업회원 탈퇴2</title>
+<title>고객센터</title>
 <!-- Bootstrap -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript">
+</script>
 <script src="../../js/bootstrap.min.js"></script>
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 
-<script type="text/javascript">
-</script>
 <style type="text/css">
-	#cmMemOut2 h1{
-		font-weight:bold;
-	}
-	#cmMemOut2 fieldset{
+	#serviceCenter fieldset {
 		width:720px;
 		margin:0 auto;	
 		padding:20px;
 		background-color:#ffff;
 	}
-	#cmMemOut2 .well{
+	#serviceCenter .well {
+		text-align:center;
 		background-color:#dde6f7;
-		padding:30px;
 	}
-	#cmMemOut2 #wellSm{
-		margin:0 auto;
-		width:500px;
+	#serviceCenter #title{
+		font-size:60px;
+		font-weight:bold;
 	}
-	#cmMemOut2 label{
-		width:120px;
-	}
-	#cmMemOut2 span{
-		color:#ff4800;
-	}
-	#cmMemOut2 #btnDiv{
+	#serviceCenter table,th{
 		text-align:center;
 	}
+	#serviceCenter table{
+		background-color:#ffff;
+	}
 	
 	
 	
-	 /* 사이드바 스타일 */
-	 #page-wrapper {
-    	padding-left: 380px;
-  	}
+	
+	/* 사이드바 스타일 */
+   	 #page-wrapper {
+    padding-left: 380px;
+  }
   
   #sidebar-wrapper {
     position:absolute;
@@ -103,9 +98,9 @@
     <![endif]-->
 </head>
 	<body>
-		<c:import url="../../index/top.jsp" />
-		<div id="page-wrapper">
+	<c:import url="../../index/top.jsp" />
 		<!-- 사이드바 -->
+		<div id="page-wrapper">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
@@ -137,42 +132,84 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-		<div id="cmMemOut2">
-		<fieldset>
-			<h1>기업회원 탈퇴</h1>
-			<br>
+			<div id="serviceCenter">
+			<fieldset>
+			<div class="well well-lg">
+			<h1 id="title">고객센터 img</h1>
+			</div>
+			<p><h3><b>안녕하세요. 알쓰신JOB 고객센터입니다.</b></h3>
+				무엇을 도와 드릴까요?<br>
+				감사하는 마음으로 늘 친절히 서비스하겠습니다.</p>
 			<hr>
-			<br>
-				<div class="well well-lg">
-					회원님께서는 <b>모든 회원 혜택을 포기하고 탈퇴하기</b>를 선택하였습니다.<br>
-					본인확인을 위해 비밀번호를 다시 한번 입력해주시기 바랍니다.<br>
-					<span>※ 타인에게 노출되지 않도록 주의해 주세요.</span><br>
-					<hr>
-					<br>
-					<b>&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>&nbsp;비밀번호 재확인</b><br><br>
-					<div class="well well-sm" id="wellSm">
-						<form role="form" class="form-inline" method="post" action="<c:url value='/member/out/cmMemOut2.do'/>">
-							<div class="form-group">
-								<label for="cmName">이름</label> 
-									<c:if test="${!empty sessionScope.cmMemberVO}">
-										${sessionScope.cmMemberVO.cmName}(${sessionScope.cmMemberVO.cmId})
-									</c:if>
-							</div><br>			
-							<hr>	
-							<div class="form-group">
-								<label for="cmPwd">비밀번호</label> 
-								<input type="password" class="form-control" id="cmPwd" name="cmPwd">
-							</div><br>				
-							<hr>	
-							<div id="btnDiv">
-									<button type="submit" class="btn btn-primary">회원확인</button>
-							</div>
-						</form>
-					</div>
+			<div class="well well-lg">
+			<h2><mark>공지사항</mark></h2>
+			<table class="table table-bordered">
+					<tr>
+						<th>제목</th>
+						<th>등록일</th>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<hr>
+			<div class="well well-lg">
+			<h2><mark>Q&A</mark></h2>
+			<table class="table table-bordered">
+					<tr>
+						<th>제목</th>
+						<th>등록일</th>
+						<th>글쓴이</th>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+						<td>홍길동</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+						<td>홍길동</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+						<td>홍길동</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+						<td>홍길동</td>
+					</tr>
+					<tr>
+						<td>2016 하반기 금호아시아나그룹 채용설명회/상담회 일정 안내</td>
+						<td>2016/09/09</td>
+						<td>홍길동</td>
+					</tr>
+				</table>
 				</div>
-		</fieldset>
+			</fieldset>
 		</div>
 		</div>
-		<c:import url="../../index/footer.jsp" />
+		<c:import url="../../index/footer.jsp" /> 
 	</body>
 </html>

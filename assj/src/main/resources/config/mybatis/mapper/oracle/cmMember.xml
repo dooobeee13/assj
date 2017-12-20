@@ -7,8 +7,8 @@
 		<selectKey keyProperty="cmNo" resultType="int" order="BEFORE">
 			select COMP_MEMBER_SEQ.nextval from dual
 		</selectKey>
-		insert into comp_member(CM_NO,CM_ID,CM_PWD,CM_REGNUM,CM_NAME,CM_REPRE,CM_MANAGER,CM_MGR_TEL,CM_ADDR,CM_DETAILADDR,CM_ZIPCODE,CM_EMAIL)
-		values(#{cmNo},#{cmId},#{cmPwd},#{cmRegnum},#{cmName},#{cmRepre},#{cmManager},#{cmMgrTel},#{cmAddr},#{cmDetailAddr},#{cmZipcode},#{cmEmail})
+		insert into comp_member(CM_NO,CM_ID,CM_PWD,CM_REGNUM,CM_NAME,CM_REPRE,CM_MANAGER,CM_MGR_TEL,CM_ADDR,CM_DETAILADDR,CM_ZIPCODE,CM_EMAIL,CC_NO)
+		values(#{cmNo},#{cmId},#{cmPwd},#{cmRegnum},#{cmName},#{cmRepre},#{cmManager},#{cmMgrTel},#{cmAddr},#{cmDetailAddr},#{cmZipcode},#{cmEmail},#{ccNo})
 	</insert>
 	
 	<select id="selectPwdByUserid" parameterType="string" resultType="string">
@@ -18,6 +18,10 @@
 	<select id="selectMember" parameterType="string" resultType="CmMemberVO">
 		select * from comp_member where CM_ID=#{cmId}
 	</select>
+	
+	<delete id="cmMemberOut" parameterType="string">
+		delete from comp_member where cm_id=#{cmId}
+	</delete>
 	
 	
 </mapper>

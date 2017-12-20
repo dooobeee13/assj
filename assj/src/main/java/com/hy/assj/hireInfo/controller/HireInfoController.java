@@ -23,7 +23,7 @@ public class HireInfoController {
 	@Autowired
 	private HireInfoService hireInfoService;
 	
-	@RequestMapping("/home.do")
+	@RequestMapping("/hireInfohome.do")
 	public String home() {
 		logger.info("채용정보 홈 요청");
 		

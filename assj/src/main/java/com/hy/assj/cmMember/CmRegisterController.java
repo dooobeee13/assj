@@ -31,7 +31,7 @@ public class CmRegisterController {
 		
 		int result=cmMemberService.insertCmMemMember(vo);
 		
-		String msg="",url="index";
+		String msg="",url="/index.do";
 		if(result>0) {
 			msg="회원가입 성공했습니다.";
 		}else {
