@@ -12,7 +12,7 @@ public class MemberVO {
 	private String memPwd;
 	private String memPwd2;
 	
-	private String memEmail;      
+	private String memEmail; 
 	private String memEmail1;      
 	private String memEmail2;      
 	private String memEmail3; 
@@ -36,6 +36,7 @@ public class MemberVO {
     private Date memLastdate;
     private String memSnsType;
     private String memSnsId;
+    private String memPhoto;
     
 	public int getMemNo() {
 		return memNo;
@@ -68,6 +69,10 @@ public class MemberVO {
 		this.memPwd2 = memPwd2;
 	}
 	public String getMemEmail() {
+		if (memEmail1 == null && memEmail2 == null && memEmail3 == null) {
+			return memEmail;
+		}
+		
 		if(memEmail2.equals("etc")) {
 			memEmail=memEmail1+"@"+memEmail3;
 		}else {
@@ -209,6 +214,12 @@ public class MemberVO {
 	public void setMemSnsId(String memSnsId) {
 		this.memSnsId = memSnsId;
 	}
+	public String getMemPhoto() {
+		return memPhoto;
+	}
+	public void setMemPhoto(String memPhoto) {
+		this.memPhoto = memPhoto;
+	}
 	
 	@Override
 	public String toString() {
@@ -219,9 +230,11 @@ public class MemberVO {
 				+ memPhone1 + ", memPhone2=" + memPhone2 + ", memPhone3=" + memPhone3 + ", memZipcode=" + memZipcode
 				+ ", memAddr=" + memAddr + ", memDetailAddr=" + memDetailAddr + ", memGender=" + memGender
 				+ ", memRegdate=" + memRegdate + ", memLastdate=" + memLastdate + ", memSnsType=" + memSnsType
-				+ ", memSnsId=" + memSnsId + "]";
+				+ ", memSnsId=" + memSnsId + ", memPhoto=" + memPhoto + "]";
 	}
+	
 
+	
 	
 	
 	

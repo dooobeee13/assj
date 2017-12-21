@@ -21,7 +21,6 @@
 	<c:import url="index/top.jsp" />
 	<!-- 슬라이드 -->
 	<fieldset id="slide">
-	<ul>
 	<div id="carousel-example-generic" class="carousel slide">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">

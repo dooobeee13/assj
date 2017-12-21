@@ -3,22 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-  <head>    
+  	<head>    
   	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>개인/기업회원 가입</title> 
-    <!-- Bootstrap -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../../js/bootstrap.min.js"></script>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     
     <script type="text/javascript">
     	$(window).load(function(){
-    		   $("select option[value='naver.com']").attr("selected", true);
+    	   //네이버 기본선택으로 설정
+   		   $("select option[value='naver.com']").attr("selected", true);
     	});
     
     	$(document).ready(function(){	
@@ -107,8 +105,7 @@
     			//false이면 에러
     			
     			/*
-    			정규식 /^[a-zA-Z0-9]+$/g
-    			a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
+    			정규식 /^[a-zA-Z0-9]+$/g  a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
     			닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
     			*/
     		}
@@ -124,7 +121,6 @@
     				return false;
     			}
     		});
-    		
     		$('#dupli2').click(function(){
     			var id=$('#cmId').val();
     			$('#dupliId').val(id);
@@ -136,9 +132,9 @@
     			}
     		});
     		
-    		//검색버튼 클릭해서 Controller로 넘기기 (ajax)
+    		//검색버튼 클릭해서 Controller로 넘기기(ajax)
 			$("#search").click(function(e){ 
-				if($('#dupliId').val()==null ||$('#dupliId').val()==""){
+				if($('#dupliId').val()==null || $('#dupliId').val()==""){
     				alert('아이디를 입력해주세요');
     				$('#dupliId').focus();
     				return false;
@@ -161,7 +157,6 @@
     		$('#memEmail2').change(function(){
     			if($(this).val()=='etc'){
     				//$('#memEmail3').css('visibility','visible');
-    				//console.log($('#memEmail3').attr('style'));
     				$('#memEmail3').attr('style','visibility: visible');
     			}else{
     				$('#memEmail3').css('visibility','hidden');
@@ -170,7 +165,6 @@
     		$('#cmEmail2').change(function(){
     			if($(this).val()=='etc'){
     				//$('#memEmail3').css('visibility','visible');
-    				//console.log($('#memEmail3').attr('style'));
     				$('#cmEmail3').attr('style','visibility: visible');
     			}else{
     				$('#cmEmail3').css('visibility','hidden');
@@ -232,6 +226,10 @@
     				alert('휴대폰 번호를 확인해주세요.');
     				$('#cmMgrTel3').focus();
     				return false;
+    			}else if($('#chkId2').val()!='Y'){
+    				alert('아이디 중복체크를 해주세요.');
+    				$('#dupli2').focus();
+    				return false;
     			}else if(!($('#CpCheckbox2').is(':checked'))){
     				alert('약관에 동의하세요.');
     				$('#CpCheckbox2').focus();
@@ -251,8 +249,7 @@
     			//false이면 에러
     			
     			/*
-    			정규식 /^[a-zA-Z0-9]+$/g
-    			a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
+    			정규식 /^[a-zA-Z0-9]+$/g a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
     			닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
     			*/
     		}
@@ -261,8 +258,7 @@
 			$(document).on('click', '.checkMessage input[type=button]', function(){
 				$('#memId').val($('#dupliId').val());
 				$('#chkId').val('Y');
-				$('#myModal1').modal('hide');
-				
+				$('#myModal1').modal('hide');		
 			});
 			$(document).on('click', '.checkMessage input[type=button]', function(){
 				$('#cmId').val($('#dupliId').val());
@@ -274,10 +270,7 @@
 			$('#myModal1').on('hide.bs.modal', function (e) {
 				$('#myModal1 .checkMessage').empty();
 			});
-				
-    		
-    	});
-    	
+    	}); 	
     </script>
     
     <style type="text/css">
@@ -302,7 +295,6 @@
    		.mem_register #info{
      		font-size:13px;
      	}
-     	
  		.mem_register fieldset{
  			width:800px;
  			margin:0 auto;	
@@ -330,6 +322,7 @@
        		 text-align: center;
 		}
 		 
+		 
 		@media screen and (min-width: 768px) { 
 	        .modal:before {
                 display: inline-block;
@@ -338,12 +331,12 @@
                 height: 100%;
 	        }
 		}
-		 
 		.modal-dialog {
 	        display: inline-block;
 	        text-align: left;
 	        vertical-align: middle;
 		}
+		
 		input[type=checkbox]
 		{
 			  /* Double-sized Checkboxes */
@@ -356,12 +349,6 @@
 			  vertical-align: middle;
 		}
     </style>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
   	<c:import url="../../index/top.jsp" />
@@ -645,73 +632,29 @@
 			
 		</fieldset>
 		
-		
-		
-
-
-
-			
-			
-			<!-- 아이디 중복확인 모달 -->
-			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" ariahidden="true">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span ariahidden="true">&times;</span>
-							<span class="sr-only">Close</span>
-						</button>
-						<h2 class="modal-title" id="myModalLabel">&nbsp;아이디 중복검사</h2>					
-					</div>
-					<div class="modal-body">
-						<div class="input-group">
-							 <span class="input-group-addon"> <span class="glyphicon glyphicon-hand-right"> </span> </span>
-						 	 <input type="text" class="form-control" id="dupliId">
-							 <span class="input-group-btn"> <button class="btn btn-default" type="submit" id="search">검색</button> </span>
-						</div>
-					</div>
-					<div class="modal-footer" style="text-align:left">
-						<div class="checkMessage"></div>
-					</div>
-				
-				</div>
-				<!-- 모달 콘텐츠 -->
-			</div>
-			<!-- 모달 다이얼로그 -->
-		</div>
-		<!-- 모달 전체 윈도우 -->
-
-		
-		<!-- 우편번호 검색 모달 -->
-		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+		<!-- 아이디 중복확인 모달 -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" ariahidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span ariahidden="true">&times;</span><span class="sr-only">Close</span>
+						<span ariahidden="true">&times;</span>
+						<span class="sr-only">Close</span>
 					</button>
-					<h2 class="modal-title" id="myModalLabel">&nbsp;우편번호 검색</h2>
-					<div class="input-group">
-					     <span class="input-group-addon"> <span class="glyphicon glyphicon-envelope"> </span> </span>
-					     <input type="text" class="form-control" placeholder="예)판교역로 235, 분당 주공,삼평동 681">
-					     <span class="input-group-btn"> <button class="btn btn-default" type="button">검색</button> </span>
-					</div>
+					<h2 class="modal-title" id="myModalLabel">&nbsp;아이디 중복검사</h2>					
 				</div>
 				<div class="modal-body">
-				 	<h3>tip</h3>
-		   			<p>아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.</p>
-					
-					<p>도로명 + 건물번호<br>
-					<span>예) 판교역로 235,  제주 첨단로 242<br></span>
-					지역명(동/리) + 번지<br>
-					<span>예) 삼평동 681,  제주 영평동 2181<br></span>
-					지역명(동/리) + 건물명(아파트명)<br>
-					<span>예) 분당 주공,  연수동 주공3차<br></span>
-					사서함명 + 번호<br>
-					<span>예) 분당우체국사서함 1~100<br></span></p>
+					<div class="input-group">
+						 <span class="input-group-addon"> <span class="glyphicon glyphicon-hand-right"> </span> </span>
+					 	 <input type="text" class="form-control" id="dupliId">
+						 <span class="input-group-btn"> <button class="btn btn-default" type="submit" id="search">검색</button> </span>
+					</div>
 				</div>
+				<div class="modal-footer" style="text-align:left">
+					<div class="checkMessage"></div>
+				</div>
+			
 			</div>
 			<!-- 모달 콘텐츠 -->
 		</div>
@@ -719,7 +662,41 @@
 	</div>
 	<!-- 모달 전체 윈도우 -->
 		
-		
+	<!-- 우편번호 검색 모달 -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" ariahidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span ariahidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h2 class="modal-title" id="myModalLabel">&nbsp;우편번호 검색</h2>
+				<div class="input-group">
+				     <span class="input-group-addon"> <span class="glyphicon glyphicon-envelope"> </span> </span>
+				     <input type="text" class="form-control" placeholder="예)판교역로 235, 분당 주공,삼평동 681">
+				     <span class="input-group-btn"> <button class="btn btn-default" type="button">검색</button> </span>
+				</div>
+			</div>
+			<div class="modal-body">
+			 	<h3>tip</h3>
+	   			<p>아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다.</p>
+				
+				<p>도로명 + 건물번호<br>
+				<span>예) 판교역로 235,  제주 첨단로 242<br></span>
+				지역명(동/리) + 번지<br>
+				<span>예) 삼평동 681,  제주 영평동 2181<br></span>
+				지역명(동/리) + 건물명(아파트명)<br>
+				<span>예) 분당 주공,  연수동 주공3차<br></span>
+				사서함명 + 번호<br>
+				<span>예) 분당우체국사서함 1~100<br></span></p>
+			</div>
+		</div>
+		<!-- 모달 콘텐츠 -->
+	</div>
+	<!-- 모달 다이얼로그 -->
+</div>
+<!-- 모달 전체 윈도우 -->
 	</div>
 	</div>
 	<c:import url="../../index/footer.jsp" />    

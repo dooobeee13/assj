@@ -30,6 +30,7 @@
 			<a href="<c:url value='/member/edit/cmMemEdit.do'/>"><b>회원정보수정</b></a>
 			<a href="<c:url value='/logout2.do'/>"><b>로그아웃</b></a>
 		</c:if>
+
 	<div class="clearfix"></div>
 	</div>
 	<div class="searchline container-fluid">

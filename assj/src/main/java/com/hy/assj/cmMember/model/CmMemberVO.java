@@ -23,6 +23,7 @@ public class CmMemberVO {
 	private String cmEmail2;
 	private String cmEmail3;
 	private Date cmRegdate;             
+	private String cmLogo;
 	private int ccNo;                   
 	private Integer csNo;
 	
@@ -161,6 +162,12 @@ public class CmMemberVO {
 	public void setCmRegdate(Date cmRegdate) {
 		this.cmRegdate = cmRegdate;
 	}
+	public String getCmLogo() {
+		return cmLogo;
+	}
+	public void setCmLogo(String cmLogo) {
+		this.cmLogo = cmLogo;
+	}
 	public int getCcNo() {
 		return ccNo;
 	}
@@ -173,6 +180,7 @@ public class CmMemberVO {
 	public void setCsNo(Integer csNo) {
 		this.csNo = csNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "CmMemberVO [cmNo=" + cmNo + ", cmId=" + cmId + ", cmPwd=" + cmPwd + ", cmPwd2=" + cmPwd2 + ", cmRegnum="
@@ -180,7 +188,9 @@ public class CmMemberVO {
 				+ cmMgrTel + ", cmMgrTel1=" + cmMgrTel1 + ", cmMgrTel2=" + cmMgrTel2 + ", cmMgrTel3=" + cmMgrTel3
 				+ ", cmAddr=" + cmAddr + ", cmDetailAddr=" + cmDetailAddr + ", cmZipcode=" + cmZipcode + ", cmEmail="
 				+ cmEmail + ", cmEmail1=" + cmEmail1 + ", cmEmail2=" + cmEmail2 + ", cmEmail3=" + cmEmail3
-				+ ", cmRegdate=" + cmRegdate + ", ccNo=" + ccNo + ", csNo=" + csNo + "]";
+				+ ", cmRegdate=" + cmRegdate + ", cmLogo=" + cmLogo + ", ccNo=" + ccNo + ", csNo=" + csNo + "]";
 	}
+	
+	
 
 }

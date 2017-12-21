@@ -108,38 +108,33 @@
 </head>
 	<body>
 		<c:import url="../../index/top.jsp" />
-		<div id="page-wrapper">
 		<!-- 사이드바 -->
+		<div id="page-wrapper">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
 				<hr>
 				<li><h5><b>무엇을 도와드릴까요?</b></h5></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>도움말</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
 				<li><a href="<c:url value='/member/menu/onenone.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>아이디.비밀번호 찾기</a></li>
-				<li><a href="<c:url value='/member/out/psMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
 			</ul>
 			<hr>
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h5><b>개인회원서비스</b></h5></li>
 				<li><a href="<c:url value='/member/menu/psService.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
+				<li><a href="<c:url value='/member/out/psMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
 			</ul>
 			<hr>
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h5><b>기업회원서비스</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 상품 안내</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>S-포인트 안내 </a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>SIAT 인적성검사 상품 </a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 안내</a></li>
 				<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>기업회원 탈퇴</a></li>
 			</ul>
 		</div>
 	</div>
 		<!-- /사이드바 -->
-		
-		<!-- 본문 -->
 		<div class="container">
 			<div id="cmMemOut">
 			<fieldset>

@@ -63,6 +63,54 @@
     	.modal-body table{
 			background-color:#f6f9ff;
 		}
+		
+		
+		 		 /* 사이드바 스타일 */
+   	 #page-wrapper {
+    padding-left: 380px;
+  }
+  
+  #sidebar-wrapper {
+    position:absolute;
+    width: 190px;
+    height: 63%;
+    background: #ffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 0.8em;
+    line-height: 2.2em;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #7a6666;
+  }
+  
+  .sidebar-nav li a:hover {
+    color: #cccc;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
     </style>
      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,6 +121,37 @@
   </head>
   <body>
    <c:import url="../../index/top.jsp" />
+   <!-- 사이드바 -->
+		<div id="page-wrapper">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h1>My Page</h1></li>
+				<hr>
+				<li><h5><b>이력서 관리</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
+			</ul>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
+				<li><a href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
+				<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
+			</ul>
+		</div>
+	</div>
+		<!-- /사이드바 -->
     <div class="container">
     	<div id="cmMemEdit">
     	<h1>기업정보 수정</h1>
@@ -81,16 +160,16 @@
 		<br>
     	<br><br>
     	<fieldset>
-    	<h4><b><span><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmName}</c:if></span> 님,안녕하세요.</b><br></h4>
+    	<h4><b><span>${vo.cmName}</span> 님,안녕하세요.</b><br></h4>
 	    	<form role="form" class="form-inline">
 					<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;아이디</td>
-							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmId}</c:if></td>			
+							<td>${vo.cmId}</td>			
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;사업자등록번호</td>
-							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmRegnum}&nbsp;&nbsp;</c:if><input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
+							<td>${vo.cmRegnum}&nbsp;&nbsp;<input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;기업구분</td>
@@ -100,10 +179,12 @@
 						</tr>
 				</table><br><br>
 				<h4><b>인사담당자 정보</b></h4>
+				<input type="text" id="cmTel" value="${vo.cmMgrTel3}">
+				<input type="text" id="cmEmail" value="${vo.cmEmail1}">
 				<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자</td>
-							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmManager}</c:if></td>				
+							<td>${vo.cmManager}</td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자 전화번호</td>
@@ -121,6 +202,7 @@
 							</td>
 						</tr>
 						<tr>
+							
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;이메일</td>
 							<td>
 							<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail1" name="cmEmail1">&nbsp;@
@@ -149,20 +231,20 @@
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;회사명</td>
 							<td><input type="text" class="form-control" 
-							<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmName}"</c:if>></td>				
+							value="${vo.cmName}"></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;대표자명</td>
 							<td><input type="text" class="form-control"
-							<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmRepre}"</c:if>></td>
+							value="${vo.cmRepre}"></td>
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사주소</td>
 							<td>
-								<input type="text" class="form-control" placeholder="우편번호" size="10" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmZipcode}"</c:if>>
+								<input type="text" class="form-control" placeholder="우편번호" size="10" value="${vo.cmZipcode}">
 								<input type="button" class="form-control" value="우편번호 검색" data-toggle="modal" data-target="#ZipModal">
-								<input type="text" class="form-control" placeholder="주소" size="38" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmAddr}"</c:if>>
-								<input type="text" class="form-control" placeholder="상세주소" size="38" <c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmDetailAddr}"</c:if>>
+								<input type="text" class="form-control" placeholder="주소" size="38" value="${vo.cmAddr}">
+								<input type="text" class="form-control" placeholder="상세주소" size="38" value="${vo.cmDetailAddr}">
 							</td>		
 						</tr>
 						<tr>
@@ -175,13 +257,11 @@
 				<hr>
 			</form><br>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary btn-lg">미리보기</button>
-					<button type="button" class="btn btn-default btn-lg">수정하기</button>
+					<button type="button" class="btn btn-primary btn-lg">수정하기</button>
+					<button type="button" class="btn btn-default btn-lg">취소하기</button>
 				</div>
 		</fieldset>
-		
-		
-		
+
 		<!-- 우편번호 검색 -->
 		
 		<div class="modal fade" id="ZipModal" tabindex="-1" role="dialog"

@@ -50,5 +50,14 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.memberOut(memId);
 	}
 
+	@Override
+	public int memberEdit(MemberVO vo) {
+		return memberDao.memberEdit(vo);
+	}
+
+	@Override
+	public int memPwdEdit(MemberVO vo) {
+		return memberDao.memPwdEdit(vo);
+	}
 
 }

@@ -1,7 +1,12 @@
 package com.hy.assj.member;
 
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
+import com.hy.assj.common.FileuploadUtil;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
 import com.ibatis.sqlmap.engine.scope.SessionScope;
@@ -28,6 +34,9 @@ public class RegisterController {
 
 	private static final Logger logger
 	=LoggerFactory.getLogger(RegisterController.class);
+	
+	@Autowired
+	private FileuploadUtil uploadUtil;
 	
 	@Autowired
 	private MemberService memberService;
@@ -191,11 +200,6 @@ public class RegisterController {
 		return "common/message";
 	}
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value="/edit/psMemEdit.do",method=RequestMethod.GET)
 	public String memberEdit_get(){
 		logger.info("개인회원정보 수정 화면(get)");
@@ -227,24 +231,55 @@ public class RegisterController {
 	}
 	@RequestMapping(value="/edit/psMemEdit2.do",method=RequestMethod.GET)
 	public String memberEdit2_get(HttpSession session,Model model){
-		logger.info("개인회원정보 수정2 화면(get)");
+		logger.info("개인회원정보 수정2 화면(get) 파라미터 session={}",session);
 			
+		MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+		MemberVO vo=memberService.selectMember(memberVO.getMemId());
+		
+		model.addAttribute("vo",vo);
+		
 		return "member/edit/psMemEdit2";
 	}
 	
 	@RequestMapping(value="/edit/psMemEdit2.do",method=RequestMethod.POST)
-	public String memberEdit2_post(){
-		logger.info("개인회원정보 수정2 화면(post)");
+	public String memberEdit2_post(@ModelAttribute MemberVO vo,@RequestParam(defaultValue="0") int memNo,
+			Model model, HttpServletRequest request){
+		logger.info("개인회원정보 수정2 화면(post) 파라미터 vo{}=,memNo={}",vo,memNo);
 		
-		return "member/edit/psMemEdit2";
+		String fileName = null;
+		try {
+			fileName = uploadUtil.fileupload2(request, FileuploadUtil.IMAGE_UPLOAD);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		vo.setMemNo(memNo);
+		vo.setMemPhoto(fileName==null?"":fileName);
+		int cnt=memberService.memberEdit(vo);
+		
+		String msg="",url="/member/edit/psMemEdit2.do";
+		if(cnt>0) {
+			msg="개인정보가 수정되었습니다.";
+			url="/index.do";
+		}else {
+			msg="개인정보 수정실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 	
-	
 	@RequestMapping(value="/edit/cmMemEdit.do",method=RequestMethod.GET)
-	public String cmMemberEdit_get() {
-		logger.info("기업회원정보 수정 화면(get)");
+	public String cmMemberEdit_get(HttpSession session,Model model) {
+		logger.info("기업회원정보 수정 화면(get) 파라미터 session={}",session);
 		
+		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
+		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
+		
+		model.addAttribute("vo={}",vo);
 		return "member/edit/cmMemEdit";
 	}
 	
@@ -253,6 +288,49 @@ public class RegisterController {
 		logger.info("개인회원 로그인 화면(get)");
 		
 		return "member/login/psMemLogin";
+	}
+	
+	@RequestMapping(value="/trans/pwdTrans.do",method=RequestMethod.GET)
+	public String pwdTrans_get(HttpSession session,Model model) {
+		logger.info("비밀번호 변경 화면(get)");
+		
+		MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+		MemberVO vo=memberService.selectMember(memberVO.getMemId());
+		
+		model.addAttribute("vo",vo);
+		
+		return "member/trans/pwdTrans";
+	}
+	
+	@RequestMapping(value="/trans/pwdTrans.do",method=RequestMethod.POST)
+	public String pwdTrans_post(@RequestParam String memId,@RequestParam String memPwd,
+			@RequestParam String pwd,Model model) {
+		logger.info("비밀번호 변경 화면(post) 파라미터 memId={},memPwd={}",memId,memPwd);
+		
+		String msg="비밀번호 수정 실패",url="/trans/pwdTrans.do";
+		MemberVO vo=memberService.selectMember(memId);
+		int cnt=memberService.loginCheck(memId, pwd);
+		
+		if(cnt==MemberService.LOGIN_OK) {
+			vo.setMemPwd(memPwd);
+			memberService.memPwdEdit(vo);
+			msg="비밀번호 수정 성공했습니다";
+			url="/index.do";
+		}else if(cnt==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 일치하지 않습니다";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/menu/scrap.do")
+	public String scrap_get() {
+		logger.info("스크랩한 공고 화면(get)");
+		
+		return "member/menu/scrap";
 	}
 	
 }

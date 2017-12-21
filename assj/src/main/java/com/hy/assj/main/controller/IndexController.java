@@ -32,7 +32,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
 	public String index_get() {
-		logger.info("메인페이지 요청");
+		logger.info("메인페이지 요청(get)");
 		
 		return "index";
 	}
@@ -43,10 +43,10 @@ public class IndexController {
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
 		
-		logger.info("로그인 진행");
+		logger.info("메인페이지 요청(post)개인회원-로그인 진행");
 		
 		String msg="";
-		String url="/index.do";
+		String url= request.getHeader("referer"); //진행하는 페이지로 url설정
 		int result=memberService.loginCheck(vo.getMemId(),vo.getMemPwd());
 		if(result==MemberService.LOGIN_OK) {
 			//로그인 성공
@@ -54,14 +54,13 @@ public class IndexController {
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
-			/*session.setAttribute("memId", memVo.getMemId());
-			session.setAttribute("memName", memVo.getMemName());*/
+			
 			session.setAttribute("memberVO", memberVO);
 			
 			//[2] 쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", memberVO.getMemId());
 			ck.setPath("/");
-			if(chkSaveId!=null) { //아이디 저장하기 체크한 경우, 쿠키 저장
+			if(chkSaveId!=null) {   //아이디 저장하기 체크한 경우, 쿠키 저장
 				ck.setMaxAge(1000*24*60*60);
 				response.addCookie(ck);
 			}else {
@@ -86,14 +85,13 @@ public class IndexController {
 	}
 		
 	
-	
 	@RequestMapping(value="/index2.do",method=RequestMethod.POST)
 	public String index_post(@ModelAttribute CmMemberVO vo,
 			@RequestParam(required=false) String chkSaveId2,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
 		
-		logger.info("로그인 진행");
+		logger.info("메인페이지 요청(post)기업회원-로그인 진행");
 		
 		String msg="";
 		String url="/index.do";
@@ -106,9 +104,9 @@ public class IndexController {
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
-		/*	session.setAttribute("cmId", memVo.getCmId());
-			session.setAttribute("cmName", memVo.getCmName());*/
+	
 			session.setAttribute("cmMemberVO", cmMemberVO);
+			
 			//[2] 쿠키에 저장
 			Cookie ck = new Cookie("ck_cmId", cmMemberVO.getCmId());
 			ck.setPath("/");
@@ -137,11 +135,12 @@ public class IndexController {
 	}
 	
 
+	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		logger.info("로그아웃 처리");
 		
-		session.removeAttribute("memberVO");
+		session.removeAttribute("memberVO");//session 삭제
 	
 		return "redirect:/index.do";
 	}
