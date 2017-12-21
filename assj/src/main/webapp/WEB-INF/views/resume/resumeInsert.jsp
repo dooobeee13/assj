@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이력서 등록</title>
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -21,8 +21,8 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link href="css/resume.css" rel="stylesheet">
-<script src="js/resume.js"></script>
+<link href="<c:url value='/css/resume.css'/>" rel="stylesheet">
+<script src="<c:url value='/js/resume.js'/>"></script>
 
 <style type="text/css">
 body {
@@ -138,7 +138,8 @@ function OntextCheck(obj)
 						<li>
 							<input type="file" name="file1" id="file1" style="display: none;">
 							<a href="#">
-								<img class="img-profile img-circle" id="profileImg" src="resume/img/img_photo_null.gif" />
+								<img class="img-profile img-circle" id="profileImg"
+								 src="${pageContext.request.contextPath }/resume/img/img_photo_null.gif" />
 							</a>
 							
 							
@@ -533,7 +534,7 @@ function OntextCheck(obj)
 						
 						<div id="addSHDiv">
 							<label>
-								<img alt="학력추가" id="addSH" src="images/button/btn_add.gif" style="text-align: right;">
+								<img alt="학력추가" id="addSH" src="${pageContext.request.contextPath}/images/button/btn_add.gif" style="text-align: right;">
 							</label>
 						</div>						
 						
