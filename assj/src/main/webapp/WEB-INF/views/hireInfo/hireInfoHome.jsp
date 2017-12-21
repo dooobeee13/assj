@@ -22,6 +22,10 @@
 	}
 }
 
+.topline{
+	padding:15px;
+}
+
 .searchline {
 	margin: 20px 0;
 }
@@ -296,11 +300,11 @@ footer {
 </style>
 <script>
 	$(function(){
-		$('.searchjob').hover(function(){
+		/* $('.searchjob').hover(function(){
 			$('.searchCategory').show();
 		},function(){
 			$('.searchCategory').hide();
-		});
+		}); */
 		
 		
 		$('.sCategory .sCateTitle').click(function(e){
@@ -328,6 +332,7 @@ footer {
 		});
 		
 		$('#searchBtn').click(function(){
+			alert('수리중...');
 			//console.log($(searchForm).serialize());
 			$.ajax({
 				url :  "<c:url value="/hireInfo/search.do" />",

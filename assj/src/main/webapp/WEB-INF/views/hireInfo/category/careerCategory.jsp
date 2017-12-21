@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 	<div class="sCateTitle">
-		경력<span class="glyphicon glyphicon-chevron-down"></span>
+		경력
 	</div>
 	<div class="sCateName thinScroll">
 		<ul>
