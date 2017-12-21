@@ -23,6 +23,11 @@ public class CmMemberDAOMabatis extends SqlSessionDaoSupport
 	public CmMemberVO selectMember(String cmId) {
 		return getSqlSession().selectOne(namespace+".selectMember",cmId);
 	}
+
+	@Override
+	public int cmMemberOut(String cmId) {
+		return getSqlSession().delete(namespace+".cmMemberOut",cmId);
+	}
 	
 	
 

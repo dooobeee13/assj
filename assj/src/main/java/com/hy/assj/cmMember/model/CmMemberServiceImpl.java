@@ -34,5 +34,10 @@ public class CmMemberServiceImpl implements CmMemberService{
 	public CmMemberVO selectMember(String cmId) {
 		return cmMemberDao.selectMember(cmId);
 	}
+
+	@Override
+	public int cmMemberOut(String cmId) {
+		return cmMemberDao.cmMemberOut(cmId);
+	}
 	
 }

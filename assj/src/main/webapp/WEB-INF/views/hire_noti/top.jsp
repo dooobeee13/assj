@@ -59,15 +59,17 @@
 		<nav id="top_navi">
 			<div id='cssmenu'>
 				<ul class="nav nav-tabs">			   
-				   <li ><a href="#tab1" data-toggle="tab"><span>공고등록</span></a></li>
-				   <li><a href="#tab2" data-toggle="tab"><span>공고.지원자 관리</span></a></li>
-				   <li><a href="#tab3" data-toggle="tab"><span>인재검색</span></a></li>
+				   <li ><a href="<c:url value='/hire_noti/hire1.do'/>" data-toggle="tab"><span>공고등록</span></a></li>
+				   <li><a href="<c:url value='/hire_noti/hire2.do'/>" data-toggle="tab"><span>공고.지원자 관리</span></a></li>
+				   <li><a href="<c:url value='/hire_noti/hire3.do'/>" data-toggle="tab"><span>인재검색</span></a></li>
 				   <li><a href="#tab4" data-toggle="tab"><span>인재관리</span></a></li>
 				   <li><a href="#tab5" data-toggle="tab"><span>인적성검사</span></a></li>
 				   <li><a href="#tab6" data-toggle="tab"><span>면접관리</span></a></li>
 				</ul>
 			</div>
 		</nav>
+		
+		
 		
 			
 			

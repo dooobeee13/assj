@@ -44,18 +44,58 @@ public class HireInfoServiceImpl implements HireInfoService {
 	}
 
 	@Override
-	public List<OccupationVO> getOccupationList() {
-		return hireInfoDao.selectOccupation();
+	public Map<String, List<OccupationVO>> getOccupationListMap() {
+		List<OccupationVO> occuList = hireInfoDao.selectOccupation();
+		Map<String, List<OccupationVO>> map = new HashMap<>();
+		map.put("topCategory", new ArrayList<>());
+		for (OccupationVO vo : occuList) {
+			if (vo.getOccuTopNo() == 0) {
+				map.get("topCategory").add(vo);
+				map.put("subCategory-" + vo.getOccuNo(), new ArrayList<>());
+			} else {
+				try {
+					map.get("subCategory-" + vo.getOccuTopNo()).add(vo);
+				} catch (NullPointerException e) {}
+			}
+		}
+		return map;
 	}
 
 	@Override
-	public List<SectorsVO> getSectorsList() {
-		return hireInfoDao.selectSectors();
+	public Map<String, List<SectorsVO>> getSectorsListMap() {
+		List<SectorsVO> sectorList = hireInfoDao.selectSectors();
+		Map<String, List<SectorsVO>> map = new HashMap<>();
+		map.put("topCategory", new ArrayList<>());
+		for (SectorsVO vo : sectorList) {
+			if (vo.getSecTopNo() == 0) {
+				map.get("topCategory").add(vo);
+				map.put("subCategory-" + vo.getSecNo(), new ArrayList<>());
+			} else {
+				try {
+					map.get("subCategory-" + vo.getSecTopNo()).add(vo);
+				} catch (NullPointerException e) {}
+			}
+		}
+		return map;
 	}
 
 	@Override
-	public List<MajorVO> getMajorList() {
-		return hireInfoDao.selectMajor();
+	public Map<String, List<MajorVO>> getMajorListMap() {
+		List<MajorVO> majorList = hireInfoDao.selectMajor();
+		Map<String, List<MajorVO>> map = new HashMap<>();
+		map.put("topCategory", new ArrayList<>());
+		for (MajorVO vo : majorList) {
+			if (vo.getMajorTopNo() == 0) {
+				map.get("topCategory").add(vo);
+				map.put("subCategory-" + vo.getMajorNo(), new ArrayList<>());
+			} else {
+				try {
+					map.get("subCategory-" + vo.getMajorTopNo()).add(vo);
+				} catch (NullPointerException e) {}
+			}
+		}
+		return map;
+		
 	}
 
 	@Override
@@ -87,8 +127,6 @@ public class HireInfoServiceImpl implements HireInfoService {
 	public List<CompScaleVO> getCompScaleList() {
 		return hireInfoDao.selectCompScale();
 	}
-	
-	
 	
 	
 }

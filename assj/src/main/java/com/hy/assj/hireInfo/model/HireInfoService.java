@@ -20,13 +20,13 @@ public interface HireInfoService {
 	Map<String, List<AreaVO>> getAreaListMap();
 	
 	//직종
-	List<OccupationVO> getOccupationList();
+	Map<String, List<OccupationVO>> getOccupationListMap();
 	
 	//업종
-	List<SectorsVO> getSectorsList();
+	Map<String, List<SectorsVO>> getSectorsListMap();
 	
 	//전공
-	List<MajorVO> getMajorList();
+	Map<String, List<MajorVO>> getMajorListMap();
 
 	//고용형태
 	List<EmpTypeVO> getEmpTypeList();

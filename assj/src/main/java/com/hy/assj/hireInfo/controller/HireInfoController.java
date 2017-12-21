@@ -1,7 +1,8 @@
 package com.hy.assj.hireInfo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.hireInfo.model.HireInfoService;
 
@@ -21,7 +23,7 @@ public class HireInfoController {
 	@Autowired
 	private HireInfoService hireInfoService;
 	
-	@RequestMapping("/home.do")
+	@RequestMapping("/hireInfohome.do")
 	public String home() {
 		logger.info("채용정보 홈 요청");
 		
@@ -32,9 +34,80 @@ public class HireInfoController {
 	public String areaList(Model model) {
 		model.addAttribute("map", hireInfoService.getAreaListMap());
 		
-		return "hireInfo/areaCategory";
+		return "hireInfo/category/areaCategory";
 	}
 	
+	@RequestMapping("/occupationList.do")
+	public String occupationList(Model model) {
+		model.addAttribute("map", hireInfoService.getOccupationListMap());
+		
+		return "hireInfo/category/occupationCategory";
+	}
 	
+	@RequestMapping("/majorList.do")
+	public String majorList(Model model) {
+		model.addAttribute("map", hireInfoService.getMajorListMap());
+		
+		return "hireInfo/category/majorCategory";
+	}
+	
+	@RequestMapping("/sectorsList.do")
+	public String secotrsList(Model model) {
+		model.addAttribute("map", hireInfoService.getSectorsListMap());
+		
+		return "hireInfo/category/sectorsCategory";
+	}
+	
+	@RequestMapping("/rankList.do")
+	public String rankList(Model model) {
+		model.addAttribute("rankList", hireInfoService.getRankList());
+		model.addAttribute("positionList", hireInfoService.getPositionList());
+		
+		return "hireInfo/category/rankCategory";
+	}
+	
+	@RequestMapping("/compScaleList.do")
+	public String compScaleList(Model model) {
+		model.addAttribute("csList", hireInfoService.getCompScaleList());		
+		model.addAttribute("etList", hireInfoService.getEmpTypeList());
+		return "hireInfo/category/compScaleCategory";
+	}
+	
+	@RequestMapping("/educationList.do")
+	public String educationList(Model model) {
+		model.addAttribute("list", hireInfoService.getEducationList());
+		
+		return "hireInfo/category/educationCategory";
+	}
+	
+	@RequestMapping("/careerList.do")
+	public String careerList(Model model) {
+		model.addAttribute("list", hireInfoService.getCareerList());
+		
+		return "hireInfo/category/careerCategory";
+	}
+	
+	/*@RequestMapping("/empTypeList.do")
+	public String empTypeList(Model model) {
+		model.addAttribute("list", hireInfoService.getEmpTypeList());
+		
+		return "hireInfo/category/empTypeCategory";
+	}
+	
+	@RequestMapping("/postionList.do")
+	public String postionList(Model model) {
+		model.addAttribute("list", hireInfoService.getPositionList());
+		
+		return "hireInfo/category/postionCategory";
+	}*/
+	
+	@RequestMapping("/search.do")
+	public String search(@RequestParam(value="area", required=false) String[] area, @RequestParam(value="occupation", required=false) String[] occupation) {
+		System.out.println("지역 수: " + area.length);
+		if (occupation != null) {
+			System.out.println("업종 수: " + occupation.length);
+		}
+		return "받음";
+	}
 	
 }
