@@ -14,6 +14,16 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.carousel').carousel({interval:3000})
+		
+		
+		$('#naverLogin').click(function(){
+			$.ajax({
+				url: '<c:url value="/login/naverLogin.do" />',
+				success: function(res){
+					location.href=res;
+				}
+			})
+		});
 	});
 </script>
 </head>
@@ -157,6 +167,11 @@
 									</div>
 									<div class="form-group">
 										<input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인" id="loginBtn">
+									</div>
+									<div style="margin-bottom: 10px">
+										<a href="#">
+											<img id="naverLogin" src="<c:url value='/images/naver_white.PNG' />" height="30">
+										</a>	
 									</div>
 									<p style="font-size: 0.9em">
 										<a href="#">아이디 / 비밀번호 찾기</a>

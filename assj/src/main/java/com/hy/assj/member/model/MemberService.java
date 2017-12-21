@@ -1,5 +1,7 @@
 package com.hy.assj.member.model;
 
+import java.util.Map;
+
 public interface MemberService {
 	//아이디 중복검사시 사용하는 상수
 	public static final int EXIST_ID=1;  //해당 아이디가 이미 존재
@@ -17,4 +19,6 @@ public interface MemberService {
 	public int memberOut(String memId);
 	public int memberEdit(MemberVO vo);
 	public int memPwdEdit(MemberVO vo);
+	
+	public MemberVO naverLogin(Map<String, String> map);
 }

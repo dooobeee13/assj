@@ -1,5 +1,8 @@
 package com.hy.assj.member.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +61,34 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int memPwdEdit(MemberVO vo) {
 		return memberDao.memPwdEdit(vo);
+	}
+
+	@Override
+	public MemberVO naverLogin(Map<String, String> map) {
+		//아이디 체크해서 없을때 insert
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("id", map.get("id"));
+		searchMap.put("type", "naver");
+		int cnt = memberDao.countMemberBySns(searchMap);
+		
+		if (cnt == 0) {
+			String id = map.get("id");
+			String email = map.get("email");
+			String image = map.get("profile_image");
+			String gender = map.get("gender");
+			String name = map.get("name");
+			MemberVO vo = new MemberVO();
+			vo.setMemName(name);
+			vo.setMemEmail(email);
+			vo.setMemGender("M".equals(gender) ? "남자" : "여자");
+			vo.setMemSnsType("naver");
+			vo.setMemSnsId(id);
+			vo.setMemPhoto(image);
+			
+			memberDao.insertMemberBySns(vo);
+		}
+		
+		return memberDao.selectMemberBySns(searchMap); 
 	}
 
 }

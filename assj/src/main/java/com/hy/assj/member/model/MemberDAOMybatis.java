@@ -1,5 +1,7 @@
 package com.hy.assj.member.model;
 
+import java.util.Map;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,6 +45,21 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int memPwdEdit(MemberVO vo) {
 		return getSqlSession().update(namespace+".memPwdEdit",vo);
+	}
+
+	@Override
+	public MemberVO selectMemberBySns(Map<String, String> map) {
+		return getSqlSession().selectOne(namespace + ".selectMemberBySns", map);
+	}
+
+	@Override
+	public int countMemberBySns(Map<String, String> map) {
+		return getSqlSession().selectOne(namespace + ".countMemberBySns", map);
+	}
+
+	@Override
+	public int insertMemberBySns(MemberVO vo) {
+		return getSqlSession().insert(namespace + ".insertMemberBySns", vo); 
 	}
 
 	
