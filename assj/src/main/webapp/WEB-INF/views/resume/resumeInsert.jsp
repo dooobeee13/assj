@@ -1046,12 +1046,17 @@ function OntextCheck(obj)
 	희망 업종과 직종에 따라 큰 카테고리에 셀프조인 하여서 상세 업종및 상세 직종을 selectbox 두개로 표현할것
 	셀렉트 박스 1 (서비스업)  셀렉트 박스 2 (서비스업에 해당하는 상세직종)
 	 -->
-					<br> <label>희망직종<span class="res-star">*</span></label> <br>
+					<br> 
+					<label>희망 직종<span class="res-star">*</span></label> 
+					<br>
 					<select class="form-control">
 						<option>occu카테고리</option>
 					</select> <select class="form-control">
 						<option>occu_top_no에따른 name</option>
-					</select> <br> <label>희망직종<span class="res-star">*</span></label> <br>
+					</select> 
+					<br> 
+					<label>희망 업종<span class="res-star">*</span></label> 
+					<br>
 					<select class="form-control">
 						<option>sectors카테고리</option>
 					</select> <select class="form-control">
