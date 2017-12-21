@@ -14,7 +14,8 @@
 			<!-- 직책 부분  -->
 				<c:forEach var="i" begin="0" end="7" step="1">
 					<c:set var="map" value="${Ranklist[i] }"></c:set>
-						<li class="col-li-4" style="width: 185px;" value="${map['RANK_NO']}">${map['RANK_NAME'] }</li>
+						<li class="col-li-4" style="width: 185px; background:#f4f4f4;">
+						<input type="checkbox" value="${map['RANK_NAME'] }" style="display:none;"/>${map['RANK_NAME'] }</li>
 				</c:forEach>
 				<a class="more-rank" href="#"
 					style="display: inline-block; float: left; padding-top: 12px;">더보기</a>
@@ -22,7 +23,8 @@
 			<ul class="ranks rankSelectVal" style="display: none;">
 				<c:forEach var="i" begin="8" end="19" step="1">
 					<c:set var="map" value="${Ranklist[i] }"></c:set>
-						<li class="col-li-4" style="width: 185px;" value="${map['RANK_NO']}">${map['RANK_NAME'] }</li>
+						<li class="col-li-4" style="width: 185px; background:#f4f4f4;">
+						<input type="checkbox" value="${map['RANK_NAME'] }" style="display:none;"/>${map['RANK_NAME'] }</li>
 					
 				</c:forEach>
 				<a class="close-rank" href="#"
@@ -32,19 +34,21 @@
 		<hr>
 		<div
 			style="float: left; width: 850px; margin-top: 2em; padding-left: 3em;">
-			<ul>
+			<ul class="positionSelectVal">
 				<!-- 직급 부분  -->
 				<c:forEach var="i" begin="0" end="7" step="1">
 					<c:set var="map" value="${Positionlist[i] }"></c:set>
-						<li class="col-li-4" style="width: 185px;" value="${map['POSITION_NO']}">${map['POSITION_NAME'] }</li>
+						<li class="col-li-4" style="width: 185px; background:#f4f4f4;">
+						<input type="checkbox" value="${map['POSITION_NAME'] }" style="display:none;"/>${map['POSITION_NAME'] }</li>
 				</c:forEach>
 				<a class="more-position" href="#"
 					style="display: inline-block; float: left; padding-top: 12px;">더보기</a>
 			</ul>
-			<ul class="position" style="display: none;">
+			<ul class="position positionSelectVal" style="display: none;">
 				<c:forEach var="i" begin="8" end="13" step="1">
 						<c:set var="map" value="${Positionlist[i] }"></c:set>
-						<li class="col-li-4" style="width: 185px;" value="${map['POSITION_NO']}">${map['POSITION_NAME'] }</li>
+						<li class="col-li-4" style="width: 185px; background:#f4f4f4;">
+						<input type="checkbox" value="${map['POSITION_NAME'] }" style="display:none;"/>${map['POSITION_NAME'] }</li>
 					</c:forEach>
 			
 				<a class="close-position" href="#"

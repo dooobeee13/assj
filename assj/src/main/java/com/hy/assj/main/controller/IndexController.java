@@ -54,8 +54,15 @@ public class IndexController {
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
+<<<<<<< HEAD
+			/*session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());*/
+			session.setAttribute("memberVO", memVo);
+			
+=======
 			
 			session.setAttribute("memberVO", memberVO);
+>>>>>>> branch 'master' of https://github.com/dooobeee13/assj.git
 			
 			//[2] 쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", memberVO.getMemId());

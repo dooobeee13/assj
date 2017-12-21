@@ -9,13 +9,11 @@
 				style="padding-top: 60px; text-align: right;">
 				<strong class="title_strong" style="margin: 0; text-align: right;">경력</strong>
 			</div>
-			<div class="col-div-70-100"
+			<div class="col-div-70-100 CareerCheckBox"
 				style="padding-top: 60px; padding-left: 9em;">
-				<input id="career1" class="one-checkbox" type="checkbox"><label
-					for="career1">경력</label> <input id="newcomer1" class="one-checkbox"
-					type="checkbox"><label for="newcomer1">신입</label> <input
-					id="none1" class="one-checkbox" type="checkbox"><label
-					for="none1">무관</label>
+				<label><input class="one-checkbox" type="checkbox" value="경력">경력</label> 
+				<label><input class="one-checkbox" type="checkbox" value="신입">신입</label> 
+				<label><input class="one-checkbox" type="checkbox" value="">무관</label>
 			</div>
 		</div>
 		<div class="col-div-100-50">
@@ -51,11 +49,10 @@
 				style="padding-top: 60px; text-align: right;">
 				<strong class="title_strong" style="margin: 0; text-align: right;">성별</strong>
 			</div>
-			<div class="col-div-70-100"
+			<div class="col-div-70-100 Gender"
 				style="padding-top: 60px; padding-left: 12em;">
-				<input id="m1" class="one-checkbox" type="checkbox"><label
-					for="m1">남자</label> <input id="f1" class="one-checkbox"
-					type="checkbox"><label for="f1">여자</label>
+				<label><input id="m" class="one-checkbox gender-m" type="checkbox" name="Genderm" value="남자">남자</label>
+				<label><input id="f" class="one-checkbox gender-f" type="checkbox" name="Gender" value="여자">여자</label>
 			</div>
 		</div>
 		<div class="col-div-100-50">
