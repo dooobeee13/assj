@@ -3,6 +3,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.hireNoti">
+	<insert id="insertHireNoti" parameterType="HireNotiVO">
+		<selectKey resultType="int" keyProperty="hnNo" order="BEFORE">
+			select hire_note_seq.nextval from dual
+		</selectKey>
+		insert into hire_noti(hnNo, hnNotiTitle, cmNo, hnSalStart, hnSalEnd,hnViews,hnStart,hnDeadline,
+		hnHows,hnTask,hnPreference,hnStep,hnBenefits,hnDocument,hnAddr,hnDetailAddr,hnLat,hnLng,
+		hnStatus,hnGender,hnMajor,hnEmpType,hnRank,hnOccupation,hnSectors,hnPosition,hnRecruitNum,
+		eduNo,careerNo) 
+		values(#{hnNo}, #{hnNotiTitle}, #{cmNo}, #{hnSalStart}, #{hnSalEnd},#{hnViews},#{hnStart},
+		#{hnDeadline},#{hnHows},#{hnTask},#{hnPreference},#{hnStep},#{hnBenefits},#{hnDocument},
+		#{hnAddr},#{hnDetailAddr},#{hnLat},#{hnLng},#{hnStatus},#{hnGender},#{hnMajor},
+		#{hnEmpType},#{hnRank},#{hnOccupation},#{hnSectors},#{hnPosition},#{hnRecruitNum},
+		#{eduNo},#{careerNo})
+	</insert>
 	
 </mapper>
 
