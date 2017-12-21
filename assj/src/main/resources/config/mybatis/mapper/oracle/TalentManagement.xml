@@ -10,6 +10,74 @@
 	<select id="selectPosition" resultType="map">
 		select * from position
 	</select>
+	
+	<select id="selectEmpType" resultType="map">
+		select * from EMP_TYPE
+	</select>
+	
+	<select id="selectSectors" resultType="map">
+		select * from sectors
+	</select>
+	
+	<select id="selectArea" resultType="map">
+		select * from area
+	</select>
+	
+	<select id="selectEducation" resultType="map">
+		select * from major
+	</select>
+	
+	<select id="selectOccupation" resultType="map">
+		select * from occupation
+	</select>
+	
+	<select id="selectResume" parameterType="TalentManagementVO" resultType="map">
+		select * from totalresume
+		
+		<trim prefix="where" prefixOverrides="AND |OR">
+		
+			<if test="AREA_TOP_NAME != null">
+				AREA_TOP_NAME in
+				<foreach collection="AREA_TOP_NAME" item="Name" 
+					index="index" open="(" close=")" separator=",">
+					#{Name}
+				</foreach>
+			</if>
+			
+			<if test="AREA_NAME != null">
+				AND AREA_NAME in
+				<foreach collection="AREA_NAME" item="area" 
+					index="index" open="(" close=")" separator=",">
+					#{area}
+				</foreach>
+			</if>
+			
+			<if test="ET_NAME != null">
+				AND ET_NAME in
+				<foreach collection="ET_NAME" item="etname" 
+					index="index" open="(" close=")" separator=",">
+					#{etname}
+				</foreach>
+			</if>
+			
+			<if test="OCCU_NAME != null">
+				AND OCCU_NAME in
+				<foreach collection="OCCU_NAME" item="occuname" 
+					index="index" open="(" close=")" separator=",">
+					#{occuname}
+				</foreach>
+			</if>
+			
+			<if test="SEC_NAME != null">
+				AND SEC_NAME in
+				<foreach collection="SEC_NAME" item="secname" 
+					index="index" open="(" close=")" separator=",">
+					#{secname}
+				</foreach>
+			</if>
+			
+		</trim>
+	</select>
 </mapper>
 
 

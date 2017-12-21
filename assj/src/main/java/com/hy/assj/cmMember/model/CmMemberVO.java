@@ -23,8 +23,9 @@ public class CmMemberVO {
 	private String cmEmail2;
 	private String cmEmail3;
 	private Date cmRegdate;             
+	private String cmLogo;
 	private int ccNo;                   
-	private int csNo;
+	private Integer csNo;
 	
 	
 	public int getCmNo() {
@@ -126,7 +127,7 @@ public class CmMemberVO {
 		if(cmEmail1==null || cmEmail1.isEmpty()){
 			cmEmail="";
 		}else {
-			if(cmEmail2=="etc") {
+			if(cmEmail2.equals("etc")) {
 				cmEmail=cmEmail1+"@"+cmEmail3;
 			}else {
 				cmEmail=cmEmail1+"@"+cmEmail2;
@@ -161,18 +162,25 @@ public class CmMemberVO {
 	public void setCmRegdate(Date cmRegdate) {
 		this.cmRegdate = cmRegdate;
 	}
+	public String getCmLogo() {
+		return cmLogo;
+	}
+	public void setCmLogo(String cmLogo) {
+		this.cmLogo = cmLogo;
+	}
 	public int getCcNo() {
 		return ccNo;
 	}
 	public void setCcNo(int ccNo) {
 		this.ccNo = ccNo;
 	}
-	public int getCsNo() {
+	public Integer getCsNo() {
 		return csNo;
 	}
-	public void setCsNo(int csNo) {
+	public void setCsNo(Integer csNo) {
 		this.csNo = csNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "CmMemberVO [cmNo=" + cmNo + ", cmId=" + cmId + ", cmPwd=" + cmPwd + ", cmPwd2=" + cmPwd2 + ", cmRegnum="
@@ -180,7 +188,9 @@ public class CmMemberVO {
 				+ cmMgrTel + ", cmMgrTel1=" + cmMgrTel1 + ", cmMgrTel2=" + cmMgrTel2 + ", cmMgrTel3=" + cmMgrTel3
 				+ ", cmAddr=" + cmAddr + ", cmDetailAddr=" + cmDetailAddr + ", cmZipcode=" + cmZipcode + ", cmEmail="
 				+ cmEmail + ", cmEmail1=" + cmEmail1 + ", cmEmail2=" + cmEmail2 + ", cmEmail3=" + cmEmail3
-				+ ", cmRegdate=" + cmRegdate + ", ccNo=" + ccNo + ", csNo=" + csNo + "]";
+				+ ", cmRegdate=" + cmRegdate + ", cmLogo=" + cmLogo + ", ccNo=" + ccNo + ", csNo=" + csNo + "]";
 	}
+	
+	
 
 }

@@ -30,5 +30,20 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace+".selectMember",memId);
 	}
 
+	@Override
+	public int memberOut(String memId) {
+		return getSqlSession().delete(namespace+".memberOut",memId);
+	}
+
+	@Override
+	public int memberEdit(MemberVO vo) {
+		return getSqlSession().update(namespace+".memberEdit",vo);
+	}
+
+	@Override
+	public int memPwdEdit(MemberVO vo) {
+		return getSqlSession().update(namespace+".memPwdEdit",vo);
+	}
+
 	
 }

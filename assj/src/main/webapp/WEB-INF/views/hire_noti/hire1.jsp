@@ -27,6 +27,15 @@
 	.lb{
 		width:100px;
 	}
+	
+	#hh{
+		text-align: center;
+	}
+	
+	#ta11{
+		width: 350px;
+		height: 100px;
+	}
 </style>
 
 <script
@@ -50,9 +59,10 @@
 				<input type="text" placeholder="검색">
 				<input type="button" value="검색">
 				
+				
 			</div>
 			<br>
-			<div>
+			<div> 
 				<span class="sp11">경력여부</span>
 				<label class="checkbox-inline"> 
 					<input type="checkbox" id="inlineCheckbox1" value="option1"> 신입 </label> 
@@ -93,9 +103,9 @@
 			
 			
 <!-- 모집요강  -->
-			
-			
-			<h2 style="text-align: center">필수 항목 확인하세요!</h2>
+
+
+			<h2 id="hh">필수 항목 확인하세요!</h2>
 			<hr>
 	
 			<table class="table table-condended">
@@ -126,29 +136,11 @@
 					</td>
 				
 				</tr>
-				<tr >
-					<td>모집분야</td>
-					<td>
-						<input type="radio" id="collect_3"
-							name="collect" value="입력"><span>입력</span>
-						<input
-							type="radio" id="collect_4" name="collect" value="미입력"><span>미입력</span>
-						
-					</td>
-					
-					
-				</tr>
+				
 				<tr >
 					<td>담당업무</td>
 					<td>
-						<input type="text" placeholder="  구체적인 업무내용을 입력하세요  "  >
-					</td>
-			
-				</tr>
-				<tr >
-					<td>근무부서</td>
-					<td>
-						<input type="text" placeholder="  근무부서명이 명확하면 적합한 인재검색에 도움됩니다.  ">
+						<textarea id="ta11"  title="담당업무" placeholder="담당업무를 입력하세요." maxlength="300"></textarea>
 					</td>
 				
 				</tr>
@@ -214,16 +206,14 @@
 				<tr >
 					<td>우대조건</td>
 					<td>
-						<input type="text" placeholder="  우대조건 입력 "  >
+						<textarea id="ta11"  title="우대사항" placeholder="우대사항을 입력해주세요." maxlength="300"></textarea>
 					</td>
-			
+					
 				</tr>
-				
 				<tr >
-					<td>자격증</td>
+					<td>자격요건</td>
 					<td>
-						<input type="text" placeholder="  자격증 입력 "  >
-
+						<textarea id="ta11"  title="자격요건" placeholder="자격요건을 입력해주세요." maxlength="300"></textarea>
 					</td>
 					
 				</tr>
@@ -240,35 +230,7 @@
 					</td>
 
 				</tr>
-				<tr >
-					<td>연령</td>
-					<td>
-						<input type="radio" id="collect_3" name="collect"
-						value="입력"><span>연령무관</span> 
-						<input type="radio"
-						id="collect_4" name="collect" value="미입력"><span>제한</span> <select>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-
-					</select><label>~</label> <select>
-						<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-							<option></option>
-
-					</select>
-
-					</td>
 				
-				</tr>
 			</table>
 			
 			
@@ -301,11 +263,7 @@
 				<tr >
 					<td>복리후생</td>
 					<td>
-						<input type="radio" id="collect_3"
-							name="collect" value="입력"><span>입력</span>
-						<input
-							type="radio" id="collect_4" name="collect" value="미입력"><span>미입력</span>
-						
+						<textarea id="ta11"  title="복리후생" placeholder="복리후생을 입력해주세요." maxlength="300"></textarea>
 					</td>
 					
 					
@@ -420,7 +378,7 @@
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text"></td>
+						<td><input type="text" class="form-control" placeholder="제목"></</td>
 
 					</tr>
 

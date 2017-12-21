@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,51 +10,94 @@
 <title>기업회원 탈퇴</title>
 <!-- Bootstrap -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#onenone').click(function(){
-			location.href="onenone.jsp";
-		});
-	});
-	
-</script>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<script src="../../js/bootstrap.min.js"></script>
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
+
 <style type="text/css">
-	fieldset{
-		width:800px;
-		margin:0 auto;
+	#cmMemOut fieldset{
+		width:720px;
+		margin:0 auto;	
+		padding:20px;
+		background-color:#ffff;
 	}
-	#btnDiv{
+	#cmMemOut #btnDiv{
 		text-align:center;
 	}
-	#btnDiv .btn{
+	#cmMemOut #btnDiv .btn{
 		width:160px;
 	}	
-	span{
+	#cmMemOut span{
 		color:#ff4800;
 	}
-	.gr{
+	#cmMemOut .gr{
 		color:green;
 	}
-	.well{
-		background-color:#f6f9ff;
+	#cmMemOut .well{
+		background-color:#dde6f7;
 		padding:30px;
 	}
-	table{
+	#cmMemOut table{
 		border-collapse: collapse;
 	}
 	
-	h1{
+	#cmMemOut h1{
 		font-weight:bold;
 	}
-	.titleTD{
+	#cmMemOut .titleTD{
 		width:180px;
 	}
 
+
+
+	 /* 사이드바 스타일 */
+	 #page-wrapper {
+    	padding-left: 380px;
+  	}
+  
+  #sidebar-wrapper {
+    position:absolute;
+    width: 190px;
+    height: 63%;
+    background: #ffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 0.8em;
+    line-height: 2.2em;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+ 	 color: #7a6666;
+  }
+  
+  .sidebar-nav li a:hover {
+    color: #cccc;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,7 +107,36 @@
     <![endif]-->
 </head>
 	<body>
+		<c:import url="../../index/top.jsp" />
+		<!-- 사이드바 -->
+		<div id="page-wrapper">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
+				<hr>
+				<li><h5><b>무엇을 도와드릴까요?</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
+				<li><a href="<c:url value='/member/menu/onenone.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>아이디.비밀번호 찾기</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>개인회원서비스</b></h5></li>
+				<li><a href="<c:url value='/member/menu/psService.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
+				<li><a href="<c:url value='/member/out/psMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>기업회원서비스</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 안내</a></li>
+				<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>기업회원 탈퇴</a></li>
+			</ul>
+		</div>
+	</div>
+		<!-- /사이드바 -->
 		<div class="container">
+			<div id="cmMemOut">
 			<fieldset>
 				<h1>기업회원 탈퇴</h1>
 				<br>
@@ -74,7 +147,7 @@
 					<b><span class="glyphicon glyphicon-phone-alt"> </span>&nbsp;고객센터로 문의주시면 최선을 다해 도와드리겠습니다.</b><br><br><br>
 					<div id="btnDiv">
 						<button type="button" class="btn btn-primary btn-sm">고객센터 문의 바로가기</button>
-						<button type="button" class="btn btn-primary btn-sm" id="onenone">1:1 상담문의 바로가기</button>
+						<a href="<c:url value='/member/menu/onenone.do'/>"><button type="button" class="btn btn-primary btn-sm" id="onenone">1:1 상담문의 바로가기</button></a>
 					</div>
 				</div>
 				<br><br>
@@ -126,11 +199,13 @@
 					</tr>					
 				</table><br><br>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary btn-lg">탈퇴하기</button>
+					<a href="<c:url value='/member/out/cmMemOut2.do'/>"><button type="button" class="btn btn-primary btn-lg">탈퇴하기</button></a>
 					<button type="button" class="btn btn-default btn-lg">취소</button>
 				</div>
 				<br><br><br><br>
 			</fieldset>
+			</div>
 		</div>
+		<c:import url="../../index/footer.jsp" />
 	</body>
 </html>

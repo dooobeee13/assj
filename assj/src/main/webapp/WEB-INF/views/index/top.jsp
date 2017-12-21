@@ -13,15 +13,24 @@
 </script>	
 <header>
 	<div class="topline">
-	<c:if test="${!empty sessionScope.memId}">	
-		<a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a>								
-		<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a>
-		<a href="<c:url value='/login/logout.do'/>">로그아웃</a>
-	</c:if>
-	<c:if test="${empty sessionScope.memId}">
-		<a href="<c:url value='/member/register/register.do'/>">회원가입</a> 
-		<a href="">로그인</a>
-	</c:if>
+		<c:if test="${empty sessionScope.memberVO.memId && empty sessionScope.cmMemberVO.cmId}">
+			<a href="<c:url value='/member/menu/serviceCenter.do'/>"><b>고객센터</b></a> 
+			<a href="<c:url value='/member/register/register.do'/>"><b>회원가입</b></a> 
+			<a href="<c:url value='/member/login/psMemLogin.do'/>"><b>로그인</b></a>
+		</c:if>
+		<!-- 개인회원 로그인후 -->
+		<c:if test="${!empty sessionScope.memberVO.memId}">
+			<a href="<c:url value='/member/out/psMemOut.do'/>"><b>회원탈퇴</b></a>								
+			<a href="<c:url value='/member/edit/psMemEdit.do'/>"><b>회원정보수정</b></a>
+			<a href="<c:url value='/logout.do'/>"><b>로그아웃</b></a>
+		</c:if>
+		<!-- 기업회원 로그인후-->
+		<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
+			<a href="<c:url value='/member/out/cmMemOut.do'/>"><b>회원탈퇴</b></a>						
+			<a href="<c:url value='/member/edit/cmMemEdit.do'/>"><b>회원정보수정</b></a>
+			<a href="<c:url value='/logout2.do'/>"><b>로그아웃</b></a>
+		</c:if>
+
 	<div class="clearfix"></div>
 	</div>
 	<div class="searchline container-fluid">

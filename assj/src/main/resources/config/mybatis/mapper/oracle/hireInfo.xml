@@ -4,46 +4,46 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.hireInfo">
 	
-	<select id="selectArea" resultType="com.hy.assj.hireInfo.model.AreaVO">
+	<select id="selectArea" resultType="com.hy.assj.vo.AreaVO">
 		select * from area
 	</select>
-	<select id="selectTopArea" resultType="com.hy.assj.hireInfo.model.AreaVO">
+	<select id="selectTopArea" resultType="com.hy.assj.vo.AreaVO">
 		select * from area where area_top_no is null
 	</select>
 	
-	<select id="selectCareer" resultType="com.hy.assj.hireInfo.model.CareerVO">
+	<select id="selectCareer" resultType="com.hy.assj.vo.CareerVO">
 		select * from career
 	</select>
 	
-	<select id="selectCompScale" resultType="com.hy.assj.hireInfo.model.CompScaleVO">
+	<select id="selectCompScale" resultType="com.hy.assj.vo.CompScaleVO">
 		select * from comp_scale
 	</select>
 	
-	<select id="selectEducation" resultType="com.hy.assj.hireInfo.model.EducationVO">
+	<select id="selectEducation" resultType="com.hy.assj.vo.EducationVO">
 		select * from education
 	</select>
 	
-	<select id="selectEmpType" resultType="com.hy.assj.hireInfo.model.EmpTypeVO">
+	<select id="selectEmpType" resultType="com.hy.assj.vo.EmpTypeVO">
 		select * from emp_type
 	</select>
 	
-	<select id="selectMajor" resultType="com.hy.assj.hireInfo.model.MajorVO">
+	<select id="selectMajor" resultType="com.hy.assj.vo.MajorVO">
 		select * from major
 	</select>
 	
-	<select id="selectOccupation" resultType="com.hy.assj.hireInfo.model.OccupationVO">
+	<select id="selectOccupation" resultType="com.hy.assj.vo.OccupationVO">
 		select * from occupation
 	</select>
 	
-	<select id="selectPosition" resultType="com.hy.assj.hireInfo.model.PositionVO">
+	<select id="selectPosition" resultType="com.hy.assj.vo.PositionVO">
 		select * from position
 	</select>
 	
-	<select id="selectRank" resultType="com.hy.assj.hireInfo.model.RankVO">
+	<select id="selectRank" resultType="com.hy.assj.vo.RankVO">
 		select * from rank
 	</select>
 	
-	<select id="selectSectors" resultType="com.hy.assj.hireInfo.model.SectorsVO">
+	<select id="selectSectors" resultType="com.hy.assj.vo.SectorsVO">
 		select * from sectors
 	</select>
 	

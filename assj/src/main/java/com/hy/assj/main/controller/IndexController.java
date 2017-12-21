@@ -32,7 +32,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
 	public String index_get() {
-		logger.info("메인페이지 요청");
+		logger.info("메인페이지 요청(get)");
 		
 		return "index";
 	}
@@ -43,26 +43,31 @@ public class IndexController {
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
 		
-		logger.info("로그인 진행");
+		logger.info("메인페이지 요청(post)개인회원-로그인 진행");
 		
 		String msg="";
-		String url="/index.do";
+		String url= request.getHeader("referer"); //진행하는 페이지로 url설정
 		int result=memberService.loginCheck(vo.getMemId(),vo.getMemPwd());
 		if(result==MemberService.LOGIN_OK) {
 			//로그인 성공
-			MemberVO memVo=memberService.selectMember(vo.getMemId());
+			MemberVO memberVO=memberService.selectMember(vo.getMemId());
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
+<<<<<<< HEAD
 			/*session.setAttribute("memId", memVo.getMemId());
 			session.setAttribute("memName", memVo.getMemName());*/
 			session.setAttribute("memberVO", memVo);
 			
+=======
+			
+			session.setAttribute("memberVO", memberVO);
+>>>>>>> branch 'master' of https://github.com/dooobeee13/assj.git
 			
 			//[2] 쿠키에 저장
-			Cookie ck = new Cookie("ck_userid", memVo.getMemId());
+			Cookie ck = new Cookie("ck_memId", memberVO.getMemId());
 			ck.setPath("/");
-			if(chkSaveId!=null) { //아이디 저장하기 체크한 경우, 쿠키 저장
+			if(chkSaveId!=null) {   //아이디 저장하기 체크한 경우, 쿠키 저장
 				ck.setMaxAge(1000*24*60*60);
 				response.addCookie(ck);
 			}else {
@@ -70,7 +75,7 @@ public class IndexController {
 				response.addCookie(ck);				
 			}
 			
-			msg=memVo.getMemName()+"님 로그인되었습니다.";
+			msg=memberVO.getMemName()+"님 로그인되었습니다.";
 			url="/index.do";
 		}else if(result==MemberService.ID_NONE) {
 			msg="해당 아이디가 존재하지 않습니다.";
@@ -87,14 +92,13 @@ public class IndexController {
 	}
 		
 	
-	
 	@RequestMapping(value="/index2.do",method=RequestMethod.POST)
 	public String index_post(@ModelAttribute CmMemberVO vo,
-			@RequestParam(required=false) String chkSaveId,
+			@RequestParam(required=false) String chkSaveId2,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
 		
-		logger.info("로그인 진행");
+		logger.info("메인페이지 요청(post)기업회원-로그인 진행");
 		
 		String msg="";
 		String url="/index.do";
@@ -103,17 +107,17 @@ public class IndexController {
 		int result=cmMemberService.loginCheck(vo.getCmId(),vo.getCmPwd());
 		if(result==CmMemberService.LOGIN_OK) {
 			//로그인 성공
-			CmMemberVO memVo=cmMemberService.selectMember(vo.getCmId());
+			CmMemberVO cmMemberVO=cmMemberService.selectMember(vo.getCmId());
 			
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
-			session.setAttribute("cmId", memVo.getCmId());
-			session.setAttribute("cmName", memVo.getCmName());
+	
+			session.setAttribute("cmMemberVO", cmMemberVO);
 			
 			//[2] 쿠키에 저장
-			Cookie ck = new Cookie("ck_userid", memVo.getCmId());
+			Cookie ck = new Cookie("ck_cmId", cmMemberVO.getCmId());
 			ck.setPath("/");
-			if(chkSaveId!=null) { //아이디 저장하기 체크한 경우, 쿠키 저장
+			if(chkSaveId2!=null) { //아이디 저장하기 체크한 경우, 쿠키 저장
 				ck.setMaxAge(1000*24*60*60);
 				response.addCookie(ck);
 			}else {
@@ -121,7 +125,7 @@ public class IndexController {
 				response.addCookie(ck);				
 			}
 			
-			msg=memVo.getCmName()+"님 로그인되었습니다.";
+			msg=cmMemberVO.getCmName()+"님 로그인되었습니다.";
 			url="/index.do";
 		}else if(result==CmMemberService.ID_NONE) {
 			msg="해당 아이디가 존재하지 않습니다.";
@@ -135,5 +139,25 @@ public class IndexController {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	
+
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		logger.info("로그아웃 처리");
+		
+		session.removeAttribute("memberVO");//session 삭제
+	
+		return "redirect:/index.do";
+	}
+	
+	@RequestMapping("/logout2.do")
+	public String logout2(HttpSession session) {
+		logger.info("로그아웃 처리");
+		
+		session.removeAttribute("cmMemberVO");
+		
+		return "redirect:/index.do";
 	}
 }
