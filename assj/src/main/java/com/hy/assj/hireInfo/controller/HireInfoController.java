@@ -1,11 +1,16 @@
 package com.hy.assj.hireInfo.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.hireInfo.model.HireInfoService;
 
@@ -18,7 +23,7 @@ public class HireInfoController {
 	@Autowired
 	private HireInfoService hireInfoService;
 	
-	@RequestMapping("/home.do")
+	@RequestMapping("/hireInfohome.do")
 	public String home() {
 		logger.info("채용정보 홈 요청");
 		
@@ -95,5 +100,14 @@ public class HireInfoController {
 		
 		return "hireInfo/category/postionCategory";
 	}*/
+	
+	@RequestMapping("/search.do")
+	public String search(@RequestParam(value="area", required=false) String[] area, @RequestParam(value="occupation", required=false) String[] occupation) {
+		System.out.println("지역 수: " + area.length);
+		if (occupation != null) {
+			System.out.println("업종 수: " + occupation.length);
+		}
+		return "받음";
+	}
 	
 }

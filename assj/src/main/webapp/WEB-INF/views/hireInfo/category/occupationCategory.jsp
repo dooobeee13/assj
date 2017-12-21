@@ -30,7 +30,8 @@
 						<c:set var="subKey" value="subCategory-${top.occuNo}"/>
 						<ul id="aTabs-${top.occuNo}">
 							<c:forEach var="vo" items="${map[subKey]}">
-								<li class="col-md-6"><input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}"> 
+								<li class="col-md-6">
+									<input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}" name="occupation" value="${vo.occuNo}"> 
 									<label class="chklabel" data-name="${top.occuName}>${vo.occuName}" for="occupation-${vo.occuNo}">
 										<span>${vo.occuName}</span>
 									</label>

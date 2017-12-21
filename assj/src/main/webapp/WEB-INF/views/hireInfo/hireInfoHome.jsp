@@ -278,11 +278,19 @@ footer {
     padding: 5px 10px;
 }
 
-.category.sub .chklabel.check span {
+.category.sub .chklabel.check span, .cLi .chklabel.check span {
 	border: 1px solid #3399ff;
     border-radius: 5px;
     color: #3399ff;
     font-weight: bold;
+}
+
+.cLi span {
+	padding: 5px 10px;
+}
+
+.cLi .chklabel {
+	width: 100%;
 }
 
 </style>
@@ -319,8 +327,20 @@ footer {
 			$('.category.sub .chklabel[for='+ id +']').removeClass('check');
 		});
 		
+		$('#searchBtn').click(function(){
+			//console.log($(searchForm).serialize());
+			$.ajax({
+				url :  "<c:url value="/hireInfo/search.do" />",
+				data : $(searchForm).serialize(),
+				success : function(res) {
+					
+				}
+			}); 
+		});
+		
 	})
 </script>
+
 </head>
 <body style="background:#ebecee">
 	<c:import url="../index/top.jsp" />
@@ -341,6 +361,7 @@ footer {
 			<div class="col-md-9">
 				<div>
 					<div class="row">
+						<form name="searchForm">
 						<div class="col-md-3 sCategory top occu">
 							<c:import url="/hireInfo/occupationList.do" />
 						</div>
@@ -372,7 +393,7 @@ footer {
 						<div class="col-md-3 sCategory bottom">
 							<c:import url="/hireInfo/compScaleList.do" />
 						</div>
-						
+						</form>
 					</div>
 				</div>
 				
@@ -383,7 +404,7 @@ footer {
 						</c:forEach> --%>
 					</div>
 					<div class="col-sm-2" style="padding: 20px 0 0 0; text-align: center" >
-						<button type="button" class="btn btn-primary btn-lg">검색하기</button>
+						<button type="button" id="searchBtn" class="btn btn-primary btn-lg">검색하기</button>
 					</div>
 				</div>
 				

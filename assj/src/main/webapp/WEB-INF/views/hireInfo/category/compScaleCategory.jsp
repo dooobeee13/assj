@@ -19,7 +19,7 @@
 				<ul>
 					<c:forEach var="vo" items="${csList}">
 						<li class="col-md-6">
-							<input type="checkbox" class="sc_chk" id="cs-${vo.csNo}"> 
+							<input type="checkbox" class="sc_chk" id="cs-${vo.csNo}" name="compScale" value="${vo.csNo}"> 
 							<label class="chklabel" data-name="${vo.csName}" for="cs-${vo.csNo}">
 								<span>${vo.csName}</span>
 							</label>
@@ -34,7 +34,7 @@
 				<ul>
 					<c:forEach var="vo" items="${etList}">
 						<li class="col-md-6">
-							<input type="checkbox" class="sc_chk" id="et-${vo.etNo}"> 
+							<input type="checkbox" class="sc_chk" id="et-${vo.etNo}" name="empType" value="${vo.etNo}"> 
 							<label class="chklabel" data-name="직책:${vo.etName}" for="et-${vo.etNo}">
 								<span>${vo.etName}</span>
 							</label>
