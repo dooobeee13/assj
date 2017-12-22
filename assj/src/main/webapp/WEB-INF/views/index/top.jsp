@@ -5,9 +5,11 @@
 <script>
 	$(function(){
 		$('.searchjob').hover(function(){
-			$('.searchCategory').show();
+			$(this).find('.searchCategory').show(); 
+			//$('.searchCategory').show();
 		},function(){
-			$('.searchCategory').hide();
+			$(this).find('.searchCategory').hide();
+			//$('.searchCategory').hide();
 		})
 	});
 </script>	
@@ -35,7 +37,13 @@
 	</div>
 	<div class="searchline container-fluid">
 		<div class="row">
-			<div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+			<div class="col-md-2 col-md-offset-3">
+				<a href="<c:url value='/index.do' />">
+					<img class="img-responsive" src="<c:url value='/images/t_logo.png' />" alt="임시 로고">
+				</a>
+			</div>
+			<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->
+			<div class="col-md-4 col-sm-6">
 				<div class="input-group input-group-lg">
 					<input type="text" class="form-control" placeholder="검색어 입력">
 					<span class="input-group-btn">
@@ -61,7 +69,7 @@
 
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="searchjob"><a href="#">전체 채용정보</a>
+				<li class="searchjob"><a href='<c:url value="/hireInfo/home.do" />'>전체 채용정보</a>
 
 					<div class="row searchCategory"
 						style="position: absolute; z-index: 1; background: #fff; width: 600px">
@@ -117,12 +125,15 @@
 						</div>
 
 
-					</div></li>
-				<li class="searchjob"><a href="#">직업별</a></li>
+					</div>
+				</li>
+				<li class="searchjob"><a href="#">직업별</a>
+					<c:import url="/WEB-INF/views/index/cateOccu.jsp" />
+				</li>
 				<li class="searchjob"><a href="#">지역별</a></li>
-				<li class="searchjob"><a href="#">기업별</a></li>
-				<li class="searchjob"><a href="#">전공별</a></li>
-				<li class="searchjob"><a href="#">학력별</a></li>
+				<li class="searchjob"><a href="#">인재검색</a></li>
+				<li class="searchjob"><a href="#">생각중</a></li>
+				<li class="searchjob"><a href="#">구상중</a></li>
 			</ul>
 		</div>
 	</div>

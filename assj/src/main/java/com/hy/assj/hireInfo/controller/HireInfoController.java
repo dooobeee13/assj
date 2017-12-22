@@ -1,9 +1,5 @@
 package com.hy.assj.hireInfo.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +19,7 @@ public class HireInfoController {
 	@Autowired
 	private HireInfoService hireInfoService;
 	
-	@RequestMapping("/hireInfohome.do")
+	@RequestMapping("/home.do")
 	public String home() {
 		logger.info("채용정보 홈 요청");
 		

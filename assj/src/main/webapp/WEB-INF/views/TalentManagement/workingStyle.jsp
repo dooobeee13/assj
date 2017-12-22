@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="TStopion_div option_flo workingStyle"
 	style="width: 1189px; margin-left: 4em; margin-bottom: 4em; overflow-y: auto;">
 	<div class="col-div-100-70">
@@ -8,11 +9,11 @@
 			<h3 class="content_title">근무형태</h3>
 		</div>
 		<div class="col-div-80-100 workingStyleSelect"
-			style="padding-left: 6em; padding-top: 2em;">
-			<ul>
-			<c:forEach var="i" begin="0" end="7" step="1">
-					<c:set var="map" value="${empTypelist[i] }"></c:set>
-						<li class="col-li-4" value=${map['etName'] }>${map['etName']</li>
+			style="padding-left: 6em; padding-top: 2em; padding-right:2em;">
+			<ul class="empTypeselectVal">
+			<c:forEach var="map" items="${empTypelist }">
+						<li class="col-li-4" style="background:#f4f4f4;">
+						<input type="checkbox" value="${map['ET_NAME']}" style="display:none;"/>${map['ET_NAME']}</li>
 				</c:forEach>
 			</ul>
 		</div>

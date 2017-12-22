@@ -11,9 +11,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.carousel').carousel({interval:3000})
+		
+		
+		$('#naverLogin').click(function(){
+			$.ajax({
+				url: '<c:url value="/login/naverLogin.do" />',
+				success: function(res){
+					location.href=res;
+				}
+			})
+		});
+		
 	});
 </script>
 </head>
@@ -157,6 +169,31 @@
 									</div>
 									<div class="form-group">
 										<input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인" id="loginBtn">
+									</div>
+									<div style="margin-bottom: 10px">
+										<div>
+											<a href="#">
+												<img class="img-responsive" id="naverLogin" style="width: 150px" src="<c:url value='/images/naver_white.PNG' />">
+											</a>
+										</div>
+										<div>	
+											<a href="javascript:loginWithKakao()">
+												<img class="img-responsive" style="width: 150px" src="<c:url value='/images/kakaoLogin.png' />">
+											</a>
+											<script>
+												Kakao.init('4db78fa8dbff10a9ea78910fbb08ccda');
+											    function loginWithKakao() {
+											      Kakao.Auth.login({
+											        success: function(authObj) {
+											          alert(JSON.stringify(authObj));
+											        },
+											        fail: function(err) {
+											          alert(JSON.stringify(err));
+											        }
+											      });
+											    };
+											</script>
+										</div>
 									</div>
 									<p style="font-size: 0.9em">
 										<a href="#">아이디 / 비밀번호 찾기</a>
