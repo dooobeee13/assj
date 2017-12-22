@@ -1,5 +1,11 @@
 package com.hy.assj.main.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.URLDecoder;
+import java.security.SecureRandom;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
@@ -55,12 +62,12 @@ public class IndexController {
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
 
+
 			/*session.setAttribute("memId", memVo.getMemId());
 			session.setAttribute("memName", memVo.getMemName());*/
 			session.setAttribute("memberVO", memberVO);
 			
 
-			
 			session.setAttribute("memberVO", memberVO);
 
 			
@@ -160,4 +167,42 @@ public class IndexController {
 		
 		return "redirect:/index.do";
 	}
+	
+	@RequestMapping("/login/naverLogin.do")
+	@ResponseBody
+	public String naverLogin(HttpSession session) {
+		String state = NaverLogin.generateState();
+		session.setAttribute("state", state);
+		return NaverLogin.getApiURL(state);
+	}
+	
+	@RequestMapping("/login/naverCallback.do")
+	public String naverLoginCallBack(@RequestParam String state,
+			@RequestParam(value="code", required=false) String code,
+			@RequestParam(value="error", required=false) String error,
+			@RequestParam(value="error_description", required=false) String errorDescription,
+			HttpSession session) {
+		String sessionState = (String)session.getAttribute("state");
+		//System.out.println("state = " + sessionState + "="+  state + "/code = " + code + "/error = " + error + "/error_description = " + errorDescription);
+
+		Map<String, String> resultMap = null;
+		if (state.equals(sessionState)) {
+			resultMap = NaverLogin.getRequestKey(sessionState, code);
+			session.setAttribute("access_token", resultMap.get("access_token"));
+			session.setAttribute("refresh_token", resultMap.get("refresh_token"));
+			session.setAttribute("token_type", resultMap.get("token_type"));
+			
+			resultMap = NaverLogin.requestUserInfo(resultMap.get("access_token"));
+			MemberVO vo = memberService.naverLogin(resultMap);
+			session.setAttribute("memberVO", vo);
+		} else {
+			System.out.println("상태키 검증 에러");
+		}
+		
+		return "redirect:/index.do";
+	}
+	
+
+	
+	
 }

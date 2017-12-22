@@ -21,8 +21,8 @@
      		color:red;
      	}
      	#psMemEdit {
-     		width:720px;
-     		padding:20px;
+     		/* width:720px;*/
+     		padding:20px; 
     		margin:0 auto;	
      		background-color:#ffff;
      	}
@@ -41,30 +41,22 @@
  			padding:8px;
  		}
  		
- 		
- 		 /* 사이드바 스타일 */
-   	 #page-wrapper {
-    padding-left: 380px;
-  }
-  
+ 	 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    position:absolute;
+    /* position:absolute;
     width: 190px;
-    height: 60%;
+    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-  }
+    height: 580px;
+  } 
   
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
-  }
   
-  .sidebar-nav {
-    width: 250px;
+   .sidebar-nav {
+   /*  width: 250px;
     margin: 0;
-    padding: 0;
+    padding: 0; */
     list-style: none;
   }
   
@@ -87,7 +79,7 @@
   .sidebar-nav > .sidebar-brand {
     font-size: 1.3em;
     line-height: 3em;
-  }
+  } 
     </style>
      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -98,8 +90,11 @@
   </head>
   <body>
  	 <c:import url="../../index/top.jsp" />
- 	<!-- 사이드바 -->
-		<div id="page-wrapper">
+ 	 
+ 	  <div class="container">
+    	<div class="row">
+		<!-- 사이드바 -->
+		<div id="page-wrapper" class="col-md-3">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1>My Page</h1></li>
@@ -131,7 +126,7 @@
 		<!-- /사이드바 -->
 		
 		<!-- 본문 -->
-    <div class="container">
+   		<div class="col-md-9">
    		 <div id="psMemEdit">
     	<h1>개인정보 수정</h1>
     	<br>
@@ -162,6 +157,8 @@
     			</table>
     		</form>
     	</fieldset>
+    	</div>
+    	</div>
     </div>    
     </div>
     <c:import url="../../index/footer.jsp" />

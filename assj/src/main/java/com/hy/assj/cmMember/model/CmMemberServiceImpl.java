@@ -39,5 +39,15 @@ public class CmMemberServiceImpl implements CmMemberService{
 	public int cmMemberOut(String cmId) {
 		return cmMemberDao.cmMemberOut(cmId);
 	}
+
+	@Override
+	public int cmPwdEdit(CmMemberVO vo) {
+		return cmMemberDao.cmPwdEdit(vo);
+	}
+
+	@Override
+	public int cmMemberEdit(CmMemberVO vo) {
+		return cmMemberDao.cmMemberEdit(vo);
+	}
 	
 }

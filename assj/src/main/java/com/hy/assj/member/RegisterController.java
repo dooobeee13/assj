@@ -243,7 +243,7 @@ public class RegisterController {
 	
 	@RequestMapping(value="/edit/psMemEdit2.do",method=RequestMethod.POST)
 	public String memberEdit2_post(@ModelAttribute MemberVO vo,@RequestParam(defaultValue="0") int memNo,
-			Model model, HttpServletRequest request){
+			Model model, HttpServletRequest request, HttpSession session){
 		logger.info("개인회원정보 수정2 화면(post) 파라미터 vo{}=,memNo={}",vo,memNo);
 		
 		String fileName = null;
@@ -261,6 +261,9 @@ public class RegisterController {
 		if(cnt>0) {
 			msg="개인정보가 수정되었습니다.";
 			url="/index.do";
+			String memId = ((MemberVO)session.getAttribute("memberVO")).getMemId();
+			vo = memberService.selectMember(memId);
+			session.setAttribute("memberVO", vo);
 		}else {
 			msg="개인정보 수정실패";
 		}
@@ -279,8 +282,42 @@ public class RegisterController {
 		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
 		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
 		
-		model.addAttribute("vo={}",vo);
+		model.addAttribute("vo",vo);
+		
 		return "member/edit/cmMemEdit";
+	}
+	
+	@RequestMapping(value="/edit/cmMemEdit.do",method=RequestMethod.POST)
+	public String cmMemberEdit_post(@ModelAttribute CmMemberVO vo,@RequestParam(defaultValue="0") int cmNo,
+			Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("기업회원 수정 화면(post) 파라미터 vo{}=",vo);
+		
+		String fileName = null;
+		try {
+			fileName = uploadUtil.fileupload2(request, FileuploadUtil.CM_LOGO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		vo.setCmNo(cmNo);
+		vo.setCmLogo(fileName==null?"":fileName);
+		int cnt=cmMemberService.cmMemberEdit(vo);
+		
+		String msg="",url="/member/edit/cmMemEdit.do";
+		if(cnt>0) {
+			msg="기업정보가 수정되었습니다.";
+			url="/index.do";
+			String cmId = ((CmMemberVO)session.getAttribute("cmMemberVO")).getCmId();
+			vo = cmMemberService.selectMember(cmId);
+			session.setAttribute("cmMemberVO", vo);
+		}else {
+			msg="기업정보 수정실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 	@RequestMapping(value="/login/psMemLogin.do",method=RequestMethod.GET)
@@ -324,13 +361,44 @@ public class RegisterController {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}	
+	
+	@RequestMapping(value="/trans/pwdTrans2.do",method=RequestMethod.GET)
+	public String pwdTrans2_get(HttpSession session,Model model) {
+		logger.info("기업회원 비밀번호 변경 화면(get)");
+		
+		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
+		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
+		
+		model.addAttribute("vo",vo);
+		
+		return "member/trans/pwdTrans2";
 	}
 	
-	@RequestMapping("/menu/scrap.do")
-	public String scrap_get() {
-		logger.info("스크랩한 공고 화면(get)");
+	@RequestMapping(value="/trans/pwdTrans2.do",method=RequestMethod.POST)
+	public String pwdTrans2_post(@RequestParam String cmId,@RequestParam String cmPwd,
+			@RequestParam String pwd,Model model) {
+		logger.info("비밀번호 변경 화면(post) 파라미터 memId={},memPwd={}",cmId,cmPwd);
 		
-		return "member/menu/scrap";
+		String msg="비밀번호 수정 실패",url="/trans/pwdTrans2.do";
+		CmMemberVO vo=cmMemberService.selectMember(cmId);
+		int cnt=cmMemberService.loginCheck(cmId, pwd);
+		
+		if(cnt==cmMemberService.LOGIN_OK) {
+			vo.setCmPwd(cmPwd);
+			cmMemberService.cmPwdEdit(vo);
+			msg="비밀번호 수정 성공했습니다";
+			url="/index.do";
+		}else if(cnt==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 일치하지 않습니다";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
+	
+	
 	
 }

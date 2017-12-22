@@ -38,12 +38,14 @@
 		<li><a href="#">대기(0건)</a></li>
 		<li><a href="#">마감(0건)</a></li>
 		<li><a href="#">전체(0건)</a></li>
-		<input type="button" class="btn btn-primary btn-md" value="채용공고 등록" onClick="self.location='hire1.do';">
+		<li><input type="button" class="btn btn-primary btn-md" value="채용공고 등록" onClick="self.location='hire1.do';"></li>
+		
 	</ul>
+	
 		<div class="table table-hover">
 			<table >
 				
-				<caption>기본 게시판</caption>
+				<caption>공고 게시판</caption>
 				<colgroup>
 					<col style="width: 100px;" />
 					<col style="width: 300px;" />

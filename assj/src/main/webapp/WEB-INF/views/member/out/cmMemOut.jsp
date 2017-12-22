@@ -18,8 +18,8 @@
 
 <style type="text/css">
 	#cmMemOut fieldset{
-		width:720px;
-		margin:0 auto;	
+		/* width:720px;
+		margin:0 auto;	 */
 		padding:20px;
 		background-color:#ffff;
 	}
@@ -51,30 +51,22 @@
 	}
 
 
-
-	 /* 사이드바 스타일 */
-	 #page-wrapper {
-    	padding-left: 380px;
-  	}
-  
+ /* 사이드바 스타일 */
   #sidebar-wrapper {
-    position:absolute;
+    /* position:absolute;
     width: 190px;
-    height: 63%;
+    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-  }
+    height: 1550px;
+  } 
   
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
-  }
   
-  .sidebar-nav {
-    width: 250px;
+   .sidebar-nav {
+   /*  width: 250px;
     margin: 0;
-    padding: 0;
+    padding: 0; */
     list-style: none;
   }
   
@@ -86,7 +78,7 @@
   .sidebar-nav li a {
     display: block;
     text-decoration: none;
- 	 color: #7a6666;
+    color: #7a6666;
   }
   
   .sidebar-nav li a:hover {
@@ -97,7 +89,7 @@
   .sidebar-nav > .sidebar-brand {
     font-size: 1.3em;
     line-height: 3em;
-  }
+  } 
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,34 +100,58 @@
 </head>
 	<body>
 		<c:import url="../../index/top.jsp" />
-		<!-- 사이드바 -->
-		<div id="page-wrapper">
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h1><b>고객센터</b></h1></li>
-				<hr>
-				<li><h5><b>무엇을 도와드릴까요?</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
-				<li><a href="<c:url value='/member/menu/onenone.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>아이디.비밀번호 찾기</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>개인회원서비스</b></h5></li>
-				<li><a href="<c:url value='/member/menu/psService.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
-				<li><a href="<c:url value='/member/out/psMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>기업회원서비스</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>채용광고 안내</a></li>
-				<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>기업회원 탈퇴</a></li>
-			</ul>
-		</div>
-	</div>
-		<!-- /사이드바 -->
+		
 		<div class="container">
+		<div class="row">
+		<!-- 사이드바 -->
+		<div id="page-wrapper" class="col-md-3">
+			<div id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand"><h1>
+							<b>고객센터</b>
+						</h1></li>
+					<hr>
+					<li><h5>
+							<b>무엇을 도와드릴까요?</b>
+						</h5></li>
+					<li><a href="#"><span
+							class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
+					<li><a href="#"><span
+							class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
+					<li><a href="<c:url value='/member/menu/onenone.do'/>"><span
+							class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
+					<li><a href="#"><span
+							class="glyphicon glyphicon-chevron-right"></span>아이디.비밀번호 찾기</a></li>
+				</ul>
+				<hr>
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand"><h5>
+							<b>개인회원서비스</b>
+						</h5></li>
+					<li><a href="<c:url value='/member/menu/psService.do'/>"><span
+							class="glyphicon glyphicon-chevron-right"></span>개인회원 안내</a></li>
+					<li><a href="<c:url value='/member/out/psMemOut.do'/>"><span
+							class="glyphicon glyphicon-chevron-right"></span>개인회원 탈퇴</a></li>
+				</ul>
+				<hr>
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand"><h5>
+							<b>기업회원서비스</b>
+						</h5></li>
+					<li><a href="#"><span
+							class="glyphicon glyphicon-chevron-right"></span>채용광고 안내</a></li>
+					<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span
+							class="glyphicon glyphicon-chevron-right"></span>기업회원 탈퇴</a></li>
+				</ul>
+			</div>
+		</div>
+<!-- /사이드바 -->
+
+
+
+<!-- 본문 -->
+			<div class="col-md-9">
+		
 			<div id="cmMemOut">
 			<fieldset>
 				<h1>기업회원 탈퇴</h1>
@@ -146,7 +162,7 @@
 					<h2>서비스 이용에 불편한 점이 있으신가요?</h2>
 					<b><span class="glyphicon glyphicon-phone-alt"> </span>&nbsp;고객센터로 문의주시면 최선을 다해 도와드리겠습니다.</b><br><br><br>
 					<div id="btnDiv">
-						<button type="button" class="btn btn-primary btn-sm">고객센터 문의 바로가기</button>
+						<a href="<c:url value='/member/menu/serviceCenter.do'/>"><button type="button" class="btn btn-primary btn-sm">고객센터 바로가기</button></a>
 						<a href="<c:url value='/member/menu/onenone.do'/>"><button type="button" class="btn btn-primary btn-sm" id="onenone">1:1 상담문의 바로가기</button></a>
 					</div>
 				</div>
@@ -205,6 +221,8 @@
 				<br><br><br><br>
 			</fieldset>
 			</div>
+		</div>
+		</div>
 		</div>
 		<c:import url="../../index/footer.jsp" />
 	</body>

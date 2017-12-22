@@ -144,7 +144,7 @@
 				$.ajax({url: "/assj/member/register/dupli.do?dupliId=" + $('#dupliId').val(), 
 			    	 success: function(result){
 	        				if (result == "true") {
-		        				$('.checkMessage').html('<div><span class="r">사용 불가능한 아이디입니다</span>');
+		        				$('.checkMessage').html('<div><span class="r">중복된 아이디입니다(사용불가)</span>');
 		        			} else {
 		        				$('.checkMessage').html('<span>사용가능한 아이디 입니다</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="사용하기"></button>');
 		        			}

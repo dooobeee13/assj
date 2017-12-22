@@ -51,6 +51,7 @@
 		margin:0 auto;
 		text-align:center;
 		background-color:#f9f9f9;
+		padding:20px;
 	}
 	.btnImg{
 		width:240px;
@@ -79,6 +80,7 @@
 	<body>
 	<c:import url="../../index/top.jsp" />
 		<div class="container" id="Service">
+		<div class="col-md-12">
 				<img src="<c:url value='/images/취업 성공 가이드.png'/>" alt="취업성공가이드">
 				<ul class="nav nav-tabs nav-justified">
 					<li><a href="#" class="step1">step1<br>회원가입&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
@@ -88,7 +90,7 @@
 					<li><a href="#" class="step5">step5<br>입사지원 관리&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></a></li>
 					<li><a href="#" class="step6">step6<br>입사성공!</a></li>
 				</ul>
-			<fieldset id="step1">
+			<fieldset id="step1" class="col-md-12">
 				<h4>아직 알쓰신JOB 회원이 아니신가요?<br> 
 				쉽고 간편하게 회원가입 해보세요.</h4>
 				<br><br>
@@ -108,7 +110,7 @@
 				<a href=""><button type="button" class="btn btn-default btn-lg">회원가입하러가기</button><br><br></a>
 				<br>
 			</fieldset>
-			<fieldset id="step2">
+			<fieldset id="step2" class="col-md-12">
 				<h4>취업 준비의 시작!<br> 
 				이력서, 자소서를 작성해보세요.</h4>
 				<br><br>
@@ -128,7 +130,7 @@
 				<a href=""><button type="button" class="btn btn-default btn-lg">인재정보등록버튼</button><br><br></a>
 				<br>
 			</fieldset>
-			<fieldset id="step3">
+			<fieldset id="step3" class="col-md-12">
 				<h4>신입을 위한 <br> 
 				공채의 모든 것!</h4>
 				<br><br>
@@ -156,7 +158,7 @@
 				<a href=""><button type="button" class="btn btn-default btn-lg">맞춤채용정보버튼</button><br><br></a>
 				<br>		
 			</fieldset>
-			<fieldset id="step4">
+			<fieldset id="step4" class="col-md-12">
 				<h4>PC, 모바일 어디서나! <br> 
 				쉽고 빠른 입사지원</h4>
 				<br><br>
@@ -167,7 +169,7 @@
 				<img src="<c:url value='/images/입사지원.png'/>" alt="입사지원" id="imgSol"><br><br><br>
 				<br><br><br>
 			</fieldset>
-			<fieldset id="step5">
+			<fieldset id="step5" class="col-md-12">
 				<h4>MY Page에서 <br> 
 				취업준비 상황을 한눈에 볼 수 있어요.</h4>
 				<br><br>
@@ -179,7 +181,7 @@
 				<a href=""><button type="button" class="btn btn-default btn-lg">입사지원관리버튼</button></a>
 				<br><br><br>
 			</fieldset>
-			<fieldset id="step6">
+			<fieldset id="step6" class="col-md-12">
 				<h4>구직자 여러분의 <br> 
 				이직 성공을 응원합니다.</h4>
 				<br><br>
@@ -191,6 +193,7 @@
 				<a href=""><button type="button" class="btn btn-default btn-lg">메인으로</button></a>
 				<br><br><br>
 			</fieldset>
+		</div>
 		</div>
 		<c:import url="../../index/footer.jsp" />
 	</body>

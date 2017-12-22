@@ -126,23 +126,55 @@ function OntextCheck(obj)
 			<div class="col-sm-3 col-md-2 sidebar" id="sideBar">
 					<script type="text/javascript">
 					$(function(){
-						$('#profileImg').click(function(){
-							window.open("<c:url value='/resume/resumeProfile.do'/>",
-									'imgForm',
-									'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');							
+						
+					
+						 $('#imgTest').click(function(){
+							 
+							var result = confirm("이력서 사진 등록 전에, 사진을 알맞게 편집하시겠습니까?");
+							
+							if(result){
+								window.open("https://fengyuanchen.github.io/photo-editor",
+										'imgForm',
+										'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');										
+							}else{
+								$('#file1').click();
+							}
+							 
+						}); 
+						
+						$('#file1').on("change",function(){
+							readURL(this);
 						});
+						  function readURL(input) {
+					            if (input.files && input.files[0]) {
+					            var reader = new FileReader();
+
+					            reader.onload = function (e) {
+					                    $('#imgTest').attr('src', e.target.result);
+					                }
+
+					              reader.readAsDataURL(input.files[0]);
+					            }
+					        }
+						  
+						  
 					});
 					</script>
 					
 					<ul class="nav nav-sidebar">
 						<li>
 							<input type="file" name="file1" id="file1" style="display: none;">
-							<a href="#">
+							<%-- <a href="#">
 								<img class="img-profile img-circle" id="profileImg" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
+							</a> --%>
+							
+							<a href="#">
+								<img class="img-profile img-circle" id="imgTest" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
 							</a>
 							
 							
 						</li>
+						
 						<li class="nav-item"><a class="nav-link" href="#basic">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#basic2">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#mil">병역 사항</a></li>

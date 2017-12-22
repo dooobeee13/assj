@@ -7,8 +7,8 @@
 	
 
 	<div class="detail" style="margin-left: -202%">
-		<div class="row tab">
-			<div class="col-md-3">
+		<div class="row tab" style="margin: 0">
+			<div class="col-md-3" style="padding-right: 0">
 				<div class="category thinScroll top">
 					<ul>
 						<c:set var="topCateogryList" value="${map['topCategory']}" />

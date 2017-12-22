@@ -38,6 +38,22 @@
 		set mem_pwd=#{memPwd}
 		where mem_id=#{memId}
 	</update>
+	
+	<select id="countMemberBySns" parameterType="Map" resultType="_int">
+		select count(*) from member where mem_sns_id = #{id} and mem_sns_type= #{type}
+	</select>
+	
+	<select id="selectMemberBySns" parameterType="Map" resultType="MemberVO">
+		select * from member where mem_sns_id = #{id} and mem_sns_type= #{type}
+	</select>
+	
+	<insert id="insertMemberBySns" parameterType="MemberVO">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="memNo">
+			select member_seq.nextval from dual
+		</selectKey>
+		insert into member(mem_no, mem_name, mem_email, mem_gender, mem_sns_type, mem_sns_id, mem_photo)
+		values(#{memNo}, #{memName}, #{memEmail}, #{memGender}, #{memSnsType}, #{memSnsId}, #{memPhoto})
+	</insert>
 </mapper>
 
 

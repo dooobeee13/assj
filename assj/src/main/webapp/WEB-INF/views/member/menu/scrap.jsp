@@ -20,14 +20,14 @@
 </script>
 <style type="text/css">
 	#scrap fieldset{
-		width:660px;
- 		margin:0 auto;
+		/* width:660px;
+ 		margin:0 auto; */
 		padding:20px;
 		background-color:#dde6f7;
 	}
 	#scrap {
-   		width:720px;
-   		padding:20px;
+   		/* width:720px;*/
+   		padding:40px; 
    		margin:0 auto;	
    		background-color:#ffff;
    	}
@@ -48,32 +48,21 @@
 		float:right;
 	}
 	
-	
-	
-	
- 		 /* 사이드바 스타일 */
-   	 #page-wrapper {
-    padding-left: 380px;
-  }
-  
+		 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    position:absolute;
+    /* position:absolute;
     width: 190px;
-    height: 63%;
+    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-  }
-  
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .sidebar-nav {
-    width: 250px;
+    height: 660px;
+  } 
+
+   .sidebar-nav {
+   /*  width: 250px;
     margin: 0;
-    padding: 0;
+    padding: 0; */
     list-style: none;
   }
   
@@ -96,7 +85,7 @@
   .sidebar-nav > .sidebar-brand {
     font-size: 1.3em;
     line-height: 3em;
-  }
+  } 
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -107,8 +96,12 @@
 </head>
 	<body>
 	<c:import url="../../index/top.jsp" />
- 	<!-- 사이드바 -->
-		<div id="page-wrapper">
+ 	
+		<div class="container">
+		
+		<div class="row">
+		<!-- 사이드바 -->
+		<div id="page-wrapper" class="col-md-3">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1>My Page</h1></li>
@@ -132,7 +125,7 @@
 			</ul>
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
-				<li><a href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
+				<li><a href="<c:if test="${!empty sessionScope.memberVO}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
 				<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
 			</ul>
 		</div>
@@ -140,7 +133,7 @@
 		<!-- /사이드바 -->
 		
 		<!-- 본문 -->
-		<div class="container">
+   			<div class="col-md-9">
 			 <div id="scrap">
 			<fieldset>
 				<h1>&nbsp;스크랩한 공고</h1>
@@ -210,6 +203,8 @@
 					</tr>
 				</table>
 			</fieldset>
+			</div>
+			</div>
 		</div>
 		</div>
 		<c:import url="../../index/footer.jsp" />
