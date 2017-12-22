@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -12,8 +13,9 @@
   <title>이력서 사진 등록</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cropper.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+  <link rel="stylesheet" href="<c:url value='/resume/profileImg/css/cropper.css'/>">
+  <link rel="stylesheet" href="<c:url value='/resume/profileImg/css/main.css'/>">
+ 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript">
 	$(function(){
@@ -25,7 +27,10 @@
 			 var imgSrc = $('#resImg').children().attr("src");
 			$(opener.document).find('#profileImg').attr("src",imgSrc);
 			self.close();
-			
+			/* var dataURL = $('#resImg').children("img").cropper("getDataURL", "image/jpeg"); */
+			//  var dataURL = $image.cropper("getDataURL", "image/jpeg");
+				
+		     /*  $(opener.document).find('#profileImg').attr("src",dataURL); */
 		});
 		$('#useCopImg').click(function(){
 			var a = $(this).parent().siblings('.modal-body').find('canvas').attr('src');
@@ -80,7 +85,7 @@ data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
       <div class="col-md-6">
         <!-- <h3>Demo:</h3> -->
         <div class="img-container">
-          <img src="${pageContext.request.contextPath}/images/noimg.gif" alt="Picture">
+          <img src="${pageContext.request.contextPath}/images/resume/img/noimg.gif" alt="Picture">
         </div>
       </div>
       <div class="col-md-6">
@@ -586,7 +591,7 @@ data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
   <script src="https://fengyuanchen.github.io/js/common.js"></script>
-  <script src="<c:url value='/js/cropper.js'/>"></script>
-  <script src="<c:url value='/js/main.js'/>"></script>
+  <script src="<c:url value='/resume/profileImg/js/cropper.js'/>"></script>
+  <script src="<c:url value='/resume/profileImg/js/main.js'/>"></script>
 </body>
 </html>
