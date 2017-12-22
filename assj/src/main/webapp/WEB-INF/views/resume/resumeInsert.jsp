@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이력서 등록</title>
 <!-- Bootstrap -->
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -21,7 +21,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link href="<c:url value='/css/resume.css'/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/resume.css" rel="stylesheet">
 <script src="<c:url value='/js/resume.js'/>"></script>
 
 <style type="text/css">
@@ -126,24 +126,55 @@ function OntextCheck(obj)
 			<div class="col-sm-3 col-md-2 sidebar" id="sideBar">
 					<script type="text/javascript">
 					$(function(){
-						$('#profileImg').click(function(){
-							window.open("<c:url value='/profileImg/profileImg.jsp'/>",
-									'imgForm',
-									'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');							
+						
+					
+						 $('#imgTest').click(function(){
+							 
+							var result = confirm("이력서 사진 등록 전에, 사진을 알맞게 편집하시겠습니까?");
+							
+							if(result){
+								window.open("https://fengyuanchen.github.io/photo-editor",
+										'imgForm',
+										'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');										
+							}else{
+								$('#file1').click();
+							}
+							 
+						}); 
+						
+						$('#file1').on("change",function(){
+							readURL(this);
 						});
+						  function readURL(input) {
+					            if (input.files && input.files[0]) {
+					            var reader = new FileReader();
+
+					            reader.onload = function (e) {
+					                    $('#imgTest').attr('src', e.target.result);
+					                }
+
+					              reader.readAsDataURL(input.files[0]);
+					            }
+					        }
+						  
+						  
 					});
 					</script>
 					
 					<ul class="nav nav-sidebar">
 						<li>
 							<input type="file" name="file1" id="file1" style="display: none;">
+							<%-- <a href="#">
+								<img class="img-profile img-circle" id="profileImg" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
+							</a> --%>
+							
 							<a href="#">
-								<img class="img-profile img-circle" id="profileImg"
-								 src="${pageContext.request.contextPath }/resume/img/img_photo_null.gif" />
+								<img class="img-profile img-circle" id="imgTest" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
 							</a>
 							
 							
 						</li>
+						
 						<li class="nav-item"><a class="nav-link" href="#basic">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#basic2">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#mil">병역 사항</a></li>
@@ -155,8 +186,7 @@ function OntextCheck(obj)
 						<li class="nav-item"><a class="nav-link" href="#pt">포트폴리오</a></li>
 						<li class="nav-item"><a class="nav-link" href="#hope">희망 근무조건</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">
-						<input type="image" id="imgSubmit" width="100%" height="100%" 
-						src="<c:url value='/images/button/write_complete.png'/>">
+						<input type="image" id="imgSubmit" width="100%" height="100%" src="<c:url value='/images/button/write_complete.png'/>">
 						</a></li>						
 					</ul>
 				
@@ -534,7 +564,7 @@ function OntextCheck(obj)
 						
 						<div id="addSHDiv">
 							<label>
-								<img alt="학력추가" id="addSH" src="${pageContext.request.contextPath}/images/button/btn_add.gif" style="text-align: right;">
+								<img alt="학력추가" id="addSH" src="images/button/btn_add.gif" style="text-align: right;">
 							</label>
 						</div>						
 						
@@ -1046,17 +1076,12 @@ function OntextCheck(obj)
 	희망 업종과 직종에 따라 큰 카테고리에 셀프조인 하여서 상세 업종및 상세 직종을 selectbox 두개로 표현할것
 	셀렉트 박스 1 (서비스업)  셀렉트 박스 2 (서비스업에 해당하는 상세직종)
 	 -->
-					<br> 
-					<label>희망 직종<span class="res-star">*</span></label> 
-					<br>
+					<br> <label>희망직종<span class="res-star">*</span></label> <br>
 					<select class="form-control">
 						<option>occu카테고리</option>
 					</select> <select class="form-control">
 						<option>occu_top_no에따른 name</option>
-					</select> 
-					<br> 
-					<label>희망 업종<span class="res-star">*</span></label> 
-					<br>
+					</select> <br> <label>희망직종<span class="res-star">*</span></label> <br>
 					<select class="form-control">
 						<option>sectors카테고리</option>
 					</select> <select class="form-control">
