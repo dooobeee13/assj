@@ -160,8 +160,8 @@
 			<h1>비밀번호 변경</h1>
 			<br>
 			<hr>
-			<input type="text" id="cmId" name="cmId" value="${vo.cmId}">
-			<input type="text" id="pwd" name="pwd" value="${vo.cmPwd}">
+			<input type="hidden" id="cmId" name="cmId" value="${vo.cmId}">
+			<input type="hidden" id="pwd" name="pwd" value="${vo.cmPwd}">
 			<fieldset>
 				개인정보 보호를 위해 <b>6개월마다 주기적으로 비밀번호를 변경</b>해 사용하는 것이 안전합니다.<br>
 				<span>※ 여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 비밀번호를 주기적으로<br> 변경해 주는 것이 안전합니다.</span>

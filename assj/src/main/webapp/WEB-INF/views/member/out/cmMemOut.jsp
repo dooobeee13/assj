@@ -59,7 +59,7 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 1600px;
+    height: 1550px;
   } 
   
   
@@ -162,7 +162,7 @@
 					<h2>서비스 이용에 불편한 점이 있으신가요?</h2>
 					<b><span class="glyphicon glyphicon-phone-alt"> </span>&nbsp;고객센터로 문의주시면 최선을 다해 도와드리겠습니다.</b><br><br><br>
 					<div id="btnDiv">
-						<button type="button" class="btn btn-primary btn-sm">고객센터 문의 바로가기</button>
+						<a href="<c:url value='/member/menu/serviceCenter.do'/>"><button type="button" class="btn btn-primary btn-sm">고객센터 바로가기</button></a>
 						<a href="<c:url value='/member/menu/onenone.do'/>"><button type="button" class="btn btn-primary btn-sm" id="onenone">1:1 상담문의 바로가기</button></a>
 					</div>
 				</div>
