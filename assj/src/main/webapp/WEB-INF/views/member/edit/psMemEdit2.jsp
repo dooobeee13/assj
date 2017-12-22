@@ -45,7 +45,7 @@
      		   	}
      		   	
      		   	//이메일 받아오기
-     		   	if($('#email').val()!=''){
+     		   	if($('#email').val()!=""){
      		   		var email=$('#email').val();
      		   		var memEmail=email.split("@");
      		   		
@@ -126,11 +126,23 @@
     			$('#frm').prop("action","<c:url value='/member/edit/psMemEdit2.do'/>");
     			$('#frm').submit();
     		});
+    		
+    		
+    		/* $('#regBtn').click(function(){
+    			
+    			
+    			var index=$('#upload').val().lastIndexOf("\\");
+    			var upload=$('#upload').val().substring(index+1);      
 
-   		
-	    		var upload = document.querySelector('#upload');
-	    	    var preview = document.querySelector('#preview');
+    			$('#preview img').attr("src","/images/"+upload);
+  
+    			$('#myModal3').modal('hide');
+    		});  */
+    		
+    		var upload = document.querySelector('#upload');
+    	    var preview = document.querySelector('#preview');
     	 
+    	    upload.addEventListener('change',function (e) {
     	        var get_file = e.target.files;
     	 
     	        var image = document.createElement('img');
@@ -140,12 +152,10 @@
     	 
     	        /* reader 시작시 함수 구현 */
     	        reader.onload = (function (aImg) {
-    	            console.log(1);
     	 
     	            return function (e) {
-    	                console.log(3);
     	                /* base64 인코딩 된 스트링 데이터 */
-    	                aImg.src = e.target.result;
+    	                aImg.src = e.target.result
     	            }
     	        })(image)
     	 
@@ -156,10 +166,11 @@
     	                이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
     	            */
     	            reader.readAsDataURL(get_file[0]);
-    	            console.log(2);
     	        }
+    	 
     	        $('#preview').html(image);
-    	        
+    	        //preview.appendChild(image);
+    	    })
     	        
     });
  
@@ -174,13 +185,14 @@
      	#psMemEdit2 .r{
     		color:red;
     	}
+ 
     	#psMemEdit2 .container{
     		width:800px;
     	}
      	#psMemEdit2 fieldset{
- 			width:720px;
-			margin:0 auto;	
-			padding:20px;
+ 		/* 	width:720px;*/
+			margin:0 auto;	 
+			padding:40px;
 			background-color:#ffff;	
  		}
  		#psMemEdit2 table{
@@ -212,16 +224,54 @@
     	}
     	
     	#psMemEdit2 #preview {
-    		width: 130px;
-		    height: 140px;
+    		width: 150px;
+		    height: 150px;
 		    display: inline-block;
     	}
     	
     	#psMemEdit2 #preview img {
-    		width: 130px;
-    		height: 140px;
+    		width: 150px;
+    		height: 150px;
     	}
-
+	
+ 	 /* 사이드바 스타일 */
+  #sidebar-wrapper {
+    /* position:absolute;
+    width: 190px;
+    height: 63%; */
+    background: #ffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 820px;
+  } 
+  
+   .sidebar-nav {
+   /*  width: 250px;
+    margin: 0;
+    padding: 0; */
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 0.8em;
+    line-height: 2.2em;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #7a6666;
+  }
+  
+  .sidebar-nav li a:hover {
+    color: #cccc;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  } 
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -233,20 +283,57 @@
   <body>
     <c:import url="../../index/top.jsp" />
     <div class="container">
-		<form role="form" method="post" class="form-inline" name="frm" id="frm" enctype="multipart/form-data">
+    
+    <div class="row">
+		<!-- 사이드바 -->
+		<div id="page-wrapper" class="col-md-3">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h1>My Page</h1></li>
+				<hr>
+				<li><h5><b>이력서 관리</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
+			</ul>
+			<hr>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
+				<li><a href="<c:url value='/member/menu/scrap.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
+			</ul>
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
+				<li><a href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
+				<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
+			</ul>
+		</div>
+	</div>
+		<!-- /사이드바 -->
+		
+		<!-- 본문 -->
+   		<div class="col-md-9">
+   		
     	<div id="psMemEdit2">
+		<form role="form" method="post" class="form-inline" name="frm" id="frm" enctype="multipart/form-data">
     	<fieldset>
     	<h1>개인정보 수정</h1>
     	<br>
 		<hr>
    			<table>
     			<tr>
-    				<td rowspan="9" width=150px; id="imgTd">
-						    <a href="#" class="thumbnail">
-						      <span id="preview">
-						      	<img src="<c:url value='/images/${vo.memPhoto}'/>" alt="puppy">
-						     </span>
-						   	</a>
+    				<td rowspan="9" width=150px; id="imgTd">	
+					  	  <a href="#" class="thumbnail">
+					         <span id="preview">
+					         	<img src = '<c:url value="/memPhoto/${sessionScope.memberVO.memPhoto==null?'basic.jpg':sessionScope.memberVO.memPhoto}"/>'/>
+					     	 </span> 
+						  </a>
 					</td>
 	    			<td width=150px;>
 	    				<input type="hidden" class="form-control" name="memNo" value="${vo.memNo}">
@@ -355,7 +442,8 @@
 					&nbsp;
 					<label for="email">프로필사진 수정</label> </td>
 					<td>
-					<input type="button" class="form-control" value="사진수정" data-toggle="modal" data-target="#myModal3">
+					<!-- <input type="button" class="form-control" value="사진수정" data-toggle="modal" data-target="#myModal3"> -->
+					<input type="file" name="imageUpload" class="form-control" id="upload">
 					</td>	
 				</tr>
 			</table>
@@ -451,10 +539,11 @@
 		<!-- 모달 다이얼로그 -->
 	</div>
 	<!-- 모달 전체 윈도우 -->
-
-    </div>  
     </form>  
-    </div>
+	</div>
+	</div>
+   </div>  
+   </div>
     
       <c:import url="../../index/footer.jsp" />
 </body>

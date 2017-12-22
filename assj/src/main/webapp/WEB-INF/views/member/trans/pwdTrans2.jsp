@@ -26,21 +26,21 @@
 				alert('현재 비밀번호가 틀립니다');
 				$('#OriginPwd').focus;
 				return false;
-			}else if($('#memPwd').val()==""){
+			}else if($('#cmPwd').val()==""){
 				alert('비밀번호를 입력해주세요');
-				$('#memPwd').focus;
+				$('#cmPwd').focus;
 				return false;
-			}else if($('#memPwd').val()==$('#pwd').val()){
+			}else if($('#cmPwd').val()==$('#pwd').val()){
 				alert('기존 비밀번호와 다르게 입력해주세요');
 				$('#newPwd').focus;
 				return false;
-			}else if($('#memPwd').val()==$('#memId').val()){
+			}else if($('#cmPwd').val()==$('#cmId').val()){
 				alert('아이디와 비밀번호를 다르게 입력해주세요');
 				$('#newPwd').focus;
 				return false;
-			}else if($('#memPwd').val()!=$('#memPwd2').val()){
+			}else if($('#cmPwd').val()!=$('#cmPwd2').val()){
 				alert('비밀번호가 일치하지 않습니다');
-				$('#memPwd2').focus;
+				$('#cmPwd2').focus;
 				return false;
 			}
 		});
@@ -57,13 +57,13 @@
 	}
 	#pwdTrans {
    		/* width:720px;*/
-   		padding:40px; 
    		margin:0 auto;	
+   		padding:40px; 
    		background-color:#ffff;
      }
 	#pwdTrans fieldset{
-		/* width:600px;
- 		margin:0 auto; */
+		width:600px;
+ 		margin:0 auto;
 		padding:20px;
 		background-color:#dde6f7;
 	}
@@ -87,10 +87,8 @@
 	#pwdTrans h1{
 		font-weight:bold;
 	}
-	
 
-		
- 	 /* 사이드바 스타일 */
+ /* 사이드바 스타일 */
   #sidebar-wrapper {
     /* position:absolute;
     width: 190px;
@@ -98,9 +96,10 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 900px;
+    height: 870px;
   } 
-
+  
+  
    .sidebar-nav {
    /*  width: 250px;
     margin: 0;
@@ -139,50 +138,30 @@
 	<body>
 		 <c:import url="../../index/top.jsp" />
 	 	
+			<!-- 본문 -->
 		<div class="container">
-		
 		<div class="row">
-		<!-- 사이드바 -->
+		 <!-- 사이드바 -->
 		<div id="page-wrapper" class="col-md-3">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1>My Page</h1></li>
 				<hr>
-				<li><h5><b>이력서 관리</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
-				<li><a href="<c:url value='/member/menu/scrap.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
-			</ul>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
-				<li><a href="<c:if test="${!empty sessionScope.memberVO}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
-				<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
+				<li><a href="<c:url value='/member/edit/cmMemEdit.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>기업정보 수정</a></li>
+				<li><a href="<c:url value='/member/trans/pwdTrans2.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
 			</ul>
 		</div>
 	</div>
 		<!-- /사이드바 -->
-		
-		<!-- 본문 -->
-   			<div class="col-md-9">
-			<form name="frm" method="post" action="<c:url value='/member/trans/pwdTrans.do'/>">
+			
+			<div class="col-md-9">
+			<form name="frm" method="post" action="<c:url value='/member/trans/pwdTrans2.do'/>">
 			<div id="pwdTrans">
 			<h1>비밀번호 변경</h1>
 			<br>
 			<hr>
-			<input type="hidden" id="memId" name="memId" value="${vo.memId}">
-			<input type="hidden" id="pwd" name="pwd" value="${vo.memPwd}">
+			<input type="text" id="cmId" name="cmId" value="${vo.cmId}">
+			<input type="text" id="pwd" name="pwd" value="${vo.cmPwd}">
 			<fieldset>
 				개인정보 보호를 위해 <b>6개월마다 주기적으로 비밀번호를 변경</b>해 사용하는 것이 안전합니다.<br>
 				<span>※ 여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 비밀번호를 주기적으로<br> 변경해 주는 것이 안전합니다.</span>
@@ -194,11 +173,11 @@
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="password" class="form-control" name="memPwd" id="memPwd"></td>
+						<td><input type="password" class="form-control" name="cmPwd" id="cmPwd"></td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인</td>
-						<td><input type="password" class="form-control" name="memPwd2" id="memPwd2"></td>
+						<td><input type="password" class="form-control" name="cmPwd2" id="cmPwd2"></td>
 					</tr>			
 				</table>
 				<br><br>

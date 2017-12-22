@@ -13,13 +13,13 @@
 </script>	
 <header>
 	<div class="topline">
-		<c:if test="${empty sessionScope.memberVO.memId && empty sessionScope.cmMemberVO.cmId}">
+		<c:if test="${empty sessionScope.memberVO && empty sessionScope.cmMemberVO.cmId}">
 			<a href="<c:url value='/member/menu/serviceCenter.do'/>"><b>고객센터</b></a> 
 			<a href="<c:url value='/member/register/register.do'/>"><b>회원가입</b></a> 
 			<a href="<c:url value='/member/login/psMemLogin.do'/>"><b>로그인</b></a>
 		</c:if>
 		<!-- 개인회원 로그인후 -->
-		<c:if test="${!empty sessionScope.memberVO.memId}">
+		<c:if test="${!empty sessionScope.memberVO}">
 			<a href="<c:url value='/member/out/psMemOut.do'/>"><b>회원탈퇴</b></a>								
 			<a href="<c:url value='/member/edit/psMemEdit.do'/>"><b>회원정보수정</b></a>
 			<a href="<c:url value='/logout.do'/>"><b>로그아웃</b></a>

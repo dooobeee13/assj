@@ -124,7 +124,7 @@
 			<div class="col-md-3">
 				<div class="conten" style="padding:5px">
 					<c:if test="${empty sessionScope.cmMemberVO.cmId}">
-					<c:if test="${empty sessionScope.memberVO.memId}">
+					<c:if test="${empty sessionScope.memberVO}">
 					<ul class="nav nav-tabs" id="MemberChoice">
 					   <li class="active"><a data-toggle="tab" href="#individual">개인회원</a></li>
 					   <li ><a data-toggle="tab" href="#company">기업회원</a></li>
@@ -204,7 +204,7 @@
 					</div>
 					</c:if>
 					</c:if>
-					<c:if test="${!empty sessionScope.memberVO.memId}">
+					<c:if test="${!empty sessionScope.memberVO}">
 							<br>
 							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 <a href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<c:url value='/logout.do'/>"><button type="button" class="btn btn-default btn-sm">로그아웃</button></a>
 							<hr>

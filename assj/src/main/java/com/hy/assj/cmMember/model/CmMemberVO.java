@@ -77,6 +77,10 @@ public class CmMemberVO {
 		this.cmManager = cmManager;
 	}
 	public String getCmMgrTel() {
+		if(cmMgrTel1==null && cmMgrTel2==null && cmMgrTel3==null) {
+			return cmMgrTel;
+		}
+		
 		if((cmMgrTel2!=null&&!cmMgrTel2.isEmpty()) && (cmMgrTel3!=null&&!cmMgrTel3.isEmpty())) {
 			cmMgrTel=cmMgrTel1+"-"+cmMgrTel2+"-"+cmMgrTel3;			
 		}else {
@@ -124,6 +128,10 @@ public class CmMemberVO {
 		this.cmZipcode = cmZipcode;
 	}
 	public String getCmEmail() {
+		if(cmEmail1==null && cmEmail2==null && cmEmail3==null) {
+			return cmEmail;
+		}
+		
 		if(cmEmail1==null || cmEmail1.isEmpty()){
 			cmEmail="";
 		}else {

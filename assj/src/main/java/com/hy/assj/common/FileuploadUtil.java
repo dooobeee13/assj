@@ -26,7 +26,7 @@ public class FileuploadUtil {
 		=LoggerFactory.getLogger(FileuploadUtil.class);
 	
 	//파일업로드 경로 관련 상수
-	public static final int PDS_UPLOAD=1;  //자료실 업로드인 경우
+	public static final int CM_LOGO=1;  //자료실 업로드인 경우
 	public static final int IMAGE_UPLOAD=2;  //상품등록시 이미지 업로드인 경우
 	
 	
@@ -126,7 +126,7 @@ public class FileuploadUtil {
 		String type=fileProperties.getProperty("file.upload.type");
 		if(type.equals("test")) {
 			//테스트시 경로
-			if(uploadGb==PDS_UPLOAD) {
+			if(uploadGb==CM_LOGO) {
 				upPath=fileProperties.getProperty("file.upload.path.test");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath
@@ -136,7 +136,7 @@ public class FileuploadUtil {
 			logger.info("test 경로:"+ upPath);
 		}else {
 			//배포시 경로
-			if(uploadGb==PDS_UPLOAD) {
+			if(uploadGb==CM_LOGO) {
 				upPath=fileProperties.getProperty("file.upload.path");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path");

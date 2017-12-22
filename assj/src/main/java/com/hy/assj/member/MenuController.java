@@ -48,4 +48,10 @@ public class MenuController {
 		return "member/menu/serviceCenter";
 	}
 	
+	@RequestMapping("/scrap.do")
+	public String scrap_get() {
+		logger.info("스크랩공고 화면");
+		
+		return "member/menu/scrap";
+	}
 }

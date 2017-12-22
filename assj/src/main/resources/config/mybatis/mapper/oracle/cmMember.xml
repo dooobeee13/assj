@@ -24,6 +24,19 @@
 		delete from comp_member where cm_id=#{cmId}
 	</delete>
 	
+	<update id="cmMemberEdit" parameterType="CmMemberVO">
+		update comp_member
+		set cm_Mgr_tel=#{cmMgrTel},cm_Email=#{cmEmail},cm_name=#{cmName}
+		,cm_repre=#{cmRepre},cm_zipcode=#{cmZipcode},cm_addr=#{cmAddr},cm_detailaddr=#{cmDetailAddr},cm_logo=#{cmLogo},cm_regnum=#{cmRegnum},cs_no=#{csNo}
+		where cm_no=#{cmNo}
+	</update>
+	
+	<update id="cmPwdEdit" parameterType="CmMemberVO">
+		update comp_member
+		set cm_pwd=#{cmPwd}
+		where cm_id=#{cmId}
+	</update>
+	
 </mapper>
 
 

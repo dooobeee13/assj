@@ -17,6 +17,29 @@
 	<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
+			$(window).load(function(){
+				
+			   	//휴대폰번호 받아오기
+     		   	if($('#cmTel').val()!=""){
+     		   		var cmTel=$('#cmTel').val();
+     		   		var cmPhone=cmTel.split("-");
+     		   		
+	     		   	$('#cmMgrTel1').val(cmPhone[0]).prop("selected",true);
+	     		 	$('#cmMgrTel2').val(cmPhone[1]);
+	     		 	$('#cmMgrTel3').val(cmPhone[2]);
+     		   	}
+     		   	//이메일 받아오기
+     		   	if($('#cmMail').val()!=""){
+     		   		var Email=$('#cmMail').val();
+     		   		var setEmail=Email.split("@");
+     		   		
+     		   		$('#cmEmail1').val(setEmail[0]);
+     		   		$('#cmEmail2').val(setEmail[1]).prop("selected", true);
+     		   	}	
+			});
+			
+			
 			$('#cmEmail2').change(function(){
     			if($(this).val()=='etc'){
     				//$('#memEmail3').css('visibility','visible');
@@ -26,22 +49,25 @@
     				$('#cmEmail3').css('visibility','hidden');
     			}	
     		});
+		
 		});
+
+		
 	</script>
     <style type="text/css">
     	#cmMemEdit span{
      		color:blue;
      	}
      	#cmMemEdit{
-    		width:720px;
-     		padding:20px;
+    	/* 	width:720px;*/
+     		padding:20px; 
     		margin:0 auto;	
      		background-color:#ffff;
     	}
    		#cmMemEdit fieldset{
- 			width:650px;
+ 			width:700px;
 	 		margin:0 auto;
-			padding:20px;
+			padding:30px;
 			background-color:#f6f9ff;
  		}
 		#cmMemEdit .titleTD{
@@ -63,31 +89,30 @@
     	.modal-body table{
 			background-color:#f6f9ff;
 		}
-		
-		
-		 		 /* 사이드바 스타일 */
-   	 #page-wrapper {
-    padding-left: 380px;
-  }
-  
+    	.modal-body td{
+			width:70%;
+		}
+		.radio-inline{
+			width:130px;
+		}
+
+
+ /* 사이드바 스타일 */
   #sidebar-wrapper {
-    position:absolute;
+    /* position:absolute;
     width: 190px;
-    height: 63%;
+    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-  }
+    height: 1480px;
+  } 
   
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
-  }
   
-  .sidebar-nav {
-    width: 250px;
+   .sidebar-nav {
+   /*  width: 250px;
     margin: 0;
-    padding: 0;
+    padding: 0; */
     list-style: none;
   }
   
@@ -110,58 +135,37 @@
   .sidebar-nav > .sidebar-brand {
     font-size: 1.3em;
     line-height: 3em;
-  }
+  } 
     </style>
-     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
   </head>
   <body>
    <c:import url="../../index/top.jsp" />
-   <!-- 사이드바 -->
-		<div id="page-wrapper">
+   
+    <div class="container">
+    <div class="row">
+    <!-- 사이드바 -->
+		<div id="page-wrapper" class="col-md-3">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1>My Page</h1></li>
 				<hr>
-				<li><h5><b>이력서 관리</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
-			</ul>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
-				<li><a href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
-				<li><a href="<c:url value='/member/out/cmMemOut.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
+				<li><a href="<c:url value='/member/edit/cmMemEdit.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>기업정보 수정</a></li>
+				<li><a href="<c:url value='/member/trans/pwdTrans2.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
 			</ul>
 		</div>
 	</div>
 		<!-- /사이드바 -->
-    <div class="container">
+		
+		<div class="col-md-9">
+    	<form role="form" class="form-inline" method="post" action="<c:url value='/member/edit/cmMemEdit.do'/>" enctype="multipart/form-data">
     	<div id="cmMemEdit">
     	<h1>기업정보 수정</h1>
     	<br>
 		<hr>
 		<br>
-    	<br><br>
     	<fieldset>
     	<h4><b><span>${vo.cmName}</span> 님,안녕하세요.</b><br></h4>
-	    	<form role="form" class="form-inline">
 					<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;아이디</td>
@@ -175,12 +179,13 @@
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;기업구분</td>
 							<td>일반기업 구분은 임의로 변경할 수 없습니다.<br> 
 							변경을 원하시는 경우,고객센터로 연락해주세요.<br>
-							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<br><a href="#">기업 구분 수정요청</a></td>		
+							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<br><a href="#CpModal" data-toggle="modal">기업 구분 수정요청</a></td>		
 						</tr>
 				</table><br><br>
 				<h4><b>인사담당자 정보</b></h4>
-				<input type="text" id="cmTel" value="${vo.cmMgrTel3}">
-				<input type="text" id="cmEmail" value="${vo.cmEmail1}">
+				<input type="text" id="cmNo" name="cmNo" value="${vo.cmNo}">
+				<input type="text" id="cmTel" value="${vo.cmMgrTel}">
+				<input type="text" id="cmMail" value="${vo.cmEmail}">
 				<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자</td>
@@ -230,34 +235,34 @@
 					<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;회사명</td>
-							<td><input type="text" class="form-control" 
+							<td><input type="text" class="form-control" name="cmName"
 							value="${vo.cmName}"></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;대표자명</td>
-							<td><input type="text" class="form-control"
+							<td><input type="text" class="form-control" name="cmRepre"
 							value="${vo.cmRepre}"></td>
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사주소</td>
 							<td>
-								<input type="text" class="form-control" placeholder="우편번호" size="10" value="${vo.cmZipcode}">
+								<input type="text" class="form-control" placeholder="우편번호" size="10" value="${vo.cmZipcode}" name="cmZipcode">
 								<input type="button" class="form-control" value="우편번호 검색" data-toggle="modal" data-target="#ZipModal">
-								<input type="text" class="form-control" placeholder="주소" size="38" value="${vo.cmAddr}">
-								<input type="text" class="form-control" placeholder="상세주소" size="38" value="${vo.cmDetailAddr}">
+								<input type="text" class="form-control" placeholder="주소" size="38" value="${vo.cmAddr}" name="cmAddr">
+								<input type="text" class="form-control" placeholder="상세주소" size="38" value="${vo.cmDetailAddr}" name="cmDetailAddr">
 							</td>		
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사 로고/사진등록</td>
 							<td>
-								<input type="button" class="form-control" value="사진수정" data-toggle="modal" data-target="#myModal1">
+								<input type="file" class="form-control" name="logo">
 							</td>
 						</tr>	
 					</table><br>
 				<hr>
-			</form><br>
+			<br>
 				<div id="btnDiv">
-					<button type="button" class="btn btn-primary btn-lg">수정하기</button>
+					<button type="submit" class="btn btn-primary btn-lg">수정하기</button>
 					<button type="button" class="btn btn-default btn-lg">취소하기</button>
 				</div>
 		</fieldset>
@@ -325,28 +330,77 @@
 					<table class="table table-bordered">
 						<tr>
 							<td class="titleTD">아이디</td>
-							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmId}</c:if></td>				
+							<td>${vo.cmId}</td>				
 						</tr>
 						<tr>
 							<td class="titleTD">기업명</td>
-							<td><c:if test="${!empty sessionScope.cmMemberVO}">${sessionScope.cmMemberVO.cmName}</c:if></td>
+							<td>${vo.cmName}</td>
 						</tr>
 						<tr>
 							<td class="titleTD">사업자<br>등록번호</td>
 							<td><input type="text" class="form-control" id="cmRegnum" name="cmRegnum"
-								<c:if test="${!empty sessionScope.cmMemberVO}">value="${sessionScope.cmMemberVO.cmRegnum}"</c:if>></td>		
+								value="${vo.cmRegnum}"></td>		
 						</tr>	
 						<tr>
-							<td class="titleTD">인증상태</td>
-							<td>인증</td>		
+							<td class="titleTD">기업구분</td>
+							<td>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="1"> 대기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="2"> 중견기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="3"> 강소기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="4"> 중소기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="5"> 외국계(법인)
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="6"> 코스닥
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="7"> 벤처
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="8"> 코스피
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="9"> 기술혁신기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="10"> 공사.공기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="11"> 외부감사법인
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="12"> 수출입기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="13"> 학교.교육기관
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="14"> 코넥스
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="15"> 경영혁신기업
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="csNo" value="16"> 우수기업
+								</label>
+							</td>		
 						</tr>	
 						<tr>
 							<td class="titleTD">담당자명</td>
-							<td><input type="text" class="form-control"></td>		
+							<td>${vo.cmManager}</td>		
 						</tr>	
 						<tr>
 							<td class="titleTD">전화번호</td>
-							<td><input type="text" class="form-control"></td>		
+							<td>${vo.cmMgrTel}</td>		
 						</tr>	
 						<tr>
 							<td class="titleTD">사업자<br>등록첨부</td>
@@ -368,8 +422,8 @@
 	</div>
 	<!-- 모달 전체 윈도우 -->
 	
-	
-	<!-- 프로필 사진수정 모달 -->
+<!-- 	
+	프로필 사진수정 모달
 		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" ariahidden="true">
 		<div class="modal-dialog">
@@ -398,12 +452,14 @@
 				
 				</div>
 			</div>
-			<!-- 모달 콘텐츠 -->
+			모달 콘텐츠
 		</div>
-		<!-- 모달 다이얼로그 -->
+		모달 다이얼로그
 	</div>
-	<!-- 모달 전체 윈도우 -->
-	
+	모달 전체 윈도우 -->
+	</form>
+		</div>
+		</div>
 	 </div>
 	 <c:import url="../../index/footer.jsp" />
 </body>
