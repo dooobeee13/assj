@@ -14,7 +14,7 @@
 		#{hnStatus},#{hnGender},#{hnRecruitNum},#{eduNo},#{careerNo})
 	</insert>
 	
-	<select id="selectHiriNoti" parameterType="SearchVO" resultType="HireNotiVO">
+	<select id="selectAll" parameterType="SearchVO" resultType="HireNotiVO">
 		select * from hire_noti order by hn_no desc
 	
 	</select>

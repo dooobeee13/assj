@@ -133,7 +133,8 @@
 </head>
 <body>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
-	<%-- <form role="form" class="form-inline" name="frm" method="post" action="<c:url value='hire1.do'/>"> --%>
+	<form name="frm" method="post" action="<c:url value='hire1.do'/>" 
+	onsubmit="return send(this)">
 	<fieldset class="fsmain">
 		
 			<div class="container">
@@ -435,7 +436,8 @@
 						</tr>
 						<tr>
 							<td>*공고제목</td>
-							<td><input type="text" class="form-control" placeholder="제목"></td>
+							<td><input type="text" class="form-control" placeholder="제목"
+								id="hnNotiTitle" name="hnNotiTitle"></td>
 
 						</tr>
 
@@ -443,8 +445,7 @@
 
 				</table>
 			</div>
-			<input type="submit" class="btn btn-primary btn-lg" value="채용공고 등록"
-				onClick="self.location='hire2.do';">
+			<input type="submit" class="btn btn-primary btn-lg" value="채용공고 등록"/>
 		
 	</fieldset>
 	
@@ -719,6 +720,7 @@
 		</div>
 		<!-- 모달 다이얼로그 -->
 	</div>
+	</form>
 	<!-- 모달 전체 윈도우 -->
 	
 <!-- 직급/직책 모달  -->
