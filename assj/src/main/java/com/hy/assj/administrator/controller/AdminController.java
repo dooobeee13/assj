@@ -40,6 +40,7 @@ public class AdminController {
 	@RequestMapping(value="/news/updatenews.do",method=RequestMethod.GET)
 	public String updateNews() {
 		
+		
 		return "administrator/news/updatenews";
 	}
 	@RequestMapping(value="/news/insertNews.do",method=RequestMethod.POST)
@@ -56,6 +57,10 @@ public class AdminController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		
+		if(fileName==null) {
+			fileName=" ";
 		}
 
 		vo.setNewsURL(fileName);
