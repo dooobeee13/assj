@@ -105,7 +105,7 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 1480px;
+    height: 1440px;
   } 
   
   
@@ -183,9 +183,9 @@
 						</tr>
 				</table><br><br>
 				<h4><b>인사담당자 정보</b></h4>
-				<input type="text" id="cmNo" name="cmNo" value="${vo.cmNo}">
-				<input type="text" id="cmTel" value="${vo.cmMgrTel}">
-				<input type="text" id="cmMail" value="${vo.cmEmail}">
+				<input type="hidden" id="cmNo" name="cmNo" value="${vo.cmNo}">
+				<input type="hidden" id="cmTel" value="${vo.cmMgrTel}">
+				<input type="hidden" id="cmMail" value="${vo.cmEmail}">
 				<table class="table">
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;담당자</td>
@@ -263,7 +263,7 @@
 			<br>
 				<div id="btnDiv">
 					<button type="submit" class="btn btn-primary btn-lg">수정하기</button>
-					<button type="button" class="btn btn-default btn-lg">취소하기</button>
+					<a href="<c:url value='/index.do'/>"><button type="button" class="btn btn-default btn-lg">취소하기</button></a>
 				</div>
 		</fieldset>
 

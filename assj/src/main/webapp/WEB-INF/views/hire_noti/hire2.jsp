@@ -17,7 +17,10 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet"> 
 <style type="text/css"> 
-	
+	.se1{
+		padding-left: 200px;
+		padding-right: 200px;
+	}
 	
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -32,7 +35,7 @@
 	</header>
 	<h1 class="text-center">전체공고 / 지원자 관리</h1>
 
-	<section style="padding-left: 200px">
+	<section class="se1">
 	<ul class="nav nav-tabs" id="">
 		<li><a href="#">진행중(0건)</a></li>
 		<li><a href="#">대기(0건)</a></li>

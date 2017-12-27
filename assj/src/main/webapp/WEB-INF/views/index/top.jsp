@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <script>
 	$(function(){
 		$('.searchjob').hover(function(){
@@ -22,12 +25,14 @@
 		</c:if>
 		<!-- 개인회원 로그인후 -->
 		<c:if test="${!empty sessionScope.memberVO}">
+			<a href="<c:url value='/member/menu/serviceCenter.do'/>"><b>고객센터</b></a>
 			<a href="<c:url value='/member/out/psMemOut.do'/>"><b>회원탈퇴</b></a>								
 			<a href="<c:url value='/member/edit/psMemEdit.do'/>"><b>회원정보수정</b></a>
 			<a href="<c:url value='/logout.do'/>"><b>로그아웃</b></a>
 		</c:if>
 		<!-- 기업회원 로그인후-->
 		<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
+			<a href="<c:url value='/member/menu/serviceCenter.do'/>"><b>고객센터</b></a>
 			<a href="<c:url value='/member/out/cmMemOut.do'/>"><b>회원탈퇴</b></a>						
 			<a href="<c:url value='/member/edit/cmMemEdit.do'/>"><b>회원정보수정</b></a>
 			<a href="<c:url value='/logout2.do'/>"><b>로그아웃</b></a>

@@ -52,6 +52,9 @@ form {
 	width: 95%;
 	margin: 0 auto;
 }
+table{
+	padding:10px;
+}
 
 
   /*  	 #page-wrapper {
@@ -71,7 +74,7 @@ form {
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 940px;
+    height: 900px;
   } 
 
    .sidebar-nav {

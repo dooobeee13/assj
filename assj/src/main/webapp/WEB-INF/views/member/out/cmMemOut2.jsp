@@ -56,7 +56,7 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 670px;
+    height: 660px;
   } 
   
   
