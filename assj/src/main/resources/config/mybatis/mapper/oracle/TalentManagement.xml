@@ -42,6 +42,7 @@
 					index="index" open="(" close=")" separator=",">
 					#{Name}
 				</foreach>
+				
 			</if>
 			
 			<if test="AREA_NAME != null">
