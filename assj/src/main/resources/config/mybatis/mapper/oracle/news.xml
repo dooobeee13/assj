@@ -11,15 +11,7 @@
 		values(#{newsNo},#{newsTitle},#{newsURL},#{newsWriter},#{newsContent},sysdate)
 	</insert>
 	
-	<select id="selectNews" resultType="map">
+	<select id="selectNews"  resultType="map">
 		select * from news
 	</select>
 </mapper>
-
-
-
-
-
-
-
-

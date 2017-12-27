@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,17 +25,22 @@ public class NewsInfoController {
 	private AdminService adminService;
 	
 	@RequestMapping(value="/news_main.do",method=RequestMethod.GET)
-	public void newsMain(Model model) {
+	public String newsMain(Model model) {
+		List<Map<String, Object>> list = adminService.selectNews();
 		
+		model.addAttribute("list",list);
+		logger.info("뉴스 목록 결과 list.size()={}",list.size());
+		return "news_Info/news_main";
 	}
 	
 	@RequestMapping("/news_data.do")
 	public @ResponseBody List<Map<String, Object>> newsdata() {
 		
 		List<Map<String, Object>> list = adminService.selectNews();
+		logger.info("뉴스 목록 결과 list.size()={}",list.size());
+		/*List<Map<String, Object>> list = new ArrayList<>();
 		
-		
-		/*Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("NEWS_NO", 1);
 		map.put("NEWS_TITLE", "이 여자는 오늘부터 제껍니다");
 		map.put("NEWS_URL", "05fde46fdf10e4953da63be7b15fed9f6338cecf.jpg");
