@@ -1,32 +1,43 @@
 @charset "UTF-8";
-
-div{
-	margin:0;
+*{
+	border-collapse: collapse;
+}
+.talentedsearchcontainer div{
 	padding:0;
 	font-size:13px;
 	text-align: left;
 }
-li,ul{
+.talentedsearchcontainer li,.talentedsearchcontainer ul{
 	list-style-type: none;
 	list-style: none;
-	margin:0px; 
 	padding:0px;
+	margin: 0 auto;
 }
-li{
+.talentedsearchcontainer li{
 	padding-left:2em;
 }
-h3{
+.talentedsearchcontainer h3{
 	margin: 0;
 	padding-left:30px;
 	text-align: left;
 	font-size:1.5em;
 }
+
 .talentedsearchcontainer{
 	position: relative;
-	overflow:scroll;
+	overflow-y:scroll;
 	background:white;
 	width: 1300px;
-	border: 1px solid #b8b8b8;
+	margin: 0 auto;
+	padding: auto;
+/* 	margin-bottom:6em;
+	margin-top:2em;
+	padding-bottom:4em; */
+}
+.interview-container{
+	position: relative;
+	background:white;
+	width: 1200px;
 	margin: 0 auto;
 	padding: auto;
 }
@@ -76,7 +87,7 @@ h3{
 }
 .optionbar>li{
 	position:relative;
-	width:8%;
+	width:12.5%;
 	display: list-item;
 	float:left;
 	height: 70px;
@@ -84,12 +95,12 @@ h3{
 	text-align: center;
 	color: #b8b8b8;
 }
-img{
+.talentedsearchcontainer img{
 	display: block;
 	margin: auto;
 	size: auto;
 }
-a{
+.talentedsearchcontainer a{
 	text-decoration: none;
 	color: black;
 	padding:0;
@@ -134,13 +145,13 @@ a{
 	width:19%;
 	float:left;
 }
-input[type=checkbox]{
+.talentedsearchcontainer input[type=checkbox]{
 	width:1.5em;
 	height:1.5em;
 	background-color:white;
 	border: 3px solid #b8b8b8; 
 }
-label{
+.talentedsearchcontainer label{
 	vertical-align: top;
 	margin-right: 1.5em;
 	font-size: 1em;
@@ -310,6 +321,7 @@ label{
 	float:left;
 	box-sizing: border-box;
 }
+
 .col-div-50-50{
 	padding:0;
 	margin:0;
@@ -939,4 +951,58 @@ label{
 }
 .AreaSelectLI li{
 	background-color:#f4f4f4;
+}
+.interview-table{
+	width:95%;
+	margin: auto;
+	box-sizing: border-box;
+}
+.interview-table th{
+	border:1px solid #b8b8b8;
+	background-color:#f4f4f4;
+	border-bottom:none;
+	height:50px;
+	
+}
+.interview-table td{
+	height:60px;
+	
+}
+.inter-select{
+	border: 1px solid #5B5B5B;
+	border-bottom:none;
+	background:white !important;
+	box-sizing: border-box;
+	z-index: 100;
+}
+.none-select{
+	border-bottom:1px solid #5B5B5B;
+	background:#f7f7f7;
+	box-sizing: border-box;
+	z-index: 100;
+}
+.interview-title{
+	font-size:1.4em;
+	text-align: center;
+	margin-top:0.4em;
+}
+.interview-top span{
+	display:table; 
+	margin-left:auto; 
+	margin-right:auto;
+}
+.major_01 li{
+	padding:0;
+}
+.cals> *, .fors> *{
+	margin-bottom:1em;
+}
+.rele-titles{
+	height:60px; 
+	background: #f7f7f7; 
+	padding-top:15px; 
+	padding-left:2em;
+	margin-bottom:2em;
+	margin-left: 8em;
+	margin-top: 0.7em;
 }

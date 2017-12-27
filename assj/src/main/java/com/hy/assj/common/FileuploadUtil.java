@@ -28,6 +28,7 @@ public class FileuploadUtil {
 	//파일업로드 경로 관련 상수
 	public static final int CM_LOGO=1;  //자료실 업로드인 경우
 	public static final int IMAGE_UPLOAD=2;  //상품등록시 이미지 업로드인 경우
+	public static final int NEWS_IMAGE=3; //뉴스에 들어가는 이미지 업로드인 경우
 	
 	
 	@Resource(name="fileUploadProperties")
@@ -131,6 +132,9 @@ public class FileuploadUtil {
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath
 				=fileProperties.getProperty("imageFile.upload.path.test");
+			}else if(uploadGb==NEWS_IMAGE) {
+				upPath
+				=fileProperties.getProperty("newsFile.upload.path.test");
 			}
 			
 			logger.info("test 경로:"+ upPath);
@@ -140,7 +144,10 @@ public class FileuploadUtil {
 				upPath=fileProperties.getProperty("file.upload.path");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path");
+			}else if(uploadGb==NEWS_IMAGE) {
+				upPath=fileProperties.getProperty("newsFile.upload.path");
 			}
+			
 			logger.info("배포시 경로:"+ upPath);
 			
 			//실제 물리적인 경로 구하기

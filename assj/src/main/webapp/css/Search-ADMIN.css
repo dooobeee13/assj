@@ -1,5 +1,19 @@
 @charset "UTF-8";
-
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+      @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+      @import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+      @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+      @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+      @import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+      @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+      @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+      @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+      @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+      @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{
+	font-family: 'Jeju Hallasan';
+}
 div{
 	margin:0;
 	padding:0;
@@ -463,6 +477,14 @@ label{
 	float:left;
 	box-sizing: border-box;
 }
+.col-div-35-80{
+	padding:0;
+	margin:0;
+	width:35%;
+	height:80%;
+	float:left;
+	box-sizing: border-box;
+}
 .col-div-50-50{
 	padding:0;
 	margin:0;
@@ -476,6 +498,14 @@ label{
 	margin:0;
 	width:50%;
 	height:100%;
+	float:left;
+	box-sizing: border-box;
+}
+.col-div-65-80{
+	padding:0;
+	margin:0;
+	width:65%;
+	height:80%;
 	float:left;
 	box-sizing: border-box;
 }
@@ -564,6 +594,14 @@ label{
 	margin:0;
 	width:100%;
 	height:80%;
+	float:left;
+	box-sizing: border-box;
+}
+.col-div-90-90{
+	padding:0;
+	margin:0;
+	width:90%;
+	height:90%;
 	float:left;
 	box-sizing: border-box;
 }
@@ -1123,4 +1161,21 @@ label{
 	box-sizing: border-box;
 	background:#FBFFFF;
 	box-shadow: 2px 2px 2px #b8b8b8;
+	border-radius: 12px 12px 0 0;
+}
+.statics{
+	box-shadow: 2px 2px 2px #b8b8b8;
+}
+.newsform{
+	border-collapse: collapse;
+}
+.newsform th, .newsform td{
+	border: 1px solid #b8b8b8;
+	
+}
+.newsform td{
+	padding-left:2em;
+}
+.newsform th:nth-child(1+1n), .newsform td:nth-child(1n+1){
+	background:#D0E8FF;
 }
