@@ -75,7 +75,7 @@
 
 					<div class="row searchCategory"
 						style="position: absolute; z-index: 1; background: #fff; width: 600px">
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">지역별</div>
 							<div class="panel-body">
 								<span>서울</span> <span>경기</span> <span>인천</span> <span>부산</span>
@@ -85,7 +85,7 @@
 								<span>세종</span>
 							</div>
 						</div>
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">직업별(직종)</div>
 							<div class="panel-body">
 								<span>경영·사무</span> <span>생산·제조</span> <span>건설</span> <span>영업·고객상담</span>
@@ -94,7 +94,7 @@
 								<span>특수계층·공공</span>
 							</div>
 						</div>
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">기업별</div>
 							<div class="panel-body">
 								<span>대기업</span> <span>외국계 기업</span> <span>공사·공기업·공공기관</span> <span>상장기업</span>
@@ -102,7 +102,7 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">전공별</div>
 							<div class="panel-body">
 								<span>기계공학</span> <span>전기공학</span> <span>건축토목</span> <span>재료금속</span>
@@ -110,7 +110,7 @@
 								<span>생명공학</span> <span>디자인</span> <span>컴퓨터공학</span> <span>전공무관</span>
 							</div>
 						</div>
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">산업별(업종)</div>
 							<div class="panel-body">
 								<span>제조·화학</span> <span>서비스업</span> <span>은행·금융업</span> <span>IT·통신</span>
@@ -118,7 +118,7 @@
 								<span>교육업</span> <span>기관·협회</span>
 							</div>
 						</div>
-						<div class="panel panel-default col-md-4">
+						<div class="panel panel-default col-md-4 total">
 							<div class="panel-heading">학력별</div>
 							<div class="panel-body">
 								<span>고졸채용</span> <span>2·3년제 채용</span> <span>4년제졸업</span> <span>석박사채용</span>
