@@ -174,6 +174,7 @@ public class HireNotiVO {
 	public void setCareerNo(int careerNo) {
 		this.careerNo = careerNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "HireNotiVO [hnNo=" + hnNo + ", hnNotiTitle=" + hnNotiTitle + ", cmNo=" + cmNo + ", hnSalStart="

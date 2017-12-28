@@ -41,7 +41,8 @@
 		<li><a href="#">대기(0건)</a></li>
 		<li><a href="#">마감(0건)</a></li>
 		<li><a href="#">전체(0건)</a></li>
-		<li><input type="button" class="btn btn-primary btn-md" value="채용공고 등록" onClick="self.location='hire1.do';"></li>
+		<li><input type="button" class="btn btn-primary btn-md" value="채용공고 등록" 
+		onClick="self.location='hire1.do';"></li>
 		
 	</ul>
 	
