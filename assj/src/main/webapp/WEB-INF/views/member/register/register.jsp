@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
+    
     
     <script type="text/javascript">
     	$(window).load(function(){

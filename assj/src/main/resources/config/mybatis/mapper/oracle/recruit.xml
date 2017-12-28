@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.recruit">
+	
+	<resultMap type="HireNotiVO" id="hnAndCategory">
+		<id property="hnNo" column="hn_no"/>
+		<result property="hnNotititle" column="hn_notititle"/>
+		<result property="cmNo" column="cm_no"/>
+		<result property="hnSalStart" column="hn_sal_start"/>
+		<result property="hnSalEnd" column="hn_sal_end"/>
+		<result property="hnViews" column="hn_views"/>
+		<result property="hnStart" column="hn_start"/>
+		<result property="hnDeadline" column="hn_deadline"/>
+		<result property="hnHows" column="hn_hows"/>
+		<result property="hnTask" column="hn_task"/>
+		<result property="hnEligibility" column="hn_eligibility"/>
+		<result property="hnPreference" column="hn_preference"/>
+		<result property="hnStep" column="hn_step"/>
+		<result property="hnBenefists" column="hn_benefits"/>
+		<result property="hnDocument" column="hn_document"/>
+		<result property="hnAddr" column="hn_addr"/>
+		<result property="hnDetailAddr" column="hn_detailAddr"/>
+		<result property="hnLat" column="hn_lat"/>
+		<result property="hnLng" column="hn_lng"/>
+		<result property="hnStatus" column="hn_status"/>
+		<result property="hnGender" column="hn_gender"/>
+		<result property="hnRecruitNum" column="hn_recruit_num"/>
+		<result property="hnEduNo" column="hn_edu_no"/>
+		<result property="careerNo" column="career_no"/>
+		<collection property="majorList" ofType="MajorVO">
+			<id property="majorNo" column="major_no" />
+			<result property="majorName" column="major_name"/>
+		</collection>
+		<collection property="positionList" ofType="PositionVO">
+			<id property="positionNo" column="position_no" />
+			<result property="positionName" column="position_name"/>
+		</collection>
+		<collection property="occupationList" ofType="OccupationVO">
+			<id property="occuNo" column="occu_no" />
+			<result property="occuName" column="occu_name"/>
+		</collection>
+		<collection property="rankList" ofType="RankVO">
+			<id property="rankNo" column="rank_no" />
+			<result property="rankName" column="rank_name"/>
+		</collection>
+		<collection property="sectorList" ofType="SectorsVO">
+			<id property="secNo" column="sec_no" />
+			<result property="secName" column="sec_name"/>
+		</collection>
+		<collection property="empTypeList" ofType="EmpTypeVO">
+			<id property="etNo" column="et_no" />
+			<result property="etName" column="et_name"/>
+		</collection>
+	</resultMap>
+
+
+	<select id="selectHireNoti" resultMap="hnAndCategory">
+		select h.*, he.et_no, et.et_name, hm.major_no, m.major_name, ho.occu_no, o.occu_name, hp.position_no, p.position_name, 
+		hr.rank_no, r.rank_name, hs.sec_no, s.sec_name
+		from hire_noti h join hn_et he on h.hn_no = he.hn_no
+		join hn_major   hm on h.hn_no = hm.hn_no
+		join hn_occu    ho on h.hn_no = ho.hn_no
+		join hn_pos     hp on h.hn_no = hp.hn_no
+		join hn_rank    hr on h.hn_no = hr.hn_no
+		join hn_sec     hs on h.hn_no = hs.hn_no
+		join emp_type   et on et.et_no = he.et_no
+		join major      m  on m.major_no = hm.major_no
+		join occupation o  on o.occu_no = ho.occu_no
+		join position   p  on p.position_no = hp.position_no
+		join rank       r  on r.rank_no =  hr.rank_no
+		join sectors    s  on s.sec_no = hs.sec_no
+		where h.hn_no = #{hnNo}
+	</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+

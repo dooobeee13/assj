@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이력서 등록</title>
 <!-- Bootstrap -->
-<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -21,7 +21,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link href="<c:url value='/css/resume.css'/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/resume.css" rel="stylesheet">
 <script src="<c:url value='/js/resume.js'/>"></script>
 
 <style type="text/css">
@@ -61,7 +61,6 @@ function OntextCheck(obj)
 </script>
 </head>
 <body>
-
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
 		id="topNav">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -119,31 +118,72 @@ function OntextCheck(obj)
 	<div class="container-fluid" id="main">
 
 		<div class="row">
-			<form name="resumeForm" id="resumeForm" action="">
-			<input type="hidden" name="resumeBirth" id="resumeBirth">
-			<input type="hidden" name="resumePhone" id="resumePhone">			
+			<form name="resumeForm" id="resumeForm" method="post" action="<c:url value='/resume/resumeInsert.do'/>" enctype="multipart/form-data">
+			
+			<input type="hidden" name="resumeBirth1" id="resumeBirth1" value="1988/11/10">
+			<input type="hidden" name="resumePhone" id="resumePhone">
+			<input type="hidden" name="resumeMilStart" id="resumeMilStart">
+			<input type="hidden" name="resumeMilEnd" id="resumeMilEnd">
+			<input type='hidden' name='shVOList[0].shAyear' id='shAyear0'>
+			<input type='hidden' name='shVOList[0].shGyear' id='shGyear0'>
+			
+			<input type="hidden" name="eduName" id="eduName" value="최종학력예비값">
+			<input type="hidden" name="eduNo" id="eduNo" value="1">
+			<input type="hidden" name="resumeSalOpt" id="resumeSalOpt">
+			<input type="hidden" name="resumeVisibility" id="resumeVisibility" value="Y">
 			
 			<div class="col-sm-3 col-md-2 sidebar" id="sideBar">
 					<script type="text/javascript">
 					$(function(){
-						$('#profileImg').click(function(){
-							window.open("<c:url value='/profileImg/profileImg.jsp'/>",
-									'imgForm',
-									'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');							
+						
+					
+						 $('#imgTest').click(function(){
+							 
+							var result = confirm("이력서 사진 등록 전에, 사진을 알맞게 편집하시겠습니까?");
+							
+							if(result){
+								window.open("https://fengyuanchen.github.io/photo-editor",
+										'imgForm',
+										'left=500,top=0,width=550,height=700,locations=yes,resizable=yes');										
+							}else{
+								$('#file1').click();
+							}
+							 
+						}); 
+						
+						$('#file1').on("change",function(){
+							readURL(this);
 						});
+						  function readURL(input) {
+					            if (input.files && input.files[0]) {
+					            var reader = new FileReader();
+
+					            reader.onload = function (e) {
+					                    $('#imgTest').attr('src', e.target.result);
+					                }
+
+					              reader.readAsDataURL(input.files[0]);
+					            }
+					        }
+						  
+						  
 					});
 					</script>
 					
 					<ul class="nav nav-sidebar">
 						<li>
 							<input type="file" name="file1" id="file1" style="display: none;">
+							<%-- <a href="#">
+								<img class="img-profile img-circle" id="profileImg" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
+							</a> --%>
+							
 							<a href="#">
-								<img class="img-profile img-circle" id="profileImg"
-								 src="${pageContext.request.contextPath }/resume/img/img_photo_null.gif" />
+								<img class="img-profile img-circle" id="imgTest" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
 							</a>
 							
 							
 						</li>
+						
 						<li class="nav-item"><a class="nav-link" href="#basic">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#basic2">기본 정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="#mil">병역 사항</a></li>
@@ -155,8 +195,7 @@ function OntextCheck(obj)
 						<li class="nav-item"><a class="nav-link" href="#pt">포트폴리오</a></li>
 						<li class="nav-item"><a class="nav-link" href="#hope">희망 근무조건</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">
-						<input type="image" id="imgSubmit" width="100%" height="100%" 
-						src="<c:url value='/images/button/write_complete.png'/>">
+						<input type="image" id="imgSubmit" width="100%" height="100%" src="<c:url value='/images/button/write_complete.png'/>">
 						</a></li>						
 					</ul>
 				
@@ -375,7 +414,7 @@ function OntextCheck(obj)
 						<label for="insertLb">재학 기간<span class="res-star">*</span></label>
 						<br>
 						<label class="form-inline"> 
-							<select name="sh_start_year" id="sh_start_year"   class="form-control" style="width: 100px">
+							<select name="sh_start_year" class="form-control" style="width: 100px">
 									<option value=""></option>
 									<c:forEach var="i" begin="0" end="${2016-1930}">
 										<c:set var="resultYear" value="${2016-i }" />
@@ -383,25 +422,27 @@ function OntextCheck(obj)
 									</c:forEach>
 							</select> 
 							.
-							<select name="sh_start_month" id="sh_start_month" class="form-control" style="width: 80px">
+							<select name="sh_start_month"  class="form-control" style="width: 80px">
 							<option value=""></option>
 									<c:forEach var="i" begin="1" end="${12}">
 										<option value="${i}">${i}</option>
 									</c:forEach>
 							</select> 
 							
+							
 							~ 
-							<select name="sh_end_year" id="sh_end_year"  class="form-control" style="width: 100px">
+							<select name="sh_end_year"  class="form-control" style="width: 100px">
 								<option value=""></option>									
 							</select> 
 							.
-							<select name="sh_end_month" id="sh_end_month" class="form-control" style="width: 80px">
+							<select name="sh_end_month" class="form-control" style="width: 80px">
 							<option value=""></option>
 									<c:forEach var="i" begin="1" end="${12}">
 										<option value="${i}">${i}</option>
 									</c:forEach>
 							</select> 
-						</label> 
+						</label>
+						
 						<br>
 						<label class="form-inline"> 
 						<select name="shAwhether" id="shAwhether" class="form-control">
@@ -441,93 +482,44 @@ function OntextCheck(obj)
 				</section>
 
 				<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="sh2">
-					<div class="my-auto">
 					
+					<div>
 					<h4 class="mb-5">학력 사항</h4>
+						<label style="color: gray; font-size: 8px;">대학, 석사, 박사 등의 학력을 추가할 수 있습니다</label>
+					</div>
 					
-						<div class="col-sm-3 col-md-3 shDiv">
-							<label for="insertLb">재학 기간<span class="res-star">*</span></label>
-						<br>
-							
-							<label class="form-inline"> 
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">~ 
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">
-							</label> 
-							<br>
-							<label class="form-inline"> 
-							<select name="shAwhether" id="shAwhether" class="form-control">
-									<option value="입학">입학</option>
-									<option value="편입">편입</option>
-							</select>
-							 <span>&nbsp;&nbsp;</span> 							
-							<c:set var="gwArr">졸업,재학중,휴학중,수료,중퇴,자퇴,졸업예정</c:set> 
-							<select name="shGwhether" id="shGwhether" class="form-control">
-									<c:forEach var="gw" items="${gwArr }">
-										<option value="${gw }">${gw}</option>
-									</c:forEach>
-							</select>
-							</label> 
-						</div>
+					
+					
 						
-						<div class="col-sm-3 col-md-3 shDiv">
-						<label for="insertLb">학교명<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="shName" id="shName" placeholder="대학교 입력"> 
-							<select name="eduNo" id="eduNo" class="form-control">
-							<!-- 학력 테이블 참조해서 반복문 -->
-								<option value="대학(2,3)년">입학</option>
-								<option value="대학교(4년)">대학교(4년)</option>
-								<option value="대학원(석사)">대학원(석사)</option>
-								<option value="대학원(박사)">대학원(박사)</option>
-							</select> 
-							<br> 
+  <script type="text/javascript">
+  $(function(){
+		$(document).on("change","select[name=shMajor]",function(){
+			
+			var no =$("option:selected",this).index()+1;	
+			var $thisSel = $(this);
+		    
+			$(this).next().next().find("option").remove();
+			
+			$.ajax({
+				url:"<c:url value='/resume/resumeMajorDetail.do' />",
+				type:"post",
+				data:"no="+no,
+				dataType:"json",
+				success:function(majorVO){
+					$.each(majorVO,function(index,item){
+						$thisSel.next().next().append("<option value='"+item.majorNo+"'>"+item.majorName+"</option>");
+					});
+				},
+				error:function(xhr,status,error){
+					alert("에러발생:"+status+"=>"+error);
+				}
+				
+			});	
+		});		
+	 
+  });
+  </script>
 							
-							
-						</div>
-						<div class="col-sm-3 col-md-3 shDiv">
-						<label for="insertLb">전공<span class="res-star">*</span></label>
-					<!-- 	지역 테이블 참조해서 반복문 -->
-						<c:set var="areaArr">서울,경기,인천,부산,대구,대전,세종,광주,울산,강원,경남,경북,전남,전북,충남,충북,제주</c:set>
-							<select name="shMajor" id="shMajor" class="form-control">
-								<c:forEach var="area_item" items="${areaArr }">
-									<option value="" ${area_item }>${area_item }</option>
-								</c:forEach>
-							</select>
-							
-							 <br>
-							  
-							 <!--  전공 테이블 참조해서 반복문  -->
-							 <!-- select 2개로 큰전공 카테고리, 작은전공 카테고리 사용
-							 작은 카테고리 안에 세부전공이 없다면 입력할 수 잇는 text박스 제공
-							  -->
-							<c:set var="majorArr">기계공학,전기전자,건축토목,재료금속,산업공학,법학사회,어문학,화학공학,생명공학,디자인,컴퓨터 IT,전공무관</c:set>
-							<select name="shMajordetail1" id="shMajordetail1" class="form-control">
-								<c:forEach var="majorItem" items="${majorArr}">
-									<option value="${majorItem}">${majorItem }</option>
-								</c:forEach>
-							</select> 
-							
-							<br>
-							
-							 <input type="text" class="form-control" name="shMajordetail2" id="shMajordetail2" placeholder="전공학과 입력"> 
-						</div>
-						
-						<div class="col-sm-3 col-md-3 shDiv">
-						<label for="insertLb">학점</label>
-						<label class="form-inline">
-							 <input type="text" class="form-control" name="shGrade" id="shGrade" > 
-						</label>
-						<br><br><br>
-						<label for="insertLb">최종 학력 선택<span class="res-star">*</span></label>
-							<label>
-							<input type="radio" name="shNo" checked >							
-							</label>
-							<br><br>
-							<img alt="학력 삭제" name="delSHImg"  src="${pageContext.request.contextPath}/images/button/btn_layer_del.gif">
-						</div>
-						
-						</div>
 						
 						<div style="clear: both" class="clearDiv"></div>
 						<div style="clear: both; display: none;" id="clearBasicDiv"></div>
@@ -539,22 +531,44 @@ function OntextCheck(obj)
 						</div>						
 						
 						
+						
 							
 						
 
-		<div id="shBasicDiv" style="display: none;">
+		<div class="shBasicDiv" style="display: none; border: 1px solid gray; margin-top: 10px; padding: 10px;">
 					
-					<h4 class="mb-5">학력 사항</h4>
+						
 					
 						<div class="col-sm-3 col-md-3 shDiv">
 							<label for="insertLb">재학 기간<span class="res-star">*</span></label>
 						<br>
 							
 							<label class="form-inline"> 
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">~ 
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">
+							<select name="basic_ssy"    class="form-control" style="width: 100px">
+									<option value=""></option>
+									<c:forEach var="i" begin="0" end="${2016-1930}">
+										<c:set var="resultYear" value="${2016-i }" />
+										<option value="${resultYear }">${resultYear }</option>
+									</c:forEach>
+							</select> 
+							.
+							<select name="basic_ssm" class="form-control" style="width: 80px">
+							<option value=""></option>
+									<c:forEach var="i" begin="1" end="${12}">
+										<option value="${i}">${i}</option>
+									</c:forEach>
+							</select> 
+							~ 
+							<select name="basic_sey"  class="form-control" style="width: 100px">
+								<option value=""></option>									
+							</select> 
+							.
+							<select name="basic_sem"  class="form-control" style="width: 80px">
+							<option value=""></option>
+									<c:forEach var="i" begin="1" end="${12}">
+										<option value="${i}">${i}</option>
+									</c:forEach>
+							</select>
 							</label> 
 							<br>
 							
@@ -576,52 +590,46 @@ function OntextCheck(obj)
 						<div class="col-sm-3 col-md-3 shDiv">
 						<label for="insertLb">학교명<span class="res-star">*</span></label>
 							<input type="text" class="form-control" name="shName" id="shName" placeholder="대학교 입력"> 
-							<select name="eduNo" id="eduNo" class="form-control">
-								<option value="대학(2,3)년">입학</option>
+							<select name="eduName" id="eduName" class="form-control">
+								<option value="대학(2,3)년">대학교(2,3년)</option>
 								<option value="대학교(4년)">대학교(4년)</option>
 								<option value="대학원(석사)">대학원(석사)</option>
 								<option value="대학원(박사)">대학원(박사)</option>
 							</select> 
 							<br>
+							<select name="areaName" id="areaName" class="form-control">
+								<c:forEach var="areaTop" items="${areaListTop}">
+									<option value="${areaTop.areaName }">${areaTop.areaName }</option>
+								</c:forEach>
+							</select>
 						</div>
 						
 						<div class="col-sm-3 col-md-3 shDiv">
 						<label for="insertLb">전공<span class="res-star">*</span></label>
-					<!-- 	지역 테이블 참조해서 반복문 -->
-						<c:set var="areaArr">서울,경기,인천,부산,대구,대전,세종,광주,울산,강원,경남,경북,전남,전북,충남,충북,제주</c:set>
-							<select name="shMajor" id="shMajor" class="form-control">
-								<c:forEach var="area_item" items="${areaArr }">
-									<option value="" ${area_item }>${area_item }</option>
-								</c:forEach>
-							</select>
+					
 							
-							 <br>
-							  
-							 <!--  전공 테이블 참조해서 반복문  -->
-							 <!-- select 2개로 큰전공 카테고리, 작은전공 카테고리 사용
-							 작은 카테고리 안에 세부전공이 없다면 입력할 수 잇는 text박스 제공
-							  -->
-							<c:set var="majorArr">기계공학,전기전자,건축토목,재료금속,산업공학,법학사회,어문학,화학공학,생명공학,디자인,컴퓨터 IT,전공무관</c:set>
-							<select name="shMajordetail1" id="shMajordetail1" class="form-control">
-								<c:forEach var="majorItem" items="${majorArr}">
-									<option value="${majorItem}">${majorItem }</option>
+							<select name="shMajor"  class="form-control">
+								<c:forEach var="majorTop" items="${majorListTop}">
+									<option value="${majorTop.majorName}">${majorTop.majorName }</option>
 								</c:forEach>
 							</select> 
 							
 							<br>
 							
-							 <input type="text" class="form-control" name="shMajordetail2" id="shMajordetail2" placeholder="전공학과 입력"> 
-						</div>
+							<select name="shMajordetail"  class="form-control">
+								<option>상위 전공을 먼저 선택하세요.</option>
+							</select>
+							</div>
 						
 						<div class="col-sm-3 col-md-3 shDiv">
 						<label for="insertLb">학점</label>
 						<label class="form-inline">
-							 <input type="text" class="form-control" name="shHrade" id="shGrade" > 
+							 <input type="text" class="form-control" name="shGrade" id="shGrade" > 
 						</label>
 						<br><br><br>
 						<label for="insertLb">최종 학력 선택<span class="res-star">*</span>
 							
-							<input type="radio" name="shNo">								
+							<input type="radio" name="eduNo">								
 							</label>
 							<br><br>
 							<img alt="학력 삭제" name="delSHImg" src="${pageContext.request.contextPath}/images/button/btn_layer_del.gif">
@@ -644,27 +652,48 @@ function OntextCheck(obj)
 						
 						</div>
 						
-						<div id="ehBasicDiv" style="display: none;">						
+					<div id="ehBasicDiv" style="display: none;">						
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 						<label for="insertLb">교육명<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="ehCsname" id="ehCsname" placeholder="교육 명"> 							
+							<input type="text" class="form-control" name="ehName" id="ehName" placeholder="교육 명"> 							
 							<br>
 						</div>
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 						<label for="insertLb">교육 기관<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="ehInstitution" id="ehInstitution" placeholder="교육기관 명">
+							<input type="text" class="form-control" name="ehIns" id="ehIns"  placeholder="교육기관 명">
 						</div>	
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 							<label for="insertLb">교육 기간<span class="res-star">*</span></label>	
 							<label class="form-inline"> 
 							<!-- 수료시작일 수료종료일 -->
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">~ 
-							<input type="text" class="form-control" name="" id="" style="width: 50px">.
-							<input type="text" class="form-control" name="" id="" style="width: 50px">
+							<select name="basic_esy"  class="form-control" style="width: 100px">
+									<option value=""></option>
+									<c:forEach var="i" begin="0" end="${2016-1930}">
+										<c:set var="resultYear" value="${2016-i }" />
+										<option value="${resultYear }">${resultYear }</option>
+									</c:forEach>
+							</select> 
+							.
+							<select name="basic_esm" class="form-control" style="width: 80px">
+							<option value=""></option>
+									<c:forEach var="i" begin="1" end="${12}">
+										<option value="${i}">${i}</option>
+									</c:forEach>
+							</select> 
+							~ 
+							<select name="basic_eey"  class="form-control" style="width: 100px">
+								<option value=""></option>									
+							</select> 
+							.
+							<select name="basic_eem" class="form-control" style="width: 80px">
+							<option value=""></option>
+									<c:forEach var="i" begin="1" end="${12}">
+										<option value="${i}">${i}</option>
+									</c:forEach>
+							</select>
 							</label> 												
 						</div>
 						
@@ -672,7 +701,7 @@ function OntextCheck(obj)
 						<label for="insertLb">수료 여부<span class="res-star">*</span></label>
 						<br>							
 							<label class="form-inline"> 
-							<select name="ehConfirm" id="ehConfirm" class="form-control">
+							<select name="ehConf" id="ehConf"  class="form-control">
 									<option value="수료">수료</option>
 									<option value="수료예정">수료예정</option>
 									<option value="중퇴">중퇴</option>
@@ -705,7 +734,7 @@ function OntextCheck(obj)
 						<input type="radio" name="optionsRadios1" id="rdExec" value="임원/CEO"> 임원/CEO
 						</label>
 						<div id="careerDiv">
-							<textarea rows="20" class="form-control" id="detailCareer"></textarea>
+							<textarea rows="20" name="resumeCareerList" class="form-control" id="detailCareer"></textarea>
 						</div>
 						<label id="lbChk">
 						<input type="checkbox" name="chkDetailTip" id="chkDetailTip">경력 기술서 쓰는 요령</label>
@@ -738,23 +767,25 @@ function OntextCheck(obj)
 					<h4 class="mb-5">선택 사항 추가</h4>
 
 					<div id="checkDiv">
-						<label class=checkbox-inline> <input type="checkbox"
-							id="chkAct" value="">대외활동&nbsp;&nbsp;&nbsp;
-						</label> <label class=checkbox-inline> <input type="checkbox"
-							id="chkCer" value="">자격증/어학/수상 내용&nbsp;&nbsp;&nbsp;
-						</label> <label class=checkbox-inline> <input type="checkbox"
-							id="chkSkill" value="">보유 기술 및 능력
+						<label class=checkbox-inline> 
+						<input type="checkbox"  id="chkAct" value="">대외활동&nbsp;&nbsp;&nbsp;
+						</label> 
+						<label class=checkbox-inline> 
+						<input type="checkbox"  id="chkCer" value="">자격증/어학/수상 내용&nbsp;&nbsp;&nbsp;
+						</label> 
+						<label class=checkbox-inline> 
+						<input type="checkbox"  id="chkSkill" value="">보유 기술 및 능력
 						</label>
 					</div>
 
 
 
 
-					<div id="addActDiv"></div>
+					<div id="addActDiv" style="margin-bottom: 100px"></div>
 
-					<div id="addCerDiv" style="margin-top: 100px"></div>
+					<div id="addCerDiv" style="margin-bottom: 100px"></div>
 
-					<div id="addSkillDiv" style="margin-top: 100px"></div>
+					<div id="addSkillDiv" style="margin-bottom: 100px"></div>
 					<!-- style="display:none;" -->
 
 					<div id="actDiv" style="display: none;">
@@ -772,32 +803,32 @@ function OntextCheck(obj)
 								</thead>
 								<tbody>
 									<tr class="contents">
-										<td><select name='cer_category' class='form-control'>
-												<option value="license" label="자격증/면허증" selected>자격증/면허증</option>
-												<option value="language_exam" label="어학시험">어학시험</option>
-												<option value="certification" label="수상내역/공모전">수상내역/공모전</option>
+										<td><select name='cCate' class='form-control cCate'>
+												<option value="자격증/면허증" label="자격증/면허증" selected>자격증/면허증</option>
+												<option value="어학시험" label="어학시험">어학시험</option>
+												<option value="수상/공모" label="수상내역/공모전">수상내역/공모전</option>
 										</select></td>
-										<td><input type="text" name="cer_name" id="cer_name"
-											placeholder="1개의 입력란에 하나의 자격증만 입력하세요." class="form-control">
+										<td>
+										<input type="text" name="cName" placeholder="1개의 입력란에 하나의 자격증만 입력하세요." class="form-control">
 										</td>
-										<td><input type="text" name="cer_publisher"
-											id="cer_publisher" placeholder="ex) 한국산업인력공단"
-											class="form-control"></td>
-										<td><select name='cer_accept_score' class='form-control'>
+										<td>
+										<input type="text" name="cPubl" placeholder="ex) 한국산업인력공단" class="form-control"></td>
+										<td>
+										<select name='cAS' class='form-control'>
 												<option value="1차합격" label="1차합격">1차합격</option>
 												<option value="2차합격" label="2차합격">2차합격</option>
 												<option value="필기합격" label="필기합격">필기합격</option>
 												<option value="실기합격" label="실기합격">실기합격</option>
 												<option value="최종합격" label="최종합격">최종합격</option>
 										</select></td>
-										<td><label class='form-inline'> <select name=""
-												id="" class="form-control" style="width: 90px">
+										<td><label class='form-inline'> 
+										<select name="cer_year" class="form-control" style="width: 90px">
 													<c:forEach var="i" begin="0" end="${2016-1900}">
 														<c:set var="resultYear" value="${2016-i }" />
 														<option value="${resultYear }">${resultYear }</option>
 													</c:forEach>
-											</select> &nbsp;.&nbsp; <select name="" id="" class="form-control"
-												style="width: 60px">
+											</select> &nbsp;.&nbsp; 
+											<select name="cer_month" class="form-control" style="width: 60px">
 													<c:forEach var="i" begin="1" end="${12}">
 														<option value="${i}">${i}</option>
 													</c:forEach>
@@ -814,6 +845,8 @@ function OntextCheck(obj)
 							</div>
 						</div>
 					</div>
+					
+					
 					<div id="cerDiv" style="display: none;">
 						<div class="form-group">
 							<table id="" class="table" cellspacing="0" summary="자격증/어학/수상"
@@ -830,39 +863,32 @@ function OntextCheck(obj)
 
 								<tbody>
 									<tr class="cerContent">
-										<td><select name='cer_category' class='form-control'>
-												<option value="license" label="자격증/면허증">자격증/면허증</option>
-												<option value="language_exam" label="어학시험" selected>어학시험</option>
-												<option value="certification" label="수상내역/공모전">수상내역/공모전</option>
+										<td><select name='cCate' class='form-control cCate'>
+												<option value="자격증/면허증" label="자격증/면허증">자격증/면허증</option>
+												<option value="어학시험" label="어학시험" selected>어학시험</option>
+												<option value="수상/공모" label="수상내역/공모전">수상내역/공모전</option>
 										</select></td>
 										<td>
-											<input type="text" name="cer_publisher" id="cer_publisher" 
-											placeholder="ex) 한국산업인력공단" class="form-control">								
+											<input type="text" name="cName" placeholder="ex) 한국산업인력공단" class="form-control">								
 										</td>
 										<td>
-										<select name="" id="" class="form-control">
-												<option value="1" label="영어">영어</option>
-												<option value="2" label="일본어">일본어</option>
-												<option value="3" label="중국어">중국어</option>
-												<option value="4" label="독일어">독일어</option>
-												<option value="5" label="불어">불어</option>
-												<option value="6" label="스페인어">스페인어</option>
-												<option value="7" label="러시아어">러시아어</option>
-												<option value="8" label="이탈리아어">이탈리아어</option>
-												<option value="45" label="한국어">한국어</option>
-												<option value="99" label="기타">기타</option>
-										</select>
+										
+											<input type="text" name="cPubl" placeholder="ex) 영어" class="form-control">
+										
 										</td>
-										<td><label class='form-inline'> 
-										<input type='text' style='width: 80px' class='form-inline'>&nbsp;점(등급)
-										</label></td>
-										<td><label class='form-inline'> <select id=""
+										<td>
+										<label class='form-inline'> 
+											<input type='text' name="cAS" style='width: 80px' class='form-inline'>&nbsp;점(등급)
+										</label>
+										</td>
+										
+										<td><label class='form-inline'> <select name="cer_year"
 												class="form-control" style="width: 90px">
 													<c:forEach var="i" begin="0" end="${2016-1900}">
 														<c:set var="resultYear" value="${2016-i }" />
 														<option value="${resultYear }">${resultYear }</option>
 													</c:forEach>
-											</select> &nbsp;.&nbsp; <select id="" class="form-control"
+											</select> &nbsp;.&nbsp; <select name="cer_month" class="form-control"
 												style="width: 60px">
 													<c:forEach var="i" begin="1" end="${12}">
 														<option value="${i}">${i}</option>
@@ -896,24 +922,24 @@ function OntextCheck(obj)
 
 								<tbody>
 									<tr class="awardsContent">
-										<td><select name='cer_category' class='form-control'>
-												<option value="license" label="자격증/면허증">자격증/면허증</option>
-												<option value="language_exam" label="어학시험">어학시험</option>
-												<option value="certification" label="수상내역/공모전" selected>수상내역/공모전</option>
+										<td><select name='cCate' class='form-control cCate'>
+												<option value="자격증/면허증" label="자격증/면허증">자격증/면허증</option>
+												<option value="어학시험" label="어학시험">어학시험</option>
+												<option value="수상/공모" label="수상내역/공모전" selected>수상내역/공모전</option>
 										</select></td>
-										<td><input type="text" name="" id=""
+										<td><input type="text" name="cName" 
 											title="수상명은 정확하고 구체적으로 최종결과까지 표현해주세요. &#13;ex)백상예술 미술경진대회 금상 &#13;&nbsp;&nbsp;청룡기 육상선수권대회 은메달"
 											class="form-control"></td>
-										<td><input type="text" name="" id=""
+										<td><input type="text" name="cPubl" 
 											title="수여기관은 정확하고 구체적으로 입력해주세요. &#13;ex)서울시청 , 경기교육청"
 											class="form-control"></td>
-										<td><label class='form-inline'> <select id=""
+										<td><label class='form-inline'> <select name="cer_year"
 												class="form-control" style="width: 90px">
 													<c:forEach var="i" begin="0" end="${2016-1900}">
 														<c:set var="resultYear" value="${2016-i }" />
 														<option value="${resultYear }">${resultYear }</option>
 													</c:forEach>
-											</select> &nbsp;.&nbsp; <select id="" class="form-control"
+											</select> &nbsp;.&nbsp; <select name="cer_month" class="form-control"
 												style="width: 60px">
 													<c:forEach var="i" begin="1" end="${12}">
 														<option value="${i}">${i}</option>
@@ -946,17 +972,21 @@ function OntextCheck(obj)
 
 								<tbody>
 									<tr class="skillContent">
-										<td><input type="text" name="skill_abil" id="skill_abil"
-											placeholder="ex)컴퓨터-코딩,서버,보안" class="form-control"></td>
-										<td><select class="form-control" name="skill_level"
-											id="skill_level">
-												<option value="초급">초급</option>
+										<td>
+											<input type="text" name="skAbil" placeholder="ex)컴퓨터-코딩,서버,보안" class="form-control">
+										</td>
+										<td>
+										<select class="form-control" name="skLevel">
+												<option value="초급" selected>초급</option>
 												<option value="중급">중급</option>
 												<option value="고급">고급</option>
-										</select></td>
-										<td><textarea rows='3' name="" id="skill_detail"
-												placeholder="보유능력에서 선택한 기술에 대해서 상세하고 구체적으로 입력해주세요. &#13; ex) - 프로그래밍 언어(Java.php,HTML) 등 언어 능력 섬렵"
-												class='form-control'></textarea></td>
+										</select>
+										</td>
+										<td>
+										<textarea rows='3' name="skDetail" 
+	placeholder="보유능력에서 선택한 기술에 대해서 상세하고 구체적으로 입력해주세요. &#13; ex) - 프로그래밍 언어(Java.php,HTML) 등 언어 능력 섬렵"
+	class='form-control'>
+												</textarea></td>
 									</tr>
 
 								</tbody>
@@ -975,10 +1005,49 @@ function OntextCheck(obj)
 
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="pt">
 				<div class="my-auto">
-					<h4 class="mb-5">포트폴리오</h4>
-					<input type="file" class="form-control" name="" id="">
-
+					
+					
 				</div>
+				
+				<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">추가</button>
+				
+				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">포트폴리오 / 첨부파일</h4>
+				      </div>
+				      <div class="modal-body">
+				        <input type="file" class="form-control" name="modalFile" >
+				        <hr>
+				        <textarea rows="5" name="portIntro" placeholder="포트폴리오 혹은 첨부파일을 소개해주세요." class="form-control"></textarea>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" name="portModalOK" data-dismiss="modal">확인</button>
+				      </div>
+				    </div>
+				
+				  </div>
+				</div>
+				<script type="text/javascript">
+				$(function(){
+					$(document).on("click","button[name=portModalOK]",function(){
+						
+						$(this).parent().prev().find("input[type=file]").val();
+						
+						var $cloneFile = $(this).parent().prev().find("input[type=file]").clone();
+						
+						$(this).parent().parent().parent().parent().prev().prev().append($cloneFile).attr("name","portFilename");
+						
+						
+					});
+				});
+				</script>
 			</section>
 
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
@@ -987,18 +1056,19 @@ function OntextCheck(obj)
 					<h4 class="mb-5">희망 근무조건</h4>
 
 
-					<label>근무형태<span class="res-star">*</span></label> <select
-						class="form-control">
-						<!-- emp_type 테이블 반복문 option -->
-						<option value="">근무형태</option>
-					</select> 
+					<label>근무형태<span class="res-star">*</span></label>
+						<select name="etNo" class="form-control">
+							<c:forEach var="ETList" items="${ETList}">
+								<option value="${ETList.etNo}">${ETList.etName}</option>
+							</c:forEach>
+						
+						</select> 
+					
 					<br> 
 					<label>희망연봉<span class="res-star">*</span></label> 
 					<br>
 					<label class="form-inline">
-						<select class="form-control" name="" id="">
-							<option value="0">회사내규에 따름</option>
-							<option value="1">면접후 결정</option>
+						<select class="form-control" name="resumeSalStart" id="resumeSalStart">
 							<c:forEach var="sal" begin="1400" end="4000" step="200">
 								<option value="${sal}">${sal}만원 이상</option>
 								<c:if test="${sal==4000 }">
@@ -1009,7 +1079,7 @@ function OntextCheck(obj)
 							</c:forEach>
 						</select> 
 						&nbsp;&nbsp;~&nbsp;&nbsp;
-						<select class="form-control" name="" id="">
+						<select class="form-control" name="resumeSalEnd" id="resumeSalEnd">
 							<c:forEach var="sal3" begin="1400" end="4000" step="200">
 								<option value="${sal3}">${sal3}만원 이하</option>
 								<c:if test="${sal3==4000 }">
@@ -1021,11 +1091,11 @@ function OntextCheck(obj)
 							<option value="10000">1억원 이하</option>
 						</select>
 						&nbsp;&nbsp; 
-						<label>
-							<input type="checkbox" name="" id="" value="0">회사 내규에 따름&nbsp;&nbsp; 
-						</label>
-						<label>
-							<input type="checkbox" name="" id="" value="1" >면접 후 결정&nbsp;&nbsp; 					
+						
+						<label class="form-inline">
+							<input type="checkbox" name="chkSalOpt1" id="chkSalOpt1" value="회사내규에 따름" > 회사내규에 따름 
+							&nbsp;&nbsp; 	
+							<input type="checkbox" name="chkSalOpt2" id="chkSalOpt2"  value="면접 후 결정" > 면접 후 결정 				
 						</label>	
 						
 					</label>
@@ -1034,38 +1104,175 @@ function OntextCheck(obj)
 					<label>희망 근무지역<span class="res-star">*</span></label> 
 					<br>
 
-					<select class="form-control">
-						<option>지역 (경기 서울)</option>
-					</select> <select class="form-control">
-						<option>상세지역(당산동)</option>
+					<select name="areaTop" class="form-control">
+					<option value="선택">--선택하세요--</option>
+					<c:forEach var="areaTop" items="${areaListTop}">
+						<option value="${areaTop.areaName }">${areaTop.areaName }</option>
+					</c:forEach>
+						
+					</select> 
+					
+					<select name="areaName" class="form-control">
+						<option>상위 지역을 먼저 선택해 주세요</option>
+						
 					</select>
 
-
-
-					<!-- 
-	희망 업종과 직종에 따라 큰 카테고리에 셀프조인 하여서 상세 업종및 상세 직종을 selectbox 두개로 표현할것
-	셀렉트 박스 1 (서비스업)  셀렉트 박스 2 (서비스업에 해당하는 상세직종)
-	 -->
 					<br> 
-					<label>희망 직종<span class="res-star">*</span></label> 
-					<br>
-					<select class="form-control">
-						<option>occu카테고리</option>
-					</select> <select class="form-control">
-						<option>occu_top_no에따른 name</option>
+					
+					<label>희망 직종<span class="res-star">*</span></label> <br>
+					<select name="occuTop" class="form-control">
+						<c:forEach var="occuTop" items="${occuListTop}">
+						<option value="${occuTop.occuName }">${occuTop.occuName }</option>
+					</c:forEach>
 					</select> 
+					
+					<select name="occuName" class="form-control">
+						<option>상위 직종을 먼저 선택해주세요.</option>
+					</select> 
+					
 					<br> 
+					
 					<label>희망 업종<span class="res-star">*</span></label> 
+					
 					<br>
-					<select class="form-control">
-						<option>sectors카테고리</option>
-					</select> <select class="form-control">
-						<option>sec_top_no에따른 name</option>
-					</select> <br>
+					
+					<select name="secTop" class="form-control">
+						<c:forEach var="secTop" items="${sectorsListTop}">
+						<option value="${secTop.secName }">${secTop.secName }</option>
+					</c:forEach>
+					</select> 
+					
+					<select name="secName" class="form-control">
+						<option>상위 업종을 먼저 선택해주세요.</option>
+					</select> 
+					<br>
 
+ <script type="text/javascript">
+  $(function(){
+		$(document).on("change","select[name=areaTop]",function(){
+			var no =$("option:selected",this).index()+1;	
+			var $thisSel = $(this);
+			$(this).next().find("option").remove();
+			
+			$.ajax({
+				url:"<c:url value='/resume/resumeAreaDetail.do' />",
+				type:"post",
+				data:"no="+no,
+				dataType:"json",
+				success:function(res){
+					$.each(res,function(index,item){
+						$thisSel.next().append("<option value='"+item.areaNo+"'>"+item.areaName+"</option>");
+					});
+				},
+				error:function(xhr,status,error){
+					alert("에러발생:"+status+"=>"+error);
+				}
+				
+			});	
+		});		
+		
+		$(document).on("change","select[name=occuTop]",function(){
+			var no =$("option:selected",this).index()+1;	
+			var $thisSel = $(this);
+			$(this).next().find("option").remove();
+			
+			$.ajax({
+				url:"<c:url value='/resume/resumeOccuDetail.do' />",
+				type:"post",
+				data:"no="+no,
+				dataType:"json",
+				success:function(res){
+					$.each(res,function(index,item){
+						$thisSel.next().append("<option value='"+item.occuNo+"'>"+item.occuName+"</option>");
+					});
+				},
+				error:function(xhr,status,error){
+					alert("에러발생:"+status+"=>"+error);
+				}
+				
+			});	
+		});	
+		
+		$(document).on("change","select[name=secTop]",function(){
+			var no =$("option:selected",this).index()+1;	
+			var $thisSel = $(this);
+			$(this).next().find("option").remove();
+			
+			$.ajax({
+				url:"<c:url value='/resume/resumeSectorsDetail.do' />",
+				type:"post",
+				data:"no="+no,
+				dataType:"json",
+				success:function(res){
+					$.each(res,function(index,item){
+						$thisSel.next().append("<option value='"+item.secNo+"'>"+item.secName+"</option>");
+					});
+				},
+				error:function(xhr,status,error){
+					alert("에러발생:"+status+"=>"+error);
+				}
+				
+			});	
+		});	
+		
+			 var ii = 1;
+		$('#addSH').click(function(){
+			 
+			 $('#addSHDiv').before(
+					$('.shBasicDiv').clone().show().attr("class","copySHDiv").append(
+						$('#clearBasicDiv').clone().show().attr("id","").attr("name","").attr("class","copyClearDiv")
+					)
+				);
+			 $('.copySHDiv').find('select[name=basic_ssy]').attr("name","sh_start_year");
+			 $('.copySHDiv').find('select[name=basic_ssm]').attr("name","sh_start_month");
+			 $('.copySHDiv').find('select[name=basic_sey]').attr("name","sh_end_year");
+			 $('.copySHDiv').find('select[name=basic_sem]').attr("name","sh_end_month");
+			 
+			 var shAyear = "<input type='hidden' name='shVOList["+ii+"].shAyear' id='shAyear"+ii+"'>";
+			 var shGyear = "<input type='hidden' name='shVOList["+ii+"].shGyear' id='shGyear"+ii+"'>";
+			 
+			 $('#eduName').before(shAyear);
+			 $('#eduName').before(shGyear);
+			
+			  
+			ii++;
+		});
+		
+		var ehIdx = 0;
+		$('#addEhImg').click(function(){
+			$('.addBtnDiv').before(
+					$('#ehBasicDiv').clone().show().attr("id","").attr("class","addEhCopyDiv").append(
+							$('#clearBasicDiv').clone().show().attr("id","").attr("class","copyClearDiv")));
+			
+			$('.addEhCopyDiv').find('select[name=basic_esy]').attr("name","eh_start_year");
+			 $('.addEhCopyDiv').find('select[name=basic_esm]').attr("name","eh_start_month");
+			 $('.addEhCopyDiv').find('select[name=basic_eey]').attr("name","eh_end_year");
+			 $('.addEhCopyDiv').find('select[name=basic_eem]').attr("name","eh_end_month");
+			 
+			 var ehName = "ehVOList["+ehIdx+"].ehCsname";
+			 var ehIns = "ehVOList["+ehIdx+"].ehInstitution";
+			 var ehConf = "ehVOList["+ehIdx+"].ehConfirm";
+			 
+			 $('.addEhCopyDiv').find('#ehName').attr("id","").attr("name",ehName);
+			 $('.addEhCopyDiv').find('#ehIns').attr("id","").attr("name",ehIns);
+			 $('.addEhCopyDiv').find('#ehConf').attr("id","").attr("name",ehConf);			 
+			 
+			 var ehAdmission = "<input type='hidden' name='ehVOList["+ehIdx+"].ehAdmission' id='ehAdmission"+ehIdx+"'>";
+			 var ehCompletion = "<input type='hidden' name='ehVOList["+ehIdx+"].ehCompletion' id='ehCompletion"+ehIdx+"'>";
+			 
+			 $('#eduName').before(ehAdmission);
+			 $('#eduName').before(ehCompletion);
+			
+			 ehIdx++;
+		});
+	
+  });
+  </script>
 				</div>
+				
 			</section>
 		</div>
+		
 
 	</form>
 	</div>

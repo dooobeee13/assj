@@ -13,7 +13,8 @@ public class HireNotiVO {
 	private Timestamp hnDeadline; // 공고마감일
 	private String hnHows; // 접수방법
 	private String hnTask; // 주요업무
-	private String hnPreference; // 우대사항
+	private String hnEligiblity;
+ 	private String hnPreference; // 우대사항
 	private String hnStep; // 채용절차
 	private String hnBenefits; // 복리후생
 	private String hnDocument; // 제출서류
@@ -23,17 +24,12 @@ public class HireNotiVO {
 	private int hnLng; // 경도
 	private String hnStatus; // 공고상태
 	private String hnGender; // 성별
-	private int hnMajor; // 전공
-	private int hnEmpType; // 고용형태
-	private int hnRank; // 직급
-	private int hnOccupation; // 직종
-	private int hnSectors; // 업종
-	private int hnPosition; // 직책
 	private int hnRecruitNum; // 모집인원
 	
 	private int eduNo; // 학력코드(FK)
 	private int careerNo; // 경력코드(FK)
 	
+	//
 	public int getHnNo() {
 		return hnNo;
 	}
@@ -93,6 +89,12 @@ public class HireNotiVO {
 	}
 	public void setHnTask(String hnTask) {
 		this.hnTask = hnTask;
+	}
+	public String getHnEligiblity() {
+		return hnEligiblity;
+	}
+	public void setHnEligiblity(String hnEligiblity) {
+		this.hnEligiblity = hnEligiblity;
 	}
 	public String getHnPreference() {
 		return hnPreference;
@@ -154,42 +156,6 @@ public class HireNotiVO {
 	public void setHnGender(String hnGender) {
 		this.hnGender = hnGender;
 	}
-	public int getHnMajor() {
-		return hnMajor;
-	}
-	public void setHnMajor(int hnMajor) {
-		this.hnMajor = hnMajor;
-	}
-	public int getHnEmpType() {
-		return hnEmpType;
-	}
-	public void setHnEmpType(int hnEmpType) {
-		this.hnEmpType = hnEmpType;
-	}
-	public int getHnRank() {
-		return hnRank;
-	}
-	public void setHnRank(int hnRank) {
-		this.hnRank = hnRank;
-	}
-	public int getHnOccupation() {
-		return hnOccupation;
-	}
-	public void setHnOccupation(int hnOccupation) {
-		this.hnOccupation = hnOccupation;
-	}
-	public int getHnSectors() {
-		return hnSectors;
-	}
-	public void setHnSectors(int hnSectors) {
-		this.hnSectors = hnSectors;
-	}
-	public int getHnPosition() {
-		return hnPosition;
-	}
-	public void setHnPosition(int hnPosition) {
-		this.hnPosition = hnPosition;
-	}
 	public int getHnRecruitNum() {
 		return hnRecruitNum;
 	}
@@ -212,16 +178,13 @@ public class HireNotiVO {
 	public String toString() {
 		return "HireNotiVO [hnNo=" + hnNo + ", hnNotiTitle=" + hnNotiTitle + ", cmNo=" + cmNo + ", hnSalStart="
 				+ hnSalStart + ", hnSalEnd=" + hnSalEnd + ", hnViews=" + hnViews + ", hnStart=" + hnStart
-				+ ", hnDeadline=" + hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnPreference="
-				+ hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits + ", hnDocument=" + hnDocument
-				+ ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat=" + hnLat + ", hnLng=" + hnLng
-				+ ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnMajor=" + hnMajor + ", hnEmpType="
-				+ hnEmpType + ", hnRank=" + hnRank + ", hnOccupation=" + hnOccupation + ", hnSectors=" + hnSectors
-				+ ", hnPosition=" + hnPosition + ", hnRecruitNum=" + hnRecruitNum + ", eduNo=" + eduNo + ", careerNo="
-				+ careerNo + "]";
+				+ ", hnDeadline=" + hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnEligiblity="
+				+ hnEligiblity + ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
+				+ ", hnDocument=" + hnDocument + ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat="
+				+ hnLat + ", hnLng=" + hnLng + ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnRecruitNum="
+				+ hnRecruitNum + ", eduNo=" + eduNo + ", careerNo=" + careerNo + "]";
 	}
 	
-
 	
 	
 }

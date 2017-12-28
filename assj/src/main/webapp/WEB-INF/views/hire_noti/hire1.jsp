@@ -43,6 +43,9 @@
 			$(this).remove();
 		})
 		
+		
+	
+		
 	});
 
 
@@ -130,7 +133,8 @@
 </head>
 <body>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
-	<%-- <form role="form" class="form-inline" name="frm" method="post" action="<c:url value='hire1.do'/>"> --%>
+	<form name="frm" method="post" action="<c:url value='hire1.do'/>" 
+	onsubmit="return send(this)">
 	<fieldset class="fsmain">
 		
 			<div class="container">
@@ -238,7 +242,7 @@
 					</tr>
 				</table>
 
-				<!-- 자격요건 및 우대조건 -->
+<!-- 자격요건 및 우대조건 -->
 
 				<table class="table table-condended">
 					<thead>
@@ -305,9 +309,30 @@
 					</tr>
 
 				</table>
+<!-- 채용절차 및 제출서류  -->
+								<table class="table table-condended">
+					<thead>
+						<tr class="active">
+							<th class="sp11">채용절차 및 제출서류</th>
+						</tr>
+					</thead>
+					
+					<tr>
+						<td>채용절차</td>
+						<td><textarea id="ta11" title="채용절차"
+								placeholder="채용절차를 입력하세요." maxlength="300"></textarea></td>
 
+					</tr>
+					<tr>
+						<td>제출서류</td>
+						<td><textarea id="ta11" title="제출서류"
+								placeholder="제출서류를 입력해주세요." maxlength="300"></textarea></td>
 
-				<!-- 근무조건  -->
+					</tr>
+
+				</table>
+
+<!-- 근무조건  -->
 				<table class="table table-condended">
 					<thead>
 						<tr class="active">
@@ -317,7 +342,7 @@
 					<tr>
 						<td>*급여</td>
 						<td><select>
-								<option>1500만원이하</option>
+								<option>0~1500만원이하</option>
 								<option>1500~2000만원</option>
 								<option>2000~2500만원</option>
 								<option>2500~3000만원</option>
@@ -411,7 +436,8 @@
 						</tr>
 						<tr>
 							<td>*공고제목</td>
-							<td><input type="text" class="form-control" placeholder="제목"></td>
+							<td><input type="text" class="form-control" placeholder="제목"
+								id="hnNotiTitle" name="hnNotiTitle"></td>
 
 						</tr>
 
@@ -419,8 +445,7 @@
 
 				</table>
 			</div>
-			<input type="submit" class="btn btn-primary btn-lg" value="채용공고 등록"
-				onClick="self.location='hire2.do';">
+			<input type="submit" class="btn btn-primary btn-lg" value="채용공고 등록"/>
 		
 	</fieldset>
 	
@@ -446,147 +471,147 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 인문과학계열</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-1"> 인문과학계열</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 사회과학계열</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-2"> 사회과학계열</label>
 								</div>	
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 인문과학계열</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-3"> 인문과학계열</label>
 								</div>	
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 법학계열</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-4"> 법학계열</label>
 								</div>	
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 심리학</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-5"> 심리학</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 국사/세계사</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-6"> 국사/세계사</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 언론정보학</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-7"> 언론정보학</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 문헌정보학</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-8"> 문헌정보학</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 문예창작과</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-9"> 문예창작과</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 사회복지학</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-10"> 사회복지학</label>
 								</div>
-								<div class="checkbox">
-									<label> <input type="checkbox" value=""> 종교계열학</label>
+								<div class="checkbox majorselectDiv">
+									<label> <input type="checkbox" value="major-11"> 종교계열학</label>
 								</div>
 
 							</td>
 							<td>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 영어영문학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 중어중문학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 일어일문학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 국어국문학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 불어불문학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 독어독문학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 노어노문학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 서반어학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 어학계열</label>
 								</div>	
 							</td>
 							<td>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 농수산/해양학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 임학/임예학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 수학/통계학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 물리</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 화학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 생명과학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 생활과학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 지구과학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 지리학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 자연계열</label>
 								</div>
 									
 							</td>
 							<td rowspan="3">
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 컴퓨터/시스템공학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 금속/비금속공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 생명/환경공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 화학공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 전기/전자공학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 반도체공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 건축/토목/조경/도시공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 에너지/원자력공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 산업공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 기계/자동차/조선공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 섬유공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 신소재/재료공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 우주/항공공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 식품/유전/바이오</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 공학계열</label>
 								</div>
 									
@@ -601,86 +626,87 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 경영학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 경제학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 회계학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 광고홍보학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 유통/무역학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 호텔경영학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 비서학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 상경계열</label>
 								</div>
 									
 							</td>
 							<td>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 특수교육학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 유아교육학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 교육심리학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 교육공학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 초등교육</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 중등교육</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 사범계열</label>
 								</div>	
 							</td>
 							<td>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 의/약학</label>
 								</div>
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 간호학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 방사선과</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 안경학과</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 임상병리학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 재활의료학</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 치기공/치위생학과</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 수의학과</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
 									<label> <input type="checkbox" value=""> 예/체능계열</label>
 								</div>	
-								<div class="checkbox">
+								<div class="checkbox majorselectDiv">
+								
 									<label> <input type="checkbox" value=""> 응급구조학과</label>
-								</div>	
+								</div>		
 							</td>
 						</tr>
 					</table>
@@ -694,6 +720,7 @@
 		</div>
 		<!-- 모달 다이얼로그 -->
 	</div>
+	</form>
 	<!-- 모달 전체 윈도우 -->
 	
 <!-- 직급/직책 모달  -->
@@ -713,6 +740,10 @@
 							<th >직급</th>
 							<td >
 								<div class="checkbox occselectDiv">
+									<%-- <c:forEach var="vo" items=${list}>
+										<label class="lb"> <input id="occu-${vo.no}" type="checkbox" value="${vo.no}"> ${vo.name}</label>
+									</c:forEach> --%>
+								
 									<label class="lb"> <input id="occu-1" type="checkbox" value="사원"> 사원</label>
 									<label class="lb"> <input id="occu-2" type="checkbox" value="주임"> 주임</label>
 									<label class="lb"> <input id="occu-3" type="checkbox" value="계장"> 계장</label>
