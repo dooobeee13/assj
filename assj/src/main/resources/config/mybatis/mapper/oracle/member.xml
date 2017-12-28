@@ -54,6 +54,11 @@
 		insert into member(mem_no, mem_name, mem_email, mem_gender, mem_sns_type, mem_sns_id, mem_photo)
 		values(#{memNo}, #{memName}, #{memEmail}, #{memGender}, #{memSnsType}, #{memSnsId}, #{memPhoto})
 	</insert>
+	
+	
+	
+	
+	
 </mapper>
 
 

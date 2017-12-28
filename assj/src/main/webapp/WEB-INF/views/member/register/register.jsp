@@ -317,7 +317,12 @@
 		.mem_register #CompanyMember{
 			display:none;
 		}
-
+		.agreeTable{
+			width:100%;
+		}
+		.agreeTable th,td{
+			padding:10px;
+		}
 		.modal {
        		 text-align: center;
 		}
@@ -451,16 +456,36 @@
 				<h1>약관 동의</h1><br>
     			<span class="r">※ 필수체크사항입니다.</span><br>
 	    		<br>
-				<p>&nbsp;&nbsp;전체 동의   																<input type="checkbox" id="PsCheckbox1" value="option1"></p><br>
-	    		<div id="PsChkItem">
-					<span class="r">*&nbsp;</span>개인회원 약관에 동의 <span class="r">(필수)</span>          <input type="checkbox" id="PsCheckbox2" value="option1"><br><br> 
-					<span class="r">*&nbsp;</span>개인정보 수집 및 이용에 동의 <span class="r">(필수)</span>    <input type="checkbox" id="PsCheckbox3" value="option1"><br><br> 
-					<p>&nbsp;&nbsp;마케팅 정보 수신 동의 - 이메일 (선택)                                        <input type="checkbox" id="PsCheckbox4" value="option1"></p><br>
-					<p>&nbsp;&nbsp;마케팅 정보 수신 동의 - SMS/MMS (선택)                                      <input type="checkbox" id="PsCheckbox5" value="option1"></p><br>
-					<p>&nbsp;&nbsp;개인정보 제 3자 제공 및 위탁사항 이용약관  </p><br> 
-				</div>
-				
-				
+	    		<table class="agreeTable" id="PsChkItem">
+		    		<colgroup>
+		    			<col width=95%>
+		    			<col width=5%>
+		    		</colgroup>
+					<tr>
+						<td>전체 동의</td>
+						<td><input type="checkbox" id="PsCheckbox1"></td>				
+					</tr>
+					<tr>													
+						<td><span class="r">*</span>개인회원 약관에 동의 <span class="r">(필수)</span></td>          
+						<td><input type="checkbox" id="PsCheckbox2"></td> 
+					</tr>
+					<tr>
+						<td><span class="r">*&nbsp;</span>개인정보 수집 및 이용에 동의 <span class="r">(필수)</span></td>
+						<td><input type="checkbox" id="PsCheckbox3"></td>
+					</tr>
+					<tr>
+						<td>마케팅 정보 수신 동의 - 이메일 (선택)</td>
+						<td><input type="checkbox" id="PsCheckbox4"></td>
+					</tr>
+					<tr>
+						<td>마케팅 정보 수신 동의 - SMS/MMS (선택) </td>
+						<td><input type="checkbox" id="PsCheckbox5"></td>
+					</tr>
+					<tr>
+						<td colspan='2'>개인정보 제 3자 제공 및 위탁사항 이용약관 </td>	
+					</tr> 	
+				</table>
+				<br>
 				<div class="form-group" id="btnDiv">
 		   			<button type="submit" class="btn btn-primary btn-lg" id="psRegister">회원가입 완료</button>
 				</div>
@@ -468,25 +493,25 @@
 			<input type ="hidden" name="chkId" id="chkId">
 			
 			<hr>
-					<article>
-						<h1>회원약관</h1>
-						<br><br>
-						<span class="r">*</span>&nbsp;<b>개인회원 약관</b> <span class="r">&nbsp;(필수)</span>
-						<iframe src="<c:url value='/inc2/provision.html'/>" 
-						width="680px" height="200px"></iframe>
-						<br><br>
-						<span class="r">*</span>&nbsp;<b>개인정보 수집 및 이용</b> <span class="r">&nbsp;(필수)</span>
-						<iframe src="<c:url value='/inc2/provision2.html'/>" 
-						width="680px" height="200px"></iframe>
-						<br><br>
-						<b>개인정보 제 3자 제공 및 위탁사항 이용약관</b>
-						<iframe src="<c:url value='/inc2/provision3.html'/>" 
-						width="680px" height="200px"></iframe>
-						<br><br>
-						<b>마케팅 정보 수신</b> (선택) 
-						<iframe src="<c:url value='/inc2/provision4.html'/>" 
-						width="680px" height="200px"></iframe>
-					</article>
+				<article>
+					<h1>회원약관</h1>
+					<br><br>
+					<span class="r">*</span>&nbsp;<b>개인회원 약관</b> <span class="r">&nbsp;(필수)</span>
+					<iframe src="<c:url value='/inc2/provision.html'/>" 
+					width="680px" height="200px"></iframe>
+					<br><br>
+					<span class="r">*</span>&nbsp;<b>개인정보 수집 및 이용</b> <span class="r">&nbsp;(필수)</span>
+					<iframe src="<c:url value='/inc2/provision2.html'/>" 
+					width="680px" height="200px"></iframe>
+					<br><br>
+					<b>개인정보 제 3자 제공 및 위탁사항 이용약관</b>
+					<iframe src="<c:url value='/inc2/provision3.html'/>" 
+					width="680px" height="200px"></iframe>
+					<br><br>
+					<b>마케팅 정보 수신</b> (선택) 
+					<iframe src="<c:url value='/inc2/provision4.html'/>" 
+					width="680px" height="200px"></iframe>
+				</article>
 		</fieldset>
 		
 		
@@ -593,16 +618,38 @@
 				<h1>약관 동의</h1><br>
     			<span class="r">※ 필수체크사항입니다.</span><br>
 	    		<br>
-				<p>&nbsp;&nbsp;전체 동의   <input type="checkbox" id="CpCheckbox1" value="option1"></p><br>
-	    		<div id="CpChkItem">
-					<span class="r">*&nbsp;</span>기업회원 약관에 동의 <span class="r">(필수)</span>                 <input type="checkbox" id="CpCheckbox2" value="option1"><br><br> 
-					<span class="r">*&nbsp;</span>개인정보 수집 및 이용에 동의 <span class="r">(필수)</span>           <input type="checkbox" id="CpCheckbox3" value="option1"><br><br> 
-					<p>&nbsp;&nbsp;마케팅 정보 수신 동의 - 이메일 (선택)                                               <input type="checkbox" id="CpCheckbox4" value="option1"></p><br>
-					<p>&nbsp;&nbsp;마케팅 정보 수신 동의 - SMS/MMS (선택)                                            <input type="checkbox" id="CpCheckbox5" value="option1"></p><br>
-					<p>&nbsp;&nbsp;개인정보 제 3자 제공 및 위탁사항 이용약관  </p><br> 
-				</div>
-				<hr>
 
+				<table class="agreeTable" id="CpChkItem">
+		    		<colgroup>
+		    			<col width=95%>
+		    			<col width=5%>
+		    		</colgroup>
+					<tr>
+						<td>전체 동의</td>
+						<td><input type="checkbox" id="CpCheckbox1"></td>				
+					</tr>
+					<tr>													
+						<td><span class="r">*&nbsp;</span>기업회원 약관에 동의 <span class="r">(필수)</span></td>          
+						<td><input type="checkbox" id="CpCheckbox2"></td> 
+					</tr>
+					<tr>
+						<td><span class="r">*&nbsp;</span>개인정보 수집 및 이용에 동의 <span class="r">(필수)</span></td>
+						<td><input type="checkbox" id="CpCheckbox3"></td>
+					</tr>
+					<tr>
+						<td>마케팅 정보 수신 동의 - 이메일 (선택)</td>
+						<td> <input type="checkbox" id="CpCheckbox4"></td>
+					</tr>
+					<tr>
+						<td>마케팅 정보 수신 동의 - SMS/MMS (선택)</td>
+						<td><input type="checkbox" id="CpCheckbox5"></td>
+					</tr>
+					<tr>
+						<td colspan='2'>개인정보 제 3자 제공 및 위탁사항 이용약관 </td>	
+					</tr> 	
+				</table>
+				<br>
+				
 				<div class="form-group" id="btnDiv">
 		   			<button type="submit" class="btn btn-primary btn-lg" id="cpRegister">회원가입 완료</button>
 				</div>
