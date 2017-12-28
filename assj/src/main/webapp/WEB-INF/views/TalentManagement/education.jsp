@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<!-- 희망 직족 자세한 옵션선택 부분 -->
-	<div class="major_01 col-div-80">
+	<div class="major_01 col-div-80" style="padding:0;">
 		<div class="col-div-30 EduCollist"
 			style="border-left: 1px solid #b8b8b8; border-right: 1px solid #b8b8b8; padding-top: 4em;">
 			<ul class="col-ul-100-100" style="height: 60%; text-align: center;">

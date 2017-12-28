@@ -1,11 +1,9 @@
 package com.hy.assj.main.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.URLDecoder;
-import java.security.SecureRandom;
+import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
+import com.hy.assj.hireInfo.model.HireInfoService;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.vo.AreaVO;
+import com.hy.assj.vo.OccupationVO;
 
 @Controller
 public class IndexController {
@@ -36,6 +38,8 @@ public class IndexController {
 	private MemberService memberService;
 	@Autowired
 	private CmMemberService cmMemberService;
+	@Inject
+	private HireInfoService hireInfoService;
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
 	public String index_get() {
@@ -202,7 +206,19 @@ public class IndexController {
 		return "redirect:/index.do";
 	}
 	
-
+	@RequestMapping("/index/navOccuCategory.do")
+	public String navOccuCategory(Model model) {
+		Map<String, List<OccupationVO>> map = hireInfoService.getOccupationListMap();
+		model.addAttribute("map", map);
+		return  "index/cateOccu";
+	}
+	
+	@RequestMapping("/index/navAreaCategory.do")
+	public String navAreaCategory(Model model) {
+		Map<String, List<AreaVO>> map = hireInfoService.getAreaListMap();
+		model.addAttribute("map", map);
+		return  "index/cateArea";
+	}
 	
 	
 }

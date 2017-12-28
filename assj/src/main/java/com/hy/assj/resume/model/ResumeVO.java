@@ -1,6 +1,7 @@
 package com.hy.assj.resume.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class ResumeVO {
 	
@@ -8,7 +9,7 @@ public class ResumeVO {
 	private int memNo;
 	private String resumeTitle;
 	private String resumeName;
-	private Timestamp resumeBirth;
+	private Date resumeBirth;
 	private String resumeAddr;
 	private String resumeDetailaddr;
 	private String resumePhone;
@@ -30,14 +31,16 @@ public class ResumeVO {
 	private String resumeCareerList;
 	private int resumeSalStart;
 	private int resumeSalEnd;
+	private String resumeSalOpt;
 	private int areaNo;
 	private int eduNo;
-	private int etNo  ;
+	private int etNo;
 	private String resumeVisibility;
 	private String resumePhoto;
     private int occuNo;
     private int secNo;
     private Timestamp resumeLastupdate;
+    
 	public int getResumeNo() {
 		return resumeNo;
 	}
@@ -62,12 +65,13 @@ public class ResumeVO {
 	public void setResumeName(String resumeName) {
 		this.resumeName = resumeName;
 	}
-	public Timestamp getResumeBirth() {
+	public Date getResumeBirth() {
 		return resumeBirth;
 	}
-	public void setResumeBirth(Timestamp resumeBirth) {
+	public void setResumeBirth(Date resumeBirth) {
 		this.resumeBirth = resumeBirth;
 	}
+	
 	public String getResumeAddr() {
 		return resumeAddr;
 	}
@@ -218,12 +222,7 @@ public class ResumeVO {
 	public void setResumeVisibility(String resumeVisibility) {
 		this.resumeVisibility = resumeVisibility;
 	}
-	public String getResumePhoto() {
-		return resumePhoto;
-	}
-	public void setResumePhoto(String resumePhoto) {
-		this.resumePhoto = resumePhoto;
-	}
+	
 	public int getOccuNo() {
 		return occuNo;
 	}
@@ -242,6 +241,18 @@ public class ResumeVO {
 	public void setResumeLastupdate(Timestamp resumeLastupdate) {
 		this.resumeLastupdate = resumeLastupdate;
 	}
+	public String getResumeSalOpt() {
+		return resumeSalOpt;
+	}
+	public void setResumeSalOpt(String resumeSalOpt) {
+		this.resumeSalOpt = resumeSalOpt;
+	}
+	public String getResumePhoto() {
+		return resumePhoto;
+	}
+	public void setResumePhoto(String resumePhoto) {
+		this.resumePhoto = resumePhoto;
+	}
 	@Override
 	public String toString() {
 		return "ResumeVO [resumeNo=" + resumeNo + ", memNo=" + memNo + ", resumeTitle=" + resumeTitle + ", resumeName="
@@ -253,12 +264,13 @@ public class ResumeVO {
 				+ ", resumeMilStart=" + resumeMilStart + ", resumeMilEnd=" + resumeMilEnd + ", resumeMilDivision="
 				+ resumeMilDivision + ", resumeMilClass=" + resumeMilClass + ", resumeMilReason=" + resumeMilReason
 				+ ", resumeMilUnfinish=" + resumeMilUnfinish + ", resumeCareerList=" + resumeCareerList
-				+ ", resumeSalStart=" + resumeSalStart + ", resumeSalEnd=" + resumeSalEnd + ", areaNo=" + areaNo
-				+ ", eduNo=" + eduNo + ", etNo=" + etNo + ", resumeVisibility=" + resumeVisibility + ", resumePhoto="
-				+ resumePhoto + ", occuNo=" + occuNo + ", secNo=" + secNo + ", resumeLastupdate=" + resumeLastupdate
-				+ "]";
+				+ ", resumeSalStart=" + resumeSalStart + ", resumeSalEnd=" + resumeSalEnd + ", resumeSalOpt="
+				+ resumeSalOpt + ", areaNo=" + areaNo + ", eduNo=" + eduNo + ", etNo=" + etNo + ", resumeVisibility="
+				+ resumeVisibility + ", resumePhoto=" + resumePhoto + ", occuNo=" + occuNo + ", secNo=" + secNo
+				+ ", resumeLastupdate=" + resumeLastupdate + "]";
 	}
-    
+	
+	
     
 
 }

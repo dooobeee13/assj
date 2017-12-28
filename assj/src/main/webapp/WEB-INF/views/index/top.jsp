@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <script>
 	$(function(){
 		$('.searchjob').hover(function(){
@@ -41,7 +44,7 @@
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3">
 				<a href="<c:url value='/index.do' />">
-					<img class="img-responsive" src="<c:url value='/images/t_logo.png' />" alt="임시 로고">
+					<img class="img-responsive" src="<c:url value='/images/assj_logo2.png' />" alt="임시 로고">
 				</a>
 			</div>
 			<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->
@@ -130,9 +133,11 @@
 					</div>
 				</li>
 				<li class="searchjob"><a href="#">직업별</a>
-					<c:import url="/WEB-INF/views/index/cateOccu.jsp" />
+					<c:import url="/index/navOccuCategory.do" />
 				</li>
-				<li class="searchjob"><a href="#">지역별</a></li>
+				<li class="searchjob"><a href="#">지역별</a>
+					<c:import url="/index/navAreaCategory.do" />
+				</li>
 				<li class="searchjob"><a href="#">인재검색</a></li>
 				<li class="searchjob"><a href="#">생각중</a></li>
 				<li class="searchjob"><a href="#">구상중</a></li>
