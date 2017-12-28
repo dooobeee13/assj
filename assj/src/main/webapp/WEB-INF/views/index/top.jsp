@@ -133,7 +133,7 @@
 					</div>
 				</li>
 				<li class="searchjob"><a href="#">직업별</a>
-					<c:import url="/WEB-INF/views/index/cateOccu.jsp" />
+					<c:import url="/index/navOccuCategory.do" />
 				</li>
 				<li class="searchjob"><a href="#">지역별</a></li>
 				<li class="searchjob"><a href="#">인재검색</a></li>
