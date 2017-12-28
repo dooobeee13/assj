@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.reboard">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword!=''">
+			where title like '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+	 
+	<insert id="insertQnA" parameterType="reboardVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select reboard_seq.nextval from dual
+		</selectKey>
+		insert into reboard(no,name,pwd,title,content)
+		values(#{no},#{name},#{pwd},#{title},#{content})
+	</insert>
+	
+	<select id="QnaList" resultType="reboardVO">
+		SELECT * FROM REBOARD order by no desc
+	</select>
+	
+	<select id="QnaRownum" resultType="hashmap">
+		select *
+		from (
+		    select * from reboard order by no desc
+		)	
+		<![CDATA[
+		where rownum <= 5]]>
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		update reboard
+		set readcount=readcount+1 
+		where no=#{no}
+	</update>
+	
+	<select id="selectByNo" parameterType="int" resultType="reboardVO">
+		select * from reboard where no=#{no}
+	</select>
+	
+	<update id="updateQnA" parameterType="reboardVO">
+		update reboard
+		set title=#{title},content=#{content}
+		where no=#{no}
+	</update>
+	
+	<select id="selectAll" parameterType="SearchVO" 
+		resultType="reboardVO" >
+		select *
+		from
+		(
+		    select rownum as RNUM, blist.*
+		    from(
+		        select * from reboard 
+		        <include refid="searchWhere"></include>
+		        order by no desc		        
+		    ) blist
+		) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>	
+	</select>
+	
+	<select id="selectTotalRecordCount" resultType="int" 
+		parameterType="SearchVO">
+		select count(*) from reboard
+		<include refid="searchWhere"></include>	
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

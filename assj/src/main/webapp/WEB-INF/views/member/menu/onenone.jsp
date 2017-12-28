@@ -20,43 +20,48 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
-h1 {
-	font-weight: bold;
-}
-
-fieldset {
-	/* width: 720px;
-	margin: 0 auto; */
-	padding: 20px;
-	background-color: #ffff;
-}
-
-label {
-	width: 165px;
-	margin: 10px;
-}
-
-.titleTD {
-	width: 130px;
-}
-
-#btnDiv {
-	text-align: center;
-}
-
-form {
-	background-color: #dde6f7;
-}
-
-.well {
-	width: 95%;
-	margin: 0 auto;
-}
-table{
-	padding:10px;
-}
-
-
+	h1 {
+		font-weight: bold;
+	}
+	
+	fieldset {
+		/* width: 720px;
+		margin: 0 auto; */
+		padding: 50px;
+		background-color: #ffff;
+	}
+	
+	label {
+		width: 165px;
+		margin: 10px;
+	}
+	
+	.titleTD {
+		width: 130px;
+	}
+	
+	#btnDiv {
+		text-align: center;
+	}
+	
+	form {
+		background-color: #dde6f7;
+	}
+	.well {
+		width: 95%;
+		margin: 0 auto;
+	}
+	#email td,th{
+		padding:20px;
+	}
+	#comments,#divide{
+		vertical-align:top;
+	}
+	
+	h1 img{
+		vertical-align: bottom;
+		width:50px;
+	}
   /*  	 #page-wrapper {
     padding-left: 380px;
   } */
@@ -112,7 +117,7 @@ table{
 
 	<div class="container">
 		<div class="row">
-		<!-- 사이드바 -->
+	<!-- 사이드바 -->
 		<div id="page-wrapper" class="col-md-3">
 			<div id="sidebar-wrapper">
 				<ul class="sidebar-nav">
@@ -123,9 +128,9 @@ table{
 					<li><h5>
 							<b>무엇을 도와드릴까요?</b>
 						</h5></li>
-					<li><a href="#"><span
+					<li><a href="<c:url value='/member/menu/notice.do'/>"><span
 							class="glyphicon glyphicon-chevron-right"></span>공지사항</a></li>
-					<li><a href="#"><span
+					<li><a href="<c:url value='/member/menu/qnaBoard.do'/>"><span
 							class="glyphicon glyphicon-chevron-right"></span>Q&A</a></li>
 					<li><a href="<c:url value='/member/menu/onenone.do'/>"><span
 							class="glyphicon glyphicon-chevron-right"></span>이메일 문의</a></li>
@@ -159,20 +164,20 @@ table{
 <!-- 본문 -->
 		<div class="col-md-9">
 		<fieldset>
-				<h1>이메일 문의</h1>
-				<br>
+				<h1><img alt="noticeImg" src="<c:url value='/images/email.png'/>">&nbsp;이메일 문의</h1>
 				<hr>
-				※ 평일 17시 이전에 보내주신 문의는 당일 답변을 원칙으로 합니다.<br> &nbsp;&nbsp;그 외 시간에
-				문의하신 내용은 다음 근무시간에 답변해드리겠습니다.<br> &nbsp;&nbsp;(평일 17시 이후 : 다음날 /
-				주말 : 다음주 월요일)<br> <br>
+				<br>
+				<h4>※ 평일 17시 이전에 보내주신 문의는 당일 답변을 원칙으로 합니다.<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;그 외 시간에 문의하신 내용은 다음 근무시간에 답변해드리겠습니다.<br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;(평일 17시 이후 : 다음날 /주말 : 다음주 월요일)</h4><br><br>
 				<form role="form" class="form-inline">
-					<table class="table table-bordered">
+					<table id="email">
 						<tr>
 							<td class="titleTD">제목</td>
-							<td><input type="text" class="form-control" size="76"></td>
+							<td><input type="text" class="form-control" size="75"></td>
 						</tr>
 						<tr>
-							<td class="titleTD">분류</td>
+							<td class="titleTD" id="divide">분류</td>
 							<td><label class="radio-inline"> <input type="radio"
 									name="optionsRadios" id="optionsRadios1" value="이력서 문의">
 									이력서 문의
@@ -214,16 +219,16 @@ table{
 							</label></td>
 						</tr>
 						<tr>
-							<td class="titleTD">내용</td>
-							<td><textarea rows="10" cols="80"></textarea></td>
+							<td class="titleTD" id="comments">내용</td>
+							<td><textarea class="form-control" rows="10" cols="78"></textarea></td>
 						</tr>
 					</table>
 					<div class="well well-lg">
 						- 수집 항목 : 이름, 이메일 주소<br> - 수집 목적 : 문의에 따른 원활한 상담 제공<br>
 						- 보유 기간 : 문의처리 후 1년간 보관
 					</div>
-					<br> &nbsp;&nbsp;<input type="checkbox" id="CpCheckbox5"
-						value="option1">&nbsp;&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다. <br>
+					<br> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="CpCheckbox5" value="option1">&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다. <br>
 					<br>
 					<br>
 				</form>

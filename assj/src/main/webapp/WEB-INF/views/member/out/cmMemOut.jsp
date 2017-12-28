@@ -49,7 +49,11 @@
 	#cmMemOut .titleTD{
 		width:180px;
 	}
-
+	h1 img{
+		vertical-align: bottom;
+		width:70px;
+	}
+	
 
  /* 사이드바 스타일 */
   #sidebar-wrapper {
@@ -154,7 +158,7 @@
 		
 			<div id="cmMemOut">
 			<fieldset>
-				<h1>기업회원 탈퇴</h1>
+				<h1><img alt="noticeImg" src="<c:url value='/images/out.png'/>">&nbsp;기업회원 탈퇴</h1>
 				<br>
 				<hr>
 				<br>
@@ -191,12 +195,6 @@
 				<table class="table table-bordered">
 					<tr><th colspan='3'><h4>&nbsp;&nbsp;<b>탈퇴이외에 이런 방법을 추천해드립니다.</b></h4></th></tr>
 					<tr>
-					 	<td class="titleTD">스팸처럼 느껴지는<br>알림 메일<br><span><b>→ 수신안함 설정</b></span></td>
-					 	<td>사람인의 이벤트, 교육정보 등의 메일이 스팸메일로 느껴지시나요?<br>
-							그렇다면, 알림메일 설정을 '수신안함'으로 변경해주세요.</td>
-					 	<td><button type="button" class="btn btn-primary">메일 수신설정<br>바로가기</button></td>
-					</tr>
-					<tr>
 						<td class="titleTD">채용 완료했는데도<br>계속 들어오는 이력서<br><span><b>→ 채용공고 마감</b></span></td>
 						<td>인재를 채용했는데도 이력서가 계속 들어온다면,<br>등록된 채용정보를 마감으로 변경해주세요.</td>
 						<td><button type="button" class="btn btn-primary">채용정보 관리<br>바로가기</button></td>
@@ -205,7 +203,7 @@
 						<td class="titleTD">기업에서 개인으로<br>아이디 변경 <br><span><b>→ 탈퇴보다는 재가입</b></span></td>
 						<td>기업회원으로 가입했는데, 개인회원 아이디로 변경하고 싶으시다고요?<br>
 							탈퇴없이 개인회원으로 재가입하시면 모든 서비스를 바로 이용하실 수<br>있습니다.</td>
-						<td><button type="button" class="btn btn-primary">개인회원 가입<br>바로가기</button></td>
+						<td><a href="<c:url value='/member/register/register.do'/>"><button type="button" class="btn btn-primary">개인회원 가입<br>바로가기</button></a></td>
 					</tr>
 					<tr>
 						<td class="titleTD">복잡한 채용정보 입력 <br><span><b>→ 필수 항목만 작성하기</b></span></td>

@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     <style type="text/css">
     	fieldset{
-    		width:720px;
-    		height:500px;
+    		width:800px;
+    		height:560px;
 			margin:0 auto;	
 			background-color:#ffff;
     	}
@@ -36,7 +36,7 @@
 		<div class="col-lg-12">
 				<div class="conten" style="padding:15px">
 			    	<h2><b>로그인이 필요한 서비스입니다.</b></h2>
-			    	<p>사람인 회원이 아니면, 지금 회원가입을 해주세요.</p>
+			    	<p><b>알쓸신JOB</b> 회원이 아니면, 지금 회원가입을 해주세요.</p>
 			    	<hr>
 					<c:if test="${empty sessionScope.compMemberVO.cmId}">
 					<c:if test="${empty sessionScope.memberVO.memId}">
