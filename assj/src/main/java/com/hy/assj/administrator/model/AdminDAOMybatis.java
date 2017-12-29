@@ -20,4 +20,19 @@ public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 	public List<Map<String, Object>> selectNews() {
 		return getSqlSession().selectList(namespace+".selectNews");
 	}
+
+	@Override
+	public NewsVO selectByNo(int newsNo) {
+		return getSqlSession().selectOne(namespace+".selectByNo",newsNo);
+	}
+
+	@Override
+	public int updateNews(NewsVO vo) {
+		return getSqlSession().update(namespace+".updateNews",vo);
+	}
+
+	@Override
+	public int deleteNews(int newsNo) {
+		return getSqlSession().delete(namespace+".deleteNews",newsNo);
+	}
 }
