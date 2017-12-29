@@ -43,6 +43,13 @@
 		select * from sectors
 	</select>
 	
+	<select id="educationList" resultType="EducationVO">
+		select * from education
+	</select>
+	
+	<select id="positionList" resultType="PositionVO">
+		select * from position
+	</select>
 	
 </mapper>
 

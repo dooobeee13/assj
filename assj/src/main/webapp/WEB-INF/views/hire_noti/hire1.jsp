@@ -14,12 +14,33 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript"
 	src="<c:url value='/jquery/jquery-3.2.1.min.js' />"></script>
+<link rel="stylesheet" type="text/css" 
+	href="<c:url value='/css/jquery-ui.css'/>">
+
+<script type="text/javascript" 
+src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
+
 
 <script type="text/javascript">
+	
+	$.applyDatePicker = function(id) {
+		$(id).datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					changeYear : true,
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+							'8월', '9월', '10월', '11월', '12월' ]
+				});
+	}
+
 	$(function() {
 		$('#savebtn').click(function() {
 			$('#rank_position').modal('hide');
 		});
+		
+		$.applyDatePicker('#startDay');
+		$.applyDatePicker('#endDay');
 		
 
 		$('.rankselectDiv .lb input[type=checkbox]').click(function() {
@@ -46,32 +67,65 @@
 		});
 		
 		
-		$('.majorselectDiv input[type=checkbox]').click(function() {
-			var isChecked = $(this).prop('checked');
-			var id = $(this).attr('id');
-			if (isChecked) {
-
-				if ($('.major').find(
-						'.majorItem [data-id=' + id + ']').length == 0) {
-					var item = '<span class="majorItem" data-id="'+ id +'">'
-							+ $(this).parent().text() + '<span>';
-					$('.major').append(item);
-				}
-			} else {
-				$('.major .majorItem[data-id=' + id + ']').remove();
-			}
-
-		});
 		
+		$('.posiselectDiv .lb1 input[type=checkbox]')
+				.click(
+						function() {
+							var isChecked = $(this).prop('checked');
+							var id = $(this).attr('id');
+							if (isChecked) {
+
+								if ($('.position').find(
+										'.positionItem [data-id=' + id + ']').length == 0) {
+									var item = '<span class="positionItem" data-id="'+ id +'">'
+											+ $(this).data('name') + '<span>';
+									$('.position').append(item);
+								}
+							} else {
+								$('.position .positionItem[data-id=' + id + ']')
+										.remove();
+							}
+
+						});
+
+		$('.position').on('click', '.positionItem', function() {
+			var id = $(this).data('id');
+			$('#' + id).removeAttr("checked");
+			$(this).remove();
+		});
+
+		$('.majorselectDiv input[type=checkbox]')
+				.click(
+						function() {
+							var isChecked = $(this).prop('checked');
+							var id = $(this).attr('id');
+							if (isChecked) {
+
+								if ($('.major').find(
+										'.majorItem [data-id=' + id + ']').length == 0) {
+									var item = '<span class="majorItem" data-id="'+ id +'">'
+											+ $(this).parent().text()
+											+ '<span>';
+									$('.major').append(item);
+								}
+							} else {
+								$('.major .majorItem[data-id=' + id + ']')
+										.remove();
+							}
+
+						});
+
 		$('.major').on('click', '.majorItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
 			$(this).remove();
 		});
-		
-		
+
 
 	});
+
+	
+	
 </script>
 
 <style type="text/css">
@@ -143,6 +197,14 @@
 	display: inline-block;	
 }
 
+.position{
+	padding: 10px;
+	min-height: 100px;
+	border: 1px solid lightgray;
+	width: 350px;
+	display: inline-block;
+}
+
 </style>
 
 <script
@@ -210,18 +272,18 @@
 					</thead>
 					<tr>
 						<td>*모집인원</td>
-						<td><label class="form_sp frm_rad01" for="collect_3"><input
-								type="radio" id="collect_3" name="collect" value="3"><span>1명</span></label>
+						<td><label class="form_sp frm_rad01" for="recruitNum"><input
+								type="radio" id="recruitNum" name="recruitNum" value="3"><span>1명</span></label>
 							<label class="form_sp frm_rad01" for="collect_4"><input
-								type="radio" id="collect_4" name="collect" value="4"><span>2명</span></label>
+								type="radio" id="collect_4" name="recruitNum" value="4"><span>2명</span></label>
 							<label class="form_sp frm_rad01" for="collect_5"><input
-								type="radio" id="collect_5" name="collect" value="5"><span>3명</span></label>
+								type="radio" id="collect_5" name="recruitNum" value="5"><span>3명</span></label>
 							<label class="form_sp frm_rad01" for="collect_1"><input
-								type="radio" id="collect_1" name="collect" value="1"><span>0명</span></label>
+								type="radio" id="collect_1" name="recruitNum" value="1"><span>0명</span></label>
 							<label class="form_sp frm_rad01" for="collect_2"><input
-								type="radio" id="collect_2" name="collect" value="2"><span>00명</span></label>
+								type="radio" id="collect_2" name="recruitNum" value="2"><span>00명</span></label>
 							<label class="form_sp frm_rad01 no_txt" for="collect_6"><input
-								type="radio" id="collect_6" name="collect" value="6"><span></span></label>
+								type="radio" id="collect_6" name="recruitNum" value="6"><span></span></label>
 							<input type="text" id="collect_cnt"
 							class="frm_input01 input_length2 _filter" name="collect_cnt"
 							data-filter="numeric" maxlength="6"><span
@@ -231,7 +293,7 @@
 
 					<tr>
 						<td>*담당업무</td>
-						<td><textarea id="ta11" title="담당업무"
+						<td><textarea id="ta11" title="담당업무" name="hnTask"
 								placeholder="담당업무를 입력하세요." maxlength="300"></textarea></td>
 
 					</tr>
@@ -260,23 +322,24 @@
 						</tr>
 					</thead>
 					<tr>
-						<td>*학력</td>
-						<td>
-							<div>
-								<input type="radio" id="collect_3" name="collect" value="3"><span>학력무관</span>
-								<input type="radio" id="collect_4" name="collect" value="4"><span>제한</span>
-								<select>
-									<option>고등학교졸업이상</option>
-									<option>대학교졸업(2,3년)이상</option>
-									<option>대학교졸업(4년) 이상</option>
-									<option>석사졸업이상</option>
-									<option>박사졸업</option>
-								</select>
-							</div> <label>기타 학력사항 </label> <input type="text">
-
-
-						</td>
-
+					<c:import url="/hire_noti/education.do"/>
+						<!-- <td>*학력</td>
+						<td><label class="radio-inline"> <input
+								type="radio" id="inlineCheckbox1" name="education" value="option1">
+								학력무관
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox2" name="education" value="option2"> 고등학교 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 2~3년제 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 4년제 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 석사학위
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 박사학위
+						</label></td>
+						<br>  -->
+					
 					</tr>
 					<tr>
 						<td>전공/학과</td>
@@ -327,13 +390,13 @@
 
 					<tr>
 						<td>채용절차</td>
-						<td><textarea id="ta11" title="채용절차"
+						<td><textarea id="ta11" title="채용절차" name="hnStep"
 								placeholder="채용절차를 입력하세요." maxlength="300"></textarea></td>
 
 					</tr>
 					<tr>
 						<td>제출서류</td>
-						<td><textarea id="ta11" title="제출서류"
+						<td><textarea id="ta11" title="제출서류" name="hnDocument"
 								placeholder="제출서류를 입력해주세요." maxlength="300"></textarea></td>
 
 					</tr>
@@ -369,7 +432,7 @@
 					</tr>
 					<tr>
 						<td>복리후생</td>
-						<td><textarea id="ta11" title="복리후생"
+						<td><textarea id="ta11" title="복리후생" name="hnBenefits"
 								placeholder="복리후생을 입력해주세요." maxlength="300"></textarea></td>
 
 
@@ -405,23 +468,26 @@
 					</thead>
 					<tr>
 						<td>*접수기간</td>
-						<td><input type="text" placeholder="  시작일 "><label>
-								~ </label> <input type="text" placeholder="  마감일 "></td>
+						<td><input type="text" name="startDay" id="startDay"
+							value="${dateSearchVO.startDay }"> ~ <input type="text"
+							name="endDay" id="endDay" value="${dateSearchVO.endDay }">
+							<!-- <input type="text" id="startDay" name="startDay" placeholder="  시작일 " ><label>
+								~ </label> <input type="text" id="endDay" name="endDay" placeholder="  마감일 " > -->
+						</td>
 					</tr>
 					<tr>
 						<td>*접수방법</td>
-						<td><label class="checkbox-inline"> <input
+						<td>
+						<label class=""> <input
+								type="checkbox" id="inlineCheckbox1" value="option1">
+								알쓸신JOB 이력서 
+						</label><br> 
+						<label class="checkbox-inline"> <input
 								type="checkbox" id="inlineCheckbox1" value="option1">
 								홈페이지접수 <input type="text" placeholder="http://">
-						</label><br> <label class="checkbox-inline"> <input
-								type="checkbox" id="inlineCheckbox1" value="option1"> 우편
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-								id="inlineCheckbox1" value="option1"> 방문
-						</label> <label class="checkbox-inline"> <input type="checkbox"
+						</label><br>   <label class="checkbox-inline"> <input type="checkbox"
 								id="inlineCheckbox1" value="option1"> 전화
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-								id="inlineCheckbox1" value="option1"> FAX
-						</label></td>
+						</label> </td> 
 
 					</tr>
 
@@ -436,8 +502,9 @@
 					</thead>
 					<tr>
 						<td>담당자</td>
-						<td><label>이름<input type="text"></label> <label>담당부서<input
-								type="text"></label></td>
+						<td><label>이름<input type="text"></label> 
+						<input type="button" class="btn btn-primary btn-lg" value="정보수정">
+						
 					</tr>
 					<tr>
 						<td>연락처</td>
@@ -481,6 +548,7 @@
 					<h4 class="modal-title" id="myModalLabel">전공 상세보기</h4>
 				</div>
 				<div class="modal-body">
+				
 					<c:import url="/hire_noti/major.do" />
 					<!-- <table class="table table-bordered">
 						<tr>
@@ -907,7 +975,8 @@
 						<tr>
 							<th>직책</th>
 							<td>
-								<div class="checkbox occselectDiv">
+								<c:import url="/hire_noti/position.do"/>
+								<!-- <div class="checkbox occselectDiv">
 									<label class="lb"> <input id="posi-1" type="checkbox"
 										value="팀원"> 팀원
 									</label> <label class="lb"> <input id="posi-2" type="checkbox"
@@ -938,7 +1007,7 @@
 										value="국장"> 국장
 									</label>
 
-								</div>
+								</div>  -->
 							</td>
 						</tr>
 					</table>
