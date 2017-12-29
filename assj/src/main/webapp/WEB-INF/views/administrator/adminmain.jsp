@@ -99,7 +99,8 @@ window.onload=function(){
 						<li>게시판</li>
 						<li>공지글</li>
 						<li>일반글</li>
-						<li>뉴스</li>
+						<li><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
+						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
 					</ul>
 					<li class="col-li-1-nb s5" style="cursor: pointer;"><div class="col-div-80-100">통계관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o5">

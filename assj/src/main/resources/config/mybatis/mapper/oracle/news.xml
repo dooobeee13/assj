@@ -8,10 +8,26 @@
 			select news_seq.nextval from dual
 		</selectKey>
 		insert into news
-		values(#{newsNo},#{newsTitle},#{newsURL},#{newsWriter},#{newsContent},sysdate)
+		values(#{newsNo},#{newsTitle},#{newsUrl},#{newsWriter},sysdate,#{newsContent})
 	</insert>
 	
 	<select id="selectNews"  resultType="map">
 		select * from news
 	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="NewsVO">
+		select * from news where news_no=#{newsNo}
+	</select>
+	
+	<update id="updateNews" parameterType="NewsVO">
+		update news
+		set news_title=#{newsTitle}, news_content=#{newsContent}
+		where news_no=#{newsNo}
+	</update>
+	
+	<delete id="deleteNews">
+		delete news
+		where news_no=#{newsNo}
+	</delete>
+	
 </mapper>

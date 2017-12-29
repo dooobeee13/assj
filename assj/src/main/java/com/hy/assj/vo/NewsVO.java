@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class NewsVO {
 	private int newsNo;
 	private String newsTitle;
-	private String newsURL;
+	private String newsUrl;
 	private String newsWriter;
 	private String newsContent;
 	private Timestamp newsRegdate;
@@ -27,11 +27,11 @@ public class NewsVO {
 	public void setNewsTitle(String newsTitle) {
 		this.newsTitle = newsTitle;
 	}
-	public String getNewsURL() {
-		return newsURL;
+	public String getNewsUrl() {
+		return newsUrl;
 	}
-	public void setNewsURL(String newsURL) {
-		this.newsURL = newsURL;
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
 	}
 	public String getNewsWriter() {
 		return newsWriter;
@@ -54,7 +54,7 @@ public class NewsVO {
 	
 	@Override
 	public String toString() {
-		return "NewsVO [newsNo=" + newsNo + ", newsTitle=" + newsTitle + ", newsURL=" + newsURL + ", newsWriter="
+		return "NewsVO [newsNo=" + newsNo + ", newsTitle=" + newsTitle + ", newsUrl=" + newsUrl + ", newsWriter="
 				+ newsWriter + ", newsContent=" + newsContent + ", newsRegdate=" + newsRegdate + "]";
 	}
 	

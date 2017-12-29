@@ -92,9 +92,92 @@ window.onload=function(){
 		{ start_date: "2017-04-23 16:00", end_date: "2017-04-23 17:00", text:"유라", subject: '집단면접' }
 	], "json");
 	
+	
 	$(".dhx_cal_ltitle").on("click",function(){
 		event.preventDefault();
 	});
+	
+	  scheduler.attachEvent("onBeforeLightbox", function(id) { //라이트박스 열었을때
+          var ev = scheduler.getEvent(id);
+          var pschNo = ev.pschid;
+          $('#pschNo').val(pschNo);
+          console.log(scheduler.map);
+          
+          if(ev.content==null){ //스케줄 신규등록일시
+              scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){ //세이브버튼 클릭 시(신규등록)
+              
+              
+              if (!ev.text) {
+                  alert("제목을 입력하세요");
+                  return false;
+              }
+              else if (!ev.content) {
+                  alert("내용을 입력하세요");
+                  return false;
+              }
+              else if (!ev.event_location) {
+                  alert("장소를 입력하세요");
+                  return false;
+              }
+              else {
+                 var start_date = ev.start_date; //시작날짜
+                 var end_date = ev.end_date; //끝날짜
+                 var text = ev.text; //제목
+                 var content = ev.content; //내용
+                 var event_location = ev.event_location; //장소
+                 var selection = ev.subject; //카테고리
+                 var pschNo=ev.pschid; //아이디
+                $('#pschNo').val(id);
+                  $('#pschStart').val(start_date);
+                  $('#pschEnd').val(end_date);
+                  $('#pschContent').val(content);
+                  $('#pschText').val(text);
+                  $('#pschEventLocation').val(event_location);
+                  $('#pschCateg').val(selection);
+                   $('#schfrm').submit();
+                 return true;  
+                 
+                 
+              } 
+              
+          }); 
+          
+          }else if(ev.content!=null){ //값이있을시(수정)
+              scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){ //세이브버튼 클릭 시(기존 값 수정)
+                    if (!ev.text) {
+                           alert("제목을 입력하세요");
+                           return false;
+                   }
+                    else if (!ev.content) {
+                           alert("내용을 입력하세요");
+                           return false;
+                   }
+                   else if (!ev.event_location) {
+                           alert("장소를 입력하세요");
+                           return false;
+                   }
+                   else {
+                    var start_date = ev.start_date; //시작날짜
+                    var end_date = ev.end_date; //끝날짜
+                    var text = ev.text; //제목
+                    var content = ev.content; //내용
+                    var event_location = ev.event_location; //장소
+                    var selection = ev.subject; //카테고리
+                     $('#pschText').val(text);
+                     $('#pschContent').val(content);
+                     $('#pschStart').val(start_date);
+                     $('#pschEnd').val(end_date);
+                     $('#pschEventLocation').val(event_location);
+                     $('#pschCateg').val(selection);
+                     
+                   $('#schfrm').attr("action", "schedulerEditContent.do");   
+                    $('#schfrm').submit(); 
+                 }
+             });
+           }
+          return true; 
+    });   
+	
 };
 </script>
 

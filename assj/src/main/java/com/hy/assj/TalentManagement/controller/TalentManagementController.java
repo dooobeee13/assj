@@ -1,7 +1,10 @@
 package com.hy.assj.TalentManagement.controller;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -248,7 +251,8 @@ public class TalentManagementController {
 										@RequestParam(required=false) List<String> CareerCheckBox,
 										@RequestParam(required=false) List<String> HopeOccu,
 										@RequestParam(required=false) List<String> area,
-										@RequestParam(required=false) List<String> Hopesectors) {
+										@RequestParam(required=false) List<String> Hopesectors, HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
 		logger.info("EduColDetail={}, Educol={}",EduColDetail,Educol);
 		logger.info("major={}, position={}",major,position);
 		logger.info("rank={}, empType={}",rank,empType);

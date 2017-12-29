@@ -145,7 +145,7 @@ footer {
 	padding-left: 1px;
 }
 
-.searchCategory .panel {
+.searchCategory .panel.total {
 	height: 195px;
 	margin-bottom: 0;
 }

@@ -24,4 +24,19 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.selectNews();
 	}
 
+	@Override
+	public NewsVO selectByNo(int newsNo) {
+		return adminDao.selectByNo(newsNo);
+	}
+
+	@Override
+	public int updateNews(NewsVO vo) {
+		return adminDao.updateNews(vo);
+	}
+
+	@Override
+	public int deleteNews(int newsNo) {
+		return adminDao.deleteNews(newsNo);
+	}
+
 }
