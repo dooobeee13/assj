@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="top.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,16 +10,10 @@
 <!-- 반응형 웹을위한 메타태그 -->
 <title>알쓸신job 공고등록</title>
 <!-- Bootstrap -->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript"
-	src="<c:url value='/jquery/jquery-3.2.1.min.js' />"></script>
-<link rel="stylesheet" type="text/css" 
-	href="<c:url value='/css/jquery-ui.css'/>">
-
-<script type="text/javascript" 
-src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="/jquery/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 
 <script>
     function findZipcode() {
@@ -68,20 +61,8 @@ src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 
 
 <script type="text/javascript">
-
-	
- 	$.applyDatePicker = function(id) {
-		$(id).datepicker(
-				{
-					dateFormat : "yy-mm-dd",
-					changeYear : true,
-					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ]
-				});
-	}
  
-	$(function() {
+	$(document).ready(function() {
 		$('#savebtn').click(function() {
 			$('#rank_position').modal('hide');
 		});
@@ -89,7 +70,6 @@ src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 		
  		$.applyDatePicker('#startDay');
 		$.applyDatePicker('#endDay'); 
-		
 
 		$('.rankselectDiv .lb input[type=checkbox]').click(function() {
 							var isChecked = $(this).prop('checked');
@@ -172,7 +152,16 @@ src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 
 	});
 
-	
+	$.applyDatePicker = function(id) {
+		$(id).datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					changeYear : true,
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+							'8월', '9월', '10월', '11월', '12월' ]
+				});
+	}
 	
 </script>
 
@@ -255,10 +244,7 @@ src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
