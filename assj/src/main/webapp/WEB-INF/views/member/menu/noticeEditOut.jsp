@@ -9,22 +9,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>1:1상담문의</title>
+<title>공지사항 수정,삭제</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){	
-		$(window).load(function(){
-	   		$("select option[value='전체']").attr("selected", true);			 
-			
-	   		$('select option:eq(1)').css('color','red');
-			$('select option:eq(2)').css('color','blue');
-			$('select option:eq(3)').css('color','orange');
-			$('select option:eq(4)').css('color','green');
-			
-			$('fieldset').hide();
-			$('#all').show();
-		}); 
-		
+   		$("select option:eq(0)").attr("selected", true);			 
+   		$('select option:eq(1)').css('color','red');
+		$('select option:eq(2)').css('color','blue');
+		$('select option:eq(3)').css('color','orange');
+		$('select option:eq(4)').css('color','green');		
+	
 		$('input[name=chkAll]').click(function(){	
 			$('tbody input[type=checkbox]').prop('checked', this.checked);
 		});
@@ -41,24 +35,27 @@
 				'<c:url value="/member/menu/deleteMulti.do"/>');
 			$('#frmList').submit();			
 		});
+
+		$.step = function(idx, currentPage){
+			var url = '<c:url value="/member/menu/step2.do"/>?notititleNo=' + idx;
+			if (currentPage) {
+				url += '&currentPage=' + currentPage;
+			}
+			
+			$.ajax({
+				url: url,
+				dataType:"xml",
+				success :function(res){
+					$('.total').html('');
+					$('.total').html($(res).find('result').find('html').text());
+				}
+			}); 
+		};
+		
 		
 		$('#noticetitleNo').change(function(){
-			if($(this).val()==0){
-				$('fieldset').hide();
-				$('#all').show();
-			}else if($(this).val()==1){
-				$('fieldset').hide();
-				$('#notice').show();
-			}else if($(this).val()==2){
-				$('fieldset').hide();
-				$('#event').show();
-			}else if($(this).val()==3){
-				$('fieldset').hide();
-				$('#open').show();
-			}else if($(this).val()==4){
-				$('fieldset').hide();
-				$('#news').show();
-			}
+			var idx = $(this).val();
+			$.step(idx);
 		});
 		
 	});
@@ -88,6 +85,9 @@
 		margin-right:35px;
 		vertical-align: bottom;
 	} 
+	.divPage {
+		text-align: center;
+	}
 	
  /* 사이드바 스타일 */
 #sidebar-wrapper {
@@ -197,7 +197,8 @@
 							<input type="button" class="btn btn-default" id="btDeleteMulti" value="선택 삭제" >
 						</div>
 						<br><br>
-				<!-- 전체보기 -->
+						
+			<%-- 	<!-- 전체보기 -->
 				<fieldset id="all">		
 					<table class="table table-hover">
 						<thead>
@@ -249,6 +250,9 @@
 						</c:if>
 						</tbody>
 					</table>
+					
+					<div class="total" id="all">
+					</div>
 				</fieldset>	
 					
 				<!-- 공지 -->
@@ -429,45 +433,17 @@
 						</c:if>
 						</tbody>
 					</table>
-				</fieldset>	
+				</fieldset>	 --%>
 				</form>
+				<div class="total" id="all">
 				
-			<div class="divPage">
-				<!-- 페이지 번호 추가 -->		
-				<!-- 이전 블럭으로 이동 ◀ -->
-				<c:if test="${pagingInfo.firstPage>1 }">
-					<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">		
-						<img src="<c:url value='/images/first.JPG'/>">
-					</a>	
-				</c:if>	
-				
-				<!-- [1][2][3][4][5][6][7][8][9][10] -->
-				<c:forEach var="i" begin="${pagingInfo.firstPage}" 
-					end="${pagingInfo.lastPage}">
-					<c:if test="${i==pagingInfo.currentPage}">
-						<span style="font-weight:bold;color:blue">${i}</span>
-					</c:if>
-					<c:if test="${i!=pagingInfo.currentPage}">
-						<a href="#" onclick="pageFunc(${i})">[${i}]</a>
-			 		</c:if>		 	
-			 	
-				</c:forEach>
-				
-				<!-- 다음 블럭으로 이동 ▶ -->
-				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-					<a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">	
-						<img src="<c:url value='/images/last.JPG'/>">
-					</a>	
-				</c:if>
-				
-				<!--  페이지 번호 끝 -->
-			</div>
 				</div>
 			</div>
-			</div>
+				</div>
 		</div>
+	</div>
+
 		
-		<c:import url="../../index/footer.jsp" />
-		
+	<c:import url="../../index/footer.jsp" />	
 </body>
 </html>

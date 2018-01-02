@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,9 +36,14 @@
 		font-size:60px;
 		font-weight:bold;
 	}
-	#serviceCenter table,th{
+	#serviceCenter table{
 		text-align:center;
 	}
+	
+	#serviceCenter th{
+		text-align:center;
+	}
+	
 	#serviceCenter table{
 		background-color:#ffff;
 	}
@@ -204,16 +210,44 @@
 						<th>등록일시</th>
 						<th>조회수</th>
 					</tr>
-					<c:forEach var="map" items="${qlist}">
-					<tr>
-						<td>${map.NO}</td>
-						<td><a href="<c:url value='/member/menu/QnAcountUpdate.do?no=${map.NO}'/>">${map.TITLE}</a></td>
-						<td>${map.NAME}</td>
-						<td><fmt:formatDate value="${map.REGDATE}" pattern="yyyy-MM-dd"/></td>
-						<td>${map.READCOUNT}</td>
-					</tr>
 					
-					</c:forEach>
+				<c:forEach var="reboardVO" items="${qlist }">
+					<tr>
+					<td>${reboardVO.NO}</td>
+					<td style="text-align:left">
+						<c:if test="${reboardVO.DELFLAG=='Y'}">
+							<span style="color: gray"><s>삭제된 글입니다.</s></span>
+						</c:if> 
+						 <c:if test="${reboardVO.DELFLAG!='Y'}">					
+							<!-- 답변-계층적으로 보여주기 -->
+							<c:if test="${reboardVO.STEP>0 }">
+								<c:forEach var="i" begin="1" end="${reboardVO.STEP}"> 
+									&nbsp;
+								</c:forEach>
+								<span class="glyphicon glyphicon-arrow-right" style="color:red"></span>						
+								<%-- <img src="<c:url value='/images/re.png'/>" alt="re이미지"> --%>
+							</c:if>
+<a href="<c:url value='/member/menu/QnAcountUpdate.do?no=${reboardVO.NO}'/>">
+								<!-- 제목이 긴 경우 일부만 보여주기 -->
+								<c:if test="${fn:length(reboardVO.TITLE)>30 }">
+									${fn:substring(reboardVO.TITLE,0,30) }...
+								</c:if>
+								<c:if test="${fn:length(reboardVO.TITLE)<=30 }">						
+									${reboardVO.TITLE}
+								</c:if>
+							</a>
+						
+							<c:if test="${reboardVO.NEWIMGTERM<24}">
+								<img src='<c:url value="/images/new.gif"/>' alt="new 이미지">
+							</c:if>  
+						 </c:if>
+					</td>
+					<td>${reboardVO.NAME}</td>
+					<td><fmt:formatDate value="${reboardVO.REGDATE}" 
+						pattern="yyyy-MM-dd" /> </td>
+					<td>${reboardVO.READCOUNT}</td>		
+				</tr> 
+		  	</c:forEach>
 			</c:if>
 				</table>
 				</div>

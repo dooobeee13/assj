@@ -8,8 +8,8 @@
 		<selectKey keyProperty="cmNo" resultType="int" order="BEFORE">
 			select COMP_MEMBER_SEQ.nextval from dual
 		</selectKey>
-		insert into comp_member(CM_NO,CM_ID,CM_PWD,CM_REGNUM,CM_NAME,CM_REPRE,CM_MANAGER,CM_MGR_TEL,CM_ADDR,CM_DETAILADDR,CM_ZIPCODE,CM_EMAIL,CC_NO)
-		values(#{cmNo},#{cmId},#{cmPwd},#{cmRegnum},#{cmName},#{cmRepre},#{cmManager},#{cmMgrTel},#{cmAddr},#{cmDetailAddr},#{cmZipcode},#{cmEmail},#{ccNo})
+		insert into comp_member(CM_NO,CM_ID,CM_PWD,CM_REGNUM,CM_NAME,CM_REPRE,CM_MANAGER,CM_MGR_TEL,CM_ADDR,CM_DETAILADDR,CM_ZIPCODE,CM_EMAIL,CC_NO,CM_HOMEPAGE)
+		values(#{cmNo},#{cmId},#{cmPwd},#{cmRegnum},#{cmName},#{cmRepre},#{cmManager},#{cmMgrTel},#{cmAddr},#{cmDetailAddr},#{cmZipcode},#{cmEmail},#{ccNo},#{cmHomepage})
 	</insert>
 	
 	<select id="selectPwdByUserid" parameterType="string" resultType="string">
@@ -27,7 +27,7 @@
 	<update id="cmMemberEdit" parameterType="CmMemberVO">
 		update comp_member
 		set cm_Mgr_tel=#{cmMgrTel},cm_Email=#{cmEmail},cm_name=#{cmName}
-		,cm_repre=#{cmRepre},cm_zipcode=#{cmZipcode},cm_addr=#{cmAddr},cm_detailaddr=#{cmDetailAddr},cm_logo=#{cmLogo},cm_regnum=#{cmRegnum},cs_no=#{csNo}
+		,cm_repre=#{cmRepre},cm_zipcode=#{cmZipcode},cm_addr=#{cmAddr},cm_detailaddr=#{cmDetailAddr},cm_logo=#{cmLogo},cm_regnum=#{cmRegnum},cs_no=#{csNo},cm_homepage=#{cmHomepage}
 		where cm_no=#{cmNo}
 	</update>
 	

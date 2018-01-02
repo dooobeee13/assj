@@ -317,12 +317,17 @@
 		.mem_register #CompanyMember{
 			display:none;
 		}
-		.agreeTable{
+		.mem_register .agreeTable{
 			width:100%;
 		}
-		.agreeTable th,td{
+		.mem_register .agreeTable th{
 			padding:10px;
 		}
+		.mem_register .agreeTable td{
+			padding:10px;
+		}
+		
+		
 		.modal {
        		 text-align: center;
 		}
@@ -598,6 +603,10 @@
 					</select>&nbsp;
 					<input type="text" class="form-control" size="12" maxlength="15" id="cmEmail3" name="cmEmail3" style="visibility:hidden">
 				</div>
+				<div class="form-group">&nbsp;
+					<label for="cmHomepage">홈페이지 주소</label> 
+					<input type="text" class="form-control"size="40" id="cmHomepage" name="cmHomepage">
+				</div><br>
 				<div class="form-group">&nbsp;
 					<label for="ccNo">기업구분</label> 
 					<label class="radio-inline">

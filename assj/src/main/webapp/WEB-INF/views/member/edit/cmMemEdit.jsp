@@ -49,6 +49,12 @@
     				$('#cmEmail3').css('visibility','hidden');
     			}	
     		});
+			
+			$('#complete').click(function(){
+				$('#cmRegnum').val($('#cmRegnumModal').val());
+				$('#csNo').val($('[name=csNoModal]:checked').val());
+				$('#CpModal').modal('hide');
+			});
 		
 		});
 
@@ -179,10 +185,9 @@
 							<td>일반기업 구분은 임의로 변경할 수 없습니다.<br> 
 							변경을 원하시는 경우,고객센터로 연락해주세요.<br>
 							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<br><a href="#CpModal" data-toggle="modal">기업 구분 수정요청</a></td>		
-						
 						</tr>
 					</table>
-					<input type="text" name="csNo" id="csNo" value='1'>
+					<input type="text" name="csNo" id="csNo" value="${vo.csNo}">
 					<br><br>
 				<h4><b>인사담당자 정보</b></h4>
 				<input type="hidden" id="cmNo" name="cmNo" value="${vo.cmNo}">
@@ -257,7 +262,13 @@
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사 로고/사진등록</td>
 							<td>
-								<input type="file" class="form-control" name="logo">
+								<input type="file" class="form-control" name="Logo">
+							</td>
+						</tr>
+						<tr>
+							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;홈페이지 주소</td>
+							<td>
+								<input type="text" class="form-control" size="38" id="cmHomepage" name="cmHomepage" value="${vo.cmHomepage}">
 							</td>
 						</tr>	
 					</table><br>
@@ -344,7 +355,7 @@
 						</tr>
 						<tr>
 							<td>사업자<br>등록번호</td>
-							<td><input type="text" class="form-control" id="cmRegnum" name="cmRegnum"
+							<td><input type="text" class="form-control" id="cmRegnumModal" name="cmRegnumModal"
 								value="${vo.cmRegnum}"></td>		
 						</tr>	
 						<tr>
@@ -352,52 +363,52 @@
 							<td>
 								&nbsp;&nbsp;
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="1"> 대기업
+									<input type="radio" name="csNoModal" value="1"> 대기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="2"> 중견기업
+									<input type="radio" name="csNoModal" value="2"> 중견기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="3"> 강소기업
+									<input type="radio" name="csNoModal" value="3"> 강소기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="4"> 중소기업
+									<input type="radio" name="csNoModal" value="4"> 중소기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="5"> 외국계(법인)
+									<input type="radio" name="csNoModal" value="5"> 외국계(법인)
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="6"> 코스닥
+									<input type="radio" name="csNoModal" value="6"> 코스닥
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="7"> 벤처
+									<input type="radio" name="csNoModal" value="7"> 벤처
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="8"> 코스피
+									<input type="radio" name="csNoModal" value="8"> 코스피
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="9"> 기술혁신기업
+									<input type="radio" name="csNoModal" value="9"> 기술혁신기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="10"> 공사.공기업
+									<input type="radio" name="csNoModal" value="10"> 공사.공기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="11"> 외부감사법인
+									<input type="radio" name="csNoModal" value="11"> 외부감사법인
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="12"> 수출입기업
+									<input type="radio" name="csNoModal" value="12"> 수출입기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="13"> 학교.교육기관
+									<input type="radio" name="csNoModal" value="13"> 학교.교육기관
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="14"> 코넥스
+									<input type="radio" name="csNoModal" value="14"> 코넥스
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="15"> 경영혁신기업
+									<input type="radio" name="csNoModal" value="15"> 경영혁신기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="16"> 우수기업
+									<input type="radio" name="csNoModal" value="16"> 우수기업
 								</label>
 							</td>		
 						</tr>	
@@ -412,7 +423,7 @@
 					</table><br>		 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-lg">신청완료</button>
+					<button type="button" class="btn btn-primary btn-lg" id="complete">신청완료</button>
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->

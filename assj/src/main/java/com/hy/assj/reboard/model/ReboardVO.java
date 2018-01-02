@@ -13,8 +13,19 @@ public class ReboardVO {
     private int groupNo;      	
 	private int step;	  	
 	private int sortNo;
-	private char delFlag;
+	private String delFlag;
 	
+	//24시간 이내의 글을 처리하기 위한 프로퍼티
+    private int newImgTerm;
+    
+    
+	public int getNewImgTerm() {
+		return newImgTerm;
+	}
+
+	public void setNewImgTerm(int newImgTerm) {
+		this.newImgTerm = newImgTerm;
+	}
 	
 	public int getNo() {
 		return no;
@@ -76,23 +87,19 @@ public class ReboardVO {
 	public void setSortNo(int sortNo) {
 		this.sortNo = sortNo;
 	}
-	public char getDelFlag() {
+	public String getDelFlag() {
 		return delFlag;
 	}
-	public void setDelFlag(char delFlag) {
+	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
 	}
-	
+
 	
 	@Override
 	public String toString() {
 		return "ReboardVO [no=" + no + ", name=" + name + ", pwd=" + pwd + ", title=" + title + ", regdate=" + regdate
 				+ ", readCount=" + readCount + ", content=" + content + ", groupNo=" + groupNo + ", step=" + step
-				+ ", sortNo=" + sortNo + ", delFlag=" + delFlag + "]";
+				+ ", sortNo=" + sortNo + ", delFlag=" + delFlag + ", newImgTerm=" + newImgTerm + "]";
 	}
-	
-	
-	
-	
 	
 }

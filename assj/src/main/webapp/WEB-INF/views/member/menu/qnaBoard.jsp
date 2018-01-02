@@ -13,23 +13,24 @@
 <title>1:1상담문의</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){		
-		function pageFunc(curPage){
-			document.frmPage.currentPage.value=curPage;
-			frmPage.submit();
-		}
-		
-	});
+	function pageFunc(curPage){
+		document.frmPage.currentPage.value=curPage;
+		frmPage.submit();
+	}
 </script>
 <script src="../../js/bootstrap.min.js"></script>
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
 	#frame {
-		padding: 20px;
+		padding:40px;
 		background-color: #ffff;
+		height:780px;
 	}
-	table,th{
+	table{
+		text-align:center;
+	}
+	table th{
 		text-align:center;
 	}
 	.btnDiv{
@@ -54,7 +55,7 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 900px;
+    height:780px;
   } 
 
    .sidebar-nav {
@@ -144,7 +145,7 @@
 				<br>
 				<!-- 페이징 처리에 필요한 form 태그 -->
 				<form name="frmPage" method="post" 
-				action="<c:url value='/member/menu/qnaBoard.do'/>">
+					action="<c:url value='/member/menu/qnaBoard.do'/>">
 					<input type="hidden" name="searchKeyword" 
 						value="${param.searchKeyword }">
 					<input type="hidden" name="currentPage">
@@ -177,8 +178,8 @@
 				<br><br>
 				<table class="table table-hover">
 				<colgroup>
-					<col width=10%>
-					<col width=50%>
+					<col width=12%>
+					<col width=48%>
 					<col width=18%>
 					<col width=12%>
 					<col width=10%>
@@ -189,18 +190,46 @@
 					<th>작성자</th>
 					<th>등록일시</th>
 					<th>조회수</th>
-				</tr>	
-					<c:forEach var="reboardVO" items="${list}">
+				</tr>			
+					<c:forEach var="reboardVO" items="${list }">
 					<tr>
-						<td>${reboardVO.no}</td>
-						<td>
-						<a href="<c:url value='/member/menu/QnAcountUpdate.do?no=${reboardVO.no}'/>">
-						${reboardVO.title}</a></td>
-						<td>${reboardVO.name}</td>
-						<td><fmt:formatDate value="${reboardVO.regdate}" pattern="yyyy-MM-dd"/></td>
-						<td>${reboardVO.readCount}</td>
-					</tr>
-					</c:forEach>
+					<td>${reboardVO.no}</td>
+					<td style="text-align:left">
+
+						<c:if test="${reboardVO.delFlag=='Y'}">
+							<span style="color: gray"><s>삭제된 글입니다.</s></span>
+						</c:if> 
+						 <c:if test="${reboardVO.delFlag!='Y'}">						
+							<!-- 답변-계층적으로 보여주기 -->
+							<c:if test="${reboardVO.step>0 }">
+								<c:forEach var="i" begin="1" end="${reboardVO.step }"> 
+									&nbsp;
+								</c:forEach>
+								<span class="glyphicon glyphicon-arrow-right" style="color:red"></span>						
+								<%-- <img src="<c:url value='/images/re.png'/>" alt="re이미지"> --%>
+							</c:if>
+<a href="<c:url value='/member/menu/QnAcountUpdate.do?no=${reboardVO.no}'/>">
+								<!-- 제목이 긴 경우 일부만 보여주기 -->
+								<c:if test="${fn:length(reboardVO.title)>30 }">
+									${fn:substring(reboardVO.title,0,30) }...
+								</c:if>
+								<c:if test="${fn:length(reboardVO.title)<=30 }">						
+									${reboardVO.title}
+								</c:if>
+							</a>
+							 <!-- 24시간 이내의 글인 경우 -->
+							<c:if test="${reboardVO.newImgTerm<24 }">
+								<img src='<c:url value="/images/new.gif"/>' 
+								alt="new 이미지">
+							</c:if>  
+					 </c:if> 
+					</td>
+					<td>${reboardVO.name}</td>
+					<td><fmt:formatDate value="${reboardVO.regdate}" 
+						pattern="yyyy-MM-dd" /> </td>
+					<td>${reboardVO.readCount}</td>		
+				</tr> 
+		  	</c:forEach>
 				</table>
 				<div class="divPage">
 	<!-- 페이지 번호 추가 -->		

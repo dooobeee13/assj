@@ -40,6 +40,7 @@
 		margin:0 auto;
 		padding:80px;
 		background-color:#ffff;
+		height:670px;
 	}
 	.container .form-group{
 		margin:6px;
@@ -55,9 +56,6 @@
 	}
 	/* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;

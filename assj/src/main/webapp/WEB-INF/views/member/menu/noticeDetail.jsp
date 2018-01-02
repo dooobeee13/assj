@@ -19,32 +19,32 @@
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
 	
-	fieldset {
+	.container fieldset {
 		padding: 40px;
 		background-color: #ffff;
 	}
-	#searchTable{
+	.container #searchTable{
 		float:right;
 	}
-	table th,table{
+	.container table th,table{
 		text-align:center;
 	}
-	#title{
+	.container #title{
 		font-size:0.6em;
 	}
-	#date{
+	.container #date{
 		text-align: right;
 	}
-	.well{
+	.container .well{
 		background: #dde0e5;
 	}
-	#list{
+	.container #list{
 		background-color:#ebecee;
 	}
-	#ListDiv{
+	.container #ListDiv{
 		text-align: right;
 	}
-	#contentsDiv{
+	.container #contentsDiv{
 		height:500px;
 	}
  /* 사이드바 스타일 */
@@ -168,11 +168,11 @@
 					</div>
 					<hr>
 					<c:if test="${!empty nexPre.NEXT_TITLE}">
-						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no=${nexPre.NO}'/>">${nexPre.NEXT_TITLE}</a>
+						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no='/>">${nexPre.NEXT_TITLE}</a>
 					</c:if>
 					<br>
 					<c:if test="${!empty nexPre.PRE_TITLE}">
-						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no=${nexPre.NO}'/>">${nexPre.PRE_TITLE}</a><br>
+						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no='/>">${nexPre.PRE_TITLE}</a><br>
 					</c:if>
 					<hr>
 					<div id="ListDiv">

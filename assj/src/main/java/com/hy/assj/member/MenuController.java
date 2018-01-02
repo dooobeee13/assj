@@ -49,11 +49,5 @@ public class MenuController {
 		return "member/menu/scrap";
 	}
 	
-	@RequestMapping("/qnaOut.do")
-	public String qnaOut_get() {
-		logger.info("Q&A 삭제화면");
-		
-		return "member/menu/qnaOut";
-	}
 
 }

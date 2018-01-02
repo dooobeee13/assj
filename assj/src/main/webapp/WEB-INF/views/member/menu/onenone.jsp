@@ -20,45 +20,45 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
-	h1 {
+	.row h1 {
 		font-weight: bold;
 	}
 	
-	fieldset {
+	.row fieldset {
 		/* width: 720px;
 		margin: 0 auto; */
-		padding: 50px;
+		padding: 40px;
 		background-color: #ffff;
 	}
 	
-	label {
+	.row label {
 		width: 165px;
 		margin: 10px;
 	}
 	
-	.titleTD {
+	.row .titleTD {
 		width: 130px;
 	}
 	
-	#btnDiv {
+	.row #btnDiv {
 		text-align: center;
 	}
 	
-	form {
-		background-color: #dde6f7;
+	.row form {
+		background-color: #dce8ff;
 	}
-	.well {
+	.row .well {
 		width: 95%;
 		margin: 0 auto;
 	}
-	#email td,th{
+	.row #email td,th{
 		padding:20px;
 	}
-	#comments,#divide{
+	.row #comments,#divide{
 		vertical-align:top;
 	}
 	
-	h1 img{
+	.row h1 img{
 		vertical-align: bottom;
 		width:50px;
 	}
