@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="top.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,30 +11,32 @@
 <!-- 반응형 웹을위한 메타태그 -->
 <title>알쓸신job 공고등록</title>
 <!-- Bootstrap -->
-<script type="text/javascript" src="/jquery/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="/jquery/jquery-ui.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript"
+	src="<c:url value='/jquery/jquery-3.2.1.min.js' />"></script>
+<link rel="stylesheet" type="text/css" 
+	href="<c:url value='/css/jquery-ui.css'/>">
+
+<script type="text/javascript" 
+src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script>
     function findZipcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullAddr = ''; // 최종 주소 변수
                 var extraAddr = ''; // 조합형 주소 변수
-
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
-
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     fullAddr = data.jibunAddress;
                 }
-
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
                 if(data.userSelectedType === 'R'){
                     //법정동명이 있을 경우 추가한다.
@@ -47,11 +50,9 @@
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('address').value = fullAddr;
-
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById('addressDetail').focus();
             }
@@ -61,21 +62,30 @@
 
 
 <script type="text/javascript">
+	
+ 	$.applyDatePicker = function(id) {
+		$(id).datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					changeYear : true,
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+							'8월', '9월', '10월', '11월', '12월' ]
+				});
+	}
  
-	$(document).ready(function() {
+	$(function() {
 		$('#savebtn').click(function() {
 			$('#rank_position').modal('hide');
 		});
-
 		
  		$.applyDatePicker('#startDay');
 		$.applyDatePicker('#endDay'); 
-
+		
 		$('.rankselectDiv .lb input[type=checkbox]').click(function() {
 							var isChecked = $(this).prop('checked');
 							var id = $(this).attr('id');
 							if (isChecked) {
-
 								if ($('.rank').find(
 										'.rankItem [data-id=' + id + ']').length == 0) {
 									var item = '<span class="rankItem" data-id="'+ id +'">'
@@ -85,9 +95,7 @@
 							} else {
 								$('.rank .rankItem[data-id=' + id + ']').remove();
 							}
-
 						});
-
 		$('.rank').on('click', '.rankItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
@@ -102,7 +110,6 @@
 							var isChecked = $(this).prop('checked');
 							var id = $(this).attr('id');
 							if (isChecked) {
-
 								if ($('.position').find(
 										'.positionItem [data-id=' + id + ']').length == 0) {
 									var item = '<span class="positionItem" data-id="'+ id +'">'
@@ -113,22 +120,18 @@
 								$('.position .positionItem[data-id=' + id + ']')
 										.remove();
 							}
-
 						});
-
 		$('.position').on('click', '.positionItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
 			$(this).remove();
 		});
-
 		$('.majorselectDiv input[type=checkbox]')
 				.click(
 						function() {
 							var isChecked = $(this).prop('checked');
 							var id = $(this).attr('id');
 							if (isChecked) {
-
 								if ($('.major').find(
 										'.majorItem [data-id=' + id + ']').length == 0) {
 									var item = '<span class="majorItem" data-id="'+ id +'">'
@@ -140,28 +143,14 @@
 								$('.major .majorItem[data-id=' + id + ']')
 										.remove();
 							}
-
 						});
-
 		$('.major').on('click', '.majorItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
 			$(this).remove();
 		});
-
-
 	});
-
-	$.applyDatePicker = function(id) {
-		$(id).datepicker(
-				{
-					dateFormat : "yy-mm-dd",
-					changeYear : true,
-					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ]
-				});
-	}
+	
 	
 </script>
 
@@ -170,32 +159,26 @@
 	width: 800px;
 	padding: 50px;
 }
-
 .sp11 {
 	font-size: 2em;
 	width: 300px;
 }
-
 .lb {
 	width: 100px;
 }
-
 #hh {
 	text-align: center;
 }
-
 #ta11 {
 	width: 350px;
 	height: 100px;
 }
-
 .fsmain {
 	width: 70%;
 	margin-top: 5%;
 	margin-right: 15%;
 	margin-left: 15%;
 }
-
 .major {
 	padding: 10px;
 	min-height: 100px;
@@ -203,11 +186,9 @@
 	width: 350px;
 	display: inline-block;
 }
-
 #majorbtn {
 	vertical-align: top;
 }
-
 .rank {
 	padding: 10px;
 	min-height: 100px;
@@ -215,17 +196,14 @@
 	width: 350px;
 	display: inline-block;
 }
-
 #rankbtn {
 	vertical-align: top;
 }
-
 .rankItem {
 	margin: 5px;
 	border: 1px solid;
 	cursor: pointer;
 }
-
 .sectors{
 	padding: 10px;
 	min-height: 100px;
@@ -233,7 +211,6 @@
 	width: 350px;
 	display: inline-block;	
 }
-
 .position{
 	padding: 10px;
 	min-height: 100px;
@@ -241,10 +218,12 @@
 	width: 350px;
 	display: inline-block;
 }
-
 </style>
 
-<script src="/js/bootstrap.min.js"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/bootstrap.min.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -539,7 +518,8 @@
 					</thead>
 					<tr>
 						<td>담당자</td>
-						<td><label>이름<input type="text"></label> 
+						<td><label for="cmName" >이름</label> 
+						<input type="text" name="cmName" id="cmName" value="${cmMemberVO.cmManager }">
 						<input type="button" class="btn btn-primary btn-lg" value="정보수정">
 						
 					</tr>
@@ -550,6 +530,7 @@
 						</label></td>
 					</tr>
 				</table>
+
 
 				<!--  채용제목 -->
 				<table class="table table-condended">
@@ -651,7 +632,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -733,7 +713,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -806,15 +785,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -850,7 +826,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -921,7 +896,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -962,7 +936,6 @@
 									<c:forEach var="vo" items=${list}>
 										<label class="lb"> <input id="occu-${vo.no}" type="checkbox" value="${vo.no}"> ${vo.name}</label>
 									</c:forEach>
-
 									<label class="lb"> <input id="occu-1" type="checkbox"
 										value="사원"> 사원
 									</label> <label class="lb"> <input id="occu-2" type="checkbox"
@@ -1043,7 +1016,6 @@
 									</label> <label class="lb"> <input id="posi-14" type="checkbox"
 										value="국장"> 국장
 									</label>
-
 								</div>  -->
 							</td>
 						</tr>
@@ -1138,7 +1110,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1220,7 +1191,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -1293,15 +1263,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -1337,7 +1304,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1408,7 +1374,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -1505,7 +1470,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1587,7 +1551,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -1660,15 +1623,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -1704,7 +1664,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1775,7 +1734,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -1797,7 +1755,6 @@
 
 </body>
 </html>
-
 
 
 
