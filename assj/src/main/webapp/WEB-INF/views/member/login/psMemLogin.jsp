@@ -14,7 +14,7 @@
 	<link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     <style type="text/css">
-    	fieldset{
+    	.container fieldset{
     		width:800px;
     		height:560px;
 			margin:0 auto;	

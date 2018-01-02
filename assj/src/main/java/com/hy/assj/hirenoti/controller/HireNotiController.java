@@ -3,6 +3,8 @@ package com.hy.assj.hirenoti.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hy.assj.cmMember.model.CmMemberService;
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
@@ -33,6 +37,9 @@ public class HireNotiController {
 	
 	@Autowired
 	private HireNotiService hirenotiService;
+	
+	@Autowired
+	private CmMemberService cmMemberService;
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
 	public String hireNoti1() {
@@ -164,6 +171,19 @@ public class HireNotiController {
 		
 		return "common/message";		
 	}
+	
+	/*@RequestMapping(value="/hire1.do",method=RequestMethod.GET)
+	public String hirenoti_cmManager(HttpSession session,Model model) {
+		logger.info("기업회원정보 수정 화면(get) 파라미터 session={}",session);
+		
+		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
+		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
+		
+		model.addAttribute("vo={}",vo);
+		
+		return "hire_noti/hire1";
+	}*/
+	 
 	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {

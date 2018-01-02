@@ -3,22 +3,26 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.notice">
-	<sql id="searchWhere">
-		<if test="searchKeyword !=null and searchKeyword!=''">
-			where to_char(regdate,'yyyy')=${searchCondition} and title like '%' || #{searchKeyword} || '%'
-		</if>
+	<sql id="searchWhere" >
+		<where>
+			<if test="searchKeyword !=null and searchKeyword!=''">
+				to_char(regdate,'yyyy')=#{searchCondition} and title like '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="notititleNo != 0">
+				and noticetitle_no= #{notititleNo}
+			</if>
+		</where>
 	</sql>
 
-	<select id="noticeList" resultType="hashmap" parameterType="SearchVO">
-		<!-- select * from noticeview order by no desc -->
+	<select id="noticeList" resultType="hashmap" parameterType="NotiSearchVO">
 		select *
 		from
 		(
 		    select rownum as RNUM, blist.*
 		    from(
 		        select * from noticeview 
-		        <include refid="searchWhere"></include>
-		        order by no desc		        
+		        <include refid="searchWhere" />
+		        order by no desc	        
 		    ) blist
 		) 
 		<![CDATA[
@@ -26,8 +30,8 @@
 		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>
 	</select>
 	
-	<select id="noticeList1" resultType="hashmap" parameterType="SearchVO">
-		<!-- select * from noticeview order by no desc -->
+	<!-- select id="noticeList1" resultType="hashmap" parameterType="SearchVO">
+		select * from noticeview order by no desc
 		select *
 		from
 		(
@@ -53,7 +57,7 @@
 	
 	<select id="noticeList4" resultType="hashmap">
 		select * from noticeview where noticetitle_no='4' order by no desc
-	</select>
+	</select> -->
 	
 	<select id="selectAll" parameterType="SearchVO" 
 		resultType="hashmap" >
@@ -72,17 +76,16 @@
 		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>	
 	</select>
 	
-	<select id="selectTotalRecordCount" resultType="int" 
+	<!-- <select id="selectTotalRecordCount" resultType="int" 
 		parameterType="SearchVO">
 		select count(*) from noticeview
 		<include refid="searchWhere"></include>	
-	</select>
+	</select> -->
 	
-	<select id="selectTotalRecordCount1" resultType="int" 
-		parameterType="SearchVO">
+	<select id="selectTotalRecordCount" resultType="int" 
+		parameterType="NotiSearchVO">
 		select count(*) from noticeview
-		<include refid="searchWhere"></include>
-		and noticetitle_no='1'
+		<include refid="searchWhere"/>
 	</select>
 	
 	

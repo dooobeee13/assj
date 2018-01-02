@@ -16,11 +16,11 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDAO noticeDao;
 	
 	@Override
-	public List<Map<String, Object>> noticeList(SearchVO vo) {
+	public List<Map<String, Object>> noticeList(NotiSearchVO vo) {
 		return noticeDao.noticeList(vo);
 	}
 
-	@Override
+	/*@Override
 	public List<Map<String, Object>> noticeList1(SearchVO vo) {
 		return noticeDao.noticeList1(vo);
 	}
@@ -43,7 +43,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Map<String,Object>> selectAll(SearchVO searchVo) {
 		return noticeDao.selectAll(searchVo);
-	}
+	}*/
 
 
 	@Override
@@ -105,14 +105,14 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int selectTotalRecordCount(SearchVO searchVo) {
+	public int selectTotalRecordCount(NotiSearchVO searchVo) {
 		return noticeDao.selectTotalRecordCount(searchVo);
 	}
 
-	@Override
+	/*@Override
 	public int selectTotalRecordCount1(SearchVO searchVo) {
 		return noticeDao.selectTotalRecordCount1(searchVo);
-	}
+	}*/
 
 	
 }
