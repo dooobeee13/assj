@@ -13,8 +13,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clear.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mystyle.css"/>
-<script type="text/javascript" 
-	src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

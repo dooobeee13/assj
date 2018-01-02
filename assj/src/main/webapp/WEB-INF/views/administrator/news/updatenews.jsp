@@ -32,10 +32,10 @@ $(function(){
 	});
 	
 	$('form[name=newssubmit]').submit(function(){
-		if($('input[name=news_title]').val()==''){
+		if($('input[name=newsTitle]').val()==''){
 			alert("뉴스 제목을 입력하지 않았습니다.");
 			event.preventDefault();
-		}else if($('input[name=news_content]').val()==''){
+		}else if($('input[name=newsContent]').val()==''){
 			alert("뉴스의 내용을 입력하지 않았습니다.");
 			event.preventDefault();
 		}
@@ -96,7 +96,8 @@ $(function(){
 						<li>게시판</li>
 						<li>공지글</li>
 						<li>일반글</li>
-						<li class="select">뉴스</li>
+						<li class="select"><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
+						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
 					</ul>
 					<li class="col-li-1-nb s5" style="cursor: pointer;"><div class="col-div-80-100">통계관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o5">
@@ -128,7 +129,7 @@ $(function(){
 							</tr>
 							<tr style="height:10%;">
 								<th style="background:#F4FFFE;">첨부사진</th>
-								<td style="background:#F4FFFE;"><input type="file"></td>
+								<td style="background:#F4FFFE;"><input type="file" id="newsUpImage" name="newsUpImage"></td>
 							</tr>
 							<tr style="height:50%;">
 								<th style="background:#F4FFFE;">내용</th>
@@ -136,7 +137,9 @@ $(function(){
 							</tr>
 						</tbody>
 					</table>
-					<div class="col-div-100-10" style="padding-right:10em; padding-top:2em;"><input style="float:right;" type="submit" value="작성완료"></div>
+					<div class="col-div-100-10" style="padding-right:10em; padding-top:2em;">
+						<input style="float:right;" type="submit" value="작성완료">
+					</div>
 				</form>
 				</div>
 			</div>

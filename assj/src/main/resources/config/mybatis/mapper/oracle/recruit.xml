@@ -59,7 +59,8 @@
 	<select id="selectHireNoti" resultMap="hnAndCategory">
 		select h.*, he.et_no, et.et_name, hm.major_no, m.major_name, ho.occu_no, o.occu_name, hp.position_no, p.position_name, 
 		hr.rank_no, r.rank_name, hs.sec_no, s.sec_name
-		from hire_noti h join hn_et he on h.hn_no = he.hn_no
+		from hire_noti h 
+		join hn_et      he on h.hn_no = he.hn_no
 		join hn_major   hm on h.hn_no = hm.hn_no
 		join hn_occu    ho on h.hn_no = ho.hn_no
 		join hn_pos     hp on h.hn_no = hp.hn_no

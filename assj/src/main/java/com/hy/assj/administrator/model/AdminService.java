@@ -8,4 +8,7 @@ import com.hy.assj.vo.NewsVO;
 public interface AdminService {
 	public int insertNews(NewsVO vo);
 	public List<Map<String, Object>> selectNews();
+	public NewsVO selectByNo(int newsNo);
+	public int updateNews(NewsVO vo);
+	public int deleteNews(int newsNo);
 }

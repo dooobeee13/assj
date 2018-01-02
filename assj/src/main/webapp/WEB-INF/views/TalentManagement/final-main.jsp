@@ -453,6 +453,7 @@ $(function(){
 	$('.AreaSelectLI li').each(function(){
 		$(this).click(function(){
 			if($(this).hasClass('select')){
+				$(this).removeClass('select');
 				var itemtoRemove = $(this).children().val();
 				MiniArea.splice($.inArray(itemtoRemove, MiniArea),1);
 			}else{
@@ -628,7 +629,11 @@ $(function(){
 	jQuery.ajaxSettings.traditional = true;/*이게 없으면 AJAX로 배열의 형태 데이터값을 보내지 못함*/
 	
 	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
+		 jQuery.ajaxSettings.traditional = true;
+
 		$.ajax({
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			type:"POST",
 			url:"<c:url value='/TalentManagement/resumed.do'/>",
 			data:{"EduColDetail":EduColDetail,
 				"Educol":Educol,
@@ -643,6 +648,7 @@ $(function(){
 				"area":area,
 				"Hopesectors":Hopesectors
 			},
+			
 			success:function(res){
 				var totalResumes = "";
 				$.each(res,function(idx, item){

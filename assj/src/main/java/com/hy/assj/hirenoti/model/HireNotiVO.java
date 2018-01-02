@@ -13,7 +13,7 @@ public class HireNotiVO {
 	private Timestamp hnDeadline; // 공고마감일
 	private String hnHows; // 접수방법
 	private String hnTask; // 주요업무
-	private String hnEligiblity;
+	private String hnEligiblity; //자격요건
  	private String hnPreference; // 우대사항
 	private String hnStep; // 채용절차
 	private String hnBenefits; // 복리후생
@@ -174,6 +174,7 @@ public class HireNotiVO {
 	public void setCareerNo(int careerNo) {
 		this.careerNo = careerNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "HireNotiVO [hnNo=" + hnNo + ", hnNotiTitle=" + hnNotiTitle + ", cmNo=" + cmNo + ", hnSalStart="
