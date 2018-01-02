@@ -11,8 +11,28 @@ public class RecruitDAOMybatis extends SqlSessionDaoSupport implements RecruitDA
 	private final String namespace = "config.mybatis.mapper.oracle.recruit";
 	
 	@Override
-	public List<HireNotiVO> selectHireNoti(int hnNo) {
-		return getSqlSession().selectList(namespace + ".selectHireNoti", hnNo);
+	public RHireNotiVO selectHireNotiByHnNo(int hnNo) {
+		return getSqlSession().selectOne(namespace + ".selectHireNotiByHnNo", hnNo);
+	}
+
+	@Override
+	public List<RHireNotiVO> selectHireNotiBySearchValue(RSearchValue searchValue) {
+		return getSqlSession().selectList(namespace + ".selectHireNotiBySearchValue", searchValue);
+	}
+
+	@Override
+	public RMemberVO selectMemberInfo(int memNo) {
+		return getSqlSession().selectOne(namespace + ".selectMemberInfo", memNo);
+	}
+
+	@Override
+	public int insertScrap(RScrapVO vo) {
+		return getSqlSession().insert(namespace + ".insertScrap", vo);
+	}
+
+	@Override
+	public int deleteScrap(RScrapVO vo) {
+		return getSqlSession().delete(namespace + ".deleteScrap", vo);
 	}
 
 }
