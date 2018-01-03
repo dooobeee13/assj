@@ -14,7 +14,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 1}">
 					<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList" value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 					</div>
@@ -26,7 +26,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 2}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>
@@ -38,7 +38,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 3}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>	
@@ -50,7 +50,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 4}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>	
@@ -70,7 +70,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 5}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>	
@@ -82,7 +82,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 6}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>	
@@ -94,7 +94,7 @@
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.majorTopNo == 7}">
 				<div class="checkbox majorselectDiv">
-					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" value="${vo.majorNo}">
+					<label for="major-${vo.majorNo}"> <input type="checkbox" id="major-${vo.majorNo}" name="majorList"  value="${vo.majorNo}">
 						${vo.majorName}
 					</label>
 				</div>	
