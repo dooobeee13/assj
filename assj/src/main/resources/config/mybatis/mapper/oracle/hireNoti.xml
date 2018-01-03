@@ -14,9 +14,41 @@
 		#{hnStatus},#{hnGender},#{hnRecruitNum},#{eduNo},#{careerNo})
 	</insert>
 	
-	<select id="selectHiriNoti" parameterType="SearchVO" resultType="HireNotiVO">
+	<select id="selectAll" parameterType="SearchVO" resultType="HireNotiVO">
 		select * from hire_noti order by hn_no desc
 	
+	</select>
+	
+	<select id="careerList" resultType="CareerVO">
+		select * from career
+	</select>
+	
+	<select id="empTypeList" resultType="EmpTypeVO">
+		select * from emp_type
+	</select>
+
+	<select id="rankList" resultType="RankVO">
+		select * from rank
+	</select>
+	
+	<select id="majorList" resultType="MajorVO">
+		select * from major
+	</select>
+	
+	<select id="occupationList" resultType="OccupationVO">
+		select * from occupation
+	</select>
+	
+	<select id="sectorsList" resultType="SectorsVO">
+		select * from sectors
+	</select>
+	
+	<select id="educationList" resultType="EducationVO">
+		select * from education
+	</select>
+	
+	<select id="positionList" resultType="PositionVO">
+		select * from position
 	</select>
 	
 </mapper>

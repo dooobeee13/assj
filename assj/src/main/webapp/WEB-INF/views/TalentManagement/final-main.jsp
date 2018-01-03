@@ -4,8 +4,18 @@
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
+
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%@include file="../index/top.jsp" %>
 <script type="text/javascript">
 $(function(){
 	$('.001').addClass('select');
@@ -443,6 +453,7 @@ $(function(){
 	$('.AreaSelectLI li').each(function(){
 		$(this).click(function(){
 			if($(this).hasClass('select')){
+				$(this).removeClass('select');
 				var itemtoRemove = $(this).children().val();
 				MiniArea.splice($.inArray(itemtoRemove, MiniArea),1);
 			}else{
@@ -463,7 +474,6 @@ $(function(){
 			}else{
 				empType.push($(this).children().val());
 				$(this).addClass('select');
-				alert(empType);
 			}
 		})
 	});
@@ -482,7 +492,6 @@ $(function(){
 			}else{
 				rank.push($(this).children().val());
 				$(this).addClass('select');
-				alert(rank);
 			}
 		})
 	});
@@ -507,7 +516,6 @@ $(function(){
 			}else{
 				position.push($(this).children().val());
 				$(this).addClass('select');
-				alert(position);
 			}
 		})
 	});
@@ -621,7 +629,11 @@ $(function(){
 	jQuery.ajaxSettings.traditional = true;/*이게 없으면 AJAX로 배열의 형태 데이터값을 보내지 못함*/
 	
 	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
+		 jQuery.ajaxSettings.traditional = true;
+
 		$.ajax({
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			type:"POST",
 			url:"<c:url value='/TalentManagement/resumed.do'/>",
 			data:{"EduColDetail":EduColDetail,
 				"Educol":Educol,
@@ -636,6 +648,7 @@ $(function(){
 				"area":area,
 				"Hopesectors":Hopesectors
 			},
+			
 			success:function(res){
 				var totalResumes = "";
 				$.each(res,function(idx, item){
@@ -648,7 +661,7 @@ $(function(){
 						'<span>(<b>'+this.RESUME_GENDER+'</b><b>'+this.RESUME_BIRTH+'</b>년)</span>'+
 						'</div>'+
 					'</td>'+
-					'<td><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
+					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
 						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
 						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>'+
 						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>'+
@@ -657,10 +670,11 @@ $(function(){
 					'<td style="text-align:center;">업데이트 일자(미구현)</td>'+
 				'</tr>'
 				});
+				
 				$('.resume_body').html(totalResumes);
 			},
 			error:function(xhr, status, error){
-				alert("에러="+error);
+				alert("에러 발생 : "+status+"=>"+error);
 			}
 		});
 	});
@@ -699,15 +713,11 @@ $(function(){
 	
 });
 </script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body style="background:#f4f4f4; overflow:scroll;">
-<form name="divform" method="post" action="">
+<link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
+<div class="talentoverscroll">
 <div class="talentedsearchcontainer">
 	<div class="TScontent">
-		<div style="width:100%;height:3em; padding-left:6em; padding-bottom:1em;">
+		<div style="width:100%;height:3em; padding-left:6em; padding-bottom:1em; margin-bottom:1.5em;">
 			<select class="one-list">
 				<option>전체</option>
 				<option>회사명</option>
@@ -725,7 +735,7 @@ $(function(){
 		</div>
 		<div class="TSarea"><!-- 검색바 전체 디브 -->
 				<div class="TSpanel"><!--윗부분  -->
-					<ul class="optionbar">
+					<ul class="optionbar" style="margin-top: 1.5em;">
 						<li><a href="#" id="all" class="img-opa"><img src="<c:url value='/icon/magnifying glass.jpeg'/>">간단검색</a></li><!-- 간단검색 -->
 						<li><a href="#" id="career-old" class="img-opa"><img src="<c:url value='/icon/TEAM.jpeg'/>">경력/성별</a></li><!--경력,성별,나이  -->
 						<li><a href="#" id="occupation" class="img-opa"><img src="<c:url value='/icon/bag.jpeg'/>">직종</a></li><!--직종  -->
@@ -786,7 +796,7 @@ $(function(){
 							<span>(<b>${vo.RESUME_GENDER } </b><b><fmt:formatDate value="${vo.RESUME_BIRTH }" pattern="yyyy"/></b>년)</span>
 							</div>
 						</td>
-						<td><span class="career_exper" style="color:#6b80f1;">${vo.RESUME_CAREER_LIST }경력부분</span>
+						<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">${vo.RESUME_CAREER_LIST }경력부분</span>
 							<span class="career_exper_titles">${vo.RESUME_TITLE }</span>
 							<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>
 							<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>
@@ -854,6 +864,7 @@ $(function(){
 		</div><!-- TSside -->
 	</div><!--TScontent  -->
 </div>
-</form>	
+</div>
+<%@include file="../index/footer.jsp" %>
 </body>
 </html>

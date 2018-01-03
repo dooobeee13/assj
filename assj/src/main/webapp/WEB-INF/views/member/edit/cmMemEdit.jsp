@@ -49,6 +49,12 @@
     				$('#cmEmail3').css('visibility','hidden');
     			}	
     		});
+			
+			$('#complete').click(function(){
+				$('#cmRegnum').val($('#cmRegnumModal').val());
+				$('#csNo').val($('[name=csNoModal]:checked').val());
+				$('#CpModal').modal('hide');
+			});
 		
 		});
 
@@ -88,9 +94,6 @@
     	}
     	.modal-body table{
 			background-color:#f6f9ff;
-		}
-    	.modal-body td{
-			width:70%;
 		}
 		.radio-inline{
 			width:130px;
@@ -173,7 +176,9 @@
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;사업자등록번호</td>
-							<td>${vo.cmRegnum}&nbsp;&nbsp;<input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
+							<td>
+							<input type="text" class="form-control" name="cmRegnum" id="cmRegnum" value="${vo.cmRegnum}" size="12" readonly="readonly">
+							<input type="button" class="form-control" value="사업자등록번호 변경요청" data-toggle="modal" data-target="#CpModal"></td>				
 						</tr>
 						<tr>
 							<td class="titleTD">&nbsp;<span class="r">*</span>&nbsp;기업구분</td>
@@ -181,7 +186,9 @@
 							변경을 원하시는 경우,고객센터로 연락해주세요.<br>
 							기업의 확인을 위해 사업자등록증 사본을 요청할 수 있습니다.<br><a href="#CpModal" data-toggle="modal">기업 구분 수정요청</a></td>		
 						</tr>
-				</table><br><br>
+					</table>
+					<input type="text" name="csNo" id="csNo" value="${vo.csNo}">
+					<br><br>
 				<h4><b>인사담당자 정보</b></h4>
 				<input type="hidden" id="cmNo" name="cmNo" value="${vo.cmNo}">
 				<input type="hidden" id="cmTel" value="${vo.cmMgrTel}">
@@ -255,7 +262,13 @@
 						<tr>
 							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사 로고/사진등록</td>
 							<td>
-								<input type="file" class="form-control" name="logo">
+								<input type="file" class="form-control" name="Logo">
+							</td>
+						</tr>
+						<tr>
+							<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;홈페이지 주소</td>
+							<td>
+								<input type="text" class="form-control" size="38" id="cmHomepage" name="cmHomepage" value="${vo.cmHomepage}">
 							</td>
 						</tr>	
 					</table><br>
@@ -328,92 +341,89 @@
 					업무시간: 월~금 09:00~18:00(주말, 공휴일 휴무)
 					<hr>
 					<table class="table table-bordered">
+					<colgroup>
+						<col width=20%>
+						<col width=80%>
+					</colgroup>
 						<tr>
-							<td class="titleTD">아이디</td>
+							<td>아이디</td>
 							<td>${vo.cmId}</td>				
 						</tr>
 						<tr>
-							<td class="titleTD">기업명</td>
+							<td>기업명</td>
 							<td>${vo.cmName}</td>
 						</tr>
 						<tr>
-							<td class="titleTD">사업자<br>등록번호</td>
-							<td><input type="text" class="form-control" id="cmRegnum" name="cmRegnum"
+							<td>사업자<br>등록번호</td>
+							<td><input type="text" class="form-control" id="cmRegnumModal" name="cmRegnumModal"
 								value="${vo.cmRegnum}"></td>		
 						</tr>	
 						<tr>
-							<td class="titleTD">기업구분</td>
+							<td>기업구분</td>
 							<td>
+								&nbsp;&nbsp;
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="1"> 대기업
+									<input type="radio" name="csNoModal" value="1"> 대기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="2"> 중견기업
+									<input type="radio" name="csNoModal" value="2"> 중견기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="3"> 강소기업
+									<input type="radio" name="csNoModal" value="3"> 강소기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="4"> 중소기업
+									<input type="radio" name="csNoModal" value="4"> 중소기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="5"> 외국계(법인)
+									<input type="radio" name="csNoModal" value="5"> 외국계(법인)
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="6"> 코스닥
+									<input type="radio" name="csNoModal" value="6"> 코스닥
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="7"> 벤처
+									<input type="radio" name="csNoModal" value="7"> 벤처
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="8"> 코스피
+									<input type="radio" name="csNoModal" value="8"> 코스피
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="9"> 기술혁신기업
+									<input type="radio" name="csNoModal" value="9"> 기술혁신기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="10"> 공사.공기업
+									<input type="radio" name="csNoModal" value="10"> 공사.공기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="11"> 외부감사법인
+									<input type="radio" name="csNoModal" value="11"> 외부감사법인
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="12"> 수출입기업
+									<input type="radio" name="csNoModal" value="12"> 수출입기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="13"> 학교.교육기관
+									<input type="radio" name="csNoModal" value="13"> 학교.교육기관
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="14"> 코넥스
+									<input type="radio" name="csNoModal" value="14"> 코넥스
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="15"> 경영혁신기업
+									<input type="radio" name="csNoModal" value="15"> 경영혁신기업
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="csNo" value="16"> 우수기업
+									<input type="radio" name="csNoModal" value="16"> 우수기업
 								</label>
 							</td>		
 						</tr>	
 						<tr>
-							<td class="titleTD">담당자명</td>
+							<td>담당자명</td>
 							<td>${vo.cmManager}</td>		
 						</tr>	
 						<tr>
-							<td class="titleTD">전화번호</td>
+							<td>전화번호</td>
 							<td>${vo.cmMgrTel}</td>		
-						</tr>	
-						<tr>
-							<td class="titleTD">사업자<br>등록첨부</td>
-							<td><input type="file" class="form-control"></td>		
-						</tr>	
-						<tr>
-							<td class="titleTD">신청내용</td>
-							<td><textarea rows="6" cols="60"></textarea></td>		
 						</tr>	
 					</table><br>		 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-lg">신청완료</button>
+					<button type="button" class="btn btn-primary btn-lg" id="complete">신청완료</button>
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->

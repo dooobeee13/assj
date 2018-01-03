@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.recruit">
+	
+	<resultMap type="RHireNotiVO" id="RHireNotiVO">
+		<id property="hnNo" column="hn_no"/>
+		<result property="hnNotititle" column="hn_notititle"/>
+		<result property="hnSalStart" column="hn_sal_start"/>
+		<result property="hnSalEnd" column="hn_sal_end"/>
+		<result property="hnViews" column="hn_views"/>
+		<result property="hnStart" column="hn_start"/>
+		<result property="hnDeadline" column="hn_deadline"/>
+		<result property="hnHows" column="hn_hows"/>
+		<result property="hnTask" column="hn_task"/>
+		<result property="hnEligibility" column="hn_eligibility"/>
+		<result property="hnPreference" column="hn_preference"/>
+		<result property="hnStep" column="hn_step"/>
+		<result property="hnBenefits" column="hn_benefits"/>
+		<result property="hnDocument" column="hn_document"/>
+		<result property="hnAddr" column="hn_addr"/>
+		<result property="hnDetailAddr" column="hn_detailAddr"/>
+		<result property="hnLat" column="hn_lat"/>
+		<result property="hnLng" column="hn_lng"/>
+		<result property="hnStatus" column="hn_status"/>
+		<result property="hnGender" column="hn_gender"/>
+		<result property="hnRecruitNum" column="hn_recruit_num"/>
+		<result property="hnExpyearMin" column="hn_expyear_min"/>
+		<result property="hnExpyearMax" column="hn_expyear_max"/>
+		
+		<association property="educationVo" javaType="EducationVO">
+			<id property="eduNo" column="edu_no"/>
+			<result property="eduName" column="edu_name"/>
+			<result property="eduRemark" column="edu_remark"/>
+		</association>
+		
+		<association property="careerVo" javaType="CareerVO">
+			<id property="careerNo" column="career_no"/>
+			<result property="careerName" column="career_name"/>
+		</association>
+		
+		<association property="areaVo" javaType="RAreaVO">
+			<id property="areaNo" column="area_no"/>
+			<result property="areaName" column="area_name"/>
+			<association property="topAreaVo" javaType="RAreaVO">
+				<id property="areaNo" column="top_area_no"/>
+				<result property="areaName" column="top_area_name"/>
+			</association>
+		</association>
+		
+		<association property="compMemberVo" javaType="RCompMemberVO">
+			<id property="cmNo" column="cm_no"/>
+			<result property="cmId" column="cm_id"/>
+			<result property="cmPwd" column="cm_pwd"/>
+			<result property="cmRegnum" column="cm_regnum"/>
+			<result property="cmName" column="cm_name"/>
+			<result property="cmRepre" column="cm_repre"/>
+			<result property="cmAddr" column="cm_addr"/>
+			<result property="cmDetailaddr" column="cm_detailaddr"/>
+			<result property="cmZipcode" column="cm_zipcode"/>
+			<result property="cmManager" column="cm_manager"/>
+			<result property="cmMgrTel" column="cm_mgr_tel"/>
+			<result property="cmEmail" column="cm_email"/>
+			<result property="cmRegdate" column="cm_regdate"/>
+			<result property="cmLogo" column="cm_logo"/>
+			<result property="cmHomepage" column="cm_homepage"/>
+			<result property="ccNo" column="cc_no"/>
+			<result property="csNo" column="cs_no"/>
+		</association>
+		
+		<collection property="majorList" ofType="MajorVO">
+			<id property="majorNo" column="major_no" />
+			<result property="majorName" column="major_name"/>
+		</collection>
+		<collection property="positionList" ofType="PositionVO">
+			<id property="positionNo" column="position_no" />
+			<result property="positionName" column="position_name"/>
+		</collection>
+		<collection property="occupationList" ofType="OccupationVO">
+			<id property="occuNo" column="occu_no" />
+			<result property="occuName" column="occu_name"/>
+		</collection>
+		<collection property="rankList" ofType="RankVO">
+			<id property="rankNo" column="rank_no" />
+			<result property="rankName" column="rank_name"/>
+		</collection>
+		<collection property="sectorList" ofType="SectorsVO">
+			<id property="secNo" column="sec_no" />
+			<result property="secName" column="sec_name"/>
+		</collection>
+		<collection property="empTypeList" ofType="EmpTypeVO">
+			<id property="etNo" column="et_no" />
+			<result property="etName" column="et_name"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="RMemberVO" id="RMemberVO">
+		<id property="memNo" column="mem_no"/>
+		<result property="memName" column="mem_name"/>
+		<result property="memId" column="mem_id"/>
+		<result property="memEmail" column="mem_email"/>
+		<result property="memBirth" column="mem_birth"/>
+		<result property="memPhone" column="mem_phone"/>
+		<result property="memZipcode" column="mem_zipcode"/>
+		<result property="memAddr" column="mem_addr"/>
+		<result property="memDetailAddr" column="mem_detailaddr"/>
+		<result property="memGender" column="mem_gender"/>
+		<result property="memRegdate" column="mem_regdate"/>
+		<result property="memLastdate" column="mem_lastdate"/>
+		<result property="memSnsType" column="mem_sns_type"/>
+		<result property="memSnsId" column="mem_sns_id"/>
+		<result property="memPhoto" column="mem_photo"/>
+		
+		<collection property="empSupList" ofType="REmpSupVO">
+			<id property="esNo" column="es_no"/>
+			<result property="hnNo" column="e_hn_no"/>
+			<result property="resumeNo" column="resume_no"/>
+			<result property="esRegdate" column="es_regdate"/>
+			<result property="esConfirm" column="es_confirm"/>
+			<result property="esStatus" column="es_status"/>
+			<result property="esDelflag" column="es_delflag"/>
+		</collection>
+		
+		<collection property="scrapList" ofType="RScrapVO">
+			<id property="scrapNo" column="scrap_no"/>
+			<result property="hnNo" column="s_hn_no"/>
+		</collection>
+	</resultMap>
+	
+	<sql id="selectHireNoti">
+		select h.*, he.et_no, et.et_name, hm.major_no, m.major_name, ho.occu_no, o.occu_name, hp.position_no, p.position_name, 
+		hr.rank_no, r.rank_name, hs.sec_no, s.sec_name, h.area_no, a.area_name, ta.area_no as top_area_no, ta.area_name as top_area_name, 
+		cm.*, ed.*, ca.*
+		from hire_noti h 
+		left outer join hn_et      he on h.hn_no = he.hn_no
+		left outer join hn_major   hm on h.hn_no = hm.hn_no
+		left outer join hn_occu    ho on h.hn_no = ho.hn_no
+		left outer join hn_pos     hp on h.hn_no = hp.hn_no
+		left outer join hn_rank    hr on h.hn_no = hr.hn_no
+		left outer join hn_sec     hs on h.hn_no = hs.hn_no
+		left outer join emp_type   et on et.et_no = he.et_no
+		left outer join major      m  on m.major_no = hm.major_no
+		left outer join occupation o  on o.occu_no = ho.occu_no
+		left outer join position   p  on p.position_no = hp.position_no
+		left outer join rank       r  on r.rank_no =  hr.rank_no
+		left outer join sectors    s  on s.sec_no = hs.sec_no
+		left outer join area       a  on h.area_no = a.area_no
+		left outer join area       ta on a.area_top_no = ta.area_no
+		join comp_member           cm on h.cm_no = cm.cm_no
+		left outer join education  ed on h.edu_no = ed.edu_no
+		left outer join career     ca on h.career_no = ca.career_no
+	</sql>	
+
+
+	<select id="selectHireNotiByHnNo" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		where h.hn_no = #{hnNo}
+	</select>
+	
+	<select id="selectHireNotiBySearchValue" parameterType="RSearchValue" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		<where>
+			<if test="occuList != null">
+				ho.occu_no in
+				<foreach item="occuNo" collection="occuList" open="(" separator="," close=")">
+					#{occuNo}
+				</foreach>
+			</if>
+			<trim prefix="and (" prefixOverrides="or" suffix=")">
+				<if test="areaList != null">
+					h.area_no in 
+					<foreach item="area" collection="areaList" open="(" separator="," close=")">
+						#{area}
+					</foreach>
+				</if>
+				<if test="topAreaList != null">
+					or ta.area_no in 
+					<foreach item="topArea" collection="topAreaList" open="(" separator="," close=")">
+						#{topArea}
+					</foreach>
+				</if>
+			</trim>
+			<!-- <if test="addrList != null">
+				and regexp_like(hn_addr,
+				<foreach item="addr" collection="addrList" open="'" separator="|" close="'">${addr}</foreach>)
+			</if> -->
+			<if test="careerList != null">
+				and h.career_no in
+				<foreach item="careerNo" collection="careerList" open="(" separator="," close=")">
+					#{careerNo}
+				</foreach>
+			</if>
+			<if test="eduList != null">
+				and h.edu_no in
+				<foreach item="eduNo" collection="eduList" open="(" separator="," close=")">
+					#{eduNo}
+				</foreach>
+			</if>
+			<if test="csList != null">
+				and cm.cs_no in
+				<foreach item="csNo" collection="csList" open="(" separator="," close=")">
+					#{csNo}
+				</foreach>
+			</if>
+			<if test="occuList != null">
+				and ho.occu_no in
+				<foreach item="occuNo" collection="occuList" open="(" separator="," close=")">
+					#{occuNo}
+				</foreach>
+			</if>
+			<if test="etList != null">
+				and he.et_no in
+				<foreach item="etNo" collection="etList" open="(" separator="," close=")">
+					#{etNo}
+				</foreach>
+			</if>
+			<if test="secList != null">
+				and hs.sec_no in
+				<foreach item="secNo" collection="secList" open="(" separator="," close=")">
+					#{secNo}
+				</foreach>
+			</if>
+			<if test="rankList != null">
+				and hr.rank_no in
+				<foreach item="rankNo" collection="rankList" open="(" separator="," close=")">
+					#{rankNo}
+				</foreach>
+			</if>
+			<if test="postionList != null">
+				and hp.position_no in
+				<foreach item="positionNo" collection="postionList" open="(" separator="," close=")">
+					#{positionNo}
+				</foreach>
+			</if>
+			<if test="majorList != null">
+				and hm.major_no in
+				<foreach item="majorNo" collection="majorList" open="(" separator="," close=")">
+					#{majorNo}
+				</foreach>
+			</if>
+			<if test="hnExpyearMin != 0">
+				and hn_expyear_min &gt;= #{hnExpyearMin}
+			</if>
+			<if test="hnExpyearMax != 0">
+				and hn_expyear_max &lt;= #{hnExpyearMax}
+			</if>
+			<if test="hnSalStart != 0">
+				and hn_sal_start &gt;= #{hnSalStart}
+			</if>
+			<if test="hnSalEnd != 0">
+				and hn_sal_end &lt;= #{hnSalEnd}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectMemberInfo" resultMap="RMemberVO">
+		select m.*, s.scrap_no, s.hn_no as s_hn_no, e.es_no, e.hn_no as e_hn_no, e.resume_no, e.es_regdate, e.es_confirm, e.es_status, e.es_delflag
+		from member m 
+		left outer join scrap   s on m.mem_no = s.mem_no
+		left outer join emp_sup e on m.mem_no = e.mem_no 
+		where m.mem_no = #{memNo}
+	</select>
+	
+	<insert id="insertScrap" parameterType="RScrapVO">
+		<selectKey keyProperty="scrapNo" order="BEFORE" resultType="_int">
+			select scrap_seq.nextval from dual 
+		</selectKey>
+		insert into scrap(scrap_no, mem_no, hn_no)
+		values(#{scrapNo}, #{memNo}, #{hnNo})
+	</insert>
+	
+	<delete id="deleteScrap" parameterType="RScrapVO">
+		delete from scrap 
+		where mem_no = #{memNo} and hn_no = #{hnNo} 
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+

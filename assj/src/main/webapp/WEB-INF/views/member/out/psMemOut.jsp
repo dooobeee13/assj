@@ -39,7 +39,7 @@
 		color:green;
 	}
 	#psMemOut .well{
-		background-color:#dde6f7;
+		background-color:#dce8ff;
 		padding:30px;
 	}
 	#psMemOut table{
@@ -52,7 +52,11 @@
 	#psMemOut .titleTD{
 		width:245px;
 	}
-
+	h1 img{
+		vertical-align: bottom;
+		width:70px;
+	}
+	
   /* 사이드바 스타일 */
   #sidebar-wrapper {
     /* position:absolute;
@@ -156,7 +160,7 @@
 			<div class="col-md-9">
 			<div id="psMemOut">
 			<fieldset>
-				<h1>개인회원 탈퇴</h1>
+				<h1><img alt="noticeImg" src="<c:url value='/images/out.png'/>">&nbsp;개인회원 탈퇴</h1>
 				<br>
 				<hr>
 				<br>
@@ -190,28 +194,24 @@
 				<table class="table table-bordered">
 					<tr><th colspan='3'><h4>&nbsp;&nbsp;<b>탈퇴이외에 이런 방법을 추천해드립니다.</b></h4></th></tr>
 					<tr>
-					 	<td class="titleTD">너무 많이 오는 채용소식 메일<br><span><b>→ 맞춤 채용소식메일 서비스 해제</b></span></td>
-					 	<td>메일이 너무 많이 와서 불편하신가요?<br>
-							맞춤 채용소식 메일링 서비스를 해제하시면, 이로 인한 불편을 감소시킬 수 있습니다.</td>
-					 	<td><button type="button" class="btn btn-primary">메일 수신설정<br>바로가기</button></td>
-					</tr>
-					<tr>
-						<td class="titleTD">스팸처럼 느껴지는 공지/이벤트 메일<br><span><b>→ 수신거부</b></span></td>
-						<td>사람인의 이벤트, 교육정보 등의 메일이 스팸메일로 느껴지시나요?<br>그렇다면, ‘공지/이벤트’ 메일을 ‘수신안함’으로 변경해주세요.</td>
-						<td><button type="button" class="btn btn-primary">메일 수신설정<br>바로가기</button></td>
+						<td class="titleTD">사이트 이용방법이 어려우시면<br><span><b>→ 개인회원 안내</b></span></td>
+						<td>알쓸신JOB 사이트 이용이 어려우신 개인회원은<br>
+						'개인회원 안내'화면을 통해서 사용방법을 한눈에 알수 있습니다.</td>
+						<td><a href="<c:url value='/member/menu/psService.do'/>"><button type="button" class="btn btn-primary">개인회원 안내<br>바로가기</button></a></td>
 					</tr>
 					<tr>
 						<td class="titleTD">이력서 유출 불안감 <br><span><b>→ 인재정보 등록설정 변경하기</b></span></td>
 						<td>내 이력서를 누가 볼까 불안하신가요?<br>
-							이력서를 인재정보 미등록으로 설정하시면, 회원님을 제외한그 누구도 이력서를<br>
-							볼 수 없어 안심하셔도 좋습니다.</td>
+							이력서를 인재정보 미등록으로 설정하시면, 회원님을 제외한<br>
+							그 누구도 이력서를 볼 수 없어 안심하셔도 좋습니다.</td>
 						<td><button type="button" class="btn btn-primary">이력서 변경&nbsp;&nbsp;&nbsp;<br>바로가기</button></td>
 					</tr>
 					<tr>
-						<td class="titleTD">개인정보 때문에 사이트마다<br>탈퇴 감행 중 <br><span><b>→ 비밀번호 변경</b></span></td>
+						<td class="titleTD">개인정보 때문에 <br>사이트마다 탈퇴 감행 중 <br><span><b>→ 비밀번호 변경</b></span></td>
 						<td>내 개인정보가 노출될까봐 불안하신가요?<br>
-							비밀번호를 정기적으로 바꾸시면 개인정보 유출을 막을 수있습니다.</td>
-						<td><button type="button" class="btn btn-primary">비밀번호 변경<br>바로가기</button></td>
+							비밀번호를 정기적으로 바꾸시면<br>
+							개인정보 유출을 막을 수있습니다.</td>
+						<td><a href="<c:url value='/member/trans/pwdTrans.do'/>"><button type="button" class="btn btn-primary">비밀번호 변경<br>바로가기</button></a></td>
 					</tr>					
 				</table><br><br>
 				<div id="btnDiv">

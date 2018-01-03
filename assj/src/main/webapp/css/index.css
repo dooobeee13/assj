@@ -4,58 +4,31 @@ body {
 	background:#ebecee;
 }
 
-@media ( min-width :992px) {
-	.topline a {
-		float: right;
-		padding: 10px 20px;
-	}
-	.padding-0 {
-		padding: 0;
-	}
-}
-
-.topline{
-	padding:15px;
-}
-.searchline {
-	margin: 20px 0;
-}
-
-.searchline .btn {
-	background: #2e6da4;
-	color: #fff;
-	border: 2px solid #2e6da4;
-}
-
-.searchline input {
-	border: 2px solid #2e6da4;
-}
-
-.login-form {
+.indexContent .login-form {
 	padding: 10px;
 }
 
-.login-form .input-group-sm {
+.indexContent .login-form .input-group-sm {
 	margin-bottom: 5px;
 }
 
-.login-form .checkbox {
+.indexContent .login-form .checkbox {
 	color: gray;
 }
 
-.nav .active {
+.indexContent .nav .active {
 	font-weight: bold;
 }
 
-.media-left img {
+.indexContent .media-left img {
 	width: 54px;
 }
 
-.media {
+.indexContent .media {
 	border-bottom: 1px solid lightgray;
 }
 
-.tags {
+.indexContent .tags {
 	color: #999;
 	font-size: 12px;
 	display: inline-block;
@@ -63,102 +36,46 @@ body {
 	padding-bottom: 4px;
 }
 
-.tags:nth-child(2):before {
+.indexContent .tags:nth-child(2):before {
 	content: '';
 	padding-right: 0px;
 }
 
-.tags:before {
+.indexContent .tags:before {
 	content: '\b7\a0';
 	padding-right: 1px;
 }
 
-.conten {
+.indexContent .conten {
 	background: #fff;
 	border-radius: 5px
 }
 
-.media-heading {
+.indexContent .media-heading {
 	font-size: 16px;
 }
 
-.media-heading a {
+.indexContent .media-heading a {
 	color: #333;
 	font-weight: bold;
 }
 
-.media-body .glyphicon {
+.indexContent .media-body .glyphicon {
 	color: #999;
 	font-size: 12px;
 }
-.smFont{
+.indexContent .smFont{
 	font-size:11px;	
 }
+
 #MemberChoice li{
-	width:126px;
+	width:50%;
 	text-align:center;	
 }
 #memMenu{
 	text-align:center;	
 }
-footer {
-	background-color: #736c6c;
-	color: white;
-	padding: 15px;
-	text-align: center;
-}
 
-.navbar-default {
-	background-color: #2e6da4;
-	border-top: 3px solid #2e6da4;
-}
-
-.navbar-default .navbar-nav>li>a {
-	color: #fff;
-	font-size: 15px;
-	font-family: "맑은 고딕", "Malgun Gothic", 굴림, Gulim, sans-serif;
-	font-weight: 400;
-}
-
-.navbar-default .navbar-nav>li>a:hover {
-	color: #2e6da4;
-	background-color: #fff;
-}
-
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
-	.navbar-default .navbar-nav>.active>a:hover {
-	color: #2e6da4;
-	background-color: #fff;
-}
-
-.panel-default>.panel-heading {
-	background-color: #fff;
-}
-
-.panel-body span:before {
-	content: '';
-	padding-right: 1px;
-}
-
-.panel-body span:after {
-	content: '';
-	padding-left: 1px;
-}
-
-.searchCategory .panel {
-	height: 195px;
-	margin-bottom: 0;
-}
-
-.searchCategory {
-	display: none;
-	border: 2px solid #2e6da4;
-	left: 13px;
-}
-.searchjob{
-	width:128px;
-	text-align:center;	
-}
 #footerBtn1,#footerBtn2{
 	background-color:#ebecee;	
 }

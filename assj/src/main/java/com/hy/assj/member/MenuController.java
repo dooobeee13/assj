@@ -41,12 +41,6 @@ public class MenuController {
 		return "member/menu/psService3";
 	}
 	
-	@RequestMapping("/serviceCenter.do")
-	public String serviceCenter() {
-		logger.info("고객센터 화면");
-		
-		return "member/menu/serviceCenter";
-	}
 	
 	@RequestMapping("/scrap.do")
 	public String scrap_get() {
@@ -54,4 +48,6 @@ public class MenuController {
 		
 		return "member/menu/scrap";
 	}
+	
+
 }

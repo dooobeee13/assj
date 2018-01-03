@@ -8,6 +8,7 @@ public class PaginationInfo {
 		blockSize : 블럭당 보여질 페이지 수
 		totalRecord : totalRecord 총 레코드 수
 	 * */
+	
 	private int currentPage; //현재 페이지
 	private int recordCountPerPage;  //pageSize 페이지당 보여질 레코드수
 	private int blockSize; //블럭당 보여질 페이지 수
@@ -87,5 +88,14 @@ public class PaginationInfo {
 	public int getLastRecordIndex() {
 		lastRecordIndex = getCurrentPage() * getRecordCountPerPage();
 		return lastRecordIndex;
+	}
+
+	@Override
+	public String toString() {
+		return "PaginationInfo [currentPage=" + currentPage + ", recordCountPerPage=" + recordCountPerPage
+				+ ", blockSize=" + blockSize + ", totalRecord=" + totalRecord + ", totalPage=" + totalPage
+				+ ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", firstRecordIndex=" + firstRecordIndex
+				+ ", lastRecordIndex=" + lastRecordIndex + "]";
 	}	
+	
 }

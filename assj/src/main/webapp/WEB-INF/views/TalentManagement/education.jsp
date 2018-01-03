@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<!-- 희망 직족 자세한 옵션선택 부분 -->
-	<div class="major_01 col-div-80">
+	<div class="major_01 col-div-80" style="padding:0;">
 		<div class="col-div-30 EduCollist"
 			style="border-left: 1px solid #b8b8b8; border-right: 1px solid #b8b8b8; padding-top: 4em;">
 			<ul class="col-ul-100-100" style="height: 60%; text-align: center;">
@@ -77,15 +77,15 @@
 				<div class="col-div-70 EduColDetaillist"
 					style="padding-right: 3em; text-align: center; width: 80%;">
 					<ul class="col-ul-1">
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="서울대학교" style="display:none;"/><a href="#">서울대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="연세대학교" style="display:none;"/><a href="#">연세대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="고려대학교" style="display:none;"/><a href="#">고려대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="서강대학교" style="display:none;"/><a href="#">서강대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="한양대학교" style="display:none;"/><a href="#">한양대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="이화여자대학교" style="display:none;"/><a href="#">이화여자대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="KAIST" style="display:none;"/><a href="#">KAIST</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="포항공과대학교" style="display:none;"/><a href="#">포항공과대학교</a></li>
-						<li class="col-li-3"><input type="checkbox" name="EduColDetail" value="성균관대학교" style="display:none;"/><a href="#">성균관대학교</a></li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="서울대학교" style="display:none;"/>서울대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="연세대학교" style="display:none;"/>연세대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="고려대학교" style="display:none;"/>고려대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="서강대학교" style="display:none;"/>서강대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="한양대학교" style="display:none;"/>한양대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="이화여자대학교" style="display:none;"/>이화여자대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="KAIST" style="display:none;"/>KAIST</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="포항공과대학교" style="display:none;"/>포항공과대학교</li>
+						<li class="col-li-3" style="cursor: pointer;"><input type="checkbox" name="EduColDetail" value="성균관대학교" style="display:none;"/>성균관대학교</li>
 					</ul>
 				</div>
 			</div>

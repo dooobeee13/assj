@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.reboard">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword!=''">
+			where title like '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+	 
+ 	<parameterMap type="map" id="deleteParam">
+		<parameter property="no" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="groupNo" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="step" javaType="string" jdbcType="VARCHAR"/>
+	</parameterMap>
+	
+	<insert id="insertQnA" parameterType="reboardVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select reboard_seq.nextval from dual
+		</selectKey>
+		insert into reboard(no,name,pwd,title,content,groupNo)
+		values(#{no},#{name},#{pwd},#{title},#{content},#{no})
+	</insert>
+	
+	<select id="QnaList" resultType="reboardVO" parameterType="SearchVO">
+		select *
+		from
+		(
+		    select rownum as RNUM, blist.*
+		    from(
+		        select r.*, (sysdate-regdate)*24 as newImgTerm
+		        from reboard r
+		        <include refid="searchWhere"></include> 
+		       order by groupno desc, sortno		        
+		    ) blist
+		) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>
+	</select>
+	
+	<select id="QnaRownum" resultType="hashmap">
+		select *
+		from (
+		    select r.*, (sysdate-regdate)*24 as newImgTerm  
+		    from reboard r
+		    order by groupno desc, sortno
+		)	
+		<![CDATA[
+		where rownum <= 5]]>
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		update reboard
+		set readcount=readcount+1 
+		where no=#{no}
+	</update>
+	
+	<select id="selectByNo" parameterType="int" resultType="reboardVO">
+		select * from reboard where no=#{no}
+	</select>
+	
+	<update id="updateQnA" parameterType="reboardVO">
+		update reboard
+		set title=#{title},content=#{content}
+		where no=#{no}
+	</update>
+	
+	<select id="selectAll" parameterType="SearchVO" 
+		resultType="reboardVO" >
+		select *
+		from
+		(
+		    select rownum as RNUM, blist.*
+		    from(
+		        select * from reboard 
+		        <include refid="searchWhere"></include>
+		        order by groupno desc, sortno		        
+		    ) blist
+		) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>	
+	</select>
+	
+	<select id="selectTotalRecordCount" resultType="int" 
+		parameterType="SearchVO">
+		select count(*) from reboard
+		<include refid="searchWhere"></include>	
+	</select>
+	
+	<delete id="deleteReBoard" parameterMap="deleteParam">
+		call deleteReboardProc(?, ?, ?)
+	</delete>
+	
+	<update id="updateSortNo" parameterType="ReBoardVO">	
+		update reboard
+		set sortno=sortno+1
+		where groupno=#{groupNo} and sortno>#{sortNo}
+	</update>
+	
+	<insert id="replyReboard" parameterType="ReBoardVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select reboard_seq.nextval from dual
+		</selectKey>	
+		insert into reboard(no, name, pwd, title, content,
+		groupno,step,sortno)
+		values(#{no}, #{name}, #{pwd}, #{title}, #{content},
+			#{groupNo},#{step}+1,#{sortNo}+1)
+	</insert>	
+	
+</mapper>
+
+
+
+
+
+
+
+

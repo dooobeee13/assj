@@ -3,15 +3,15 @@ package com.hy.assj.vo;
 //경력
 public class CareerVO {
 	
-	private int carrerNo;
+	private int careerNo;
 	private String careerName;
 	private String careerRemark;
 	
-	public int getCarrerNo() {
-		return carrerNo;
+	public int getCareerNo() {
+		return careerNo;
 	}
-	public void setCarrerNo(int carrerNo) {
-		this.carrerNo = carrerNo;
+	public void setCareerNo(int careerNo) {
+		this.careerNo = careerNo;
 	}
 	public String getCareerName() {
 		return careerName;
@@ -27,7 +27,7 @@ public class CareerVO {
 	}
 	@Override
 	public String toString() {
-		return "Career [carrerNo=" + carrerNo + ", careerName=" + careerName + ", careerRemark=" + careerRemark + "]";
+		return "Career [careerNo=" + careerNo + ", careerName=" + careerName + ", careerRemark=" + careerRemark + "]";
 	}
 	
 }

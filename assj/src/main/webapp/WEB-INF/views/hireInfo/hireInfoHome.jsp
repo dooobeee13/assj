@@ -12,101 +12,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
-@media ( min-width : 992px) {
-	.topline a {
-		float: right;
-		padding: 10px 20px;
-	}
-	.padding-0 {
-		padding: 0;
-	}
-}
-
-.topline{
-	padding:15px;
-}
-
-.searchline {
-	margin: 20px 0;
-}
-
-.searchline .btn {
-	background: #2e6da4;
-	color: #fff;
-	border: 2px solid #2e6da4;
-}
-
-.searchline input {
-	border: 2px solid #2e6da4;
-}
-
-.nav .active {
-	font-weight: bold;
-}
-
-.conten {
-	background: #fff;
-	border-radius: 5px
-}
-
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-.navbar-default {
-	background-color: #2e6da4;
-	border-top: 3px solid #2e6da4;
-}
-
-.navbar-default .navbar-nav>li>a {
-	color: #fff;
-	font-size: 15px;
-	font-family: "맑은 고딕", "Malgun Gothic", 굴림, Gulim, sans-serif;
-	font-weight: 400;
-}
-
-.navbar-default .navbar-nav>li>a:hover {
-	color: #2e6da4;
-	background-color: #fff;
-}
-
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
-	.navbar-default .navbar-nav>.active>a:hover {
-	color: #2e6da4;
-	background-color: #fff;
-}
-
-.panel-default>.panel-heading {
-	background-color: #fff;
-}
-
-.panel-body span:before {
-	content: '';
-	padding-right: 1px;
-}
-
-.panel-body span:after {
-	content: '';
-	padding-left: 1px;
-}
-
-.searchCategory .panel {
-	height: 195px;
-	margin-bottom: 0;
-}
-
-.searchCategory {
-	display: none;
-	border: 2px solid #2e6da4;
-	left: 13px;
-}
-
-
-
-
-
 .sCategory {
 	padding-left: 0;
 	padding-right: 0;
@@ -123,10 +28,34 @@ footer {
 	padding-left: 17px;
 }
 
-.sCategory .sCateTitle .glyphicon {
+.sCategory .sCateTitle span {
 	float: right;
 	top: 15px;
 	padding-right: 10px;
+}
+
+.sCategory .sCateTitle span.up {
+	text-indent: -9999px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 17px;
+    width: 18px;
+    height: 10px;
+    right: 10px;
+    background: url(/assj/images/spr.png) no-repeat;
+}
+
+.sCategory .sCateTitle span.down {
+	text-indent: -9999px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 17px;
+    width: 18px;
+    height: 10px;
+    right: 10px;
+    background: url(/assj/images/spr.png) no-repeat -35px 0px;
 }
 
 .sCategory .sCateName {
@@ -223,13 +152,6 @@ footer {
 	font-weight: bold
 }
 
-.scrapIcon {
-	font-size: 16px;
-	top: 3px;
-	color: lightgray;
-	cursor: pointer;
-}
-
 .searchCondition {
 	padding: 10px;
 }
@@ -240,8 +162,26 @@ footer {
 
 .searchCondition button{
 	margin-right: 20px; 
+	margin-bottom: 5px;
 	background: #fff; 
 	border: 0;
+}
+
+.searchCondition button label {
+	font-weight: normal;
+	cursor: pointer;
+	margin-bottom: 0;
+}
+
+.searchCondition button .ico {
+	text-indent: -9999px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    width: 10px;
+    height: 10px;
+    background: url(/assj/images/spr.png) no-repeat -86px 0;
 }
 
 .sCategory .detail {
@@ -249,6 +189,8 @@ footer {
 	background: #fff;
 	z-index: 1;
 	width: 403%;
+	margin-top: 1px;
+	border: 1px solid black;
 }
 
 .sCategory .detail .row {
@@ -260,7 +202,7 @@ footer {
 	display: block;
 }
 
-.sCategory .active{
+.sCateTitle.active{
 	background: #333;
 	color: #fff;
 }
@@ -310,8 +252,8 @@ footer {
 		$('.sCategory .sCateTitle').click(function(e){
 			$(this).parent().siblings().find('.sCateTitle').removeClass('active');
 			$(this).toggleClass('active');
-			$('.sCategory .sCateTitle').find('span').attr('class', 'glyphicon glyphicon-chevron-down');
-			$('.sCategory .sCateTitle.active').find('span').attr('class', 'glyphicon glyphicon-chevron-up');
+			$('.sCategory .sCateTitle').find('span').attr('class', 'down');
+			$('.sCategory .sCateTitle.active').find('span').attr('class', 'up');
 		})
 		
 		$('.sCateTitle').click(function(e){
@@ -324,23 +266,22 @@ footer {
 			}
 		});
 		
-		$('.searchCondition').on('click', 'button', function(){
+		/* $('.searchCondition').on('click', 'button', function(){
 			var id = $(this).data('id');
 			$('#' + id).trigger('click');
 			$(this).remove();
-			$('.category.sub .chklabel[for='+ id +']').removeClass('check');
-		});
+			$('.sCategory .chklabel[for='+ id +']').removeClass('check');
+		}); */
 		
 		$('#searchBtn').click(function(){
-			alert('수리중...');
-			//console.log($(searchForm).serialize());
-			$.ajax({
-				url :  "<c:url value="/hireInfo/search.do" />",
+			console.log($(searchForm).serialize());
+			 $.ajax({
+				url :  '<c:url value="/hireInfo/search.do" />',
 				data : $(searchForm).serialize(),
 				success : function(res) {
-					
+					$('#searchResult').html(res);
 				}
-			}); 
+			});  
 		});
 		
 	})
@@ -352,7 +293,7 @@ footer {
 	
 	<section class="container">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div>
 					<ul class="list-group">
 						<li class="list-group-item">채용정보 상세검색</li>
@@ -363,7 +304,7 @@ footer {
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div>
 					<div class="row">
 						<form name="searchForm">
@@ -403,18 +344,14 @@ footer {
 				</div>
 				
 				<div class="row clearfix" style="background: #fff">
-					<div class="col-sm-10 searchCondition" style="min-height: 100px">
-						<%-- <c:forEach begin="1" end="10">
-							<button style=""><span class="item">경기>고양시</span><span class="glyphicon glyphicon-remove"></span></button>
-						</c:forEach> --%>
-					</div>
+					<div class="col-sm-10 searchCondition" style="min-height: 100px"></div>
 					<div class="col-sm-2" style="padding: 20px 0 0 0; text-align: center" >
 						<button type="button" id="searchBtn" class="btn btn-primary btn-lg">검색하기</button>
 					</div>
 				</div>
 				
-				<div class="row" style="margin-top: 20px; margin-bottom: 20px; background: #fff; padding: 10px">
-					<table class="table table-hover notiTable">
+				<div id="searchResult" class="row" style="margin-top: 20px; margin-bottom: 20px; background: #fff; padding: 10px">
+					<%-- <table class="table table-hover notiTable">
 						<tr>
 							<th class="text-center">기업명</th>
 							<th class="text-center">제목</th>
@@ -425,10 +362,22 @@ footer {
 						<c:forEach begin="1" end="10">
 							<tr>
 								<td>와디즈㈜</td>
-								<td><a href="#">클라우드펀딩 와디즈(Wadiz) 각 부문별 채용</a> <span class="glyphicon glyphicon-heart-empty scrapIcon"></span></td>
+								<td>
+									<div>
+										<a href="#">클라우드펀딩 와디즈(Wadiz) 각 부문별 채용</a> <span class="glyphicon glyphicon-heart-empty scrapIcon"></span>
+									</div>
+									<p>
+										공인중개사,부동산중개,부동산개발,분양,부동산,분양상담사,분양홍보,모델하우스
+									</p>
+									<p>
+										<span>신입·경력</span>
+										<span>초대졸↑</span>
+										<span>서울 > 강남구</span>
+									</p>
+								</td>
 								<td class="text-center">
 									<div>정규직</div>
-									<div>경기 성남시</div>
+									<div>회사내규에 따름</div>
 								</td>
 								<td class="text-center">
 									<div>3분 전 등록</div>
@@ -452,7 +401,7 @@ footer {
 									aria-hidden="true">&raquo;</span>
 							</a></li>
 						</ul>
-					</nav>
+					</nav> --%>
 				</div>
 					
 			</div>
