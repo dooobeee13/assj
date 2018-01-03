@@ -1,6 +1,7 @@
 package com.hy.assj.hirenoti.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,12 @@ import com.hy.assj.common.SearchVO;
 import com.hy.assj.vo.CareerVO;
 import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
+import com.hy.assj.vo.HnEtVO;
+import com.hy.assj.vo.HnMajorVO;
+import com.hy.assj.vo.HnOccuVO;
+import com.hy.assj.vo.HnPosVO;
+import com.hy.assj.vo.HnRankVO;
+import com.hy.assj.vo.HnSecVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
 import com.hy.assj.vo.PositionVO;
@@ -71,6 +78,36 @@ public class HireNotiDAOMybatis extends SqlSessionDaoSupport implements HireNoti
 	@Override
 	public List<PositionVO> selectPositionAll() {
 		return getSqlSession().selectList(namespace+".positionList");
+	}
+
+	@Override
+	public int insertMajor(Map<String, Object> map) {
+		return getSqlSession().update(namespace + ".insertMajor", map);
+	}
+
+	@Override
+	public int insertRank(Map<String, Object> map) {
+		return getSqlSession().insert(namespace + ".insertRank", map);
+	}
+
+	@Override
+	public int insertOccupation(Map<String, Object> map) {
+		return getSqlSession().insert(namespace + ".insertOccu", map);
+	}
+
+	@Override
+	public int insertSector(Map<String, Object> map) {
+		return getSqlSession().insert(namespace + ".insertSec", map);
+	}
+
+	@Override
+	public int insertEmpType(Map<String, Object> map) {
+		return getSqlSession().insert(namespace + ".insertEt", map);
+	}
+
+	@Override
+	public int insertPosition(Map<String, Object> map) {
+		return getSqlSession().insert(namespace + ".insertPosition", map);
 	}
 	
 }
