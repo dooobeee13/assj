@@ -20,6 +20,12 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link rel="stylesheet" type="text/css" 
+	href="<c:url value='/css/jquery-ui.css'/>">
+
+<script type="text/javascript" 
+src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
+
 
 <link href="${pageContext.request.contextPath}/css/resume.css" rel="stylesheet">
 <script src="<c:url value='/js/resume.js'/>"></script>
@@ -29,11 +35,10 @@ body {
 	padding-top: 60px;
 }
 .my-auto{margin:100px 0px;}
-/* #sideBar .nav-sidebar .img-profile{
-	max-width: 150px;
-	max-height: 150px;
-	border: .5rem solid rgba(255, 255, 255, .2)
-}  */
+
+.startDP, .endDP{
+	width: 80px;
+}
 </style>
 <script type="text/javascript">
 
@@ -73,7 +78,9 @@ function OntextCheck(obj)
 					<span class="sr-only">ASSJ</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<!-- <a class="navbar-brand" href="#">로고 </a> -->
+				 <a class="navbar-brand" href="index.do">홈으로</a>
+				 <a class="navbar-brand" href="index.do">My 홈</a>
+				  
 			</div>
 
 			<!-- 데스크탑에서 메뉴가 나오는 부분-->
@@ -120,13 +127,12 @@ function OntextCheck(obj)
 		<div class="row">
 			<form name="resumeForm" id="resumeForm" method="post" action="<c:url value='/resume/resumeInsert.do'/>" enctype="multipart/form-data">
 			
-			<input type="hidden" name="resumeBirth1" id="resumeBirth1" value="1988/11/10">
 			<input type="hidden" name="resumePhone" id="resumePhone">
 			<input type="hidden" name="resumeMilStart" id="resumeMilStart">
 			<input type="hidden" name="resumeMilEnd" id="resumeMilEnd">
-			<input type='hidden' name='shVOList[0].shAyear' id='shAyear0'>
-			<input type='hidden' name='shVOList[0].shGyear' id='shGyear0'>
-			
+			<input type='hidden' name='shVOList[0].shMajordetail' value="고졸">
+			<input type='hidden' name='shVOList[0].shGrade' id='shGrade0' value="0">
+			<input type='hidden' name='shVOList[0].shEduNo' id='shEduNo0' value="1">
 			<input type="hidden" name="eduName" id="eduName" value="최종학력예비값">
 			<input type="hidden" name="eduNo" id="eduNo" value="1">
 			<input type="hidden" name="resumeSalOpt" id="resumeSalOpt">
@@ -178,7 +184,7 @@ function OntextCheck(obj)
 							</a> --%>
 							
 							<a href="#">
-								<img class="img-profile img-circle" id="imgTest" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
+								<img class="img-profile img-circle" name="imgTest" id="imgTest" src="${pageContext.request.contextPath }/images/img_photo_null.gif" />
 							</a>
 							
 							
@@ -194,6 +200,7 @@ function OntextCheck(obj)
 						<li class="nav-item"><a class="nav-link" href="#addSelect">선택 사항</a></li>
 						<li class="nav-item"><a class="nav-link" href="#pt">포트폴리오</a></li>
 						<li class="nav-item"><a class="nav-link" href="#hope">희망 근무조건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#intro">자기소개서</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">
 						<input type="image" id="imgSubmit" width="100%" height="100%" src="<c:url value='/images/button/write_complete.png'/>">
 						</a></li>						
@@ -219,22 +226,9 @@ function OntextCheck(obj)
 							<label for="insertLb">생년월일<span class="res-star">*</span></label>
 							<br>
 							 <label class="form-inline"> 
-							 <select name="birth_year" id="birth_year"  class="form-control" style="width: 100px">
-									<c:forEach var="i" begin="0" end="${2016-1900}">
-										<c:set var="resultYear" value="${2016-i }" />
-										<option value="${resultYear }">${resultYear }</option>
-									</c:forEach>
-							</select> 년&nbsp;&nbsp; 
-							<select name="birth_month" id="birth_month" class="form-control" style="width: 80px">
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 월&nbsp;&nbsp; 
-							<select name="birth_day" id="birth_day" class="form-control" style="width: 80px">
-									<c:forEach var="i" begin="1" end="${31}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 일
+							 
+								<input type="text" name="resumeBirth" class="form-control startDP">														
+							
 							</label> 
 							<br>
 							<label for="insertLb">주소<span class="res-star">*</span></label>
@@ -414,38 +408,17 @@ function OntextCheck(obj)
 						<label for="insertLb">재학 기간<span class="res-star">*</span></label>
 						<br>
 						<label class="form-inline"> 
-							<select name="sh_start_year" class="form-control" style="width: 100px">
-									<option value=""></option>
-									<c:forEach var="i" begin="0" end="${2016-1930}">
-										<c:set var="resultYear" value="${2016-i }" />
-										<option value="${resultYear }">${resultYear }</option>
-									</c:forEach>
-							</select> 
-							.
-							<select name="sh_start_month"  class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 
 							
+							<input type="text" name="shVOList[0].shAyear" class="form-control startDP">
 							
 							~ 
-							<select name="sh_end_year"  class="form-control" style="width: 100px">
-								<option value=""></option>									
-							</select> 
-							.
-							<select name="sh_end_month" class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 
+							<input type="text" name="shVOList[0].shGyear" class="form-control endDP">							
+							
 						</label>
 						
 						<br>
 						<label class="form-inline"> 
-						<select name="shAwhether" id="shAwhether" class="form-control">
+						<select name="shVOList[0].shAwhether"  class="form-control">
 								<option value=""></option>
 								<option value="입학" selected>입학</option>
 								<option value="편입">편입</option>
@@ -453,8 +426,7 @@ function OntextCheck(obj)
 						</label> <span>&nbsp;&nbsp;</span> 
 						<label class="form-inline"> 
 						<c:set var="gwArr">졸업,재학중,휴학중,수료,중퇴,자퇴,졸업예정</c:set> 
-						<select name="shGwhether" id="shGwhether" class="form-control">
-								
+						<select name="shVOList[0].shGwhether"  class="form-control">								
 								<c:forEach var="gw" items="${gwArr }">
 									<option class="shgwOp" value="${gw }">${gw}</option>
 								</c:forEach>
@@ -463,15 +435,20 @@ function OntextCheck(obj)
 						</label> 
 						<br><br><br>
 						<label for="insertLb">학교명<span class="res-star">*</span></label>
-						<input type="text" class="form-control" name="shSname" id="shSname" placeholder="고등학교 입력"> 
+						<input type="text" class="form-control" name="shVOList[0].shSname" id="shSname" placeholder="고등학교 입력"> 
+						<br>
+							<select name="shVOList[0].shAreaNo" class="form-control">
+								<c:forEach var="areaTop" items="${areaListTop}">
+									<option value="${areaTop.areaNo}">${areaTop.areaName}</option>
+								</c:forEach>
+							</select>
 						<br> 
 						<label class="form-inline"> 
 						<input type="checkbox" class="form-control" name="chkSname" id="chkSname" value="검정고시">대입 검정고시(고졸)
 						</label> 
 						<br> <br><br>
 						<label for="insertLb">전공<span class="res-star">*</span></label>
-						<select name="shMajor" id="shMajor" class="form-control">
-						<option value=""></option>
+						<select name="shVOList[0].shMajor" class="form-control">						
 							<option value="문과계열">문과계열</option>
 							<option value="이과계열">이과계열</option>
 							<option value="전문(실업)계">전문(실업)계</option>
@@ -492,8 +469,9 @@ function OntextCheck(obj)
 					
 						
   <script type="text/javascript">
-  $(function(){
-		$(document).on("change","select[name=shMajor]",function(){
+   $(function(){
+	  var majorCnt1 = 1;
+	  $(document).on("change",".basicshMajor",function(){
 			
 			var no =$("option:selected",this).index()+1;	
 			var $thisSel = $(this);
@@ -517,7 +495,7 @@ function OntextCheck(obj)
 			});	
 		});		
 	 
-  });
+  }); 
   </script>
 							
 						
@@ -535,8 +513,7 @@ function OntextCheck(obj)
 							
 						
 
-		<div class="shBasicDiv" style="display: none; border: 1px solid gray; margin-top: 10px; padding: 10px;">
-					
+		<div class="shBasicDiv" style="display: none; border: 1px solid gray; margin-top: 10px; padding: 10px;">					
 						
 					
 						<div class="col-sm-3 col-md-3 shDiv">
@@ -544,43 +521,23 @@ function OntextCheck(obj)
 						<br>
 							
 							<label class="form-inline"> 
-							<select name="basic_ssy"    class="form-control" style="width: 100px">
-									<option value=""></option>
-									<c:forEach var="i" begin="0" end="${2016-1930}">
-										<c:set var="resultYear" value="${2016-i }" />
-										<option value="${resultYear }">${resultYear }</option>
-									</c:forEach>
-							</select> 
-							.
-							<select name="basic_ssm" class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 
-							~ 
-							<select name="basic_sey"  class="form-control" style="width: 100px">
-								<option value=""></option>									
-							</select> 
-							.
-							<select name="basic_sem"  class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select>
+								<input type="text" name="basicStartDP" class="form-control startDP">
+							
+								~ 
+								<input type="text" name="basicEndDP" class="form-control endDP">							
+							
 							</label> 
 							<br>
 							
 							<label class="form-inline"> 
-								<select name="shAwhether" id="shAwhether" class="form-control">
+								<select name="basicshAwhether" class="form-control">
 										<option value="입학">입학</option>
 										<option value="편입">편입</option>
 								</select>
 							&nbsp;&nbsp;
 							
 							<c:set var="gwArr">졸업,재학중,휴학중,수료,중퇴,자퇴,졸업예정</c:set> 
-							<select name="shGwhether" id="shGwhether" class="form-control">
+							<select name="basicshGwhether" class="form-control">
 									<c:forEach var="gw" items="${gwArr }">
 										<option value="${gw }">${gw}</option>
 									</c:forEach>
@@ -589,17 +546,17 @@ function OntextCheck(obj)
 						</div>
 						<div class="col-sm-3 col-md-3 shDiv">
 						<label for="insertLb">학교명<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="shName" id="shName" placeholder="대학교 입력"> 
-							<select name="eduName" id="eduName" class="form-control">
-								<option value="대학(2,3)년">대학교(2,3년)</option>
-								<option value="대학교(4년)">대학교(4년)</option>
-								<option value="대학원(석사)">대학원(석사)</option>
-								<option value="대학원(박사)">대학원(박사)</option>
+							<input type="text" class="form-control" name="basicshSname"  placeholder="대학교 입력"> 
+							<select name="basiceduNo"  class="form-control">
+								<option value="2">대학교(2,3년)</option>
+								<option value="3">대학교(4년)</option>
+								<option value="4">대학원(석사)</option>
+								<option value="5">대학원(박사)</option>
 							</select> 
 							<br>
-							<select name="areaName" id="areaName" class="form-control">
+							<select name="basicareaNo" class="form-control">
 								<c:forEach var="areaTop" items="${areaListTop}">
-									<option value="${areaTop.areaName }">${areaTop.areaName }</option>
+									<option value="${areaTop.areaNo}">${areaTop.areaName}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -608,7 +565,7 @@ function OntextCheck(obj)
 						<label for="insertLb">전공<span class="res-star">*</span></label>
 					
 							
-							<select name="shMajor"  class="form-control">
+							<select name="basicshMajor"  class="form-control basicshMajor">							
 								<c:forEach var="majorTop" items="${majorListTop}">
 									<option value="${majorTop.majorName}">${majorTop.majorName }</option>
 								</c:forEach>
@@ -616,15 +573,17 @@ function OntextCheck(obj)
 							
 							<br>
 							
-							<select name="shMajordetail"  class="form-control">
-								<option>상위 전공을 먼저 선택하세요.</option>
+							<select name="basicshMajordetail"  class="form-control basicshMajordetail">
+								<c:forEach var="majorDt" items="${majorListBasicDetail}">
+									<option value="${majorDt.majorName}">${majorDt.majorName }</option>
+								</c:forEach>
 							</select>
 							</div>
 						
 						<div class="col-sm-3 col-md-3 shDiv">
 						<label for="insertLb">학점</label>
 						<label class="form-inline">
-							 <input type="text" class="form-control" name="shGrade" id="shGrade" > 
+							 <input type="text" class="form-control" name="basicshGrade"> 
 						</label>
 						<br><br><br>
 						<label for="insertLb">최종 학력 선택<span class="res-star">*</span>
@@ -656,44 +615,24 @@ function OntextCheck(obj)
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 						<label for="insertLb">교육명<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="ehName" id="ehName" placeholder="교육 명"> 							
+							<input type="text" class="form-control" name="ehName"  placeholder="교육 명"> 							
 							<br>
 						</div>
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 						<label for="insertLb">교육 기관<span class="res-star">*</span></label>
-							<input type="text" class="form-control" name="ehIns" id="ehIns"  placeholder="교육기관 명">
+							<input type="text" class="form-control" name="ehIns"   placeholder="교육기관 명">
 						</div>	
 						
 						<div class="col-sm-3 col-md-3 ehDiv">
 							<label for="insertLb">교육 기간<span class="res-star">*</span></label>	
 							<label class="form-inline"> 
 							<!-- 수료시작일 수료종료일 -->
-							<select name="basic_esy"  class="form-control" style="width: 100px">
-									<option value=""></option>
-									<c:forEach var="i" begin="0" end="${2016-1930}">
-										<c:set var="resultYear" value="${2016-i }" />
-										<option value="${resultYear }">${resultYear }</option>
-									</c:forEach>
-							</select> 
-							.
-							<select name="basic_esm" class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select> 
-							~ 
-							<select name="basic_eey"  class="form-control" style="width: 100px">
-								<option value=""></option>									
-							</select> 
-							.
-							<select name="basic_eem" class="form-control" style="width: 80px">
-							<option value=""></option>
-									<c:forEach var="i" begin="1" end="${12}">
-										<option value="${i}">${i}</option>
-									</c:forEach>
-							</select>
+								<input type="text" name="basicStartDP" class="form-control startDP">
+							
+								~ 
+								<input type="text" name="basicEndDP" class="form-control endDP">							
+							
 							</label> 												
 						</div>
 						
@@ -701,11 +640,11 @@ function OntextCheck(obj)
 						<label for="insertLb">수료 여부<span class="res-star">*</span></label>
 						<br>							
 							<label class="form-inline"> 
-							<select name="ehConf" id="ehConf"  class="form-control">
+							<select name="ehConf"  class="form-control">
 									<option value="수료">수료</option>
 									<option value="수료예정">수료예정</option>
 									<option value="중퇴">중퇴</option>
-									<option value="자퇴">중퇴</option>									
+									<option value="자퇴">자퇴</option>									
 							</select>
 							</label>
 							<br>
@@ -804,9 +743,9 @@ function OntextCheck(obj)
 								<tbody>
 									<tr class="contents">
 										<td><select name='cCate' class='form-control cCate'>
-												<option value="자격증/면허증" label="자격증/면허증" selected>자격증/면허증</option>
-												<option value="어학시험" label="어학시험">어학시험</option>
-												<option value="수상/공모" label="수상내역/공모전">수상내역/공모전</option>
+												<option value="자격증/면허증" selected>자격증/면허증</option>
+												<option value="어학시험" >어학시험</option>
+												<option value="수상/공모" >수상내역/공모전</option>
 										</select></td>
 										<td>
 										<input type="text" name="cName" placeholder="1개의 입력란에 하나의 자격증만 입력하세요." class="form-control">
@@ -822,18 +761,11 @@ function OntextCheck(obj)
 												<option value="최종합격" label="최종합격">최종합격</option>
 										</select></td>
 										<td><label class='form-inline'> 
-										<select name="cer_year" class="form-control" style="width: 90px">
-													<c:forEach var="i" begin="0" end="${2016-1900}">
-														<c:set var="resultYear" value="${2016-i }" />
-														<option value="${resultYear }">${resultYear }</option>
-													</c:forEach>
-											</select> &nbsp;.&nbsp; 
-											<select name="cer_month" class="form-control" style="width: 60px">
-													<c:forEach var="i" begin="1" end="${12}">
-														<option value="${i}">${i}</option>
-													</c:forEach>
-											</select>
-										</label></td>
+										
+											<input type="text" name="basicStartDP" class="form-control startDP">							
+								
+										</label>
+										</td>
 									</tr>
 
 								</tbody>
@@ -882,18 +814,10 @@ function OntextCheck(obj)
 										</label>
 										</td>
 										
-										<td><label class='form-inline'> <select name="cer_year"
-												class="form-control" style="width: 90px">
-													<c:forEach var="i" begin="0" end="${2016-1900}">
-														<c:set var="resultYear" value="${2016-i }" />
-														<option value="${resultYear }">${resultYear }</option>
-													</c:forEach>
-											</select> &nbsp;.&nbsp; <select name="cer_month" class="form-control"
-												style="width: 60px">
-													<c:forEach var="i" begin="1" end="${12}">
-														<option value="${i}">${i}</option>
-													</c:forEach>
-											</select>
+										<td>
+										<label class='form-inline'> 
+											<input type="text" name="cerBasicDP" class="form-control startDP">							
+								
 										</label></td>
 									</tr>
 
@@ -933,18 +857,11 @@ function OntextCheck(obj)
 										<td><input type="text" name="cPubl" 
 											title="수여기관은 정확하고 구체적으로 입력해주세요. &#13;ex)서울시청 , 경기교육청"
 											class="form-control"></td>
-										<td><label class='form-inline'> <select name="cer_year"
-												class="form-control" style="width: 90px">
-													<c:forEach var="i" begin="0" end="${2016-1900}">
-														<c:set var="resultYear" value="${2016-i }" />
-														<option value="${resultYear }">${resultYear }</option>
-													</c:forEach>
-											</select> &nbsp;.&nbsp; <select name="cer_month" class="form-control"
-												style="width: 60px">
-													<c:forEach var="i" begin="1" end="${12}">
-														<option value="${i}">${i}</option>
-													</c:forEach>
-											</select>
+										<td><label class='form-inline'> 
+											<input type="text" name="basicSkillDP" class="form-control startDP">
+							
+							
+							
 										</label></td>
 									</tr>
 
@@ -983,10 +900,8 @@ function OntextCheck(obj)
 										</select>
 										</td>
 										<td>
-										<textarea rows='3' name="skDetail" 
-	placeholder="보유능력에서 선택한 기술에 대해서 상세하고 구체적으로 입력해주세요. &#13; ex) - 프로그래밍 언어(Java.php,HTML) 등 언어 능력 섬렵"
-	class='form-control'>
-												</textarea></td>
+										<textarea rows='3' name="skDetail" placeholder="보유능력에서 선택한 기술에 대해서 상세하고 구체적으로 입력해주세요. &#13; ex) - 프로그래밍 언어(Java.php,HTML) 등 언어 능력 섬렵"	class='form-control'></textarea>
+										</td>
 									</tr>
 
 								</tbody>
@@ -1010,11 +925,12 @@ function OntextCheck(obj)
 				</div>
 				
 				<!-- Trigger the modal with a button -->
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">추가</button>
+				
+				<button type="button" class="btn btn-info btn-lg" style="margin-top: 10px; " id="addPFBtn" data-toggle="modal" data-target="#myModal">등록</button>
 				
 				<!-- Modal -->
 				<div id="myModal" class="modal fade" role="dialog">
-				  <div class="modal-dialog">
+				  <div class="modal-dialog" >
 				
 				    <!-- Modal content-->
 				    <div class="modal-content">
@@ -1038,14 +954,53 @@ function OntextCheck(obj)
 				$(function(){
 					$(document).on("click","button[name=portModalOK]",function(){
 						
-						$(this).parent().prev().find("input[type=file]").val();
+						var addTag = "<div><div style=' padding: 5px; margin-bottom: 10px'><span></span><span name='PFIntroView' style='margin-left: 20px; '>내용 보기</span></div>"+
+						"<div style=' padding: 5px; margin-bottom: 10px'> </div></div> ";
 						
 						var $cloneFile = $(this).parent().prev().find("input[type=file]").clone();
 						
-						$(this).parent().parent().parent().parent().prev().prev().append($cloneFile).attr("name","portFilename");
+						var $cloneTA = $(this).parent().prev().find('textarea').clone();
 						
+						
+						//alert($(this).parent().parent().parent().parent().prev().prev().attr("class")); -> my-auto
+						
+						$(this).parent().parent().parent().parent().prev().prev().append(addTag);
+						
+						
+						var fileValue = $cloneFile.val().split("\\");
+						var fileName = fileValue[fileValue.length-1]; // 파일명
+
+						var okBtn = "<button type='button' class='btn btn-default' name='PFIntroBtn'>확인</button>";
+						
+						$(this).parent().parent().parent().parent().prev().prev().find('div').find('div:last-child').hide();
+						$(this).parent().parent().parent().parent().prev().prev().find('div').find('input[type=file]').hide();
+						$(this).parent().parent().parent().parent().prev().prev().find('div').find('div:last-child').append(
+								$(this).parent().prev().find("input[type=file]").clone().hide()
+						);
+						
+						$(this).parent().parent().parent().parent().prev().prev().find("div:last-child").find("span:first-child").html(
+							fileName		
+						);
+						$(this).parent().parent().parent().parent().prev().prev().find("div:last-child").find("div:last-child").append(
+							$cloneTA
+						);
+						$(this).parent().parent().parent().parent().prev().prev().find("div:last-child").find("div:last-child").
+							find('textarea').attr("readonly","readonly").after(okBtn);
 						
 					});
+					
+					$(document).on("click","span[name=PFIntroView]",function(){
+						$(this).parent().next().slideDown(2000);
+						$(this).fadeOut(1000,function(){
+							$(this).hide();
+						});
+					});					
+					
+					$(document).on("click","button[name=PFIntroBtn]",function(){
+						$(this).parent().fadeOut(2000);
+						$(this).parent().prev().find("span:last-child").fadeIn(3000);						
+					});					
+					
 				});
 				</script>
 			</section>
@@ -1104,52 +1059,57 @@ function OntextCheck(obj)
 					<label>희망 근무지역<span class="res-star">*</span></label> 
 					<br>
 
-					<select name="areaTop" class="form-control">
-					<option value="선택">--선택하세요--</option>
+					<select name="areaNoTop" class="form-control">
 					<c:forEach var="areaTop" items="${areaListTop}">
-						<option value="${areaTop.areaName }">${areaTop.areaName }</option>
+						<option value="${areaTop.areaNo }">${areaTop.areaName }</option>
 					</c:forEach>
 						
 					</select> 
 					
-					<select name="areaName" class="form-control">
-						<option>상위 지역을 먼저 선택해 주세요</option>
+					<select name="areaNo" class="form-control">
+						<c:forEach var="areaBasicDt" items="${selectBasicArea}">
+						<option value="${areaBasicDt.areaNo }">${areaBasicDt.areaName }</option>
+					</c:forEach>
 						
 					</select>
 
 					<br> 
 					
 					<label>희망 직종<span class="res-star">*</span></label> <br>
-					<select name="occuTop" class="form-control">
+					<select name="occuNoTop" class="form-control">
 						<c:forEach var="occuTop" items="${occuListTop}">
-						<option value="${occuTop.occuName }">${occuTop.occuName }</option>
-					</c:forEach>
+						<option value="${occuTop.occuNo }">${occuTop.occuName }</option>
+						</c:forEach>
 					</select> 
 					
-					<select name="occuName" class="form-control">
-						<option>상위 직종을 먼저 선택해주세요.</option>
+					<select name="occuNo" class="form-control">
+						<c:forEach var="selectBasicOccu" items="${selectBasicOccu}">
+						<option value="${selectBasicOccu.occuNo }">${selectBasicOccu.occuName }</option>
+						</c:forEach>
 					</select> 
-					
+					   
 					<br> 
 					
 					<label>희망 업종<span class="res-star">*</span></label> 
-					
+						
 					<br>
 					
-					<select name="secTop" class="form-control">
+					<select name="secNoTop" class="form-control">
 						<c:forEach var="secTop" items="${sectorsListTop}">
-						<option value="${secTop.secName }">${secTop.secName }</option>
+						<option value="${secTop.secNo}">${secTop.secName }</option>
 					</c:forEach>
 					</select> 
 					
-					<select name="secName" class="form-control">
-						<option>상위 업종을 먼저 선택해주세요.</option>
+					<select name="secNo" class="form-control">
+						<c:forEach var="selectBasicSec" items="${selectBasicSec}">
+						<option value="${selectBasicSec.secNo }">${selectBasicSec.secName }</option>
+						</c:forEach>
 					</select> 
 					<br>
 
  <script type="text/javascript">
   $(function(){
-		$(document).on("change","select[name=areaTop]",function(){
+		$(document).on("change","select[name=areaNoTop]",function(){
 			var no =$("option:selected",this).index()+1;	
 			var $thisSel = $(this);
 			$(this).next().find("option").remove();
@@ -1171,7 +1131,7 @@ function OntextCheck(obj)
 			});	
 		});		
 		
-		$(document).on("change","select[name=occuTop]",function(){
+		$(document).on("change","select[name=occuNoTop]",function(){
 			var no =$("option:selected",this).index()+1;	
 			var $thisSel = $(this);
 			$(this).next().find("option").remove();
@@ -1193,7 +1153,7 @@ function OntextCheck(obj)
 			});	
 		});	
 		
-		$(document).on("change","select[name=secTop]",function(){
+		$(document).on("change","select[name=secNoTop]",function(){
 			var no =$("option:selected",this).index()+1;	
 			var $thisSel = $(this);
 			$(this).next().find("option").remove();
@@ -1219,59 +1179,178 @@ function OntextCheck(obj)
 		$('#addSH').click(function(){
 			 
 			 $('#addSHDiv').before(
-					$('.shBasicDiv').clone().show().attr("class","copySHDiv").append(
+					$('.shBasicDiv').clone(true).show().attr("class","copySHDiv").append(
 						$('#clearBasicDiv').clone().show().attr("id","").attr("name","").attr("class","copyClearDiv")
 					)
-				);
-			 $('.copySHDiv').find('select[name=basic_ssy]').attr("name","sh_start_year");
-			 $('.copySHDiv').find('select[name=basic_ssm]').attr("name","sh_start_month");
-			 $('.copySHDiv').find('select[name=basic_sey]').attr("name","sh_end_year");
-			 $('.copySHDiv').find('select[name=basic_sem]').attr("name","sh_end_month");
-			 
-			 var shAyear = "<input type='hidden' name='shVOList["+ii+"].shAyear' id='shAyear"+ii+"'>";
-			 var shGyear = "<input type='hidden' name='shVOList["+ii+"].shGyear' id='shGyear"+ii+"'>";
-			 
-			 $('#eduName').before(shAyear);
-			 $('#eduName').before(shGyear);
-			
+				);	
+			 $.applyDatePicker(
+			 	$('.copySHDiv').find('input[name=basicStartDP]').attr("name","shVOList["+ii+"].shAyear")
+			 );
+			 $.applyDatePicker(
+				 $('.copySHDiv').find('input[name=basicEndDP]').attr("name","shVOList["+ii+"].shGyear")
+			 );
+			 $('.copySHDiv').find('select[name=basicshAwhether]').attr("name","shVOList["+ii+"].shAwhether");
+			 $('.copySHDiv').find('select[name=basicshGwhether]').attr("name","shVOList["+ii+"].shGwhether");
+			 $('.copySHDiv').find('input[name=basicshSname]').attr("name","shVOList["+ii+"].shSname");
+			 $('.copySHDiv').find('select[name=basiceduNo]').attr("name","shVOList["+ii+"].shEduNo");
+			 $('.copySHDiv').find('select[name=basicareaNo]').attr("name","shVOList["+ii+"].shAreaNo");
+			 $('.copySHDiv').find('select[name=basicshMajor]').attr("name","shVOList["+ii+"].shMajor");
+			 $('.copySHDiv').find('select[name=basicshMajordetail]').attr("name","shVOList["+ii+"].shMajordetail");
+			 $('.copySHDiv').find('input[name=basicshGrade]').attr("name","shVOList["+ii+"].shGrade");	 			
 			  
 			ii++;
 		});
-		
+	
 		var ehIdx = 0;
 		$('#addEhImg').click(function(){
 			$('.addBtnDiv').before(
-					$('#ehBasicDiv').clone().show().attr("id","").attr("class","addEhCopyDiv").append(
-							$('#clearBasicDiv').clone().show().attr("id","").attr("class","copyClearDiv")));
+					$('#ehBasicDiv').clone(true).show().attr("id","").attr("class","addEhCopyDiv").append(
+							$('#clearBasicDiv').clone().show().attr("id","").attr("class","copyClearDiv")
+							)
+						);
 			
-			$('.addEhCopyDiv').find('select[name=basic_esy]').attr("name","eh_start_year");
-			 $('.addEhCopyDiv').find('select[name=basic_esm]').attr("name","eh_start_month");
-			 $('.addEhCopyDiv').find('select[name=basic_eey]').attr("name","eh_end_year");
-			 $('.addEhCopyDiv').find('select[name=basic_eem]').attr("name","eh_end_month");
+			$.applyDatePicker(
+			 $('.addEhCopyDiv').find('input[name=basicStartDP]').attr("name","ehVOList["+ehIdx+"].ehAdmission")
+			 );
+			
+			$.applyDatePicker(
+			 $('.addEhCopyDiv').find('input[name=basicEndDP]').attr("name","ehVOList["+ehIdx+"].ehCompletion")			
+			 );
+			
+			 $('.addEhCopyDiv').find('input[name=ehName]').attr("name","ehVOList["+ehIdx+"].ehCsname");
+			 $('.addEhCopyDiv').find('input[name=ehIns]').attr("name","ehVOList["+ehIdx+"].ehInstitution");
+			 $('.addEhCopyDiv').find('select[name=ehConf]').attr("name","ehVOList["+ehIdx+"].ehConfirm");			 
 			 
-			 var ehName = "ehVOList["+ehIdx+"].ehCsname";
-			 var ehIns = "ehVOList["+ehIdx+"].ehInstitution";
-			 var ehConf = "ehVOList["+ehIdx+"].ehConfirm";
-			 
-			 $('.addEhCopyDiv').find('#ehName').attr("id","").attr("name",ehName);
-			 $('.addEhCopyDiv').find('#ehIns').attr("id","").attr("name",ehIns);
-			 $('.addEhCopyDiv').find('#ehConf').attr("id","").attr("name",ehConf);			 
-			 
-			 var ehAdmission = "<input type='hidden' name='ehVOList["+ehIdx+"].ehAdmission' id='ehAdmission"+ehIdx+"'>";
-			 var ehCompletion = "<input type='hidden' name='ehVOList["+ehIdx+"].ehCompletion' id='ehCompletion"+ehIdx+"'>";
-			 
-			 $('#eduName').before(ehAdmission);
-			 $('#eduName').before(ehCompletion);
 			
 			 ehIdx++;
 		});
-	
+		
+		$.applyDatePicker("input[name=resumeBirth]");
+		$.applyDatePicker("input[name='shVOList[0].shAyear']");
+		$.applyDatePicker("input[name='shVOList[0].shGyear']");
+		
+		var divIndex = 0;
+		$(document).on("click",".cCate",function(){
+			
+			divIndex = $(this).parent().parent().parent().parent().parent().parent().index();				
+			
+		});	
+		
+		$(document).on("change",".cCate",function(){
+			if($(this).val()=='자격증/면허증'){
+				
+				$(this).parent().parent().parent().parent().parent().parent().replaceWith(
+						$('#actDiv').clone().show().attr("class","actDivClass"+divIndex).attr("id","")					
+				);
+				$('.actDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
+				$('.actDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
+				$('.actDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
+				$('.actDivClass'+divIndex).find('select[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
+			
+				$('.actDivClass'+divIndex).find('input[name=basicStartDP]').attr("name","cerVOList["+divIndex+"].cerAcquiDate")
+			
+				
+			}else if($(this).val()=='어학시험'){
+				
+				$(this).parent().parent().parent().parent().parent().parent().replaceWith(
+						$('#cerDiv').clone().show().attr("class","cerDivClass"+divIndex).attr("id","")								
+				);
+				
+				$('.cerDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
+				$('.cerDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
+				$('.cerDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
+				$('.cerDivClass'+divIndex).find('input[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
+				$.applyDatePicker(
+				$('.cerDivClass'+divIndex).find('input[name=cerBasicDP]').attr("name","cerVOList["+divIndex+"].cerAcquiDate")
+				);
+			}else if($(this).val()=='수상/공모'){
+				$(this).parent().parent().parent().parent().parent().parent().replaceWith(
+						$('#awardsDiv').clone().show().attr("class","awardsDivClass"+divIndex).attr("id","")								
+				);
+				$('.awardsDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
+				$('.awardsDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
+				$('.awardsDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
+				$('.awardsDivClass'+divIndex).find('select[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
+				$.applyDatePicker(
+				$('.awardsDivClass'+divIndex).find('input[name=basicSkillDP]').attr("name","cerVOList["+divIndex+"].cerAcquiDate")
+				);
+			}
+		});    
+		
   });
+		 
+   $.applyDatePicker=function(dp){
+		$(dp).removeClass('hasDatepicker').datepicker({
+			dateFormat:"yy-mm-dd",
+			changeYear:true,
+			changeMonth:true,
+			showMonthAfterYear: true,
+			dayNamesMin:['일','월','화','수','목','금','토'],
+			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월',
+				'10월','11월','12월'],
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+			
+		});
+	} 
+	
+	$.convertDate=function(date){
+		return date.getFullYear()+"-"+$.formatDate(date.getMonth()+1)+"-"
+		 + $.formatDate(date.getDate());
+	}
+	
+	$.formatDate = function(d){
+		var result=d;
+		if(d<10){
+			result="0"+d;
+		}
+		return result;
+	}
+  
   </script>
 				</div>
 				
 			</section>
-		</div>
+
+					<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+						id="intro">
+						<div class="my-auto">
+							<h4 class="mb-5">
+								자기소개서<span class="res-star">*</span>
+							</h4>
+							
+							<div id="introAddDiv">
+								<div class='addIntroBtnDiv' style='text-align: left; margin-bottom: 5px;'>
+									<img alt='추가버튼' name='addIntroImg' id="addIntroImg"
+									src='${pageContext.request.contextPath}/images/button/btn_add.gif' />
+								</div>
+							
+							</div>
+						
+						
+							
+						</div>
+					</section>
+<script type="text/javascript">
+$(function(){
+	var introCnt = 0;
+	$('#addIntroImg').click(function(){
+		
+		var addIntroTag = "<div class='form-group'><div><input type='text' class='form-control' name='introVOList["+introCnt+"].introTitle' placeholder='자기소개서 제목을 입력해주세요. ex) 자기소개 ,성장과정 '></div>"+
+		"<div><textarea rows='20' name='introVOList["+introCnt+"].introContent' class='form-control' ></textarea></div>"+
+		"</div>";
+		
+		$('#introAddDiv').before(addIntroTag);
+		
+		introCnt++;
+	});
+	$(document).on("click","img[name=delIntroImg]",function(){
+		$(this).parent().parent().remove();
+	});
+	
+});
+</script>
+
+				</div>
 		
 
 	</form>

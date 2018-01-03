@@ -16,6 +16,8 @@ public interface AdminDAO {
 	
 	public int deleteNews(int newsNo);
 	
+	public String selectAdminLogin(String userid);
 	
-	
+	public int CreateAdmin(Map<String, Object> list);
+
 }

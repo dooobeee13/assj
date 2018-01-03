@@ -111,64 +111,59 @@ window.onload=function(){
                   alert("제목을 입력하세요");
                   return false;
               }
-              else if (!ev.content) {
-                  alert("내용을 입력하세요");
+              else if (!ev.selectors) {
+                  alert("면접 대상을 선택해주세요");
                   return false;
               }
-              else if (!ev.event_location) {
-                  alert("장소를 입력하세요");
+              else if (!ev.subject) {
+                  alert("면접 종류를 선택해주세요");
                   return false;
               }
               else {
                  var start_date = ev.start_date; //시작날짜
                  var end_date = ev.end_date; //끝날짜
-                 var text = ev.text; //제목
-                 var content = ev.content; //내용
-                 var event_location = ev.event_location; //장소
-                 var selection = ev.subject; //카테고리
-                 var pschNo=ev.pschid; //아이디
-                $('#pschNo').val(id);
-                  $('#pschStart').val(start_date);
-                  $('#pschEnd').val(end_date);
-                  $('#pschContent').val(content);
-                  $('#pschText').val(text);
-                  $('#pschEventLocation').val(event_location);
-                  $('#pschCateg').val(selection);
-                   $('#schfrm').submit();
+                 var text = ev.text; //면접 내용
+                 var member = ev.selectors; //면접자
+                 var category = ev.subject; //면접 종류
+                 
+                 $('#startDay').val(start_date);
+                 $('#endDay').val(end_date);
+                 $('#text').val(text);
+                 $('#member').val(member);
+                 $('#category').val(category);
+                 
+                 $('#schfrm').submit();
                  return true;  
-                 
-                 
               } 
               
           }); 
           
           }else if(ev.content!=null){ //값이있을시(수정)
               scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){ //세이브버튼 클릭 시(기존 값 수정)
-                    if (!ev.text) {
-                           alert("제목을 입력하세요");
-                           return false;
-                   }
-                    else if (!ev.content) {
-                           alert("내용을 입력하세요");
-                           return false;
-                   }
-                   else if (!ev.event_location) {
-                           alert("장소를 입력하세요");
-                           return false;
-                   }
+            	  if (!ev.text) {
+                      alert("제목을 입력하세요");
+                      return false;
+                  }
+                  else if (!ev.selectors) {
+                      alert("면접 대상을 선택해주세요");
+                      return false;
+                  }
+                  else if (!ev.subject) {
+                      alert("면접 종류를 선택해주세요");
+                      return false;
+                  }
                    else {
-                    var start_date = ev.start_date; //시작날짜
-                    var end_date = ev.end_date; //끝날짜
-                    var text = ev.text; //제목
-                    var content = ev.content; //내용
-                    var event_location = ev.event_location; //장소
-                    var selection = ev.subject; //카테고리
-                     $('#pschText').val(text);
-                     $('#pschContent').val(content);
-                     $('#pschStart').val(start_date);
-                     $('#pschEnd').val(end_date);
-                     $('#pschEventLocation').val(event_location);
-                     $('#pschCateg').val(selection);
+                	   var start_date = ev.start_date; //시작날짜
+                       var end_date = ev.end_date; //끝날짜
+                       var text = ev.text; //면접 내용
+                       var member = ev.selectors; //면접자
+                       var category = ev.subject; //카테고리
+                       
+                       $('#startDay').val(start_date);
+                       $('#endDay').val(end_date);
+                       $('#text').val(text);
+                       $('#member').val(member);
+                       $('#category').val(category);
                      
                    $('#schfrm').attr("action", "schedulerEditContent.do");   
                     $('#schfrm').submit(); 
@@ -286,6 +281,13 @@ window.onload=function(){
 	</div>
 	</div>
 </div>
+	<form action="">
+		<input type="text" id="startDay">
+		<input type="text" id="endDay">
+		<input type="text" id="text">
+		<input type="text" id="member">
+		<input type="text" id="category">
+	</form>
 <%@include file="../index/footer.jsp" %>
 </body>
 <script type="text/javascript">
