@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
+import com.hy.assj.vo.PositionVO;
 import com.hy.assj.vo.RankVO;
 import com.hy.assj.vo.SectorsVO;
 
@@ -59,6 +61,16 @@ public class HireNotiDAOMybatis extends SqlSessionDaoSupport implements HireNoti
 	@Override
 	public List<SectorsVO> selectSectorsAll() {
 		return getSqlSession().selectList(namespace+".sectorsList");
+	}
+
+	@Override
+	public List<EducationVO> selectEducationAll() {
+		return getSqlSession().selectList(namespace+".educationList");
+	}
+
+	@Override
+	public List<PositionVO> selectPositionAll() {
+		return getSqlSession().selectList(namespace+".positionList");
 	}
 	
 }

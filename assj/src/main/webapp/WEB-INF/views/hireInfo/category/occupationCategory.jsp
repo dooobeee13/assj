@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 	<div class="sCateTitle">
-		직무(직종)<span class="glyphicon glyphicon-chevron-down"></span>
+		직무(직종)<span class="down"></span>
 	</div>
 	<div class="sCateName thinScroll">
 		<ul>
@@ -15,11 +15,11 @@
 
 	<div class="detail thinScroll">
 		<div class="row tab">
-			<div class="col-md-5">
+			<div class="col-md-5" style="border-right: 1px solid #d3d3d3">
 				<div class="category thinScroll top">
 					<ul>
-						<c:forEach var="vo" items="${topCateogryList}">
-							<li class="col-md-6"><a href="#aTabs-${vo.occuNo}"><label class="chklabel">${vo.occuName}</label></a></li>
+						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">
+							<li class="col-md-6 <c:if test='${status.first}'>selected</c:if>"><a href="#aTabs-${vo.occuNo}"><label class="chklabel">${vo.occuName}</label></a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 						<ul id="aTabs-${top.occuNo}">
 							<c:forEach var="vo" items="${map[subKey]}">
 								<li class="col-md-6">
-									<input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}" name="occupation" value="${vo.occuNo}"> 
+									<input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}" name="occuList" value="${vo.occuNo}"> 
 									<label class="chklabel" data-name="${top.occuName}>${vo.occuName}" for="occupation-${vo.occuNo}">
 										<span>${vo.occuName}</span>
 									</label>

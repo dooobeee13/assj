@@ -2,6 +2,7 @@ package com.hy.assj.reboard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,17 +49,32 @@ public class ReboardController {
 	
 	
     @RequestMapping(value="/qnaBoard.do",method=RequestMethod.GET)
-	public String qnaBoard_get(Model model) {
+	public String qnaBoard_get(@ModelAttribute SearchVO searchVo,Model model) {
 		logger.info("Q&A 게시판");
 	
-		List<ReboardVO>list=reboardService.QnaList();
+		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+				
+		//SearchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("searchVo 최종값 : {}", searchVo);
+		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
+		
+		List<ReboardVO>list=reboardService.QnaList(searchVo);
+		
+		pagingInfo.setTotalRecord(reboardService.selectTotalRecordCount(searchVo));
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "member/menu/qnaBoard";
 	}
 	
-/*	@RequestMapping(value="/qnaBoard.do",method=RequestMethod.POST)
+	@RequestMapping(value="/qnaBoard.do",method=RequestMethod.POST)
 	public String qnaBoard_post(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("글 목록, 파라미터 searchVo={}", searchVo);
 		
@@ -85,7 +101,7 @@ public class ReboardController {
 		model.addAttribute("pagingInfo", pagingInfo);
 			
 		return "member/menu/qnaBoard";
-	}*/
+	}
 	
 	@RequestMapping(value="/qnaWrite.do",method=RequestMethod.GET)
 	public String qnaWrite_get() {
@@ -166,6 +182,60 @@ public class ReboardController {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping("/qnaOut.do")
+	@ResponseBody
+	public String qnaOut(@RequestParam String no,@RequestParam String groupNo
+			,@RequestParam String step, @RequestParam String pwd) {
+		logger.info("ajax-qnaOut화면 파라미터 no={},groupNo={},",no,groupNo);
+		logger.info("step={}, pwd={}",step, pwd);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("no", no);
+		map.put("groupNo", groupNo);
+		map.put("step", step);
+		map.put("pwd", pwd);
+		
+		boolean result = reboardService.deleteReBoard(map);
+		
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping(value="/qnaReply.do",method=RequestMethod.GET)
+	public String qnaReply_get(@RequestParam(defaultValue="0") int no,Model model) {
+		logger.info("답글 화면(get) 파라미터 no={}",no);
+		
+		ReboardVO vo=reboardService.selectByNo(no);
+		logger.info("답변하기 조회 결과, vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return "member/menu/qnaReply";
+	}
+	
+	@RequestMapping(value="/qnaReply.do", method=RequestMethod.POST)
+	public String reply_post(@ModelAttribute ReboardVO vo,
+			Model model) {
+		logger.info("답변하기 처리, 파라미터 vo={}", vo);
+		
+		int cnt = reboardService.reply(vo);
+		logger.info("답변하기 처리, 결과 cnt={}", cnt);
+		
+		String msg="", url="";
+		if(cnt>0) {
+			msg="답변하기 성공";
+			url="/member/menu/qnaBoard.do";
+		}else {
+			msg="답변하기 실패";
+			url="/member/menu/qnaReply.do?no="+vo.getNo();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 		
 	}
+	
 }

@@ -14,8 +14,8 @@ public class SchoolHistoryVO {
 	private String shMajor;
 	private String shMajordetail;
 	private String shGrade;
-	private int areaNo;
-	private int eduNo;
+	private int shAreaNo;
+	private int shEduNo;
 	
 	private List<SchoolHistoryVO> shVOList;
 	
@@ -85,24 +85,24 @@ public class SchoolHistoryVO {
 	public void setShGrade(String shGrade) {
 		this.shGrade = shGrade;
 	}
-	public int getAreaNo() {
-		return areaNo;
+	public int getShAreaNo() {
+		return shAreaNo;
 	}
-	public void setAreaNo(int areaNo) {
-		this.areaNo = areaNo;
+	public void setShAreaNo(int shAreaNo) {
+		this.shAreaNo = shAreaNo;
 	}
-	public int getEduNo() {
-		return eduNo;
+	public int getShEduNo() {
+		return shEduNo;
 	}
-	public void setEduNo(int eduNo) {
-		this.eduNo = eduNo;
+	public void setShEduNo(int shEduNo) {
+		this.shEduNo = shEduNo;
 	}
 	@Override
 	public String toString() {
 		return "SchoolHistoryVO [shNo=" + shNo + ", resumeNo=" + resumeNo + ", shAyear=" + shAyear + ", shGyear="
 				+ shGyear + ", shAwhether=" + shAwhether + ", shGwhether=" + shGwhether + ", shSname=" + shSname
-				+ ", shMajor=" + shMajor + ", shMajordetail=" + shMajordetail + ", shGrade=" + shGrade + ", areaNo="
-				+ areaNo + ", eduNo=" + eduNo + ", shVOList=" + shVOList + "]";
+				+ ", shMajor=" + shMajor + ", shMajordetail=" + shMajordetail + ", shGrade=" + shGrade + ", shAreaNo="
+				+ shAreaNo + ", shEduNo=" + shEduNo + ", shVOList=" + shVOList + "]";
 	}
 	
 	

@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><!-- 반응형 웹을위한 메타태그 -->
 <title>assj 공고/지원자관리</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainstyle.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/clear.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mystyle.css"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/mainstyle.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/clear.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/layout.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/mystyle.css'/>"/>
 
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet"> 

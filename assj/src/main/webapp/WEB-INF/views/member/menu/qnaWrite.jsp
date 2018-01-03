@@ -40,6 +40,7 @@
 		margin:0 auto;
 		padding:80px;
 		background-color:#ffff;
+		height:670px;
 	}
 	.container .form-group{
 		margin:6px;

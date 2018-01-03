@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
+import com.hy.assj.vo.PositionVO;
 import com.hy.assj.vo.RankVO;
 import com.hy.assj.vo.SectorsVO;
 
@@ -64,5 +66,15 @@ public class HireNotiServiceImpl implements HireNotiService{
 	@Override
 	public List<SectorsVO> selectSectorsAll() {
 		return hirenotiDao.selectSectorsAll();
+	}
+
+	@Override
+	public List<EducationVO> selectEducationAll() {
+		return hirenotiDao.selectEducationAll();
+	}
+
+	@Override
+	public List<PositionVO> selectPositionAll() {
+		return hirenotiDao.selectPositionAll();
 	}	
 }

@@ -3,7 +3,6 @@ package com.hy.assj.main.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +37,7 @@ public class IndexController {
 	private MemberService memberService;
 	@Autowired
 	private CmMemberService cmMemberService;
-	@Inject
+	@Autowired
 	private HireInfoService hireInfoService;
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)

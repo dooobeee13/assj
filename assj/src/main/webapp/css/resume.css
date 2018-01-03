@@ -25,6 +25,7 @@ a:active, a:focus, a:hover {
 
 #topNav {
 	background-color: #2594cf;
+	/* background-color: #2594cf; */
 }
 
 #topDropMenu>ul>li>a {
@@ -92,7 +93,7 @@ section.resume-section .resume-item .resume-date {
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
   color: #fff;
-  background-color: #428bca;
+  background-color: #428bca; 
 }
 img {
 	vertical-align: middle

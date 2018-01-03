@@ -42,28 +42,28 @@
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
-	fieldset{
+	.container fieldset{
 		margin:0 auto;
 		padding:80px;
 		background-color:#ffff;
 	}
-	.form-group{
+	.container .form-group{
 		margin:10px;
 	}
-	#contents{
+	.container #contents{
 		vertical-align:top;
 	}
-	#btnDiv{
+	.container #btnDiv{
 		text-align:center;
 	}
-	#size{
+	.container #size{
 		font-size:1.5em;
 		vertical-align: middle;
 	}
-	#adminDiv{
+	.container #adminDiv{
 		text-align: right;
 	}
-	#adminDiv img{
+	.container #adminDiv img{
 		vertical-align: bottom;
 	}
 	/* 사이드바 스타일 */
@@ -155,7 +155,7 @@
 		</div>
 <!-- /사이드바 -->
 
-
+	
 		<div class="col-md-9">
 		<fieldset>
 		<form role="form" class="form-inline" method="post" action="<c:url value='/member/menu/noticeWrite.do'/>">	
@@ -196,8 +196,9 @@
 		</form>
 		</fieldset>
 		</div>
+		</div>
 	</div>
-	</div>
+
 	
 	<c:import url="../../index/footer.jsp" />
 </body>

@@ -3,6 +3,8 @@ package com.hy.assj.hirenoti.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hy.assj.cmMember.model.CmMemberService;
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
 import com.hy.assj.hirenoti.model.HireNotiService;
 import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
+import com.hy.assj.vo.PositionVO;
 import com.hy.assj.vo.RankVO;
 import com.hy.assj.vo.SectorsVO;
 
@@ -31,6 +37,9 @@ public class HireNotiController {
 	
 	@Autowired
 	private HireNotiService hirenotiService;
+	
+	@Autowired
+	private CmMemberService cmMemberService;
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
 	public String hireNoti1() {
@@ -64,6 +73,21 @@ public class HireNotiController {
 		return "hire_noti/rank";
 	}
 	
+	@RequestMapping(value="/position.do", method=RequestMethod.GET)
+	public String position(Model model) {
+		logger.info("직책 카테고리 요청");
+		List<PositionVO> list = hirenotiService.selectPositionAll();
+		model.addAttribute("list", list);
+		return "hire_noti/position";
+	}
+	@RequestMapping(value="/education.do", method=RequestMethod.GET)
+	public String education(Model model) {
+		logger.info("학력 카테고리 요청");
+		List<EducationVO> list = hirenotiService.selectEducationAll();
+		model.addAttribute("list", list);
+		return "hire_noti/education";
+	}
+	
 	@RequestMapping(value="/major.do", method=RequestMethod.GET)
 	public String major(Model model) {
 		logger.info("전공 카테고리 요청");
@@ -86,7 +110,7 @@ public class HireNotiController {
 	
 	@RequestMapping(value="/occupation.do", method=RequestMethod.GET)
 	public String ocupation(Model model) {
-		logger.info("전공 카테고리 요청");
+		logger.info("직종 카테고리 요청");
 		List<OccupationVO> list = hirenotiService.selectOccupationAll();
 		List<OccupationVO> topList = new ArrayList<>();
 		List<OccupationVO> subList = new ArrayList<>();
@@ -106,7 +130,7 @@ public class HireNotiController {
 	
 	@RequestMapping(value="/sectors.do", method=RequestMethod.GET)
 	public String sectors(Model model) {
-		logger.info("전공 카테고리 요청");
+		logger.info("업종 카테고리 요청");
 		List<SectorsVO> list = hirenotiService.selectSectorsAll();
 		List<SectorsVO> topList = new ArrayList<>();
 		List<SectorsVO> subList = new ArrayList<>();
@@ -147,6 +171,19 @@ public class HireNotiController {
 		
 		return "common/message";		
 	}
+	
+	/*@RequestMapping(value="/hire1.do",method=RequestMethod.GET)
+	public String hirenoti_cmManager(HttpSession session,Model model) {
+		logger.info("기업회원정보 수정 화면(get) 파라미터 session={}",session);
+		
+		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
+		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
+		
+		model.addAttribute("vo={}",vo);
+		
+		return "hire_noti/hire1";
+	}*/
+	 
 	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {

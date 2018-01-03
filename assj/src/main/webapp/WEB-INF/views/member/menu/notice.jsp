@@ -14,186 +14,111 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
-
 	$(document).ready(function(){	
-		$(window).load(function(){
-			$('#noticeBoard ul li:eq(0)').attr("class","active");
-		});  
+		$('#noticeBoard ul li:eq(0)').attr("class","active");
+		
+		$.step = function(idx, currentPage, searchKeyword, searchCondition){
+			var url = '<c:url value="/member/menu/step.do"/>?notititleNo=' + idx;
+			if (currentPage) {
+				url += '&currentPage=' + currentPage;
+			}
+			if (searchKeyword) {
+				url += '&searchKeyword=' + searchKeyword;
+			}
+			if (searchCondition) {
+				url += '&searchCondition=' + searchCondition;
+			}
 			
-		$('#testAnchor').click(function(){			
 			$.ajax({
-				url : '<c:url value="/member/menu/test.do"/>',
-				success : function(res){
-					$('#test').append(res);
-				}
-			});		
-		});
-			
-		$('#step1').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$('#noticeBoard ul li:eq(0)').attr("class","active");
-			$.ajax({
-				url: '<c:url value="/member/menu/step1.do"/>',
+				url: url,
+				dataType:"xml",
 				success :function(res){
+					var size = $(res).find('result').find('size').text();
+					$('#resultSize').text(size);
 					$('.total').html('');
-					$('#all').html(res);
+					//$('.total:eq('+ idx +')').html($(res).find('result').find('html').text());
+					$('.total').html($(res).find('result').find('html').text());
 				}
-			});
+			}); 
+		};
+		
+		$('#noticeBoard ul li a').click(function(){
+			$('#noticeBoard ul li').attr("class","");
+			var idx = $(this).data('id');
+			$('#noticeBoard ul li:eq('+ idx +')').attr("class","active");
+			$.step(idx);
+			$('#searchCondition').val(1);
+			$('#searchKeyword').val('');
 		});
 		
-		$('#step2').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$('#noticeBoard ul li:eq(1)').attr("class","active");
-			$.ajax({
-				url: '<c:url value="/member/menu/step2.do"/>',
-				success :function(res){
-					$('.total').html('');
-					$('#notice').html(res);
-				}
-			});
-		});
+		$('#step1').trigger('click');		
 		
-		$('#step3').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$('#noticeBoard ul li:eq(2)').attr("class","active");
-			$.ajax({
-				url: '<c:url value="/member/menu/step3.do"/>',
-				success :function(res){
-					$('.total').html('');
-					$('#event').html(res);
-				}
-			});
-		});
 		
-		$('#step4').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$('#noticeBoard ul li:eq(3)').attr("class","active");
-			$.ajax({
-				url: '<c:url value="/member/menu/step4.do"/>',
-				success :function(res){
-					$('.total').html('');
-					$('#open').html(res);
-				}
-			});
-		});
-		
-		$('#step5').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$('#noticeBoard ul li:eq(4)').attr("class","active");
-			$.ajax({
-				url: '<c:url value="/member/menu/step5.do"/>',
-				success :function(res){
-					$('.total').html('');
-					$('#news').html(res);
-				}
-			});
-		});
-		
-		$('#step1').trigger('click');
-		
-		/* $('#noticeBoard ul li:eq(0)').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$(this).attr("class","active");
-			
-			$('.total').hide();
-			$('#all').show();
-		});
-		 
-		$('#noticeBoard ul li:eq(1)').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$(this).attr("class","active");
-			
-			$('.total').hide();
-			$('#notice').show();
-		});
-		$('#noticeBoard ul li:eq(2)').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$(this).attr("class","active");
-			
-			$('.total').hide();
-			$('#event').show();
-		});
-		$('#noticeBoard ul li:eq(3)').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$(this).attr("class","active");
-			
-			$('.total').hide();
-			$('#open').show();
-		});
-		$('#noticeBoard ul li:eq(4)').click(function(){
-			$('#noticeBoard ul li').attr("class","");
-			$(this).attr("class","active");
-			
-			$('.total').hide();
-			$('#news').show();
-		});
- */
 	});
+	
+	
 </script>
 <script src="../../js/bootstrap.min.js"></script>
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
 <style type="text/css">
-#frame {
-	padding: 20px;
-	background-color: #ffff;
-}
-
-#searchTable {
-	float: right;
-}
-
-table th, table {
-	text-align: center;
-}
-
-.divPage {
-	text-align: center;
-}
-
-h1 img {
-	vertical-align: bottom;
-	width: 70px;
-}
+	#frame {
+		padding: 40px;
+		background-color: #ffff;
+		height: 830px;
+	}
+	#searchTable {
+		float: right;
+	}
+	table th, table {
+		text-align: center;
+	}
+	.divPage {
+		text-align: center;
+	}
+	h1 img {
+		vertical-align: bottom;
+		width: 70px;
+	}
 
 /* 사이드바 스타일 */
-#sidebar-wrapper {
-	/* position:absolute;
-    width: 190px;
-    height: 63%; */
-	background: #ffff;
-	overflow-x: hidden;
-	overflow-y: auto;
-	height: 900px;
-}
-
-.sidebar-nav {
-	/*  width: 250px;
-    margin: 0;
-    padding: 0; */
-	list-style: none;
-}
-
-.sidebar-nav li {
-	text-indent: 0.8em;
-	line-height: 2.2em;
-}
-
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: #7a6666;
-}
-
-.sidebar-nav li a:hover {
-	color: #cccc;
-	background: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar-nav>.sidebar-brand {
-	font-size: 1.3em;
-	line-height: 3em;
-}
+	#sidebar-wrapper {
+		/* position:absolute;
+	    width: 190px;
+	    height: 63%; */
+		background: #ffff;
+		overflow-x: hidden;
+		overflow-y: auto;
+		height: 830px;
+	}
+	
+	.sidebar-nav {
+		/*  width: 250px;
+	    margin: 0;
+	    padding: 0; */
+		list-style: none;
+	}
+	
+	.sidebar-nav li {
+		text-indent: 0.8em;
+		line-height: 2.2em;
+	}
+	
+	.sidebar-nav li a {
+		display: block;
+		text-decoration: none;
+		color: #7a6666;
+	}
+	
+	.sidebar-nav li a:hover {
+		color: #cccc;
+		background: rgba(255, 255, 255, 0.2);
+	}
+	
+	.sidebar-nav>.sidebar-brand {
+		font-size: 1.3em;
+		line-height: 3em;
+	}
 </style>
 </head>
 <body>
@@ -247,7 +172,7 @@ h1 img {
 			<!-- /사이드바 -->
 
 			<!-- 본문 -->
-			<div class="col-md-9">
+			<div id="framedDiv" class="col-md-9">
 				<!-- 페이징 처리에 필요한 form 태그 -->
 				<form name="frmPage" method="post"
 					action="<c:url value='/reBoard/list.do'/>">
@@ -264,15 +189,16 @@ h1 img {
 					<hr>
 					<div id="noticeBoard">
 						<ul class="nav nav-tabs nav-justified">
-							<li><a id="step1">전체</a></li>
-							<li><a id="step2">공지</a></li>
-							<li><a id="step3">이벤트</a></li>
-							<li><a id="step4">오픈</a></li>
-							<li><a id="step5">뉴스</a></li>
+							<li><a data-id='0' id="step1">전체</a></li>
+							<li><a data-id='1' id="step2">공지</a></li>
+							<li><a data-id='2' id="step3">이벤트</a></li>
+							<li><a data-id='3' id="step4">오픈</a></li>
+							<li><a data-id='4' id="step5">뉴스</a></li>
 						</ul>
 					</div>
 					<br><br><br><br>
-
+					
+					
 					<c:if test="${!empty param.searchKeyword }">
 						<!-- 검색의 경우 -->
 						<p>검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건
@@ -280,9 +206,10 @@ h1 img {
 					</c:if>
 					<c:if test="${empty param.searchKeyword }">
 						<!-- 전체 조회의 경우 -->
-						<p>전체 조회 결과, ${pagingInfo.totalRecord }건 조회되었습니다.</p>
+						<p>전체 조회 결과, <span id="resultSize">${pagingInfo.totalRecord }</span>건 조회되었습니다.</p>
 					</c:if> 
-
+					
+					
 					<div class="form-group">
 						<div class="divSearch">
 							<form name="frmSearch" method="post"
@@ -290,7 +217,7 @@ h1 img {
 								<table id="searchTable">
 									<tr>
 										<td style="width: 20%"><select class="form-control"
-											name="searchCondition">
+											name="searchCondition" id="searchCondition">
 												<option value="1"
 													<c:if test="${param.searchCondition=='1'}"> 
 					            		selected
@@ -314,12 +241,13 @@ h1 img {
 										</select></td>
 										<td style="width: 70%"><input type="text"
 											class="form-control" size="8" maxlength="4"
-											name="searchKeyword" placeholder="검색어를 입력하세요"
+											name="searchKeyword" id="searchKeyword" placeholder="검색어를 입력하세요"
 											value="${param.searchKeyword }"></td>
-										<td style="width: 10%"><input type="submit"
-											class="btn btn-primary btn-sm" value="검색"></td>
+										<td style="width: 10%"><input type="button"
+											class="btn btn-primary btn-sm" value="검색" onclick="pageFunc(1)"></td>
 									</tr>
 								</table>
+								
 							</form>
 						</div>
 					</div>
@@ -328,18 +256,6 @@ h1 img {
 
 					<div class="total" id="all">
 					</div>
-
-				    <div class="total" id="notice">
-					</div>
-
-					<div class="total" id="event">
-					</div>
-
-					<div class="total" id="open">
-					</div>
-
-					<div class="total" id="news">
-					</div> 
 
 				</div>		
 			</div>

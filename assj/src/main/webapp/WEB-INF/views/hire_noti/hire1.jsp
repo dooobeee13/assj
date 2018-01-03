@@ -14,19 +14,78 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript"
 	src="<c:url value='/jquery/jquery-3.2.1.min.js' />"></script>
+<link rel="stylesheet" type="text/css" 
+	href="<c:url value='/css/jquery-ui.css'/>">
+
+<script type="text/javascript" 
+src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<script>
+    function findZipcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address').value = fullAddr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('addressDetail').focus();
+            }
+        }).open();
+    }
+</script>
+
 
 <script type="text/javascript">
+	
+ 	$.applyDatePicker = function(id) {
+		$(id).datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					changeYear : true,
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+							'8월', '9월', '10월', '11월', '12월' ]
+				});
+	}
+ 
 	$(function() {
 		$('#savebtn').click(function() {
 			$('#rank_position').modal('hide');
 		});
 		
-
+ 		$.applyDatePicker('#startDay');
+		$.applyDatePicker('#endDay'); 
+		
 		$('.rankselectDiv .lb input[type=checkbox]').click(function() {
 							var isChecked = $(this).prop('checked');
 							var id = $(this).attr('id');
 							if (isChecked) {
-
 								if ($('.rank').find(
 										'.rankItem [data-id=' + id + ']').length == 0) {
 									var item = '<span class="rankItem" data-id="'+ id +'">'
@@ -36,9 +95,7 @@
 							} else {
 								$('.rank .rankItem[data-id=' + id + ']').remove();
 							}
-
 						});
-
 		$('.rank').on('click', '.rankItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
@@ -46,32 +103,55 @@
 		});
 		
 		
-		$('.majorselectDiv input[type=checkbox]').click(function() {
-			var isChecked = $(this).prop('checked');
-			var id = $(this).attr('id');
-			if (isChecked) {
-
-				if ($('.major').find(
-						'.majorItem [data-id=' + id + ']').length == 0) {
-					var item = '<span class="majorItem" data-id="'+ id +'">'
-							+ $(this).parent().text() + '<span>';
-					$('.major').append(item);
-				}
-			} else {
-				$('.major .majorItem[data-id=' + id + ']').remove();
-			}
-
-		});
 		
+		$('.posiselectDiv .lb1 input[type=checkbox]')
+				.click(
+						function() {
+							var isChecked = $(this).prop('checked');
+							var id = $(this).attr('id');
+							if (isChecked) {
+								if ($('.position').find(
+										'.positionItem [data-id=' + id + ']').length == 0) {
+									var item = '<span class="positionItem" data-id="'+ id +'">'
+											+ $(this).data('name') + '<span>';
+									$('.position').append(item);
+								}
+							} else {
+								$('.position .positionItem[data-id=' + id + ']')
+										.remove();
+							}
+						});
+		$('.position').on('click', '.positionItem', function() {
+			var id = $(this).data('id');
+			$('#' + id).removeAttr("checked");
+			$(this).remove();
+		});
+		$('.majorselectDiv input[type=checkbox]')
+				.click(
+						function() {
+							var isChecked = $(this).prop('checked');
+							var id = $(this).attr('id');
+							if (isChecked) {
+								if ($('.major').find(
+										'.majorItem [data-id=' + id + ']').length == 0) {
+									var item = '<span class="majorItem" data-id="'+ id +'">'
+											+ $(this).parent().text()
+											+ '<span>';
+									$('.major').append(item);
+								}
+							} else {
+								$('.major .majorItem[data-id=' + id + ']')
+										.remove();
+							}
+						});
 		$('.major').on('click', '.majorItem', function() {
 			var id = $(this).data('id');
 			$('#' + id).removeAttr("checked");
 			$(this).remove();
 		});
-		
-		
-
 	});
+	
+	
 </script>
 
 <style type="text/css">
@@ -79,32 +159,26 @@
 	width: 800px;
 	padding: 50px;
 }
-
 .sp11 {
 	font-size: 2em;
 	width: 300px;
 }
-
 .lb {
 	width: 100px;
 }
-
 #hh {
 	text-align: center;
 }
-
 #ta11 {
 	width: 350px;
 	height: 100px;
 }
-
 .fsmain {
 	width: 70%;
 	margin-top: 5%;
 	margin-right: 15%;
 	margin-left: 15%;
 }
-
 .major {
 	padding: 10px;
 	min-height: 100px;
@@ -112,11 +186,9 @@
 	width: 350px;
 	display: inline-block;
 }
-
 #majorbtn {
 	vertical-align: top;
 }
-
 .rank {
 	padding: 10px;
 	min-height: 100px;
@@ -124,17 +196,14 @@
 	width: 350px;
 	display: inline-block;
 }
-
 #rankbtn {
 	vertical-align: top;
 }
-
 .rankItem {
 	margin: 5px;
 	border: 1px solid;
 	cursor: pointer;
 }
-
 .sectors{
 	padding: 10px;
 	min-height: 100px;
@@ -142,11 +211,17 @@
 	width: 350px;
 	display: inline-block;	
 }
-
+.position{
+	padding: 10px;
+	min-height: 100px;
+	border: 1px solid lightgray;
+	width: 350px;
+	display: inline-block;
+}
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../js/bootstrap.min.js"></script>
 
@@ -210,18 +285,18 @@
 					</thead>
 					<tr>
 						<td>*모집인원</td>
-						<td><label class="form_sp frm_rad01" for="collect_3"><input
-								type="radio" id="collect_3" name="collect" value="3"><span>1명</span></label>
+						<td><label class="form_sp frm_rad01" for="recruitNum"><input
+								type="radio" id="recruitNum" name="recruitNum" value="3"><span>1명</span></label>
 							<label class="form_sp frm_rad01" for="collect_4"><input
-								type="radio" id="collect_4" name="collect" value="4"><span>2명</span></label>
+								type="radio" id="collect_4" name="recruitNum" value="4"><span>2명</span></label>
 							<label class="form_sp frm_rad01" for="collect_5"><input
-								type="radio" id="collect_5" name="collect" value="5"><span>3명</span></label>
+								type="radio" id="collect_5" name="recruitNum" value="5"><span>3명</span></label>
 							<label class="form_sp frm_rad01" for="collect_1"><input
-								type="radio" id="collect_1" name="collect" value="1"><span>0명</span></label>
+								type="radio" id="collect_1" name="recruitNum" value="1"><span>0명</span></label>
 							<label class="form_sp frm_rad01" for="collect_2"><input
-								type="radio" id="collect_2" name="collect" value="2"><span>00명</span></label>
+								type="radio" id="collect_2" name="recruitNum" value="2"><span>00명</span></label>
 							<label class="form_sp frm_rad01 no_txt" for="collect_6"><input
-								type="radio" id="collect_6" name="collect" value="6"><span></span></label>
+								type="radio" id="collect_6" name="recruitNum" value="6"><span></span></label>
 							<input type="text" id="collect_cnt"
 							class="frm_input01 input_length2 _filter" name="collect_cnt"
 							data-filter="numeric" maxlength="6"><span
@@ -231,7 +306,7 @@
 
 					<tr>
 						<td>*담당업무</td>
-						<td><textarea id="ta11" title="담당업무"
+						<td><textarea id="ta11" title="담당업무" name="hnTask"
 								placeholder="담당업무를 입력하세요." maxlength="300"></textarea></td>
 
 					</tr>
@@ -260,23 +335,24 @@
 						</tr>
 					</thead>
 					<tr>
-						<td>*학력</td>
-						<td>
-							<div>
-								<input type="radio" id="collect_3" name="collect" value="3"><span>학력무관</span>
-								<input type="radio" id="collect_4" name="collect" value="4"><span>제한</span>
-								<select>
-									<option>고등학교졸업이상</option>
-									<option>대학교졸업(2,3년)이상</option>
-									<option>대학교졸업(4년) 이상</option>
-									<option>석사졸업이상</option>
-									<option>박사졸업</option>
-								</select>
-							</div> <label>기타 학력사항 </label> <input type="text">
-
-
-						</td>
-
+					<c:import url="/hire_noti/education.do"/>
+						<!-- <td>*학력</td>
+						<td><label class="radio-inline"> <input
+								type="radio" id="inlineCheckbox1" name="education" value="option1">
+								학력무관
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox2" name="education" value="option2"> 고등학교 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 2~3년제 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 4년제 졸업
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 석사학위
+						</label> <label class="radio-inline"> <input type="radio"
+								id="inlineCheckbox3" name="education" value="option3"> 박사학위
+						</label></td>
+						<br>  -->
+					
 					</tr>
 					<tr>
 						<td>전공/학과</td>
@@ -327,13 +403,13 @@
 
 					<tr>
 						<td>채용절차</td>
-						<td><textarea id="ta11" title="채용절차"
+						<td><textarea id="ta11" title="채용절차" name="hnStep"
 								placeholder="채용절차를 입력하세요." maxlength="300"></textarea></td>
 
 					</tr>
 					<tr>
 						<td>제출서류</td>
-						<td><textarea id="ta11" title="제출서류"
+						<td><textarea id="ta11" title="제출서류" name="hnDocument"
 								placeholder="제출서류를 입력해주세요." maxlength="300"></textarea></td>
 
 					</tr>
@@ -369,7 +445,7 @@
 					</tr>
 					<tr>
 						<td>복리후생</td>
-						<td><textarea id="ta11" title="복리후생"
+						<td><textarea id="ta11" title="복리후생" name="hnBenefits"
 								placeholder="복리후생을 입력해주세요." maxlength="300"></textarea></td>
 
 
@@ -389,8 +465,12 @@
 					</tr>
 					<tr>
 						<td>*근무지역</td>
-						<td><input type="text" placeholder="  근무지역을 입력하세요 ">
-							<input type="text" placeholder="  상세지역 "></td>
+						<td>
+							<input type="text" id="zipcode" placeholder="우편번호">
+							<input type="button" onclick="findZipcode()" value="우편번호 찾기"><br>
+							<input type="text" id="address" placeholder="  기본주소 " size="50">
+						
+							<input type="text" id="addressDetail" placeholder="  상세주소 "></td>
 
 					</tr>
 				</table>
@@ -405,23 +485,25 @@
 					</thead>
 					<tr>
 						<td>*접수기간</td>
-						<td><input type="text" placeholder="  시작일 "><label>
-								~ </label> <input type="text" placeholder="  마감일 "></td>
+						<td><input type="text" name="startDay" id="startDay"
+							value="${dateSearchVO.startDay }"> ~ <input type="text"
+							name="endDay" id="endDay" value="${dateSearchVO.endDay }">
+
+						</td>
 					</tr>
 					<tr>
 						<td>*접수방법</td>
-						<td><label class="checkbox-inline"> <input
+						<td>
+						<label class=""> <input
+								type="checkbox" id="inlineCheckbox1" value="option1">
+								알쓸신JOB 이력서 
+						</label><br> 
+						<label class="checkbox-inline"> <input
 								type="checkbox" id="inlineCheckbox1" value="option1">
 								홈페이지접수 <input type="text" placeholder="http://">
-						</label><br> <label class="checkbox-inline"> <input
-								type="checkbox" id="inlineCheckbox1" value="option1"> 우편
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-								id="inlineCheckbox1" value="option1"> 방문
-						</label> <label class="checkbox-inline"> <input type="checkbox"
+						</label><br>   <label class="checkbox-inline"> <input type="checkbox"
 								id="inlineCheckbox1" value="option1"> 전화
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-								id="inlineCheckbox1" value="option1"> FAX
-						</label></td>
+						</label> </td> 
 
 					</tr>
 
@@ -436,8 +518,10 @@
 					</thead>
 					<tr>
 						<td>담당자</td>
-						<td><label>이름<input type="text"></label> <label>담당부서<input
-								type="text"></label></td>
+						<td><label for="cmName" >이름</label> 
+						<input type="text" name="cmName" id="cmName" value="${cmMemberVO.cmManager }">
+						<input type="button" class="btn btn-primary btn-lg" value="정보수정">
+						
 					</tr>
 					<tr>
 						<td>연락처</td>
@@ -446,6 +530,7 @@
 						</label></td>
 					</tr>
 				</table>
+
 
 				<!--  채용제목 -->
 				<table class="table table-condended">
@@ -481,6 +566,7 @@
 					<h4 class="modal-title" id="myModalLabel">전공 상세보기</h4>
 				</div>
 				<div class="modal-body">
+				
 					<c:import url="/hire_noti/major.do" />
 					<!-- <table class="table table-bordered">
 						<tr>
@@ -546,7 +632,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -628,7 +713,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -701,15 +785,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -745,7 +826,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -816,7 +896,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -857,7 +936,6 @@
 									<c:forEach var="vo" items=${list}>
 										<label class="lb"> <input id="occu-${vo.no}" type="checkbox" value="${vo.no}"> ${vo.name}</label>
 									</c:forEach>
-
 									<label class="lb"> <input id="occu-1" type="checkbox"
 										value="사원"> 사원
 									</label> <label class="lb"> <input id="occu-2" type="checkbox"
@@ -907,7 +985,8 @@
 						<tr>
 							<th>직책</th>
 							<td>
-								<div class="checkbox occselectDiv">
+								<c:import url="/hire_noti/position.do"/>
+								<!-- <div class="checkbox occselectDiv">
 									<label class="lb"> <input id="posi-1" type="checkbox"
 										value="팀원"> 팀원
 									</label> <label class="lb"> <input id="posi-2" type="checkbox"
@@ -937,8 +1016,7 @@
 									</label> <label class="lb"> <input id="posi-14" type="checkbox"
 										value="국장"> 국장
 									</label>
-
-								</div>
+								</div>  -->
 							</td>
 						</tr>
 					</table>
@@ -1032,7 +1110,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1114,7 +1191,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -1187,15 +1263,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -1231,7 +1304,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1302,7 +1374,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -1399,7 +1470,6 @@
 										종교계열학
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1481,7 +1551,6 @@
 									<label> <input type="checkbox" value=""> 자연계열
 									</label>
 								</div>
-
 							</td>
 							<td rowspan="3">
 								<div class="checkbox majorselectDiv">
@@ -1554,15 +1623,12 @@
 									<label> <input type="checkbox" value=""> 공학계열
 									</label>
 								</div>
-
 							</td>
-
 						</tr>
 						<tr>
 							<th>상경계열</th>
 							<th>사범계열</th>
 							<th>의학/예체능</th>
-
 						</tr>
 						<tr>
 							<td>
@@ -1598,7 +1664,6 @@
 									<label> <input type="checkbox" value=""> 상경계열
 									</label>
 								</div>
-
 							</td>
 							<td>
 								<div class="checkbox majorselectDiv">
@@ -1669,7 +1734,6 @@
 									</label>
 								</div>
 								<div class="checkbox majorselectDiv">
-
 									<label> <input type="checkbox" value=""> 응급구조학과
 									</label>
 								</div>
@@ -1691,7 +1755,6 @@
 
 </body>
 </html>
-
 
 
 

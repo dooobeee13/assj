@@ -12,12 +12,20 @@
 		 select * from area where area_top_no=#{areaTopNo}
 	</select>
 	
+	<select id="selectBasicArea" resultType="AreaVO">
+		select * from area where area_top_no = 1
+	</select>
+	
 	<select id="selectAllMajorTop" resultType="MajorVO">
 		select * from major where major_top_no is null
 	</select>
 	
 	<select id="selectAllMajorDetail" resultType="MajorVO" parameterType="int">
 		select * from major where major_top_no = #{majorTopNo}
+	</select>
+	
+	<select id="selectMajorBasicD" resultType="MajorVO">
+		select * from major where major_top_no = 1
 	</select>
 	
 	<select id="selectAllEmpType" resultType="EmpTypeVO">
@@ -40,84 +48,19 @@
 		select * from occupation where occu_top_no = #{occuTopNo}
 	</select>
 	
-	<!-- <selectKey keyProperty="shNo" resultType="int" order="BEFORE">
-			select school_history_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="ehNo" resultType="int" order="BEFORE">
-			select edu_history_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="actNo" resultType="int" order="BEFORE">
-			select activities_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="cerNo" resultType="int" order="BEFORE">
-			select certificate_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="skillNo" resultType="int" order="BEFORE">
-			select skill_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="portNo" resultType="int" order="BEFORE">
-			select portfolio_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="etNo" resultType="int" order="BEFORE">
-			select emp_type_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="areaNo" resultType="int" order="BEFORE">
-			select area_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="occuNo" resultType="int" order="BEFORE">
-			select occupation_seq.nextval from dual
-		</selectKey>
-		<selectKey keyProperty="secNo" resultType="int" order="BEFORE">
-			select sectors_seq.nextval from dual
-		</selectKey>
-	 -->
-	<insert id="insertResume1" parameterType="hashmap">
-		<selectKey keyProperty="resumeNo,shNo,ehNo,actNo,cerNo,skillNo,portNo,eduNo" resultType="hashmap" order="BEFORE">
-			select resume_seq.nextval as resumeNo ,
-			 school_history_seq.nextval as shNo ,
-			 edu_history_seq.nextval as ehNo ,
-			 activities_seq.nextval as actNo ,
-			 certificate_seq.nextval as cerNo ,
-			 skill_seq.nextval as skillNo ,
-			 portfolio_seq.nextval as portNo,
-			 education_seq.nextval as eduNo 			
-			from dual
-		</selectKey>
-		
-		
-		insert
-		
-		into resume (resume_no,mem_no,resume_title,resume_name,resume_birth,resume_addr,resume_detailaddr,resume_phone,
-		resume_email,resume_status,resume_gender,resume_hobby,resume_specialty,resume_married,resume_veteran,resume_subsidy,
-		resume_mil_target,resume_mil_start,resume_mil_end,resume_mil_division,resume_mil_class,resume_mil_reason,resume_mil_unfinish,
-		resume_career_list,resume_sal_start,resume_sal_end,resume_sal_opt,
-		area_no,edu_no,et_no,
-		resume_visibility,resume_photo,
-		occu_no,sec_no,
-		resume_lastupdate
-		)
-		values(#{resumeNo},#{resumeVO.memNo},#{resumeVO.resumeTitle},#{resumeVO.resumeName},#{resumeVO.resumeBirth},
-		#{resumeVO.resumeAddr},#{resumeVO.resumeDetailaddr},#{resumeVO.resumePhone},
-		#{resumeVO.resumeEmail},#{resumeVO.resumeStatus},#{resumeVO.resumeGender},#{resumeVO.resumeHobby},
-		#{resumeVO.resumeSpecialty},#{resumeVO.resumeMarried},#{resumeVO.resumeVeteran},#{resumeVO.resumeSubsidy},
-		#{resumeVO.resumeMilTarget},#{resumeVO.resumeMilStart},#{resumeVO.resumeMilEnd},#{resumeVO.resumeMilDivision},
-		#{resumeVO.resumeMilClass},#{resumeVO.resumeMilReason},#{resumeVO.resumeMilUnfinish},
-		#{resumeVO.resumeCareerList},#{resumeVO.resumeSalStart},#{resumeVO.resumeSalEnd},#{resumeVO.resumeSalOpt},
-		#{resumeVO.areaNo},#{resumeVO.eduNo},#{resumeVO.etNo},
-		#{resumeVO.resumeVisibility},#{resumeVO.resumePhoto},
-		#{resumeVO.occuNo},#{resumeVO.secNo},
-		#{resumeVO.resumeLastupdate}
-		)
-		
-		
-		
-		
-	</insert>
+	<select id="selectBasicOccu" resultType="OccupationVO">
+		select * from occupation where occu_top_no = 1
+	</select>
 	
-	<insert id="insertResume" parameterType="ResumeVO">
-	<selectKey keyProperty="resumeNo" resultType="int" order="BEFORE">
-		select resume_seq.nextval from dual
-	</selectKey>
+	<select id="selectBasicSec" resultType="SectorsVO">
+		select * from sectors where sec_top_no = 1
+	</select>
+
+
+
+	
+	
+	<insert id="insertResume" parameterType="ResumeVO">	
 	
 		insert into resume(
 		resume_no,mem_no,resume_title,resume_name,resume_birth,
@@ -128,13 +71,18 @@
 		resume_sal_end,resume_sal_opt,area_no,edu_no,et_no,
 		resume_visibility,resume_photo,occu_no,sec_no,resume_lastupdate)
 		values(
-		#{resumeNo},#{memNo},#{resumeTitle},#{resumeName},#{resumeBirth},
+		resume_seq.nextval,#{memNo},#{resumeTitle},#{resumeName},#{resumeBirth},
 		#{resumeAddr},#{resumeDetailaddr},#{resumePhone},#{resumeEmail},#{resumeStatus},
 		#{resumeGender},#{resumeHobby},#{resumeSpecialty},#{resumeMarried},#{resumeVeteran},
 		#{resumeSubsidy},#{resumeMilTarget},#{resumeMilStart},#{resumeMilEnd},#{resumeMilDivision},
 		#{resumeMilClass},#{resumeMilReason},#{resumeMilUnfinish},#{resumeCareerList},#{resumeSalStart},
 		#{resumeSalEnd},#{resumeSalOpt},#{areaNo},#{eduNo},#{etNo},
 		#{resumeVisibility},#{resumePhoto},#{occuNo},#{secNo},sysdate)
+		
+		<selectKey keyProperty="resumeNo" resultType="int" order="AFTER">
+			SELECT resume_seq.currval FROM dual
+		</selectKey>
+		
 	</insert>
 	
 	<select id="selectAllMyResume" parameterType="int" resultType="ResumeVO">
@@ -144,6 +92,79 @@
 	<select id="selectMemNoByEmail" parameterType="string" resultType="int">
 		select mem_no from member where mem_email=#{memEmail}
 	</select>
+	
+	<insert id="insertSH" parameterType="SchoolHistoryVO">
+		<selectKey keyProperty="shNo" resultType="int" order="BEFORE">
+			select school_history_seq.nextval from dual
+		</selectKey>
+		insert into school_history
+		values(
+		#{shNo},#{resumeNo},#{shAyear},#{shGyear},#{shAwhether},
+		#{shGwhether},#{shSname},#{shMajor},#{shMajordetail},#{shGrade},
+		#{shAreaNo},#{shEduNo})
+	</insert>
+	
+	<insert id="insertEH" parameterType="EduHistoryVO">
+		<selectKey keyProperty="ehNo" resultType="int" order="BEFORE">
+		 select edu_history_seq.nextval from dual
+		</selectKey>
+		insert into edu_history
+		values(
+		#{ehNo},#{resumeNo},#{ehAdmission},#{ehCompletion},#{ehConfirm},
+		#{ehInstitution},#{ehCsname}
+		)		
+	</insert>
+	
+	<insert id="insertAct" parameterType="ActivitiesVO">
+		<selectKey keyProperty="actNo" resultType="int" order="BEFORE">
+			select activities_seq.nextval from dual
+		</selectKey>
+		insert into activities
+		values(
+		#{actNo},#{resumeNo},#{actHistory}
+		)
+	</insert>
+	
+	<insert id="insertCer" parameterType="CertificateVO">
+		<selectKey keyProperty="cerNo" resultType="int" order="BEFORE">
+		 select certificate_seq.nextval from dual
+		</selectKey>
+		insert into certificate
+		values(
+		#{cerNo},#{resumeNo},#{cerCategory},#{cerName},#{cerPublisher},#{cerAcceptScore},#{cerAcquiDate}
+		)
+	</insert>
+	
+	<insert id="insertSkill" parameterType="SkillVO">
+		<selectKey keyProperty="skillNo" resultType="int" order="BEFORE">
+			select skill_seq.nextval from dual
+		</selectKey>
+		insert into skill
+		values(
+			#{skillNo},#{resumeNo},#{skillAbility},#{skillLevel},#{skillDetail}
+		)
+	</insert>
+	
+	<insert id="insertPF" parameterType="PortfolioVO">
+		<selectKey keyProperty="portNo" resultType="int" order="BEFORE">
+			select portfolio_seq.nextval from dual
+		</selectKey>
+		insert into portfolio
+		values(
+			#{portNo},#{resumeNo},#{portIntro},#{portFilename},#{portOrifname},#{portFilesize}
+		)
+		
+	</insert>
+	
+	<insert id="insertIntro" parameterType="IntroductionVO">
+		<selectKey keyProperty="introNo" resultType="int" order="BEFORE">
+			select introduction_seq.nextval from dual
+		</selectKey>
+		insert into introduction
+		values(
+			#{introNo},#{resumeNo},#{introTitle},#{introContent}
+		)
+	</insert>
 	
 </mapper>
 

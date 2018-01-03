@@ -20,8 +20,8 @@ public class ReboardDAOMybatis extends SqlSessionDaoSupport
 	}
 
 	@Override
-	public List<ReboardVO> QnaList() {
-		return getSqlSession().selectList(namespace+".QnaList");
+	public List<ReboardVO> QnaList(SearchVO searchVo) {
+		return getSqlSession().selectList(namespace+".QnaList",searchVo);
 	}
 	
 	@Override
@@ -33,17 +33,15 @@ public class ReboardDAOMybatis extends SqlSessionDaoSupport
 	public ReboardVO selectByNo(int no) {
 		return getSqlSession().selectOne(namespace+".selectByNo",no);
 	}
-	/*
-	@Override
-	public List<Map<String, Object>> QnaRownum() {
-		return getSqlSession().selectList(namespace+".QnaRownum");
-	}
-
-
-
+	
 	@Override
 	public List<ReboardVO> selectAll(SearchVO searchVo) {
 		return getSqlSession().selectList(namespace+".selectAll",searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> QnaRownum() {
+		return getSqlSession().selectList(namespace+".QnaRownum");
 	}
 
 	@Override
@@ -51,12 +49,23 @@ public class ReboardDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace+".selectTotalRecordCount",searchVo);
 	}
 
-	
-	*/
-
 	@Override
 	public int updateQnA(ReboardVO reboardVO) {
 		return getSqlSession().update(namespace+".updateQnA",reboardVO);
+	}
+
+	public void deleteReBoard(Map<String, String> map){
+		getSqlSession().delete(namespace+".deleteReBoard", map);
+	}
+
+	@Override
+	public int updateSortNo(ReboardVO vo) {
+		return getSqlSession().update(namespace+".updateSortNo", vo);
+	}
+
+	@Override
+	public int replyReboard(ReboardVO vo) {
+		return getSqlSession().insert(namespace+".replyReboard", vo);
 	}
 	
 }
