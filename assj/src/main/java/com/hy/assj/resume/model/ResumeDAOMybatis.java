@@ -63,10 +63,6 @@ public class ResumeDAOMybatis extends SqlSessionDaoSupport implements ResumeDAO 
 		return getSqlSession().selectList(namespace+".selectAllOccuDetail",no);
 	}
 
-	@Override
-	public int insertResume1(HashMap<String, Object> map) {
-		return getSqlSession().insert(namespace+".insertResume1", map);
-	}
 
 	@Override
 	public int insertResume(ResumeVO resumeVO) {
@@ -81,6 +77,61 @@ public class ResumeDAOMybatis extends SqlSessionDaoSupport implements ResumeDAO 
 	@Override
 	public int selectMemNoByEmail(String memEmail) {
 		return getSqlSession().selectOne(namespace+".selectMemNoByEmail", memEmail);
+	}
+
+	@Override
+	public int insertSH(SchoolHistoryVO shVO) {
+		return getSqlSession().insert(namespace+".insertSH", shVO);
+	}
+
+	@Override
+	public List<MajorVO> selectMajorBasicD() {
+		return getSqlSession().selectList(namespace+".selectMajorBasicD");
+	}
+
+	@Override
+	public List<AreaVO> selectBasicArea() {
+		return getSqlSession().selectList(namespace+".selectBasicArea");
+	}
+
+	@Override
+	public List<OccupationVO> selectBasicOccu() {
+		return getSqlSession().selectList(namespace+".selectBasicOccu");
+	}
+
+	@Override
+	public List<SectorsVO> selectBasicSec() {
+		return getSqlSession().selectList(namespace+".selectBasicSec");
+	}
+
+	@Override
+	public int insertEH(EduHistoryVO ehVO) {
+		return getSqlSession().insert(namespace+".insertEH", ehVO);
+	}
+
+	@Override
+	public int insertAct(ActivitiesVO actVO) {
+		return getSqlSession().insert(namespace+".insertAct", actVO);
+	}
+
+	@Override
+	public int insertCer(CertificateVO cerVO) {
+		return getSqlSession().insert(namespace+".insertCer", cerVO);
+	}
+
+	@Override
+	public int insertSkill(SkillVO skillVO) {
+		return getSqlSession().insert(namespace+".insertSkill", skillVO);
+	}
+
+	@Override
+	public int insertPF(PortfolioVO pfVO) {
+		return getSqlSession().insert(namespace+".insertPF", pfVO);
+	}
+
+	@Override
+	public int insertIntro(IntroductionVO introVO) {
+		return getSqlSession().insert(namespace+".insertIntro", introVO);
 	}
 
 	
