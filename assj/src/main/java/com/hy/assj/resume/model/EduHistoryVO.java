@@ -11,7 +11,6 @@ public class EduHistoryVO {
 	private String ehConfirm;
 	private String ehInstitution;
 	private String ehCsname;
-	private int areaNo;
 	
 	private List<EduHistoryVO> ehVOList;
 	
@@ -63,17 +62,11 @@ public class EduHistoryVO {
 	public void setEhCsname(String ehCsname) {
 		this.ehCsname = ehCsname;
 	}
-	public int getAreaNo() {
-		return areaNo;
-	}
-	public void setAreaNo(int areaNo) {
-		this.areaNo = areaNo;
-	}
 	@Override
 	public String toString() {
 		return "EduHistoryVO [ehNo=" + ehNo + ", resumeNo=" + resumeNo + ", ehAdmission=" + ehAdmission
 				+ ", ehCompletion=" + ehCompletion + ", ehConfirm=" + ehConfirm + ", ehInstitution=" + ehInstitution
-				+ ", ehCsname=" + ehCsname + ", areaNo=" + areaNo + ", ehVOList=" + ehVOList + "]";
+				+ ", ehCsname=" + ehCsname + ", ehVOList=" + ehVOList + "]";
 	}
 	
 	

@@ -57,6 +57,54 @@
 		select * from position
 	</select>
 	
+	<!-- 전공 등록 -->
+	<update id="insertMajor">
+		insert into hn_major(hn_major_no, hn_no, major_no)
+		<foreach collection="list" item="major" separator=" union all ">
+	    	select get_hn_major_seq, #{hnNo}, #{major} from dual
+		</foreach>
+	</update>
+	
+	<!-- 직급 등록 -->
+	<update id="insertRank">
+		insert into hn_rank(hn_rank_no, hn_no, rank_no)
+		<foreach collection="list" item="rank" separator=" union all ">
+	    	select get_hn_rank_seq, #{hnNo}, #{rank} from dual
+		</foreach>
+	</update>
+	
+	<!-- 직종 등록 -->
+	<update id="insertOccu">
+		insert into hn_occu(hn_occu_no, hn_no, occu_no)
+		<foreach collection="list" item="occu" separator=" union all ">
+	    	select get_hn_occu_seq, #{hnNo}, #{occu} from dual
+		</foreach>
+	</update>
+	
+	<!-- 업종 등록 -->
+	<update id="insertSec">
+		insert into hn_sec(hn_sec_no, hn_no, sec_no)
+		<foreach collection="list" item="sec" separator=" union all ">
+	    	select get_hn_sec_seq, #{hnNo}, #{sec} from dual
+		</foreach> 
+	</update>
+	
+	<!-- 고용형태 등록 -->
+	<update id="insertEt">
+		insert into hn_et(hn_et_no, hn_no, et_no)
+		<foreach collection="list" item="et" separator=" union all ">
+	    	select get_hn_et_seq, #{hnNo}, #{et} from dual
+		</foreach>
+	</update>
+	
+	<!-- 직책 등록 -->
+	<update id="insertPosition">
+		insert into hn_pos(hn_pos_no, hn_no, position_no)
+		<foreach collection="list" item="position" separator=" union all ">
+	    	select get_hn_pos_seq, #{hnNo}, #{position} from dual
+		</foreach>
+	</update>
+	
 </mapper>
 
 

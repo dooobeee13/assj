@@ -29,6 +29,8 @@ public class TalentManagementController {
 	@RequestMapping(value="/TalentManagement/final-main.do",method=RequestMethod.GET)
 	public String Main_get(Model model) {
 		TalentManagementVO vo = new TalentManagementVO();
+		vo.setCountPerPage("10");
+		vo.setCurrentPage("0");
 		List<Map<String, Object>> Resumelist = tmService.selectResume(vo);
 
 		model.addAttribute("Resumelist",Resumelist);
@@ -220,38 +222,22 @@ public class TalentManagementController {
 		
 	}
 	
-	/*@RequestMapping(value="/TalentManagement/resume.do",method=RequestMethod.GET)
-	public String resume_get(Model model) {
-		logger.info("resume.do get()메서드 호출");
-		
-		List<Map<String, Object>> Resumelist = tmService.selectResume(vo);
-		
-		logger.info("Resumelist.size()={}",Resumelist.size());
-		model.addAttribute("Resumelist",Resumelist);
-		
-		return "TalentManagement/resume";
-	}*/
-	
-	@RequestMapping(value="/TalentManagement/resume.do",method=RequestMethod.POST)
-	public @ResponseBody String resume(@RequestParam String [] EduColDetail) {
-		logger.info("EduColDetail={}",EduColDetail);
-		
-		return "dasf";
-	}
-	
 	@RequestMapping("/TalentManagement/resumed.do")
 	public @ResponseBody List<Map<String, Object>> resumde(@RequestParam(required=false) List<String> EduColDetail,//자주 찾는 대학
 										@RequestParam(required=false) List<String> Educol,//몇년제 졸업인지
-										@RequestParam(required=false) List<String> major,
-										@RequestParam(required=false) List<String> position,
-										@RequestParam(required=false) List<String> rank,
-										@RequestParam(required=false) List<String> empType,
-										@RequestParam(required=false) List<String> MiniArea,
-										@RequestParam(required=false) List<String> Gender,
-										@RequestParam(required=false) List<String> CareerCheckBox,
-										@RequestParam(required=false) List<String> HopeOccu,
-										@RequestParam(required=false) List<String> area,
-										@RequestParam(required=false) List<String> Hopesectors, HttpServletResponse response) {
+										@RequestParam(required=false) List<String> major, //전공
+										@RequestParam(required=false) List<String> position, //직책
+										@RequestParam(required=false) List<String> rank, //직급
+										@RequestParam(required=false) List<String> empType, //고용형태
+										@RequestParam(required=false) List<String> MiniArea, //간편검색 지역부분
+										@RequestParam(required=false) List<String> Gender, //성별
+										@RequestParam(required=false) List<String> CareerCheckBox, //경력체크박스
+										@RequestParam(required=false) List<String> HopeOccu, //희망직종
+										@RequestParam(required=false) List<String> area, //지역
+										@RequestParam(required=false) List<String> Hopesectors, //희망 업종
+										@RequestParam String countPerPage,
+										@RequestParam String currentPage
+										, HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
 		logger.info("EduColDetail={}, Educol={}",EduColDetail,Educol);
 		logger.info("major={}, position={}",major,position);
@@ -261,28 +247,31 @@ public class TalentManagementController {
 		logger.info("area={},Hopesectors={}",area,Hopesectors);
 		
 		TalentManagementVO vo = new TalentManagementVO();
-		vo.setAREA_TOP_NAME(MiniArea);
-		vo.setAREA_NAME(area);
+		vo.setAreaTopName(MiniArea);//
+		vo.setAreaName(area);//
 		vo.setCareerCheckBox(CareerCheckBox);
 		vo.setEduColDetail(EduColDetail);
-		vo.setET_NAME(empType);
-		vo.setOCCU_NAME(HopeOccu);
+		vo.setEtName(empType);//
+		vo.setOccuName(HopeOccu);//
 		vo.setPosition(position);
 		vo.setRank(rank);
-		vo.setRESUME_GENDER(Gender);
+		vo.setResumeGender(Gender);//
 		vo.setUniversityType(Educol);
-		vo.setSEC_NAME(Hopesectors);
+		vo.setSecName(Hopesectors);//
+		vo.setMajor(major);
+		
+		int cur = Integer.parseInt(currentPage);
+		int page = Integer.parseInt(countPerPage);
+		if((cur-1)==0) {
+			vo.setCurrentPage("0");
+		}else {
+			vo.setCurrentPage((cur*page)+"");
+		}
+		vo.setCountPerPage(countPerPage);
 		
 		List<Map<String, Object>> Resumelist = tmService.selectResume(vo);
 
 		return Resumelist;
-	}
-	
-	@RequestMapping("/TalentManagement/resumedtwo.do")
-	public @ResponseBody String resumdetwo(@RequestParam(required=false) String [] EduColDetail) {
-		logger.info("EduColDetail={},={}",EduColDetail[0],EduColDetail[1]);
-		
-		return "dasf";
 	}
 }
 

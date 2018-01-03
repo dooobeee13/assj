@@ -89,11 +89,9 @@ $(function(){
 				$('.actDivClass'+cerCnt).find('input[name=cPubl]').attr("name","cerVOList["+cerCnt+"].cerPublisher");
 				$('.actDivClass'+cerCnt).find('select[name=cAS]').attr("name","cerVOList["+cerCnt+"].cerAcceptScore");
 				
-				var actHidden = "<input type='hidden' name='cerVOList["+cerCnt+"].cerAcquiDate' id='cerAD"+cerCnt+"'>";
-				$('#eduName').before(actHidden);
-				
-				var cntHidden = "<input type='hidden' name='cntHidden"+cerCnt+"' id='cntHidden"+cerCnt+"'>";				
-				$("actDivClass"+cerCnt).append(cntHidden);
+				$.applyDatePicker(
+				$('.actDivClass'+cerCnt).find('input[name=basicStartDP]').attr("name","cerVOList["+cerCnt+"].cerAcquiDate")
+				);
 				
 				$('#addCerDiv').append(addBtn);					
 				
@@ -104,55 +102,16 @@ $(function(){
 					$('.actDivClass'+cerCnt).find('input[name=cName]').attr("name","cerVOList["+cerCnt+"].cerName");
 					$('.actDivClass'+cerCnt).find('input[name=cPubl]').attr("name","cerVOList["+cerCnt+"].cerPublisher");
 					$('.actDivClass'+cerCnt).find('select[name=cAS]').attr("name","cerVOList["+cerCnt+"].cerAcceptScore");
-					
-					var actHidden = "<input type='hidden' name='cerVOList["+cerCnt+"].cerAcquiDate' id='cerAD"+cerCnt+"'>";
-					$('#eduName').before(actHidden);
+					$.applyDatePicker(
+					$('.actDivClass'+cerCnt).find('input[name=basicStartDP]').attr("name","cerVOList["+cerCnt+"].cerAcquiDate")
+					);
 				});					
 				
 				$(document).on("click","img[name=delCerImg]",function(){
 					$(this).parent().parent().parent().remove();						
 				});
 				
-				var divIndex = 0;
-				$(document).on("click",".cCate",function(){
-					
-					divIndex = $(this).parent().parent().parent().parent().parent().parent().index();				
-					
-				});	
 				
-				$(document).on("change",".cCate",function(){
-					
-					if($(this).val()=='자격증/면허증'){
-						$(this).parent().parent().parent().parent().parent().parent().replaceWith(
-								$('#actDiv').clone().show().attr("class","actDivClass"+divIndex).attr("id","")								
-						);
-						$('.actDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
-						$('.actDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
-						$('.actDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
-						$('.actDivClass'+divIndex).find('select[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
-						
-					}
-					if($(this).val()=='어학시험'){
-						$(this).parent().parent().parent().parent().parent().parent().replaceWith(
-								$('#cerDiv').clone().show().attr("class","cerDivClass"+divIndex).attr("id","")								
-						);
-						
-						$('.cerDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
-						$('.cerDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
-						$('.cerDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
-						$('.cerDivClass'+divIndex).find('input[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
-						
-					}
-					if($(this).val()=='수상/공모'){
-						$(this).parent().parent().parent().parent().parent().parent().replaceWith(
-								$('#awardsDiv').clone().show().attr("class","awardsDivClass"+divIndex).attr("id","")								
-						);
-						$('.awardsDivClass'+divIndex).find('select[name=cCate]').attr("name","cerVOList["+divIndex+"].cerCategory")
-						$('.awardsDivClass'+divIndex).find('input[name=cName]').attr("name","cerVOList["+divIndex+"].cerName")
-						$('.awardsDivClass'+divIndex).find('input[name=cPubl]').attr("name","cerVOList["+divIndex+"].cerPublisher")
-						$('.awardsDivClass'+divIndex).find('select[name=cAS]').attr("name","cerVOList["+divIndex+"].cerAcceptScore");
-					}
-				});
 				
               	
 			}else if($(this).attr("id")=="chkSkill"){
@@ -193,12 +152,15 @@ $(function(){
 		}
 	});
 	
+	
+	
+	
 	$('.nav-link').click(function(){
 		$('html,body').animate({scrollTop:$($(this).attr("href")).offset().top-50},500);
 		return false;
 	});
 	
-	
+
 	
 	$(document).on("click","img[name=delSHImg]",function(){
 		$(this).parent().parent().remove();
@@ -207,6 +169,7 @@ $(function(){
 		$(this).parent().parent().parent().remove();
 	});
 	
+
 	
 	
 	
@@ -306,6 +269,8 @@ $(function(){
 		
 	});
 	
+	
+	
 	$(document).on("change","select[name=eh_start_year]",function(){
 		var startYear = $(this).val();
 		var currentYear = new Date().getFullYear();
@@ -318,8 +283,6 @@ $(function(){
 		}
 		
 	});
-	
-	
 	
 	
 	
@@ -408,62 +371,7 @@ $(function(){
 		var resumeSalOpt1 = "";
 		var resumeSalOpt2 = "";
 		var resumeSalOpt = "";
-		
-		var ssy = "";
-		$('select[name=sh_start_year').each(function(idx,item){				
-				$("#shAyear"+(idx)).attr("value",$(this).val());
-		});
-		
-		$('select[name=sh_start_month').each(function(idx,item){			
-			$("#shAyear"+(idx)).attr("value",
-					$("#shAyear"+(idx)).val()+"/"+$(this).val()
-			);
-		});
-		
-		$('select[name=sh_end_year').each(function(idx,item){
-			$("#shGyear"+(idx)).attr("value",$(this).val());
-		});
-		
-		$('select[name=sh_end_month').each(function(idx,item){
-			$("#shGyear"+(idx)).attr("value",
-					$("#shGyear"+(idx)).val()+"/"+$(this).val()
-			);
-		});
-		
-		
-		
-		
-		$('select[name=eh_start_year').each(function(idx,item){				
-			$("#ehAdmission"+(idx)).attr("value",$(this).val());
-		});
-		
-		$('select[name=eh_start_month').each(function(idx,item){			
-			$("#ehAdmission"+(idx)).attr("value",
-					$("#ehAdmission"+(idx)).val()+"/"+$(this).val()
-			);
-		});
-		
-		$('select[name=eh_end_year').each(function(idx,item){
-			$("#ehCompletion"+(idx)).attr("value",$(this).val());
-		});
-		
-		$('select[name=eh_end_month').each(function(idx,item){
-			$("#ehCompletion"+(idx)).attr("value",
-					$("#ehCompletion"+(idx)).val()+"/"+$(this).val()
-			);
-		});
-		
-		
-		
-		 $('select[name=cer_year').each(function(idx,item){				
-				$("#cerAD"+(idx)).attr("value",$(this).val());
-			});
-			
-			$('select[name=cer_month').each(function(idx,item){			
-				$("#cerAD"+(idx)).attr("value",
-						$("#cerAD"+(idx)).val()+"/"+$(this).val()
-				);
-			});
+	
 		
 		if($('#chkSalOpt1').is(":checked") && $('#chkSalOpt2').is(":checked")){
 			resumeSalOpt = "";
@@ -481,34 +389,14 @@ $(function(){
 		$('#resumeSalOpt').attr("value",resumeSalOpt);
 		
 	
+		$('.startDP').each(function(idx,item){
+			var s = $(this).val();
+			var dp = $.convertDate(s);
+			$(this).attr("value",dp);
+		});
 		
 	});
 	
-	
-	$(document).on("change","select[name=shMajor2]",function(){
-		
-		var no =$("option:selected",this).index()+1;	
-		var $thisSel = $(this);
-	    
-		$(this).next().next().find("option").remove();
-		
-		$.ajax({
-			url:"<c:url value='/resume/resumeMajorDetail.do' />",
-			type:"post",
-			data:"no="+no,
-			dataType:"json",
-			success:function(majorVO){
-				$.each(majorVO,function(index,item){
-					$thisSel.next().next().append("<option value='"+item.majorName+"'>"+item.majorName+"</option>");
-				});
-			},
-			error:function(xhr,status,error){
-				alert("에러발생:"+status+"=>"+error);
-			}
-			
-		});	
-	});		
-
 	
 });
 

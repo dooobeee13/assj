@@ -9,7 +9,7 @@ public class ResumeVO {
 	private int memNo;
 	private String resumeTitle;
 	private String resumeName;
-	private Date resumeBirth;
+	private String resumeBirth;
 	private String resumeAddr;
 	private String resumeDetailaddr;
 	private String resumePhone;
@@ -65,13 +65,14 @@ public class ResumeVO {
 	public void setResumeName(String resumeName) {
 		this.resumeName = resumeName;
 	}
-	public Date getResumeBirth() {
+	
+	
+	public String getResumeBirth() {
 		return resumeBirth;
 	}
-	public void setResumeBirth(Date resumeBirth) {
+	public void setResumeBirth(String resumeBirth) {
 		this.resumeBirth = resumeBirth;
 	}
-	
 	public String getResumeAddr() {
 		return resumeAddr;
 	}

@@ -11,6 +11,7 @@ import com.hy.assj.vo.NewsVO;
 @Repository
 public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 	private String namespace = "config.mybatis.mapper.oracle.news";
+	private String adminspace = "config.mybatis.mapper.oracle.admin";
 	
 	public int insertNews(NewsVO vo) {
 		return getSqlSession().insert(namespace+".insertNews",vo);
@@ -35,4 +36,16 @@ public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 	public int deleteNews(int newsNo) {
 		return getSqlSession().delete(namespace+".deleteNews",newsNo);
 	}
+
+	@Override
+	public String selectAdminLogin(String userid) {
+		return getSqlSession().selectOne(adminspace+".selectAdminLogin",userid);
+	}
+
+	@Override
+	public int CreateAdmin(Map<String, Object> list) {
+		return getSqlSession().insert(adminspace+".CreateAdmin",list);
+	}
+	
+	
 }
