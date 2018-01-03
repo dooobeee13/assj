@@ -34,6 +34,14 @@
 	margin-top:2em;
 	padding-bottom:4em; */
 }
+.talentoverscroll{
+	position: relative;
+	background:white;
+	width: 1285px;
+    overflow: hidden;
+	margin: 0 auto;
+	padding: auto;
+}
 .interview-container{
 	position: relative;
 	background:white;

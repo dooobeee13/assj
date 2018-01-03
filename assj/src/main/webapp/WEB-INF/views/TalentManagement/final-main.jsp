@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 
-<script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery-3.2.1.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/paging.js'/>"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>">
@@ -626,11 +627,12 @@ $(function(){
 	});
 	
 	
-	jQuery.ajaxSettings.traditional = true;/*이게 없으면 AJAX로 배열의 형태 데이터값을 보내지 못함*/
 	
-	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
-		 jQuery.ajaxSettings.traditional = true;
-
+	$.send=function(curPage){
+		$('#currentPage').val(curPage);
+		
+		jQuery.ajaxSettings.traditional = true;
+		
 		$.ajax({
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			type:"POST",
@@ -646,7 +648,9 @@ $(function(){
 				"CareerCheckBox":CareerCheckBox,
 				"HopeOccu":HopeOccu,
 				"area":area,
-				"Hopesectors":Hopesectors
+				"Hopesectors":Hopesectors,
+				"countPerPage":countPerPage,
+				"currentPage":currentPage
 			},
 			
 			success:function(res){
@@ -658,20 +662,156 @@ $(function(){
 						'<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>'+
 						'<div style="float:left; margin-left:100px;">'+
 							'<strong style="">'+this.RESUME_NAME+'</strong><br>'+
-						'<span>(<b>'+this.RESUME_GENDER+'</b><b>'+this.RESUME_BIRTH+'</b>년)</span>'+
+						'<span>(<b>'+this.RESUME_GENDER+'</b> <b>'+this.RESUME_BIRTH+'</b>)</span>'+
 						'</div>'+
 					'</td>'+
 					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
 						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
 						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>'+
-						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>'+
-						'</span> | <span>'+this.AREA_NAME+'</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">'+this.OCCU_NAME+' '+ this.SEC_NAME+'</p>'+
+						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
+						if(this.RESUME_SAL_START!=null){
+							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
+						}else{
+							totalResumes+='<span>면접 후 결정</span>';
+						}
+						totalResumes+='</span> | <span>'+this.AREA_NAME+'</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">'+this.OCCU_NAME+' '+ this.SEC_NAME+'</p>'+
 					'</td>'+
-					'<td style="text-align:center;">업데이트 일자(미구현)</td>'+
+					'<td style="text-align:center;">'+this.LAST_UPDATE+'</td>'+
 				'</tr>'
 				});
 				
 				$('.resume_body').html(totalResumes);
+				
+				if(totalCount==0){
+					return false;		
+				}
+				//페이징처리
+				pagination($("#currentPage").val(), 6, 10, totalCount);
+				
+				$('#divPage').html("");
+				
+				//이전 블럭
+				if(firstPage>1){
+					var anchorEl = $("<a href='#'></a>").html("<img src='<c:url value='/images1/first.JPG'/>'>").attr('onclick','$.send('+(firstPage-1)+')');
+					$('#divPage').append(anchorEl);
+				}
+				
+				for(var i=firstPage;i<=lastPage;i++){
+					var anchorEl="";
+					
+					if(i==currentPage){
+						var anchorEl = $("<span style='font-weight:bold; color:blue;'></span>").html(i);
+					}else{
+						var anchorEl = $("<a href='#'></a>").html("["+i+"]").attr('onclick','$.send('+i+')');
+					}
+					
+					$('#divPage').append(anchorEl);
+				}//for
+				
+				//다음 블럭으로 이동
+				if(lastPage<totalPage){
+					var anchorEl = $('<a href="#"></a>').html("<img src='<c:url value='/images1/last.JPG'/>'>").attr('onclick','$.send('+(lastPage+1)+')');
+					$("#divPage").append(anchorEl);
+				}
+			},
+			error:function(xhr, status, error){
+				alert("에러 발생 : "+status+"=>"+error);
+			}
+		});
+	}
+	$('#countPerPage').change(function(){
+		countPerPage=$(this).val();
+	});
+	
+	var countPerPage = $('#countPerPage>option:selected').val();
+	
+	jQuery.ajaxSettings.traditional = true;/*이게 없으면 AJAX로 배열의 형태 데이터값을 보내지 못함*/
+	
+	
+	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
+
+		var currentPage = $('#currentPage').val();
+		alert(countPerPage);
+		$.ajax({
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			type:"POST",
+			url:"<c:url value='/TalentManagement/resumed.do'/>",
+			data:{"EduColDetail":EduColDetail,
+				"Educol":Educol,
+				"major":major,
+				"position":position,
+				"rank":rank,
+				"empType":empType,
+				"MiniArea":MiniArea,
+				"Gender":Gender,
+				"CareerCheckBox":CareerCheckBox,
+				"HopeOccu":HopeOccu,
+				"area":area,
+				"Hopesectors":Hopesectors,
+				"countPerPage":countPerPage,
+				"currentPage":currentPage
+			},
+			
+			success:function(res){
+				var totalResumes = "";
+				$.each(res,function(idx, item){
+					totalResumes+='<tr style="border:1px solid #b8b8b8;">'+
+					'<td style="text-align:center;"><a href="#"><img src="<c:url value='/icon/star.jpeg'/>"></a></td>'+
+					'<td style="height:120px;">'+
+						'<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>'+
+						'<div style="float:left; margin-left:100px;">'+
+							'<strong style="">'+this.RESUME_NAME+'</strong><br>'+
+						'<span>(<b>'+this.RESUME_GENDER+'</b> <b>'+this.RESUME_BIRTH+'</b>)</span>'+
+						'</div>'+
+					'</td>'+
+					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
+						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
+						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>'+
+						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
+						if(this.RESUME_SAL_START!=null){
+							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
+						}else{
+							totalResumes+='<span>면접 후 결정</span>';
+						}
+						totalResumes+='</span> | <span>'+this.AREA_NAME+'</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">'+this.OCCU_NAME+' '+ this.SEC_NAME+'</p>'+
+					'</td>'+
+					'<td style="text-align:center;">'+this.LAST_UPDATE+'</td>'+
+				'</tr>'
+				});
+				
+				$('.resume_body').html(totalResumes);
+				
+				if(totalCount==0){
+					return false;		
+				}
+				//페이징처리
+				pagination($("#currentPage").val(), 6, 10, totalCount);
+				
+				$('#divPage').html("");
+				
+				//이전 블럭
+				if(firstPage>1){
+					var anchorEl = $("<a href='#'></a>").html("<img src='<c:url value='/images1/first.JPG'/>'>").attr('onclick','$.send('+(firstPage-1)+')');
+					$('#divPage').append(anchorEl);
+				}
+				
+				for(var i=firstPage;i<=lastPage;i++){
+					var anchorEl="";
+					
+					if(i==currentPage){
+						var anchorEl = $("<span style='font-weight:bold; color:blue;'></span>").html(i);
+					}else{
+						var anchorEl = $("<a href='#'></a>").html("["+i+"]").attr('onclick','$.send('+i+')');
+					}
+					
+					$('#divPage').append(anchorEl);
+				}//for
+				
+				//다음 블럭으로 이동
+				if(lastPage<totalPage){
+					var anchorEl = $('<a href="#"></a>').html("<img src='<c:url value='/images1/last.JPG'/>'>").attr('onclick','$.send('+(lastPage+1)+')');
+					$("#divPage").append(anchorEl);
+				}
 			},
 			error:function(xhr, status, error){
 				alert("에러 발생 : "+status+"=>"+error);
@@ -714,8 +854,8 @@ $(function(){
 });
 </script>
 <link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
-<div class="talentoverscroll">
-<div class="talentedsearchcontainer">
+<div class="talentoverscroll" style="margin-bottom:3em;">
+<div class="talentedsearchcontainer" style="padding-bottom:3em;">
 	<div class="TScontent">
 		<div style="width:100%;height:3em; padding-left:6em; padding-bottom:1em; margin-bottom:1.5em;">
 			<select class="one-list">
@@ -767,16 +907,17 @@ $(function(){
 		</div>
 		<div class="TSdetail" style="float:left;width:70%; margin-left: 5em;"><!-- 게시판 형태의 이력서 간단 보기 -->
 			<div class="col-div-100-10" style="padding: 1em; text-align: right;">
-				<select class="one-list" id="HowManyRead">
-				<option value="10">10개씩 보기</option>
-				<option value="20">20개씩 보기</option>
-				<option value="30">30개씩 보기</option>
-				<option value="50">50개씩 보기</option>
-				<option value="100">100개씩 보기</option>
+				<input type="hidden" name="currentPage" id="currentPage" value="1"/>
+				<select class="one-list" id="countPerPage" name="countPerPage">
+					<option value="10">10개씩 보기</option>
+					<option value="20">20개씩 보기</option>
+					<option value="30">30개씩 보기</option>
+					<option value="50">50개씩 보기</option>
+					<option value="100">100개씩 보기</option>
 			</select>
 			</div>
 			<!-- 이력서 부분 -->
-			<table style="width:100%; height:90%; float:left;">
+			<table style="width:100%; float:left;">
 				<thead>
 					<tr style="height:50px;">
 						<th style="width:5%; background:#f4f4f4; text-align:center;"></th>
@@ -793,7 +934,7 @@ $(function(){
 							<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>" style="position:absolute; margin-left:30px; margin-top:-10px;"></div>
 							<div style="float:left; margin-left:100px;">
 								<strong style="">${vo.RESUME_NAME }</strong><br>
-							<span>(<b>${vo.RESUME_GENDER } </b><b><fmt:formatDate value="${vo.RESUME_BIRTH }" pattern="yyyy"/></b>년)</span>
+							<span>(<b>${vo.RESUME_GENDER } </b><b>${vo.RESUME_BIRTH }</b>)</span>
 							</div>
 						</td>
 						<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">${vo.RESUME_CAREER_LIST }경력부분</span>
@@ -809,7 +950,7 @@ $(function(){
 							
 							</span> | <span>${vo.AREA_NAME }</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">${vo.OCCU_NAME } ${vo.SEC_NAME }</p>
 						</td>
-						<td style="text-align:center;">업데이트 일자(미구현)</td>
+						<td style="text-align:center;">${vo.LAST_UPDATE }</td>
 					</tr>
 				</c:forEach>
 					<!-- <tr style="border:1px solid #b8b8b8;">
@@ -848,7 +989,7 @@ $(function(){
 			</table>
 			
 			
-			
+			<div id="divPage"></div>
 		</div><!-- TSdetail -->
 
 		<div class="TSside" style="position:relative;float:left; text-align: center; border:1px solid #b8b8b8; border-radius: 10px 10px 40px 40px;"><!-- 오른쪽 사이드바 -->

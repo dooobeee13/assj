@@ -32,52 +32,67 @@
 	</select>
 	
 	<select id="selectResume" parameterType="TalentManagementVO" resultType="map">
+		select * from(
+		
+		select rownum as RNUM, blist.* from (
+		
 		select * from totalresume
 		
 		<trim prefix="where" prefixOverrides="AND |OR">
 		
-			<if test="AREA_TOP_NAME != null">
+			<if test="areaTopName != null">
 				AREA_TOP_NAME in
-				<foreach collection="AREA_TOP_NAME" item="Name" 
+				<foreach collection="areaTopName" item="Name" 
 					index="index" open="(" close=")" separator=",">
 					#{Name}
 				</foreach>
 				
 			</if>
 			
-			<if test="AREA_NAME != null">
+			<if test="areaName != null">
 				AND AREA_NAME in
-				<foreach collection="AREA_NAME" item="area" 
+				<foreach collection="areaName" item="area" 
 					index="index" open="(" close=")" separator=",">
 					#{area}
 				</foreach>
 			</if>
 			
-			<if test="ET_NAME != null">
+			<if test="etName != null">
 				AND ET_NAME in
-				<foreach collection="ET_NAME" item="etname" 
+				<foreach collection="etName" item="etname" 
 					index="index" open="(" close=")" separator=",">
 					#{etname}
 				</foreach>
 			</if>
 			
-			<if test="OCCU_NAME != null">
+			<if test="occuName != null">
 				AND OCCU_NAME in
-				<foreach collection="OCCU_NAME" item="occuname" 
+				<foreach collection="occuName" item="occuname" 
 					index="index" open="(" close=")" separator=",">
 					#{occuname}
 				</foreach>
 			</if>
 			
-			<if test="SEC_NAME != null">
+			<if test="secName != null">
 				AND SEC_NAME in
-				<foreach collection="SEC_NAME" item="secname" 
+				<foreach collection="secName" item="secname" 
 					index="index" open="(" close=")" separator=",">
 					#{secname}
 				</foreach>
 			</if>
 			
+			<if test="resumeGender != null">
+				AND RESUME_GENDER in
+				<foreach collection="resumeGender" item="resumeGender" 
+					index="index" open="(" close=")" separator=",">
+					#{resumeGender}
+				</foreach>
+			</if>
 		</trim>
+		) blist
+		)
+			<![CDATA[
+			where RNUM > #{currentPage} and RNUM<=#{currentPage}+#{countPerPage}]]>		
 	</select>
 </mapper>
 

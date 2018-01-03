@@ -25,9 +25,8 @@
 			</div>
 			<div class="col-div-100-30"
 				style="border: 1px solid #b8b8b8; border-bottom: none; padding-top: 1.5em; text-align: center;">
-				<strong class="strong">학점</strong><input class="one-text"
-					type="text">&nbsp;&nbsp;<input class="one-button"
-					type="button" value="추가">
+				<strong class="strong">학점</strong><input class="one-text" 
+					type="text">&nbsp;&nbsp;<input class="one-button" type="button" value="검색">
 			</div>
 		</div>
 	</div>
@@ -65,8 +64,8 @@
 						<option>대학원(석/박사)</option>
 						<option>고등학교</option>
 						<option>전체</option>
-					</select> <input class="one-text" type="text"> <input
-						class="one-button search-button" type="button" value="추가">
+					</select> <input class="one-text" type="text" placeholder="  대학명을 입력하세요."> 
+					<input class="one-button search-button" type="button" value="검색">
 				</div>
 			</div>
 			<div class="col-div-100-50">
