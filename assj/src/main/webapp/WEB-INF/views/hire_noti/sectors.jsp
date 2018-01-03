@@ -13,9 +13,9 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 1}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
-						${vo.secName}
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" 
+								name="sectorList" value="${vo.secNo}">${vo.secName}
 					</label>
 					</div>
 				</c:if>
@@ -26,9 +26,9 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 2}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
-						${vo.secName}
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}"
+							name="sectorList" value="${vo.secNo}">${vo.secName}
 					</label>
 					</div>
 				</c:if>
@@ -38,8 +38,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 3}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -50,8 +50,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 4}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -62,8 +62,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 5}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -83,8 +83,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 6}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -95,8 +95,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 7}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -107,8 +107,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 8}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -119,8 +119,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 9}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>
@@ -131,8 +131,8 @@
 		<td>
 		<c:forEach var="vo" items="${subList}">
 			<c:if test="${vo.secTopNo == 10}">
-					<div class="checkbox majorselectDiv">
-					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" value="${vo.secNo}">
+					<div class="checkbox sectorsselectDiv">
+					<label for="sectors-${vo.secNo}"> <input type="checkbox" id="sectors-${vo.secNo}" name="sectorList"  value="${vo.secNo}">
 						${vo.secName}
 					</label>
 					</div>

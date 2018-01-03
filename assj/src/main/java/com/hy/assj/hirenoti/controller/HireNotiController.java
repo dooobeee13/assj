@@ -150,20 +150,25 @@ public class HireNotiController {
 	
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, 
+	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, HttpSession session,
 			Model model) {
 		logger.info("공고등록 처리-파라미터, vo={}", hirenotiVo);
 		
+		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		int cmNo = cmMemberVo.getCmNo();
+		hirenotiVo.setCmNo(cmNo);
+		hirenotiVo.setAreaNo(20);
+		
 		int cnt =hirenotiService.insertHireNoti(hirenotiVo);
-		logger.info("글쓰기 결과, cnt={}", cnt);
+		logger.info("공고등록  처리 결과, cnt={}", cnt);
 		
 		String msg="", url="";
 		if(cnt>0) {
-			msg="글쓰기 처리되었습니다.";
-			url="/hire2.do";
+			msg="공고등록 처리되었습니다.";
+			url="/hire_noti/hire2.do";
 		}else {
-			msg="글쓰기 실패";
-			url="/hire1.do";			
+			msg="공고등록 실패";
+			url="/hire_noti/hire1.do";			
 		}
 		
 		model.addAttribute("msg", msg);
@@ -172,18 +177,6 @@ public class HireNotiController {
 		return "common/message";		
 	}
 	
-	/*@RequestMapping(value="/hire1.do",method=RequestMethod.GET)
-	public String hirenoti_cmManager(HttpSession session,Model model) {
-		logger.info("기업회원정보 수정 화면(get) 파라미터 session={}",session);
-		
-		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
-		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
-		
-		model.addAttribute("vo={}",vo);
-		
-		return "hire_noti/hire1";
-	}*/
-	 
 	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {

@@ -5,7 +5,7 @@
 <td>*학력</td>
 <td>
 <label class="radio-inline" for="education0">
-	<input type="radio" id="education0" name="eduNo" value="0">
+	<input type="radio" id="education0" name="eduNo" checked="checked" value="0">
 		학력무관
 	</label>
 <c:forEach var="vo" items="${list}">

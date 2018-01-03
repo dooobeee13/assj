@@ -1,6 +1,7 @@
 package com.hy.assj.hirenoti.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class HireNotiVO {
 	private int hnNo; // 채용공고번호(PK)
@@ -9,11 +10,11 @@ public class HireNotiVO {
 	private int hnSalStart; // 최소급여
 	private int hnSalEnd; //  최대급여
 	private int hnViews; // 조회수
-	private Timestamp hnStart; // 공고시작일
-	private Timestamp hnDeadline; // 공고마감일
+	private String hnStart; // 공고시작일
+	private String hnDeadline; // 공고마감일
 	private String hnHows; // 접수방법
 	private String hnTask; // 주요업무
-	private String hnEligiblity; //자격요건
+	private String hnEligibility; //자격요건
  	private String hnPreference; // 우대사항
 	private String hnStep; // 채용절차
 	private String hnBenefits; // 복리후생
@@ -25,11 +26,20 @@ public class HireNotiVO {
 	private String hnStatus; // 공고상태
 	private String hnGender; // 성별
 	private int hnRecruitNum; // 모집인원
+	private int hnExpyearMin; //최소경력
+	private int hnExpyearMax; // 최대경력
 	
 	private int eduNo; // 학력코드(FK)
 	private int careerNo; // 경력코드(FK)
 	
-	//
+	
+	private int areaNo;
+	private List<Integer> occuList;
+	private List<Integer> empTypeList;
+	private List<Integer> rankList;
+	private List<Integer> positionList;
+	private List<Integer> majorList;
+	private List<Integer> sectorList;
 	public int getHnNo() {
 		return hnNo;
 	}
@@ -66,16 +76,16 @@ public class HireNotiVO {
 	public void setHnViews(int hnViews) {
 		this.hnViews = hnViews;
 	}
-	public Timestamp getHnStart() {
+	public String getHnStart() {
 		return hnStart;
 	}
-	public void setHnStart(Timestamp hnStart) {
+	public void setHnStart(String hnStart) {
 		this.hnStart = hnStart;
 	}
-	public Timestamp getHnDeadline() {
+	public String getHnDeadline() {
 		return hnDeadline;
 	}
-	public void setHnDeadline(Timestamp hnDeadline) {
+	public void setHnDeadline(String hnDeadline) {
 		this.hnDeadline = hnDeadline;
 	}
 	public String getHnHows() {
@@ -90,11 +100,11 @@ public class HireNotiVO {
 	public void setHnTask(String hnTask) {
 		this.hnTask = hnTask;
 	}
-	public String getHnEligiblity() {
-		return hnEligiblity;
+	public String getHnEligibility() {
+		return hnEligibility;
 	}
-	public void setHnEligiblity(String hnEligiblity) {
-		this.hnEligiblity = hnEligiblity;
+	public void setHnEligibility(String hnEligibility) {
+		this.hnEligibility = hnEligibility;
 	}
 	public String getHnPreference() {
 		return hnPreference;
@@ -162,6 +172,18 @@ public class HireNotiVO {
 	public void setHnRecruitNum(int hnRecruitNum) {
 		this.hnRecruitNum = hnRecruitNum;
 	}
+	public int getHnExpyearMin() {
+		return hnExpyearMin;
+	}
+	public void setHnExpyearMin(int hnExpyearMin) {
+		this.hnExpyearMin = hnExpyearMin;
+	}
+	public int getHnExpyearMax() {
+		return hnExpyearMax;
+	}
+	public void setHnExpyearMax(int hnExpyearMax) {
+		this.hnExpyearMax = hnExpyearMax;
+	}
 	public int getEduNo() {
 		return eduNo;
 	}
@@ -174,18 +196,60 @@ public class HireNotiVO {
 	public void setCareerNo(int careerNo) {
 		this.careerNo = careerNo;
 	}
-	
+	public int getAreaNo() {
+		return areaNo;
+	}
+	public void setAreaNo(int areaNo) {
+		this.areaNo = areaNo;
+	}
+	public List<Integer> getOccuList() {
+		return occuList;
+	}
+	public void setOccuList(List<Integer> occuList) {
+		this.occuList = occuList;
+	}
+	public List<Integer> getEmpTypeList() {
+		return empTypeList;
+	}
+	public void setEmpTypeList(List<Integer> empTypeList) {
+		this.empTypeList = empTypeList;
+	}
+	public List<Integer> getRankList() {
+		return rankList;
+	}
+	public void setRankList(List<Integer> rankList) {
+		this.rankList = rankList;
+	}
+	public List<Integer> getPositionList() {
+		return positionList;
+	}
+	public void setPositionList(List<Integer> positionList) {
+		this.positionList = positionList;
+	}
+	public List<Integer> getMajorList() {
+		return majorList;
+	}
+	public void setMajorList(List<Integer> majorList) {
+		this.majorList = majorList;
+	}
+	public List<Integer> getSectorList() {
+		return sectorList;
+	}
+	public void setSectorList(List<Integer> sectorList) {
+		this.sectorList = sectorList;
+	}
 	@Override
 	public String toString() {
 		return "HireNotiVO [hnNo=" + hnNo + ", hnNotiTitle=" + hnNotiTitle + ", cmNo=" + cmNo + ", hnSalStart="
 				+ hnSalStart + ", hnSalEnd=" + hnSalEnd + ", hnViews=" + hnViews + ", hnStart=" + hnStart
-				+ ", hnDeadline=" + hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnEligiblity="
-				+ hnEligiblity + ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
+				+ ", hnDeadline=" + hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnEligibility="
+				+ hnEligibility + ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
 				+ ", hnDocument=" + hnDocument + ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat="
 				+ hnLat + ", hnLng=" + hnLng + ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnRecruitNum="
-				+ hnRecruitNum + ", eduNo=" + eduNo + ", careerNo=" + careerNo + "]";
+				+ hnRecruitNum + ", hnExpyearMin=" + hnExpyearMin + ", hnExpyearMax=" + hnExpyearMax + ", eduNo="
+				+ eduNo + ", careerNo=" + careerNo + ", areaNo=" + areaNo + ", occuList=" + occuList + ", empTypeList="
+				+ empTypeList + ", rankList=" + rankList + ", positionList=" + positionList + ", majorList=" + majorList
+				+ ", sectorList=" + sectorList + "]";
 	}
-	
-	
 	
 }
