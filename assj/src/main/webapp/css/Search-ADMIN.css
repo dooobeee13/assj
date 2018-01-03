@@ -1,8 +1,4 @@
 @charset "UTF-8";
-
-*{
-	font-size: x-small;
-}
 div{
 	margin:0;
 	padding:0;
@@ -1381,4 +1377,7 @@ h2{
 	cursor:pointer;
 	font-weight: bold;
 	outline: none;
+}
+.main-stati span, .main-stati strong{
+	font-size: 12px;
 }

@@ -53,6 +53,11 @@ $(function(){
 		window.open('<c:url value="/administrator/login/createadmin.do"/>','CreateAdminAccount','width=500, height=400, top=300, left=650, location=no,menubar=no, status=no, toolbar=no');
 	});
 	
+	//로고 글릭
+	$('.MainLogo').click(function(){
+		location.href='<c:url value="/administrator/adminmain.do"/>';
+	})
+	
 	
 	//채팅 모달
 	var modalLayer = $("#modalLayer");
@@ -154,17 +159,18 @@ function closeNav() {
 <div class="admin-container" style="box-shadow: 0 4px 4px #b8b8b8;">
 	<header class="col-div-100-8" style="z-index: 10; position:relative;">
 		<div class="col-div-100-100 "  style="background:#607D8B; box-shadow: 0 4px 4px #b8b8b8; padding:20px;position: relative;">
+			<img class="MainLogo" src="<c:url value='/images/innerlogo.png'/>" style="width:180px; float:left; cursor: pointer;"/>
 			<span id="openNavbutton" style="font-size:15px;cursor:pointer; float:right" onclick="openNav()"> &#9776; Side Menu</span>
 		</div>
 	</header>
-	<article class="col-div-100-80" style="border-left: 1px solid #b8b8b8; height:92%; overflow-y: hidden; position: relative; overflow-x: hidden;">
+	<article class="col-div-100-80" style="border-left: 1px solid #b8b8b8; height:92%; position: relative; overflow-x: hidden;">
 		<!-- 사이드바 메뉴 부분 -->
 		<div class="col-div-15-100 sid" style="box-shadow: 4px 0 4px #b8b8b8;">
 			<div class="col-div-100-30">
 				<div class="col-div-100-80" style="background-image: url('<c:url value="/icon/adminMain.jpg"/>'); background-size: cover;">
 					<div class="col-div-100-70">
 						<div class="col-div-30-100"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="border-radius: 25px; margin-top:4em;"></div>
-						<div class="col-div-70-100" style="color:#607D8B; font-weight: bold; padding-left:0.3em;"><p style="margin-top:4.5em;margin-bottom:6px;">관리자1</p><p style="margin-top:0;">testAdmin@naver.com</p></div>
+						<div class="col-div-70-100" style="color:#607D8B; font-weight: bold; padding-left:0.3em; font-size: 12px;"><p style="margin-top:4.5em;margin-bottom:6px;">관리자1</p><p style="margin-top:0;">testAdmin@naver.com</p></div>
 					</div>
 					<div class="col-div-100-30">
 						<a href="#" style="margin-left:1em; color:#607D8B;">관리자 정보 보기</a>

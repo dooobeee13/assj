@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body style="width:460px; height:300px;">
-<div class="divMainbox" style="text-align: center;">
+<div class="divMainbox" style="text-align: center; margin-bottom:2em;">
 	<h2 class="divMainbox-title" style="margin:0 auto; float:none; font-weight: bold;">관리자 생성</h2>
 </div>
 	<form name="adminform" method="post"
@@ -31,32 +31,32 @@
 			</colgroup>
 			<tbody>
 				<tr>
-					<th style="font-size: 1.5em; text-align: right;">아이디</th>
-					<td style="font-size: 1.5em;"><input id="userid" name="userid"
+					<th style="font-size: 1em; text-align: right;">아이디</th>
+					<td style="font-size: 1em;"><input id="userid" name="userid"
 						class="one-text" type="text" placeholder=" 아이디를 입력하세요."></td>
 
 				</tr>
 				<tr>
-					<th style="font-size: 1.5em; text-align: right;">비밀번호</th>
-					<td style="font-size: 1.5em;"><input id="pwd" name="pwd"
+					<th style="font-size: 1em; text-align: right;">비밀번호</th>
+					<td style="font-size: 1em;"><input id="pwd" name="pwd"
 						class="one-text" type="password" placeholder=" 비밀번호를 입력하세요."></td>
 				</tr>
 				<tr>
-					<th style="font-size: 1.5em; text-align: right;">비밀번호 확인</th>
-					<td style="font-size: 1.5em;"><input id="pwd1" name="pwd1"
+					<th style="font-size: 1em; text-align: right;">비밀번호 확인</th>
+					<td style="font-size: 1em;"><input id="pwd1" name="pwd1"
 						class="one-text" type="password" placeholder=" 비밀번호를 입력하세요."></td>
 				</tr>
 				<tr>
-					<th style="font-size: 1.5em; text-align: right;">이름</th>
-					<td style="font-size: 1.5em;"><input id="name" name="name"
+					<th style="font-size: 1em; text-align: right;">이름</th>
+					<td style="font-size: 1em;"><input id="name" name="name"
 						class="one-text" type="text" placeholder=" 이름을 입력해주세요."></td>
 				</tr>
 			</tbody>
 		</table>
 		<br> <input class="one-button" type="submit" value="등록하기"
-			style="font-size: 1.4em;">&nbsp;&nbsp;&nbsp;
+			style="font-size: 1em;">&nbsp;&nbsp;&nbsp;
 			<input class="one-button" type="button" value="취소"
-			style="font-size: 1.4em;">
+			style="font-size: 1em;">
 	</form>
 </body>
 </html>
