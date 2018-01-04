@@ -3,31 +3,69 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script>
 	$(function(){
-		$('.category.top .chklabel').click(function(){
-			$('.category.top li').removeClass('selected');
-			$(this).parent().parent().addClass('selected');
+		$('form[name=searchForm] input[type=checkbox]').change(function(){
+			var id = $(this).attr('id');
+			var name = $(this).attr('name');
+			var label = $('.category.sub .chklabel, .sCateName .cLi .chklabel').filter('[for='+ id +']');
+			if ($(this).prop("checked")) {
+				var button = '<button><label for="' + id + '"><span class="item">'+ label.data('name') 
+					+'</span></label><span class="ico"></span></button>';
+				$('.searchCondition').append(button);
+				label.addClass('check');
+				
+				if (name == 'topAreaList') {
+					$('form[name=searchForm] input[type=checkbox]').filter('[data-toparea='+ id +']:checked').trigger('click');
+				} else if (name =='areaList') {
+					var topArea = $(this).data('toparea');
+					$('#' + topArea + ':checked').trigger('click');
+				}
+			} else {
+				$('.searchCondition button').has('label[for='+ id +']').remove();
+				label.removeClass('check');
+			}
 		});
 		
-		$('.category.sub .chklabel, .sCateName .cLi .chklabel').click(function(){
-			var id = $(this).attr('for');
-			if ($('.searchCondition').find('button[data-id='+ id +']').length == 0) {
-				$(this).addClass('check');
-				$('.searchCondition').append('<button data-id="'+ id +'"><span class="item">'+ $(this).data('name') +'</span><span class="glyphicon glyphicon-remove"></span></button>');
-			} else {
-				$(this).removeClass('check');
-				$('#' + id).trigger('click');
-				$('.searchCondition button[data-id='+ id +']').remove();
-			}
+		$('.category.top .chklabel').click(function(){
+			$(this).closest('.category.top').find('li').removeClass('selected');
+			$(this).parent().parent().addClass('selected');
 		});
 		
 		$('.sCateName .step1').click(function(){
 			$(this).closest('.sCateName').prev().trigger('click');
 			$(this).closest('.sCateName').next().find('a[href="#aTabs-'+ $(this).data('no') +'"] label').trigger('click');
+		}); 
+		
+		/*
+		$('input[name=topArea]').change(function(){
+			var id = $(this).attr('id');
+			if ($(this).prop("checked")) {
+				//alert($('.searchCondition button[data-topcategory='+ id +']').length);
+				$('.searchCondition button[data-topcategory='+ id +']').trigger('click');
+			} 
 		});
+		
+		
+		$('.category.sub .chklabel, .sCateName .cLi .chklabel').click(function(){
+			var id = $(this).attr('for');
+			var topcategory = $(this).data('topcategory');
+			if ($('.searchCondition').find('button[data-id='+ id +']').length == 0) {
+				$(this).addClass('check');
+				$('.searchCondition').append('<button data-id="'+ id +'"'+ (topcategory?'data-topcategory=' + topcategory :'') 
+						+'><span class="item">'+ $(this).data('name') +'</span><span class="glyphicon glyphicon-remove"></span></button>');
+				if(topcategory) {
+					$('.searchCondition button[data-id='+ topcategory +']').trigger('click');
+				}
+			} else {
+				$(this).removeClass('check');
+				$('.searchCondition button[data-id='+ id +']').remove();
+			}
+		});
+		*/
+		
 	})
 </script>
 	<div class="sCateTitle">
-		근무지역<span class="glyphicon glyphicon-chevron-down"></span>
+		근무지역<span class="down"></span>
 	</div>
 	<div class="sCateName thinScroll">
 		<ul>
@@ -43,9 +81,8 @@
 			<div class="col-md-4">
 				<div class="category thinScroll top">
 					<ul>
-						<c:forEach var="vo" items="${topCateogryList}">
-							<li class="col-md-6">
-								<%-- <input type="checkbox" class="sc_chk" id="area_step1_${vo.areaNo}"> --%>
+						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">
+							<li class="col-md-6 <c:if test='${status.first}'>selected</c:if>">
 								<a href="#aTabs-${vo.areaNo}"><label class="chklabel" <%-- for="area_step1_${vo.areaNo}" --%>>${vo.areaName}</label></a>
 							</li>
 						</c:forEach>
@@ -57,10 +94,23 @@
 					<c:forEach var="top" items="${topCateogryList}">
 						<c:set var="subKey" value="subCategory-${top.areaNo}"/>
 						<ul id="aTabs-${top.areaNo}">
-							<c:forEach var="vo" items="${map[subKey]}">
+							<c:forEach var="vo" items="${map[subKey]}" varStatus="status">
 								<li class="col-md-4">
-									<input type="checkbox" class="sc_chk" name="area" value="${vo.areaNo}" id="area-${vo.areaNo}">
-									<label class="chklabel" data-name="${top.areaName}>${vo.areaName}" for="area-${vo.areaNo}"><span>${vo.areaName}</span></label>
+									<input type="checkbox" class="sc_chk" name=
+									<c:if test="${status.first}">"topAreaList"</c:if>
+									<c:if test="${!status.first}">"areaList"</c:if>
+									value=
+									<c:if test="${status.first}">"${top.areaNo}"</c:if>
+									<c:if test="${!status.first}">"${vo.areaNo}" </c:if>
+									id=
+									<c:if test="${status.first}">"area-${top.areaNo}"</c:if>
+									<c:if test="${!status.first}">"area-${vo.areaNo}" </c:if>
+									
+									<c:if test="${!status.first}">data-toparea="area-${top.areaNo}" </c:if>>
+									<label class="chklabel" data-name="${top.areaName}>${vo.areaName}" for=
+										<c:if test="${status.first}">"area-${top.areaNo}"</c:if>
+										<c:if test="${!status.first}">"area-${vo.areaNo}"</c:if>
+										><span>${vo.areaName}</span></label>
 								</li>
 							</c:forEach>
 						</ul>

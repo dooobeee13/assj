@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hy.assj.common.FileuploadUtil;
 import com.hy.assj.resume.model.ActivitiesVO;
 import com.hy.assj.resume.model.CertificateVO;
 import com.hy.assj.resume.model.EduHistoryVO;
+import com.hy.assj.resume.model.IntroductionVO;
 import com.hy.assj.resume.model.PortfolioVO;
 import com.hy.assj.resume.model.ResumeService;
 import com.hy.assj.resume.model.ResumeVO;
@@ -106,7 +108,11 @@ public class ResumeController {
 
 		List<AreaVO> areaListTop = resumeService.selectAllAreaTop();
 		
+		List<AreaVO> selectBasicArea = resumeService.selectBasicArea();
+		
 		List<MajorVO> majorListTop = resumeService.selectAllMajorTop();
+		
+		List<MajorVO> majorListBasicDetail = resumeService.selectMajorBasicD();
 		
 		List<EmpTypeVO> ETList = resumeService.selectAllET();
 		
@@ -114,132 +120,39 @@ public class ResumeController {
 		
 		List<OccupationVO> occuListTop = resumeService.selectAllOccuTop();
 		
+		List<SectorsVO> selectBasicSec = resumeService.selectBasicSec();
+		
+		List<OccupationVO> selectBasicOccu = resumeService.selectBasicOccu();
+		
 		model.addAttribute("areaListTop", areaListTop);		
 		model.addAttribute("majorListTop", majorListTop);
 		model.addAttribute("ETList", ETList);		
 		model.addAttribute("sectorsListTop", sectorsListTop);
 		model.addAttribute("occuListTop", occuListTop);		
+		model.addAttribute("majorListBasicDetail", majorListBasicDetail);		
+		model.addAttribute("selectBasicArea", selectBasicArea);	
+		model.addAttribute("selectBasicSec", selectBasicSec);	
+		model.addAttribute("selectBasicOccu", selectBasicOccu);	
 		
-	}
+	}	
 	
-	@Transactional
-	@RequestMapping(value="/resumeInsert1.do", method=RequestMethod.POST)
-	public String resumeInsert_post(@ModelAttribute ResumeVO resumeVO,SchoolHistoryVO shVO,EduHistoryVO ehVO,SkillVO skillVO,
-			CertificateVO cerVO, ActivitiesVO actVO, AreaVO areaVO, PortfolioVO pfVO, EmpTypeVO etVO, OccupationVO occuVO, SectorsVO secVO
-			,EducationVO eduVO,HttpServletRequest request, MultipartHttpServletRequest mhsq,
-			@RequestParam String resumeBirth1, Model model) {
-		logger.info("이력서 등록, 파라미터 resumeVO={}", resumeVO);
-		
-			Date resumeBirth = new Date();
-		try {
-			resumeBirth = new SimpleDateFormat("yyyy/MM/dd").parse(resumeBirth1);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		resumeVO.setResumeBirth(resumeBirth);
-		
-		//이미지 업로드 처리
-		String imageURL="";
-		try {
-			List<Map<String, Object>> list 
-			=fileUtil.fileupload(request, FileuploadUtil.RESUME_PHOTO);
-			for(Map<String, Object> map: list) {
-				imageURL=(String) map.get("file1");
-				resumeVO.setResumePhoto(imageURL);
-			}
-			
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		//파일 업로드 처리
-		List<Map<String, Object>> list=null;
-		String fileName="", originalFileName="";
-		long fileSize=0;
-		try {
-			list=fileUtil.fileupload(request, FileuploadUtil.RESUME_PORTFOLIO);
-			
-			//파일 업로드 한 경우
-			if(list!=null && !list.isEmpty()) {
-				for(Map<String, Object> map : list) {
-					originalFileName=(String) map.get("originalFilename");
-					fileName=(String) map.get("filename");
-					fileSize=(Long) map.get("fileSize");
-				}//for
-			}
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		pfVO.setPortFilename(fileName);
-		pfVO.setPortOrifname(originalFileName);
-		pfVO.setPortFilesize(fileSize);
-
-		
-		HashMap<String, Object> map = new HashMap<String,Object>();
-		
-		map.put("resumeVO", resumeVO);
-		map.put("shVO", shVO);
-		map.put("ehVO", ehVO);
-		map.put("skillVO", skillVO);
-		map.put("cerVO", cerVO);
-		map.put("actVO", actVO);
-		map.put("areaVO", areaVO);
-		map.put("pfVO", pfVO);
-		map.put("etVO", etVO);
-		map.put("occuVO", occuVO);
-		map.put("secVO", secVO);
-		map.put("eduVO", eduVO);
-		
-		//int cnt = resumeService.insertResume(map);
-		int cnt = resumeService.insertResume(resumeVO);
-		logger.info("이력서 등록 결과 cnt={}",cnt);
-		
-		String msg="", url="";
-		if(cnt>0) {
-			msg="이력서 등록 완료.";
-			url="/index.do";
-		}else {
-			msg="이력서 등록 실패";
-			url="/resume/resumeInsert.do";
-		}
-
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);		
-		
-		return "common/message";
-		
-	}
 	
 	@Transactional
 	@RequestMapping(value="/resumeInsert.do", method=RequestMethod.POST)
-	public String test(
+	public String resumeInsert_post(
 			@ModelAttribute ResumeVO resumeVO,@ModelAttribute SchoolHistoryVO shVO,@ModelAttribute EduHistoryVO ehVO,
 			@ModelAttribute ActivitiesVO actVO,@ModelAttribute CertificateVO cerVO,@ModelAttribute SkillVO skillVO,
-			@RequestParam String resumeBirth1,
-			HttpServletRequest request,Model model) {
-		logger.info("이력서 등록 결과 resumeVO={}",resumeVO);
-		
-		Date resumeBirth = new Date();
-		try {
-			resumeBirth = new SimpleDateFormat("yyyy/MM/dd").parse(resumeBirth1);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+			@ModelAttribute PortfolioVO pfVO,@ModelAttribute IntroductionVO introVO,
+			HttpServletRequest request,MultipartHttpServletRequest mhsr,Model model) {
+		logger.info("이력서 등록 resumeVO={}",resumeVO);		
+				
 		//이미지 업로드 처리
 		String imageURL="";
 		try {
 			List<Map<String, Object>> list 
 			=fileUtil.fileupload(request, FileuploadUtil.RESUME_PHOTO);
 			for(Map<String, Object> map: list) {
-				imageURL=(String) map.get("filename");
+				imageURL=(String) map.get("filename"); 
 				resumeVO.setResumePhoto(imageURL);
 				logger.info("이미지 업로드, imageURL={}",imageURL);
 			}
@@ -249,25 +162,211 @@ public class ResumeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		/*logger.info("대외활동 사이즈 actVO.getActVOList().size()={}",actVO.getActVOList().size());
+
 		
-		logger.info("보유능력 사이즈 skillVO.getSkillVOList().size()={}",skillVO.getSkillVOList().size());
-		*/
 		
-		// 추가 되는 학력 같은 값들의 length를 구한뒤 반복
 		
+		
+		if(resumeVO.getResumePhoto()==null || resumeVO.getResumePhoto().isEmpty() ) {
+			resumeVO.setResumePhoto("사진없음");
+		}
 		resumeVO.setMemNo(1);
 		resumeVO.setAreaNo(1);
 		resumeVO.setEduNo(1);
 		resumeVO.setEtNo(1);
 		resumeVO.setOccuNo(1);
 		resumeVO.setSecNo(1);
-		resumeVO.setResumeBirth(resumeBirth);
 		
 		int cnt = resumeService.insertResume(resumeVO);
+		
 		logger.info("이력서 등록 결과 cnt={}",cnt);
+		logger.info("이력서 등록후 resumeVO={}",resumeVO);
+		
+		int resumeVoNo = resumeVO.getResumeNo();
+		
+		//파일 업로드 처리
+		
+				String fileName="", originalFileName="";
+				long fileSize=0;
+				int pfcnt = 0;
+				String[] portIntro = request.getParameterValues("portIntro");
+				
+				try {
+					List<Map<String, Object>> list2
+					=fileUtil.fileupload(request, FileuploadUtil.RESUME_PORTFOLIO);
+					
+					for(Map<String, Object> map: list2) {
+						fileName=(String) map.get("filename"); 
+						originalFileName = (String) map.get("originalFilename");
+						fileSize = (long) map.get("fileSize");
+						logger.info("포트폴리오 업로드, originalFileName={}",originalFileName);
+						
+						pfVO.setPortFilename(fileName);
+						pfVO.setPortFilesize(fileSize);
+						pfVO.setPortOrifname(originalFileName);
+						pfVO.setPortIntro(portIntro[pfcnt]);
+						pfVO.setResumeNo(resumeVoNo);
+						logger.info("포트폴리오 insert 전,pfVO={} ",pfVO);
+						int pfres = resumeService.insertPF(pfVO);
+						logger.info("포트폴리오 등록 결과 pfres={}",pfres);
+						
+						pfcnt++;
+					}
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		
 		String msg="", url="";
+		
+		int shCnt = 0;
+		int ehCnt = 0;
+		int actCnt = 0;
+		int cerCnt = 0;
+		int skillCnt = 0;
+		
+		
+		
 		if(cnt>0) {
+			
+			// 학력 등록 ( 고등학교는 필수 입력, 대학교 이상은 추가 입력 가능 )
+			if(shVO.getShVOList()!=null) {
+				logger.info("학력 사이즈, shVO.getShVOList().size()={}",shVO.getShVOList().size());
+				
+				for(int i=0; i<shVO.getShVOList().size(); i++) {
+					logger.info("학력 등록 i={},shVO.getShVOList().get(i)={}",i,shVO.getShVOList().get(i));
+					if(shVO.getShVOList().get(i).getShAyear()!=null && !shVO.getShVOList().get(i).getShAyear().isEmpty()) {
+						//logger.info("setResumeNo 전 : shVO.getShVOList().get(i)={}",shVO.getShVOList().get(i));
+						
+						shVO.getShVOList().get(i).setResumeNo(resumeVoNo);
+						
+						//logger.info("setResumeNo 후 : shVO.getShVOList().get(i)={}",shVO.getShVOList().get(i));
+						
+						//logger.info("insertSH 전 shVO.getShVOList().get(i).getResumeNo()={}",shVO.getShVOList().get(i).getResumeNo());
+						
+						shCnt = resumeService.insertSH(shVO.getShVOList().get(i));
+						
+						logger.info("학력 등록 결과 shCnt={}",shCnt);
+					}
+				}
+			}		
+			
+			
+			// 교육 사항 ( 추가 선택 사항 )
+			if(ehVO.getEhVOList()!=null) {
+				logger.info("ehVO.getEhVOList().size()={}",ehVO.getEhVOList().size());
+				
+				
+				for(int i=0; i<ehVO.getEhVOList().size(); i++) {
+					
+					logger.info("ehVO.getEhVOList().get(i)={}",ehVO.getEhVOList().get(i));
+					
+					if(ehVO.getEhVOList().get(i).getEhCsname()!=null && !ehVO.getEhVOList().get(i).getEhCsname().isEmpty()) {
+						
+						ehVO.getEhVOList().get(i).setResumeNo(resumeVoNo);							
+						
+						ehCnt = resumeService.insertEH(ehVO.getEhVOList().get(i));
+						
+						logger.info("교육 등록 결과 ehCnt={}",ehCnt);
+					}
+				}
+			}
+			
+			// 대외 활동
+			if(actVO.getActVOList()!=null) {
+				
+				logger.info("대외활동 사이즈,actVO.getActVOList().size()={}",actVO.getActVOList().size());
+				
+				
+				for(int i=0; i<actVO.getActVOList().size(); i++) {
+					
+					logger.info("actVO.getActVOList().get(i)={}",actVO.getActVOList().get(i));
+					
+					if(actVO.getActVOList().get(i).getActHistory() != null && !actVO.getActVOList().get(i).getActHistory().isEmpty()) {
+						
+						actVO.getActVOList().get(i).setResumeNo(resumeVoNo);
+						
+						logger.info("대외활동 insert 전 . actVO.getActVOList().get(i)={}",actVO.getActVOList().get(i));
+						
+						actCnt = resumeService.insertAct(actVO.getActVOList().get(i));
+						
+						logger.info("대외활동 등록 결과 actCnt={}",actCnt);
+					}
+				}
+			}
+			
+			
+			// 자격증 / 어학 / 수상
+			if(cerVO.getCerVOList()!=null) {
+				
+				logger.info("자격증/어학/수상 사이즈,cerVO.getCerVOList().size()={}",cerVO.getCerVOList().size());
+				
+				for(int i=0; i<cerVO.getCerVOList().size(); i++) {
+					
+					logger.info("cerVO.getCerVOList().get(i)={}",cerVO.getCerVOList().get(i));
+					
+					if(cerVO.getCerVOList().get(i).getCerName() != null && !cerVO.getCerVOList().get(i).getCerName().isEmpty()) {
+						
+						cerVO.getCerVOList().get(i).setResumeNo(resumeVoNo);
+						
+						if(cerVO.getCerVOList().get(i).getCerAcceptScore() == null || cerVO.getCerVOList().get(i).getCerAcceptScore().isEmpty()) {
+							cerVO.getCerVOList().get(i).setCerAcceptScore("-");
+						}
+						
+						logger.info("자격증 insert 전 . cerVO.getCerVOList().get(i)={}",cerVO.getCerVOList().get(i));
+						cerCnt = resumeService.insertCer(cerVO.getCerVOList().get(i));
+						
+						logger.info("자격증/어학/수상 등록 결과 cerCnt={}",cerCnt);
+					}
+				}
+			}
+			
+			
+			
+			// 보유 기술 및 능력
+			if(skillVO.getSkillVOList()!=null) {
+				
+				logger.info("보유기술 사이즈,skillVO.getSkillVOList().size()={}",skillVO.getSkillVOList().size());
+				
+				for(int i=0; i<skillVO.getSkillVOList().size(); i++) {
+					
+					logger.info("skillVO.getSkillVOList().get(i)={}",skillVO.getSkillVOList().get(i));
+					
+					if(skillVO.getSkillVOList().get(i).getSkillAbility() != null && !skillVO.getSkillVOList().get(i).getSkillAbility().isEmpty()) {
+						
+						skillVO.getSkillVOList().get(i).setResumeNo(resumeVoNo);
+						
+						skillCnt = resumeService.insertSkill(skillVO.getSkillVOList().get(i));
+						
+						logger.info("보유기술 및 능력 등록 결과 skillCnt={}",skillCnt);
+					}
+				}
+			}
+			
+			int introCnt = 0;
+			// 자기소개서
+			if(introVO.getIntroVOList()!=null) {
+				
+				logger.info("자기소개서 사이즈,introVO.getIntroVOList().size()={}",introVO.getIntroVOList().size());
+				
+				for(int i=0; i<introVO.getIntroVOList().size(); i++) {
+					
+					logger.info("introVO.getIntroVOList().get(i)={}",introVO.getIntroVOList().get(i));
+					
+					if(introVO.getIntroVOList().get(i).getIntroTitle() != null && !introVO.getIntroVOList().get(i).getIntroTitle().isEmpty()) {
+						
+						introVO.getIntroVOList().get(i).setResumeNo(resumeVoNo);
+						
+						introCnt = resumeService.insertIntro(introVO.getIntroVOList().get(i));
+						
+						logger.info("자기소개서 등록 결과 introCnt={}",introCnt);
+					}
+				}
+			}
+			
+			
 			msg="이력서 등록 완료.";
 			url="/index.do";
 		}else {
@@ -276,11 +375,21 @@ public class ResumeController {
 		}
 
 		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);		
+		model.addAttribute("url", url);			
 		
+		
+		
+		
+		
+		
+		
+	
+	
 		return "common/message";
 	}
 	
+	
+
 	@RequestMapping("/resumeList.do")
 	public String resumeList(HttpSession session,Model model) {
 		logger.info("내 이력서 리스트보기");
@@ -299,6 +408,13 @@ public class ResumeController {
 	}
 	
 	
+	@RequestMapping("/resumeView.do")
+	public String resumeView(Model model) {
+		
+		
+		
+		return "resume/resumeView";
+	}
 
 	
 }

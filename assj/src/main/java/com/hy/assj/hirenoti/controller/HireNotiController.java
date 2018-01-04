@@ -3,6 +3,8 @@ package com.hy.assj.hirenoti.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hy.assj.cmMember.model.CmMemberService;
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
@@ -33,6 +37,9 @@ public class HireNotiController {
 	
 	@Autowired
 	private HireNotiService hirenotiService;
+	
+	@Autowired
+	private CmMemberService cmMemberService;
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
 	public String hireNoti1() {
@@ -143,20 +150,25 @@ public class HireNotiController {
 	
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, 
+	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, HttpSession session,
 			Model model) {
 		logger.info("공고등록 처리-파라미터, vo={}", hirenotiVo);
 		
+		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		int cmNo = cmMemberVo.getCmNo();
+		hirenotiVo.setCmNo(cmNo);
+		hirenotiVo.setAreaNo(20);
+		
 		int cnt =hirenotiService.insertHireNoti(hirenotiVo);
-		logger.info("글쓰기 결과, cnt={}", cnt);
+		logger.info("공고등록  처리 결과, cnt={}", cnt);
 		
 		String msg="", url="";
 		if(cnt>0) {
-			msg="글쓰기 처리되었습니다.";
-			url="/hire2.do";
+			msg="공고등록 처리되었습니다.";
+			url="/hire_noti/hire2.do";
 		}else {
-			msg="글쓰기 실패";
-			url="/hire1.do";			
+			msg="공고등록 실패";
+			url="/hire_noti/hire1.do";			
 		}
 		
 		model.addAttribute("msg", msg);
@@ -164,6 +176,7 @@ public class HireNotiController {
 		
 		return "common/message";		
 	}
+	
 	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {

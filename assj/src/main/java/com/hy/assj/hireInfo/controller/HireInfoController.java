@@ -1,5 +1,7 @@
 package com.hy.assj.hireInfo.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.hireInfo.model.HireInfoService;
+import com.hy.assj.recruit.model.RHireNotiVO;
+import com.hy.assj.recruit.model.RSearchValue;
 
 @Controller
 @RequestMapping("/hireInfo")
@@ -78,7 +82,7 @@ public class HireInfoController {
 	
 	@RequestMapping("/careerList.do")
 	public String careerList(Model model) {
-		model.addAttribute("list", hireInfoService.getCareerList());
+		//model.addAttribute("list", hireInfoService.getCareerList());
 		
 		return "hireInfo/category/careerCategory";
 	}
@@ -98,12 +102,13 @@ public class HireInfoController {
 	}*/
 	
 	@RequestMapping("/search.do")
-	public String search(@RequestParam(value="area", required=false) String[] area, @RequestParam(value="occupation", required=false) String[] occupation) {
-		System.out.println("지역 수: " + area.length);
-		if (occupation != null) {
-			System.out.println("업종 수: " + occupation.length);
-		}
-		return "받음";
+	public String search(RSearchValue searchValue, Model model) {
+		//System.out.println(searchValue);
+		List<RHireNotiVO> list = hireInfoService.searchHireNoti(searchValue);
+		System.out.println(list);
+		System.out.println("list size:" + list.size());
+		model.addAttribute("list", list);
+		return "hireInfo/searchResult";
 	}
 	
 }

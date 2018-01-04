@@ -11,18 +11,27 @@ public class TalentManagementVO {
 	private List<String> EduColDetail; //자주 검색하는 대학
 	private List<String> position; //직책 부분
 	private List<String> rank; //직급 부분
-	private List<String> ET_NAME; //empType근무형태 부분
-	private List<String> AREA_TOP_NAME; // 제일 상위 지역 검색
-	private List<String> RESUME_GENDER; //성별
-	private List<String> CareerCheckBox; //경력이 있는지 없는지 체크하는 곳 업데이트 필요
-	private List<String> OCCU_NAME; //HopeOccu
-	private List<String> AREA_NAME; //area
-	private List<String> SEC_NAME; //희망 업종
+	private List<String> etName; //empType근무형태 부분
+	private List<String> areaTopName; // 제일 상위 지역 검색
+	private List<String> resumeGender; //성별
+	private List<String> careerCheckBox; //경력이 있는지 없는지 체크하는 곳 업데이트 필요
+	private List<String> occuName; //HopeOccu
+	private List<String> areaName; //area
+	private List<String> secName; //희망 업종
+	private String countPerPage; //한페이지당 보여줄 데이터 개수
+	private String currentPage;//현재 페이지
 	
-	
-	public TalentManagementVO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getCountPerPage() {
+		return countPerPage;
+	}
+	public void setCountPerPage(String countPerPage) {
+		this.countPerPage = countPerPage;
+	}
+	public String getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
 	}
 	public List<String> getUniversityType() {
 		return UniversityType;
@@ -48,48 +57,55 @@ public class TalentManagementVO {
 	public void setRank(List<String> rank) {
 		this.rank = rank;
 	}
-	public List<String> getET_NAME() {
-		return ET_NAME;
+	public List<String> getEtName() {
+		return etName;
 	}
-	public void setET_NAME(List<String> eT_NAME) {
-		ET_NAME = eT_NAME;
+	public void setEtName(List<String> etName) {
+		this.etName = etName;
 	}
-	public List<String> getAREA_TOP_NAME() {
-		return AREA_TOP_NAME;
+	public List<String> getAreaTopName() {
+		return areaTopName;
 	}
-	public void setAREA_TOP_NAME(List<String> aREA_TOP_NAME) {
-		AREA_TOP_NAME = aREA_TOP_NAME;
+	public void setAreaTopName(List<String> areaTopName) {
+		this.areaTopName = areaTopName;
 	}
-	public List<String> getRESUME_GENDER() {
-		return RESUME_GENDER;
+	public List<String> getResumeGender() {
+		return resumeGender;
 	}
-	public void setRESUME_GENDER(List<String> rESUME_GENDER) {
-		RESUME_GENDER = rESUME_GENDER;
+	public void setResumeGender(List<String> resumeGender) {
+		this.resumeGender = resumeGender;
 	}
 	public List<String> getCareerCheckBox() {
-		return CareerCheckBox;
+		return careerCheckBox;
 	}
 	public void setCareerCheckBox(List<String> careerCheckBox) {
-		CareerCheckBox = careerCheckBox;
+		this.careerCheckBox = careerCheckBox;
 	}
-	public List<String> getOCCU_NAME() {
-		return OCCU_NAME;
+	public List<String> getOccuName() {
+		return occuName;
 	}
-	public void setOCCU_NAME(List<String> oCCU_NAME) {
-		OCCU_NAME = oCCU_NAME;
+	public void setOccuName(List<String> occuName) {
+		this.occuName = occuName;
 	}
-	public List<String> getAREA_NAME() {
-		return AREA_NAME;
+	public List<String> getAreaName() {
+		return areaName;
 	}
-	public void setAREA_NAME(List<String> aREA_NAME) {
-		AREA_NAME = aREA_NAME;
+	public void setAreaName(List<String> areaName) {
+		this.areaName = areaName;
 	}
-	public List<String> getSEC_NAME() {
-		return SEC_NAME;
+	public List<String> getSecName() {
+		return secName;
 	}
-	public void setSEC_NAME(List<String> sEC_NAME) {
-		SEC_NAME = sEC_NAME;
+	public void setSecName(List<String> secName) {
+		this.secName = secName;
 	}
+	public List<String> getMajor() {
+		return major;
+	}
+	public void setMajor(List<String> major) {
+		this.major = major;
+	}
+	private List<String> major;//전공
 	
 	
 }

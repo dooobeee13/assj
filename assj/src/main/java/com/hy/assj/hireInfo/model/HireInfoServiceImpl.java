@@ -8,6 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hy.assj.recruit.model.RHireNotiVO;
+import com.hy.assj.recruit.model.RSearchValue;
+import com.hy.assj.recruit.model.RecruitDAO;
 import com.hy.assj.vo.AreaVO;
 import com.hy.assj.vo.CareerVO;
 import com.hy.assj.vo.CompScaleVO;
@@ -24,6 +27,9 @@ public class HireInfoServiceImpl implements HireInfoService {
 
 	@Autowired
 	private HireInfoDAO hireInfoDao;
+	
+	@Autowired
+	private RecruitDAO recuriteDao;
 
 	@Override
 	public Map<String, List<AreaVO>> getAreaListMap() {
@@ -128,5 +134,8 @@ public class HireInfoServiceImpl implements HireInfoService {
 		return hireInfoDao.selectCompScale();
 	}
 	
+	public List<RHireNotiVO> searchHireNoti(RSearchValue searchValue) {
+		return recuriteDao.selectHireNotiBySearchValue(searchValue);
+	}
 	
 }

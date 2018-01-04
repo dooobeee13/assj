@@ -5,7 +5,7 @@
 	<span class="sp11">고용형태</span>
 	<c:forEach var="vo" items="${list}">
 		<label class="checkbox-inline" for="empType${vo.etNo}">
-		<input type="checkbox" id="empType${vo.etNo}" name="empType" value="${vo.etNo}">
+		<input type="checkbox" id="empType${vo.etNo}" name="empTypeList" value="${vo.etNo}">
 			${vo.etName}
 		</label>
 	</c:forEach>

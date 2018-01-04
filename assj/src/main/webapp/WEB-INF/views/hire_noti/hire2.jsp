@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><!-- 반응형 웹을위한 메타태그 -->
 <title>assj 공고/지원자관리</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mainstyle.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/clear.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/mystyle.css"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/mainstyle.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/clear.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/layout.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/mystyle.css'/>"/>
 
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet"> 
@@ -74,18 +74,7 @@
 					</c:if>
 					<c:if test="${!empty list}">
 						<!--게시판 내용 반복문 시작  -->
-						<c:forEach var="vo" items="${list }" varStatus="status">
-							<tr style="text-align: center">
-								<td>${vo.no}</td>
-								<td style="text-align: left"><a
-									href="<c:url value='/board/countUpdate.do?no=${vo.no}'/>">
-										${vo.title}</a></td>
-								<td>${vo.name}</td>
-								<td><fmt:formatDate value="${vo.regdate}"
-										pattern="yyyy-MM-dd" /></td>
-								<td>${vo.readcount}</td>
-							</tr>
-						</c:forEach>
+					
 						<!--반복처리 끝  -->
 					</c:if>
 				</tbody>

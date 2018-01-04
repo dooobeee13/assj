@@ -1,6 +1,7 @@
 package com.hy.assj.hirenoti.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.vo.CareerVO;
@@ -25,4 +26,11 @@ public interface HireNotiDAO {
 	public List<SectorsVO> selectSectorsAll();
 	public List<EducationVO> selectEducationAll();
 	public List<PositionVO> selectPositionAll();
+	
+	int insertMajor(Map<String, Object> map);
+	int insertRank(Map<String, Object> map);
+	int insertOccupation(Map<String, Object> map);
+	int insertSector(Map<String, Object> map);
+	int insertEmpType(Map<String, Object> map);
+	int insertPosition(Map<String, Object> map);
 }

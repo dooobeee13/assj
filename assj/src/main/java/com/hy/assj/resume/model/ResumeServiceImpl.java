@@ -64,10 +64,7 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeDao.selectAllOccuDetail(no);
 	}
 
-	@Override
-	public int insertResume1(HashMap<String, Object> map) {
-		return resumeDao.insertResume1(map);
-	}
+	
 
 	@Override
 	public int insertResume(ResumeVO resumeVO) {
@@ -82,6 +79,61 @@ public class ResumeServiceImpl implements ResumeService {
 	@Override
 	public int selectMemNoByEmail(String memEmail) {
 		return resumeDao.selectMemNoByEmail(memEmail);
+	}
+
+	@Override
+	public int insertSH(SchoolHistoryVO shVO) {
+		return resumeDao.insertSH(shVO);
+	}
+
+	@Override
+	public List<MajorVO> selectMajorBasicD() {
+		return resumeDao.selectMajorBasicD();
+	}
+
+	@Override
+	public List<AreaVO> selectBasicArea() {
+		return resumeDao.selectBasicArea();
+	}
+
+	@Override
+	public List<OccupationVO> selectBasicOccu() {
+		return resumeDao.selectBasicOccu();
+	}
+
+	@Override
+	public List<SectorsVO> selectBasicSec() {
+		return resumeDao.selectBasicSec();
+	}
+
+	@Override
+	public int insertEH(EduHistoryVO ehVO) {
+		return resumeDao.insertEH(ehVO);
+	}
+
+	@Override
+	public int insertAct(ActivitiesVO actVO) {
+		return resumeDao.insertAct(actVO);
+	}
+
+	@Override
+	public int insertCer(CertificateVO cerVO) {
+		return resumeDao.insertCer(cerVO);
+	}
+
+	@Override
+	public int insertSkill(SkillVO skillVO) {
+		return resumeDao.insertSkill(skillVO);
+	}
+
+	@Override
+	public int insertPF(PortfolioVO pfVO) {
+		return resumeDao.insertPF(pfVO);
+	}
+
+	@Override
+	public int insertIntro(IntroductionVO introVO) {
+		return resumeDao.insertIntro(introVO);
 	}
 
 	

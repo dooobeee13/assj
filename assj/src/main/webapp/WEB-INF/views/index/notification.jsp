@@ -2,17 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.panel-heading img {
+	.notification {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	
+	.notification .notiTitle {
+		background: #fff;
+	}
+
+	.notification .panel-heading img {
 		width: 180px;
 		height: 72px;
 	}
 	
-	.compName {
+	.notification .compName {
 		font-weight: bold;
 		font-size: 1.2em;
 	}
 	
-	.notiContent {
+	.notification .notiContent {
 		overflow: hidden;
    		text-overflow: ellipsis;
    		display: -webkit-box;
@@ -20,21 +29,17 @@
   		-webkit-box-orient: vertical;  
 	}
 	
-	.notiItem {
+	.notification .notiItem {
 		height: 198px;
 		margin-bottom: 0;
 	}
 	
-	.sidemargin0 {
-		margin-right: 0;
-		margin-left: 0;
-	}
-	
-	.notiItem:hover {
+	.notification .notiItem:hover {
 		border: 2px solid red;
 	}
 </style>
-<div class="row sidemargin0">
+
+<div class="row notification">
 	<c:forEach begin="1" end="12">
 		<div class="panel panel-default col-md-3 notiItem">
 			<div class="panel-heading notiTitle text-center"><img src="//img11.jobkorea.kr/Images/Logo/180/u/t/utopia10_180.gif?20171213170002" alt="교보정보통신" ></div>

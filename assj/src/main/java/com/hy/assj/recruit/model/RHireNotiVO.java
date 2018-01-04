@@ -3,6 +3,8 @@ package com.hy.assj.recruit.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.hy.assj.vo.CareerVO;
+import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
@@ -10,11 +12,10 @@ import com.hy.assj.vo.PositionVO;
 import com.hy.assj.vo.RankVO;
 import com.hy.assj.vo.SectorsVO;
 
-public class HireNotiVO {
+public class RHireNotiVO {
 
 	private int hnNo;
 	private String hnNotititle;
-	private int cmNo;
 	private int hnSalStart;
 	private int hnSalEnd;
 	private int hnViews;
@@ -34,9 +35,13 @@ public class HireNotiVO {
 	private String hnStatus;
 	private String hnGender;
 	private int hnRecruitNum;
-	private int eduNo;
-	private int careerNo;
+	private int hnExpyearMin;
+	private int hnExpyearMax;
 	
+	private RCompMemberVO compMemberVo;
+	private EducationVO educationVo;
+	private CareerVO careerVo;
+	private RAreaVO areaVo;
 	private List<MajorVO> majorList;
 	private List<PositionVO> positionList;
 	private List<OccupationVO> occupationList;
@@ -55,12 +60,6 @@ public class HireNotiVO {
 	}
 	public void setHnNotititle(String hnNotititle) {
 		this.hnNotititle = hnNotititle;
-	}
-	public int getCmNo() {
-		return cmNo;
-	}
-	public void setCmNo(int cmNo) {
-		this.cmNo = cmNo;
 	}
 	public int getHnSalStart() {
 		return hnSalStart;
@@ -176,17 +175,41 @@ public class HireNotiVO {
 	public void setHnRecruitNum(int hnRecruitNum) {
 		this.hnRecruitNum = hnRecruitNum;
 	}
-	public int getEduNo() {
-		return eduNo;
+	public int getHnExpyearMin() {
+		return hnExpyearMin;
 	}
-	public void setEduNo(int eduNo) {
-		this.eduNo = eduNo;
+	public void setHnExpyearMin(int hnExpyearMin) {
+		this.hnExpyearMin = hnExpyearMin;
 	}
-	public int getCareerNo() {
-		return careerNo;
+	public int getHnExpyearMax() {
+		return hnExpyearMax;
 	}
-	public void setCareerNo(int careerNo) {
-		this.careerNo = careerNo;
+	public void setHnExpyearMax(int hnExpyearMax) {
+		this.hnExpyearMax = hnExpyearMax;
+	}
+	public RCompMemberVO getCompMemberVo() {
+		return compMemberVo;
+	}
+	public void setCompMemberVo(RCompMemberVO compMemberVo) {
+		this.compMemberVo = compMemberVo;
+	}
+	public EducationVO getEducationVo() {
+		return educationVo;
+	}
+	public void setEducationVo(EducationVO educationVo) {
+		this.educationVo = educationVo;
+	}
+	public CareerVO getCareerVo() {
+		return careerVo;
+	}
+	public void setCareerVo(CareerVO careerVo) {
+		this.careerVo = careerVo;
+	}
+	public RAreaVO getAreaVo() {
+		return areaVo;
+	}
+	public void setAreaVo(RAreaVO areaVo) {
+		this.areaVo = areaVo;
 	}
 	public List<MajorVO> getMajorList() {
 		return majorList;
@@ -224,18 +247,18 @@ public class HireNotiVO {
 	public void setEmpTypeList(List<EmpTypeVO> empTypeList) {
 		this.empTypeList = empTypeList;
 	}
-	
 	@Override
 	public String toString() {
-		return "HireNotiVO [hnNo=" + hnNo + ", hnNotititle=" + hnNotititle + ", cmNo=" + cmNo + ", hnSalStart="
-				+ hnSalStart + ", hnSalEnd=" + hnSalEnd + ", hnViews=" + hnViews + ", hnStart=" + hnStart
-				+ ", hnDeadline=" + hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnEligibility="
-				+ hnEligibility + ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
+		return "RHireNotiVO [hnNo=" + hnNo + ", hnNotititle=" + hnNotititle + ", hnSalStart=" + hnSalStart
+				+ ", hnSalEnd=" + hnSalEnd + ", hnViews=" + hnViews + ", hnStart=" + hnStart + ", hnDeadline="
+				+ hnDeadline + ", hnHows=" + hnHows + ", hnTask=" + hnTask + ", hnEligibility=" + hnEligibility
+				+ ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
 				+ ", hnDocument=" + hnDocument + ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat="
 				+ hnLat + ", hnLng=" + hnLng + ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnRecruitNum="
-				+ hnRecruitNum + ", eduNo=" + eduNo + ", careerNo=" + careerNo + ", majorList=" + majorList
-				+ ", positionList=" + positionList + ", occupationList=" + occupationList + ", sectorList=" + sectorList
-				+ ", rankList=" + rankList + ", empTypeList=" + empTypeList + "]";
+				+ hnRecruitNum + ", hnExpyearMin=" + hnExpyearMin + ", hnExpyearMax=" + hnExpyearMax + ", compMemberVo="
+				+ compMemberVo + ", educationVo=" + educationVo + ", careerVo=" + careerVo + ", areaVo=" + areaVo
+				+ ", majorList=" + majorList + ", positionList=" + positionList + ", occupationList=" + occupationList
+				+ ", sectorList=" + sectorList + ", rankList=" + rankList + ", empTypeList=" + empTypeList + "]";
 	}
 	
 }

@@ -4,6 +4,13 @@ import java.util.List;
 
 public interface RecruitDAO {
 
-	List<HireNotiVO> selectHireNoti(int hnNo);
+	RHireNotiVO selectHireNotiByHnNo(int hnNo);
 	
+	List<RHireNotiVO> selectHireNotiBySearchValue(RSearchValue searchValue);
+	
+	RMemberVO selectMemberInfo(int memNo);
+	
+	int insertScrap(RScrapVO vo);
+	
+	int deleteScrap(RScrapVO vo);
 }
