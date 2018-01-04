@@ -63,16 +63,16 @@
 		background-color: #ffff;
 		height: 860px;
 	}
-	#searchTable {
+	#frame #searchTable {
 		float: right;
 	}
-	table th, table {
+	#frame table th, table {
 		text-align: center;
 	}
-	.divPage {
+	#frame .divPage {
 		text-align: center;
 	}
-	h1 img {
+	#frame h1 img {
 		vertical-align: bottom;
 		width: 70px;
 	}
