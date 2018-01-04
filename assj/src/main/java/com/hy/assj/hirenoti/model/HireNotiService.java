@@ -1,6 +1,7 @@
 package com.hy.assj.hirenoti.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.vo.CareerVO;
@@ -24,4 +25,5 @@ public interface HireNotiService {
 	public List<SectorsVO> selectSectorsAll();
 	public List<EducationVO> selectEducationAll();
 	public List<PositionVO> selectPositionAll();
+	public List<Map<String, Object>> selecthireNoti(int cmNo);
 }

@@ -1,6 +1,7 @@
 package com.hy.assj.hirenoti.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,10 @@ public class HireNotiServiceImpl implements HireNotiService{
 	@Override
 	public List<PositionVO> selectPositionAll() {
 		return hirenotiDao.selectPositionAll();
+	}
+
+	@Override
+	public List<Map<String, Object>> selecthireNoti(int cmNo) {
+		return hirenotiDao.selecthireNoti(cmNo);
 	}	
 }

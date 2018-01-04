@@ -22,7 +22,6 @@
 	
 	<select id="selectAll" parameterType="SearchVO" resultType="HireNotiVO">
 		select * from hire_noti order by hn_no desc
-	
 	</select>
 	
 	<select id="careerList" resultType="CareerVO">
@@ -104,6 +103,12 @@
 	    	select get_hn_pos_seq, #{hnNo}, #{position} from dual
 		</foreach>
 	</update>
+	
+	<select id="selecthireNoti" parameterType="int" resultType="map">
+			select * from hire_noti where cm_no=#{cmNo}
+			order by hn_no desc
+	</select>
+	
 </mapper>
 
 

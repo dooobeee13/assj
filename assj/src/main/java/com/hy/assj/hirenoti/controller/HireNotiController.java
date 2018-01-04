@@ -2,6 +2,7 @@ package com.hy.assj.hirenoti.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -184,10 +185,14 @@ public class HireNotiController {
 	*/
 	
 	@RequestMapping("/hire2.do")
-	public String list(@ModelAttribute SearchVO searchVo, Model model) {
+	public String list(@ModelAttribute SearchVO searchVo,HttpSession session, Model model) {
 		logger.info("공고 목록, 파라미터 = {}", searchVo);
 		
-		//Paging 처리에 필요한 변수를 계산해주는 PasinationInfo생성
+		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		int cmNo = cmMemberVo.getCmNo();
+		
+			
+	/*	//Paging 처리에 필요한 변수를 계산해주는 PasinationInfo생성
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
@@ -198,19 +203,18 @@ public class HireNotiController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		logger.info("searchVo 최종값 : {}", searchVo);
+		logger.info("searchVo 최종값 : {}", searchVo);*/
 		
-		List<HireNotiVO>list =hirenotiService.selectAll(searchVo);
-		logger.info("글목록 결과, list.size()={}", list.size());
+		List<Map<String, Object>>list =hirenotiService.selecthireNoti(cmNo);
+		logger.info("공고목록 결과, list.size()={}", list.size());
 		
-		/*
-		//int totalRecord = hirenotiService.selectTotalRecordCount(searchVo);
+		/*int totalRecord = hirenotiService.selectTotalRecordCount(searchVo);
 		logger.info("글 전체 개수 조회 결과, totalRecord={}", totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);*/
 		
 		model.addAttribute("list",list);
-		model.addAttribute("pagingInfo",pagingInfo);
+/*		model.addAttribute("pagingInfo",pagingInfo);*/
 		
 		return "hire_noti/hire2";
 		
