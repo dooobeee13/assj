@@ -7,17 +7,14 @@
 		<selectKey resultType="int" keyProperty="hnNo" order="BEFORE">
 			select hire_noti_seq.nextval from dual
 		</selectKey>
-		insert into hire_noti(hn_no,hn_notititle,cm_no,hn_sal_start,hn_sal_end,hn_views,
-		hn_start,hn_deadline,hn_hows,hn_task,hn_eligibility,hn_preference,hn_step,
-		hn_benefits,hn_document,hn_addr,hn_detailaddr,hn_lat,hn_lng,hn_gender,
-		edu_no,career_no,HN_EXPYEAR_MIN,HN_EXPYEAR_MAX) 
-		
-		
-		values(#{hnNo}, #{hnNotiTitle}, #{cmNo}, #{hnSalStart}, #{hnSalEnd},#{hnViews},
-		to_date(#{hnStart}),to_date(#{hnDeadline}),
-		#{hnHows},#{hnTask},#{hnEligibility},#{hnPreference},#{hnStep},
-		#{hnBenefits},#{hnDocument},#{hnAddr},#{hnDetailAddr},#{hnLat},#{hnLng},
-		#{hnGender},#{eduNo},#{careerNo},#{hnExpyearMin},#{hnExpyearMax})
+		insert into hire_noti(hn_no, hn_notititle, cm_no, hn_sal_start, hn_sal_end, hn_views, hn_start,
+		hn_deadline, hn_hows, hn_task, hn_eligibility, hn_preference, hn_step, hn_benefits, hn_document, 
+		hn_addr, hn_detailaddr, hn_lat, hn_lng, hn_gender, hn_recruit_num, HN_EXPYEAR_MIN, HN_EXPYEAR_MAX,  
+		edu_no, career_no, area_no) 
+		values(#{hnNo}, #{hnNotiTitle}, #{cmNo}, #{hnSalStart}, #{hnSalEnd}, #{hnViews}, to_date(#{hnStart}),
+		to_date(#{hnDeadline}), #{hnHows}, #{hnTask}, #{hnEligibility}, #{hnPreference}, #{hnStep}, #{hnBenefits},
+		#{hnDocument}, #{hnAddr}, #{hnDetailAddr}, #{hnLat}, #{hnLng}, #{hnGender}, #{hnRecruitNum}, #{hnExpyearMin}, #{hnExpyearMax}, 
+		decode(#{eduNo},0,null,1), decode(#{careerNo},0,null,1),(select area_no from area where area_name like '%' || #{sigungu} || '%'))
 	</insert>
 	
 	<select id="selectAll" parameterType="SearchVO" resultType="HireNotiVO">
@@ -60,7 +57,7 @@
 	<!-- 전공 등록 -->
 	<update id="insertMajor">
 		insert into hn_major(hn_major_no, hn_no, major_no)
-		<foreach collection="list" item="major" separator=" union all ">
+		<foreach collection="majorList" item="major" separator=" union all ">
 	    	select get_hn_major_seq, #{hnNo}, #{major} from dual
 		</foreach>
 	</update>
@@ -68,7 +65,7 @@
 	<!-- 직급 등록 -->
 	<update id="insertRank">
 		insert into hn_rank(hn_rank_no, hn_no, rank_no)
-		<foreach collection="list" item="rank" separator=" union all ">
+		<foreach collection="rankList" item="rank" separator=" union all ">
 	    	select get_hn_rank_seq, #{hnNo}, #{rank} from dual
 		</foreach>
 	</update>
@@ -76,7 +73,7 @@
 	<!-- 직종 등록 -->
 	<update id="insertOccu">
 		insert into hn_occu(hn_occu_no, hn_no, occu_no)
-		<foreach collection="list" item="occu" separator=" union all ">
+		<foreach collection="occuList" item="occu" separator=" union all ">
 	    	select get_hn_occu_seq, #{hnNo}, #{occu} from dual
 		</foreach>
 	</update>
@@ -84,7 +81,7 @@
 	<!-- 업종 등록 -->
 	<update id="insertSec">
 		insert into hn_sec(hn_sec_no, hn_no, sec_no)
-		<foreach collection="list" item="sec" separator=" union all ">
+		<foreach collection="secList" item="sec" separator=" union all ">
 	    	select get_hn_sec_seq, #{hnNo}, #{sec} from dual
 		</foreach> 
 	</update>
@@ -92,7 +89,7 @@
 	<!-- 고용형태 등록 -->
 	<update id="insertEt">
 		insert into hn_et(hn_et_no, hn_no, et_no)
-		<foreach collection="list" item="et" separator=" union all ">
+		<foreach collection="etList" item="et" separator=" union all ">
 	    	select get_hn_et_seq, #{hnNo}, #{et} from dual
 		</foreach>
 	</update>
@@ -100,10 +97,11 @@
 	<!-- 직책 등록 -->
 	<update id="insertPosition">
 		insert into hn_pos(hn_pos_no, hn_no, position_no)
-		<foreach collection="list" item="position" separator=" union all ">
+		<foreach collection="posList" item="position" separator=" union all ">
 	    	select get_hn_pos_seq, #{hnNo}, #{position} from dual
 		</foreach>
 	</update>
+	
 </mapper>
 
 

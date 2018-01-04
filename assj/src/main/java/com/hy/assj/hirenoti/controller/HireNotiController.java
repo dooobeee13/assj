@@ -38,8 +38,6 @@ public class HireNotiController {
 	@Autowired
 	private HireNotiService hirenotiService;
 	
-	@Autowired
-	private CmMemberService cmMemberService;
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
 	public String hireNoti1() {
@@ -150,16 +148,20 @@ public class HireNotiController {
 	
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, HttpSession session,
+	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, String sal, HttpSession session,
 			Model model) {
 		logger.info("공고등록 처리-파라미터, vo={}", hirenotiVo);
+		String[] sals = sal.split("~");
+		hirenotiVo.setHnSalStart(Integer.parseInt(sals[0]));
+		hirenotiVo.setHnSalEnd(Integer.parseInt(sals[1]));
+		
+		System.out.println("최종 vo:" + hirenotiVo);
 		
 		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
 		int cmNo = cmMemberVo.getCmNo();
 		hirenotiVo.setCmNo(cmNo);
-		hirenotiVo.setAreaNo(20);
 		
-		int cnt =hirenotiService.insertHireNoti(hirenotiVo);
+		int cnt = hirenotiService.insertHireNoti(hirenotiVo);
 		logger.info("공고등록  처리 결과, cnt={}", cnt);
 		
 		String msg="", url="";

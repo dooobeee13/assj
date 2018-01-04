@@ -24,8 +24,7 @@
 	</label> <br> <br> -->
 </div>
 <div id="careeryear" style="display: none">
-	<select id="hnExpyearMin">
-		
+	<select id="hnExpyearMin" name="hnExpyearMin">
 		<option value="0">선택</option>
 		<option value="1">1년</option>
 		<option value="2">2년</option>
@@ -39,7 +38,7 @@
 		<option value="10">10년</option>
 	</select>
 	~
-	<select id="hnExpyearMax">
+	<select id="hnExpyearMax" name="hnExpyearMax">
 		<option value="0">선택</option>
 		<option value="1">1년</option>
 		<option value="2">2년</option>

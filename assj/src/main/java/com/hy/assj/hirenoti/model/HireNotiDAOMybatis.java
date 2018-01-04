@@ -109,5 +109,5 @@ public class HireNotiDAOMybatis extends SqlSessionDaoSupport implements HireNoti
 	public int insertPosition(Map<String, Object> map) {
 		return getSqlSession().insert(namespace + ".insertPosition", map);
 	}
-	
+
 }
