@@ -67,7 +67,7 @@
 					<c:if test="${vo.dday == 0}">
 					<span class="label label-danger">오늘 마감</span>
 					</c:if>
-					<c:if test="${vo.dday == 0}">
+					<c:if test="${vo.dday > 0}">
 					<span class="label label-warning">D - ${vo.dday}</span>
 					</c:if>
 				</div>
