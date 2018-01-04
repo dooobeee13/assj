@@ -1,10 +1,8 @@
 package com.hy.assj.resume.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hy.assj.common.FileuploadUtil;
+import com.hy.assj.member.model.MemberVO;
 import com.hy.assj.resume.model.ActivitiesVO;
 import com.hy.assj.resume.model.CertificateVO;
 import com.hy.assj.resume.model.EduHistoryVO;
@@ -36,7 +34,6 @@ import com.hy.assj.resume.model.ResumeVO;
 import com.hy.assj.resume.model.SchoolHistoryVO;
 import com.hy.assj.resume.model.SkillVO;
 import com.hy.assj.vo.AreaVO;
-import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
 import com.hy.assj.vo.MajorVO;
 import com.hy.assj.vo.OccupationVO;
@@ -136,6 +133,8 @@ public class ResumeController {
 		
 	}	
 	
+
+	
 	
 	@Transactional
 	@RequestMapping(value="/resumeInsert.do", method=RequestMethod.POST)
@@ -143,7 +142,7 @@ public class ResumeController {
 			@ModelAttribute ResumeVO resumeVO,@ModelAttribute SchoolHistoryVO shVO,@ModelAttribute EduHistoryVO ehVO,
 			@ModelAttribute ActivitiesVO actVO,@ModelAttribute CertificateVO cerVO,@ModelAttribute SkillVO skillVO,
 			@ModelAttribute PortfolioVO pfVO,@ModelAttribute IntroductionVO introVO,
-			HttpServletRequest request,MultipartHttpServletRequest mhsr,Model model) {
+			HttpServletRequest request,HttpSession session,MultipartHttpServletRequest mhsr,Model model) {
 		logger.info("이력서 등록 resumeVO={}",resumeVO);		
 				
 		//이미지 업로드 처리
@@ -162,21 +161,21 @@ public class ResumeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		
-		
-		
+		session=request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		logger.info("회원 session, memberVO={}",memberVO);
 		
 		if(resumeVO.getResumePhoto()==null || resumeVO.getResumePhoto().isEmpty() ) {
 			resumeVO.setResumePhoto("사진없음");
 		}
-		resumeVO.setMemNo(1);
-		resumeVO.setAreaNo(1);
-		resumeVO.setEduNo(1);
-		resumeVO.setEtNo(1);
-		resumeVO.setOccuNo(1);
-		resumeVO.setSecNo(1);
+				
+		resumeVO.setMemNo(memberVO.getMemNo());
+		resumeVO.setAreaNo(resumeVO.getAreaNo());
+		resumeVO.setEtNo(resumeVO.getEtNo());
+		resumeVO.setOccuNo(resumeVO.getOccuNo());
+		resumeVO.setSecNo(resumeVO.getSecNo());
 		
+		logger.info("이력서 등록전 resumeVO={}",resumeVO);
 		int cnt = resumeService.insertResume(resumeVO);
 		
 		logger.info("이력서 등록 결과 cnt={}",cnt);
@@ -201,10 +200,14 @@ public class ResumeController {
 						fileSize = (long) map.get("fileSize");
 						logger.info("포트폴리오 업로드, originalFileName={}",originalFileName);
 						
+						String str = portIntro[pfcnt];
+						
+						str = str.replaceAll("\r\n", "<br>");
+						
 						pfVO.setPortFilename(fileName);
 						pfVO.setPortFilesize(fileSize);
 						pfVO.setPortOrifname(originalFileName);
-						pfVO.setPortIntro(portIntro[pfcnt]);
+						pfVO.setPortIntro(str);
 						pfVO.setResumeNo(resumeVoNo);
 						logger.info("포트폴리오 insert 전,pfVO={} ",pfVO);
 						int pfres = resumeService.insertPF(pfVO);
@@ -290,6 +293,12 @@ public class ResumeController {
 						
 						logger.info("대외활동 insert 전 . actVO.getActVOList().get(i)={}",actVO.getActVOList().get(i));
 						
+						String str = actVO.getActVOList().get(i).getActHistory();
+						
+						str = str.replaceAll("\r\n", "<br>");
+						
+						actVO.getActVOList().get(i).setActHistory(str);
+						
 						actCnt = resumeService.insertAct(actVO.getActVOList().get(i));
 						
 						logger.info("대외활동 등록 결과 actCnt={}",actCnt);
@@ -338,6 +347,12 @@ public class ResumeController {
 						
 						skillVO.getSkillVOList().get(i).setResumeNo(resumeVoNo);
 						
+						String str = skillVO.getSkillVOList().get(i).getSkillDetail();
+						
+						str = str.replaceAll("\r\n", "<br>");
+						
+						skillVO.getSkillVOList().get(i).setSkillDetail(str);
+						
 						skillCnt = resumeService.insertSkill(skillVO.getSkillVOList().get(i));
 						
 						logger.info("보유기술 및 능력 등록 결과 skillCnt={}",skillCnt);
@@ -359,6 +374,12 @@ public class ResumeController {
 						
 						introVO.getIntroVOList().get(i).setResumeNo(resumeVoNo);
 						
+						String str = introVO.getIntroVOList().get(i).getIntroContent();
+						
+						str = str.replaceAll("\r\n", "<br>");
+						
+						introVO.getIntroVOList().get(i).setIntroContent(str);
+				
 						introCnt = resumeService.insertIntro(introVO.getIntroVOList().get(i));
 						
 						logger.info("자기소개서 등록 결과 introCnt={}",introCnt);
@@ -368,7 +389,7 @@ public class ResumeController {
 			
 			
 			msg="이력서 등록 완료.";
-			url="/index.do";
+			url="/resume/resumeList.do";
 		}else {
 			msg="이력서 등록 실패";
 			url="/resume/resumeInsert.do";
@@ -391,17 +412,17 @@ public class ResumeController {
 	
 
 	@RequestMapping("/resumeList.do")
-	public String resumeList(HttpSession session,Model model) {
+	public String resumeList(HttpServletRequest request,HttpSession session,Model model) {
 		logger.info("내 이력서 리스트보기");
-		
-		//String memEmail = (String) session.getAttribute("memEmail");
 		
 		String memEmail = "test";
 		
-		int memNo = resumeService.selectMemNoByEmail(memEmail);
+		session = request.getSession();
 		
-		List<ResumeVO> list = resumeService.selectAllMyResume(memNo);
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		
+		List<ResumeVO> list = resumeService.selectAllMyResume(memberVO.getMemNo());
+		logger.info("내 이력서 사이즈, list.size()={}",list.size());
 		model.addAttribute("list", list);
 		
 		return "resume/resumeList";
@@ -409,9 +430,61 @@ public class ResumeController {
 	
 	
 	@RequestMapping("/resumeView.do")
-	public String resumeView(Model model) {
+	public String resumeView(@RequestParam(defaultValue="0")int resumeNo,Model model) {
+		logger.info("내 이력서 상세보기");
 		
+		Map<String,Object> map = resumeService.selectResumeByResumeNo(resumeNo);
 		
+		Date d = (Date) map.get("RESUME_BIRTH");
+		
+		Calendar cal = Calendar.getInstance();
+		
+		int currentYear = cal.get(Calendar.YEAR);
+		int currentMonth = cal.get(Calendar.MONTH)+1;
+		int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+		
+		cal.setTime(d);
+		
+		int birthYear = cal.get(Calendar.YEAR);
+		int birthMonth = cal.get(Calendar.MONTH)+1;
+		int birthDay = cal.get(Calendar.DAY_OF_MONTH);
+		
+		int age = currentYear - birthYear;
+		
+		 if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) {
+			 age--;			 
+		 }
+		
+		 List<SchoolHistoryVO> shList = resumeService.selectSHByResumeNo(resumeNo);
+		 logger.info("학력 가져오기 사이즈, shList.size()={}",shList.size());
+		 
+		 List<EduHistoryVO> ehList = resumeService.selectEHByResumeNo(resumeNo);
+		 logger.info("교육 가져오기 사이즈, ehList.size()={}",ehList.size());
+		 
+		 List<ActivitiesVO> actList = resumeService.selectActByResumeNo(resumeNo);
+		 logger.info("대외활동 가져오기 사이즈, actList.size()={}",actList.size());
+		 
+		 List<CertificateVO> cerList = resumeService.selectCerByResumeNo(resumeNo);
+		 logger.info("자격증 가져오기 사이즈, cerList.size()={}",cerList.size());
+		 
+		 List<SkillVO> skillList = resumeService.selectSkillByResumeNo(resumeNo);
+		 logger.info("보유기술 가져오기 사이즈, skillList.size()={}",skillList.size());
+		
+		 List<IntroductionVO> introList = resumeService.selectIntroByResumeNo(resumeNo);
+		 logger.info("자소서 가져오기 사이즈, introList.size()={}",introList.size());
+		 
+		 List<PortfolioVO> portList = resumeService.selectPortByResumeNo(resumeNo);
+		 logger.info("포트폴리오 가져오기 사이즈, portList.size()={}",portList.size());
+		 
+		model.addAttribute("age", age);
+		model.addAttribute("map", map);
+		model.addAttribute("shList", shList);
+		model.addAttribute("ehList", ehList);
+		model.addAttribute("actList", actList);
+		model.addAttribute("cerList", cerList);
+		model.addAttribute("skillList", skillList);
+		model.addAttribute("introList", introList);
+		model.addAttribute("portList", portList);
 		
 		return "resume/resumeView";
 	}

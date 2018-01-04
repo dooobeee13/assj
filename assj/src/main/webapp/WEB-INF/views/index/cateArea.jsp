@@ -67,9 +67,9 @@
 					<ul class="tabContent" id="tcArea${vo.areaNo}" <c:if test="${status.first}">style="display:block"</c:if>>
 					
 					<c:set var="subKey" value="subCategory-${vo.areaNo}"/>
-					<c:forEach var="sub" items="${map[subKey]}">
+					<c:forEach var="sub" items="${map[subKey]}" varStatus="stat">
 						<li class="col-md-4">
-							<a href="#"><span>${sub.areaName}</span></a>
+							<a href="<c:url value="/hireInfo/home.do?type=area&val=${stat.first ? vo.areaNo : sub.areaNo}" />"><span>${sub.areaName}</span></a>
 						</li>
 					</c:forEach>
 					</ul>

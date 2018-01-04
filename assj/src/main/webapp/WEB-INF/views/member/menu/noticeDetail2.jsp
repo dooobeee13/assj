@@ -104,11 +104,6 @@ $(function(){
 		$(this).css('opacity','1');
 	});
 	
-	$('select option:eq(0)').css('color','red');
-	$('select option:eq(1)').css('color','blue');
-	$('select option:eq(2)').css('color','orange');
-	$('select option:eq(3)').css('color','green');
-
 });
 
 window.onload=function(){
@@ -159,52 +154,34 @@ function closeNav() {
 
 </script>
 <style type="text/css">
-	.container fieldset{
-		/* margin:0 auto; */
+	.container fieldset {
 		width:70%;
 		padding:80px;
 		background-color:#ffff;
 	}
-	.container .form-group{
-		margin:10px;
+	.container #searchTable{
+		float:right;
 	}
-	.container #contents{
-		vertical-align:top;
-	}
-	.container #btnDiv{
+	.container table th,table{
 		text-align:center;
 	}
-	.container #adminDiv{
-		text-align:right;
+	.container #title{
+		font-size:0.6em;
 	}
-	.container #adminDiv img{
-		vertical-align:bottom;
+	.container #date{
+		text-align: right;
 	}
-	.container #size{
-		font-size:1.5em;
-		vertical-align: middle;
+	.container .well{
+		background: #e3e8ef;
 	}
-	.Advertising{
-		position: relative;
-		width: 100%;
-		height: 20%;
-		margin:10px;
-		float: right;
-		box-sizing: border-box;
-		background:#FBFFFF;
-		box-shadow: 2px 2px 2px #b8b8b8;
-		border-radius: 12px 12px 0 0;
+	.container #list{
+		background-color:#ebecee;
 	}
-	
-	.Advertising-div{
-		position: absolute;
-		top: 30px;
-		right: 20px;		
-		padding:0;
-		margin:0 auto;
-		width:22%;
-		height:100%;
-		box-sizing: border-box;
+	.container #ListDiv{
+		text-align: right;
+	}
+	.container #contentsDiv{
+		height:280px;
 	}
 </style>
 <head>
@@ -273,123 +250,57 @@ function closeNav() {
 			</div>
 		</div>
 		<!-- 섹션 부분 -->
-		<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;">
-			<div class="col-div-100-20">	
+	 	<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;"> 
+			<div class="col-div-80-20 "> 	
 				<div class="container">
 					<fieldset>
-		<form role="form" class="form-inline" method="post" action="<c:url value='/member/menu/noticeEdit.do'/>">	
-			<h1>공지사항 수정</h1>
-			<hr>
-			<div id="adminDiv">
-				[admin]관리자 입니다.				
-			</div>
-			<div class="form-group">
-				<label for="noticetitleNo">구분</label>&nbsp;&nbsp;  
-				<select class="form-control" id="noticetitleNo" name="noticetitleNo" >
-					<option value="1"
-					<c:if test="${map.NOTITITLE=='공지'}">
-						selected
-					</c:if>>공지</option>
-					<option value="2"
-					<c:if test="${map.NOTITITLE=='이벤트'}">
-						selected
-					</c:if>>이벤트</option>
-					<option value="3"
-					<c:if test="${map.NOTITITLE=='오픈'}">
-						selected
-					</c:if>>오픈</option>
-					<option value="4"
-					<c:if test="${map.NOTITITLE=='뉴스'}">
-						selected
-					</c:if>>뉴스</option>
-				</select>
-				<span id="size" class="glyphicon glyphicon-list"></span>
-			</div>
-			<br>
-			<div class="form-group">
-				<label for="title">제목</label>&nbsp;&nbsp;  
-				<input type="text" class="form-control" id="title" name="title" size="73" <c:if test="${!empty map.TITLE}">value="${map.TITLE}"</c:if>>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<input type="hidden" class="form-control" id="no" name="no" size="12" value='${map.NO}'>
-			</div>
-			<br>
-			<div class="form-group">
-				<label for="contents" id="contents">내용</label>&nbsp;&nbsp;  
-				<textarea class="form-control" rows="13" cols="75" id="contents" name="contents"><c:if test="${!empty map.CONTENTS}">${map.CONTENTS}</c:if></textarea>
-			</div>
-			<br>
-			<br>
-			<div id="btnDiv">
-				<button type="submit" class="btn btn-default btn-sm" id="editBtn" style="background-color:#607D8B;color:#ffff">수정</button>&nbsp;
-				<a href="<c:url value='/member/menu/noticeEditOut.do'/>"><button type="button" class="btn btn-default btn-sm" id="cancleBtn">취소</button><br></a>
-			</div>
-		</form>
-		</fieldset>
-		
-		<div class="Advertising-div">	
-				<!-- 메인 화면 통계부분 처리 -->
-				<div class="Advertising">
-						<div class="col-div-100-20 divMainbox">
-							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 회원</h2>
-						</div>
+				<h4>공지사항</h4>
+				<hr>
+				<div>	
+					<div class="well well-lg">
+						<h4>
+						<c:if test="${map.NOTITITLE=='공지'}">
+							<span style="color:red">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='이벤트'}">
+							<span style="color:blue">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='오픈'}">
+							<span style="color:orange">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='뉴스'}">
+							<span style="color:green">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>			
+						<span id="title">${map.TITLE }</span>
+						</h4>
 						
-						<div class="col-div-35-80" style="padding-top:1em;">
-							<img alt="" src="<c:url value='/icon/visitorimg.png'/>">
-						</div>
-						<div class="col-div-65-80" style="padding-top:2em;">
-							<ul>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>총 회원 수 : </span><strong>10,223명</strong></li>
-								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>오늘 가입자 수 : </span><strong>56명</strong></li>
-							</ul>
-						</div>
+						<p id="date">등록일:<fmt:formatDate value="${map.REGDATE}" pattern="yyyy-mm-dd hh-mm-ss"/>&nbsp;&nbsp; 조회수:${map.READCOUNT}</p>
 					</div>
-					<div class="Advertising">
-						<div class="col-div-100-20 divMainbox">
-							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 이력서</h2>
-						</div>
-						<div class="col-div-35-80" style="padding-top:1em;">
-							<img alt="" src="<c:url value='/icon/curriculum.png'/>">
-						</div>
-						<div class="col-div-65-80" style="padding-top:2em;">
-							<ul>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>총 이력서 : </span><strong>4,658 장</strong></li>
-								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 이력서 : </span><strong>56장</strong></li>
-							</ul>
-						</div>
+					<div id="contentsDiv">
+						${map.CONTENTS}
 					</div>
-					<div class="Advertising">
-						<div class="col-div-100-20 divMainbox">
-							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 1:1 문의 현황</h2>
-						</div>
-						<div class="col-div-35-80" style="padding-top:2.5em;">
-							<img alt="" src="<c:url value='/icon/QNA.png'/>">
-						</div>
-						<div class="col-div-65-80" style="padding-top:2em;">
-							<ul>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>오늘의 총 문의 : </span><strong>120개 </strong></li>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>새로운 문의 : </span><strong>36개 </strong></li>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>기다리는 문의 : </span><strong>14개</strong></li>
-							</ul>
-						</div>
+					<hr>
+					<c:if test="${!empty nexPre.NEXT_TITLE}">
+						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${nexPre.NEXT_NO}'/>">${nexPre.NEXT_TITLE}</a>
+					</c:if>
+					<br>
+					<c:if test="${!empty nexPre.PRE_TITLE}">
+						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${nexPre.PRE_NO}'/>">${nexPre.PRE_TITLE}</a><br>
+					</c:if>
+					<hr>
+					<div id="ListDiv">
+					<a href="<c:url value='/member/menu/noticeEditOut.do'/>"><button type="button" class="btn btn-default btn-sm" id="list" style="background-color:#607D8B;color:#ffff" >목록으로</button></a>
 					</div>
-					<div class="Advertising">
-						<div class="col-div-100-20 divMainbox">
-							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 공고</h2>
-						</div>
-						<div class="col-div-35-80" style="padding-top:1em;">
-							<img alt="" src="<c:url value='/icon/user.png'/>">
-						</div>
-						<div class="col-div-65-80" style="padding-top:2em;">
-							<ul>
-								<li style="border-left:1.5px solid #b8b8b8;"><span>총 공고 수 : </span><strong>1,400 개</strong></li>
-								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 공고 : </span><strong>14 개</strong></li>
-							</ul>
-						</div>
-					</div>
-				</div>			
+				</div>
+			</fieldset>
+					
 				</div>
 			</div>
 			  </div>
 	  	</div>
 </body>
 </html>
+				
+				
+				
+				

@@ -34,4 +34,5 @@ public interface HireNotiDAO {
 	int insertSector(Map<String, Object> map);
 	int insertEmpType(Map<String, Object> map);
 	int insertPosition(Map<String, Object> map);
+	
 }

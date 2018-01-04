@@ -84,11 +84,13 @@ public class NoticeController {
 		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		//pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setRecordCountPerPage(8);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 				
 		//SearchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		//searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setRecordCountPerPage(8);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("searchVo 최종값 : {}", searchVo);
 		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
@@ -123,6 +125,23 @@ public class NoticeController {
 		return "redirect:/member/menu/noticeDetail.do?no="+no;
 	}
 	
+	@RequestMapping("/AdminCountUpdate.do")
+	public String AdminCountUpdate(@RequestParam(defaultValue="0") int no,
+			Model model) {
+		logger.info("Admin 공지사항 상세보기, 파라미터 no={}", no);
+		
+	/*	if(no==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/member/menu/notice.do");
+			
+			return "common/message";
+		}
+		
+		int cnt = noticeService.updateReadCount(no);
+		logger.info("조회수 증가 결과, cnt={}", cnt);*/
+		
+		return "redirect:/member/menu/AdminNoticeDetail.do?no="+no;
+	}
 	
 	@RequestMapping("/noticeDetail.do")
 	public String noticeDetail_get(@RequestParam(defaultValue="0") int no,
@@ -138,6 +157,22 @@ public class NoticeController {
 		model.addAttribute("nexPre", nexPre);
 
 		return "member/menu/noticeDetail";
+	}
+	
+	@RequestMapping("/AdminNoticeDetail.do")
+	public String noticeDetail2_get(@RequestParam(defaultValue="0") int no,
+			HttpServletRequest request,	ModelMap model) {
+		logger.info("admin 상세보기 파라미터 no={}", no);
+		
+		Map<String,Object> map =noticeService.selectByNo(no);
+		Map<String,Object> nexPre=noticeService.nextprev(no);
+		
+		logger.info("상세보기 결과, map={}", map);
+
+		model.addAttribute("map", map);
+		model.addAttribute("nexPre", nexPre);
+
+		return "member/menu/noticeDetail2";
 	}
 	
 	@RequestMapping("/serviceCenter.do")
@@ -176,7 +211,7 @@ public class NoticeController {
 		
 		int cnt=noticeService.insertNotice(noticeVO);
 		
-		String msg="공지사항 등록 실패",url="/member/menu/notice.do";
+		String msg="공지사항 등록 실패",url="/member/menu/noticeEditOut.do";
 		if(cnt>0){
 			msg="공지사항 등록 성공";
 		}

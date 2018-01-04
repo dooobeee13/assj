@@ -19,7 +19,7 @@
 				<div class="category thinScroll top">
 					<ul>
 						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">
-							<li class="col-md-6 <c:if test='${status.first}'>selected</c:if>"><a href="#aTabs-${vo.occuNo}"><label class="chklabel">${vo.occuName}</label></a></li>
+							<li class="col-md-6 <c:if test='${status.first}'>selected</c:if>"><a href="#aTabs-${vo.occuNo}"><label class="chklabel" data-top="${vo.occuNo}">${vo.occuName}</label></a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -32,7 +32,7 @@
 							<c:forEach var="vo" items="${map[subKey]}">
 								<li class="col-md-6">
 									<input type="checkbox" class="sc_chk" id="occupation-${vo.occuNo}" name="occuList" value="${vo.occuNo}"> 
-									<label class="chklabel" data-name="${top.occuName}>${vo.occuName}" for="occupation-${vo.occuNo}">
+									<label class="chklabel" data-name="${top.occuName}>${vo.occuName}" data-top="${top.occuNo}" for="occupation-${vo.occuNo}">
 										<span>${vo.occuName}</span>
 									</label>
 								</li>
