@@ -26,7 +26,7 @@
 		font-size: 12px;
 		overflow: hidden;
 	    text-overflow: ellipsis;
-	    white-space: nowrap;
+	    //white-space: nowrap;
 	}
 	
 	.notiTable .notiName button {

@@ -221,8 +221,12 @@
 						<c:import url="/index/navAreaCategory.do" />
 					</li>
 					<li class="searchjob"><a href="#">인재검색</a></li>
-					<li class="searchjob"><a href="#">생각중</a></li>
-					<li class="searchjob"><a href="#">구상중</a></li>
+					
+					<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
+					<li class="searchjob"><a href='<c:url value="/hire_noti/hire1.do" />'>공고등록</a></li>
+					</c:if>
+					<!-- 
+					<li class="searchjob"><a href="#">구상중</a></li> -->
 				</ul>
 			</div>
 		</div>

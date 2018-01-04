@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.main">
+	<select id="selectHireNotiList" resultType="MHireNotiVO">
+		select h.hn_no, c.CM_HOMEPAGE, c.CM_LOGO, c.cm_name, h.HN_NOTITITLE, h.hn_deadline - trunc(sysdate) dday
+		from hire_noti h join comp_member c on h.cm_no = c.cm_no
+		where h.hn_deadline - trunc(sysdate) >= 0
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
