@@ -78,8 +78,14 @@ function OntextCheck(obj)
 					<span class="sr-only">ASSJ</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				 <a class="navbar-brand" href="index.do">홈으로</a>
-				 <a class="navbar-brand" href="index.do">My 홈</a>
+				
+				<a href="<c:url value='/index.do' />">
+					 <img class="img-responsive" style="width: 60px; height: 50px; float: left;" src="<c:url value='/images/assj_logo2.png' />" alt="로고">
+					</a>
+	
+				 <a class="navbar-brand" style="color: white;margin-left: 10px; " href="index.do">My 홈</a>
+				
+				
 				  
 			</div>
 
@@ -90,7 +96,7 @@ function OntextCheck(obj)
 					<li class="dropdown"><a class="nav-link"
 						class="dropdown-toggle" data-toggle="dropdown" href="#">이력서 관리</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">이력서 등록</a></li>
+							<li><a href="<c:url value='/resume/resumeInsert.do'/>">이력서 등록</a></li>
 							<li><a href="#">이력서 현황</a></li>
 							<li><a href="#">자소서 관리</a></li>
 							<li><a href="#">내 이력서 열람기업</a></li>
@@ -134,6 +140,7 @@ function OntextCheck(obj)
 			<input type='hidden' name='shVOList[0].shGrade' id='shGrade0' value="0">
 			<input type='hidden' name='shVOList[0].shEduNo' id='shEduNo0' value="1">
 			<input type="hidden" name="eduName" id="eduName" value="최종학력예비값">
+			
 			<input type="hidden" name="eduNo" id="eduNo" value="1">
 			<input type="hidden" name="resumeSalOpt" id="resumeSalOpt">
 			<input type="hidden" name="resumeVisibility" id="resumeVisibility" value="Y">
@@ -203,7 +210,9 @@ function OntextCheck(obj)
 						<li class="nav-item"><a class="nav-link" href="#intro">자기소개서</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">
 						<input type="image" id="imgSubmit" width="100%" height="100%" src="<c:url value='/images/button/write_complete.png'/>">
-						</a></li>						
+						</a></li>	
+						
+											
 					</ul>
 				
 			</div>
@@ -258,10 +267,10 @@ function OntextCheck(obj)
 							<label for="insertLb">성별<span class="res-star">*</span></label> 
 							<br> 
 							<label> 
-							<input type="radio" name="resumeGender" id="resumeGender" value="Male" checked> 남성 
+							<input type="radio" name="resumeGender" id="resumeGender" value="남" checked> 남성 
 							</label>
 							<label> 
-							<input type="radio" name="resumeGender" id="resumeGender" value="Female"> 여성
+							<input type="radio" name="resumeGender" id="resumeGender" value="여"> 여성
 							</label> 
 							<br> 
 							<label for="insertLb">구직상태
@@ -485,7 +494,7 @@ function OntextCheck(obj)
 				dataType:"json",
 				success:function(majorVO){
 					$.each(majorVO,function(index,item){
-						$thisSel.next().next().append("<option value='"+item.majorNo+"'>"+item.majorName+"</option>");
+						$thisSel.next().next().append("<option value='"+item.majorName+"'>"+item.majorName+"</option>");
 					});
 				},
 				error:function(xhr,status,error){
@@ -588,7 +597,7 @@ function OntextCheck(obj)
 						<br><br><br>
 						<label for="insertLb">최종 학력 선택<span class="res-star">*</span>
 							
-							<input type="radio" name="eduNo">								
+							<input type="radio" name="basicEduno" class="basicEduNoClass">								
 							</label>
 							<br><br>
 							<img alt="학력 삭제" name="delSHImg" src="${pageContext.request.contextPath}/images/button/btn_layer_del.gif">
@@ -664,13 +673,13 @@ function OntextCheck(obj)
 					<div class="my-auto">
 						<h4 class="mb-5">경력 사항</h4>
 						<label> 
-						<input type="radio" name="optionsRadios1" id="rdNewcomer" value="신입" checked> 신입
+						<input type="radio" name="careerNo" id="rdNewcomer" value="1" checked> 신입
 						</label>
 						<label> 
-						<input type="radio" name="optionsRadios1" id="rdCareer" value="경력">경력 
+						<input type="radio" name="careerNo" id="rdCareer" value="2">경력 
 						</label>
 						<label>
-						<input type="radio" name="optionsRadios1" id="rdExec" value="임원/CEO"> 임원/CEO
+						<input type="radio" name="careerNo" id="rdExec" value="3"> 임원/CEO
 						</label>
 						<div id="careerDiv">
 							<textarea rows="20" name="resumeCareerList" class="form-control" id="detailCareer"></textarea>
@@ -1189,6 +1198,7 @@ function OntextCheck(obj)
 			 $.applyDatePicker(
 				 $('.copySHDiv').find('input[name=basicEndDP]').attr("name","shVOList["+ii+"].shGyear")
 			 );
+			 $('.copySHDiv').find('input[name=basicEduno]').attr("class","eduNoClass");
 			 $('.copySHDiv').find('select[name=basicshAwhether]').attr("name","shVOList["+ii+"].shAwhether");
 			 $('.copySHDiv').find('select[name=basicshGwhether]').attr("name","shVOList["+ii+"].shGwhether");
 			 $('.copySHDiv').find('input[name=basicshSname]').attr("name","shVOList["+ii+"].shSname");
@@ -1345,6 +1355,16 @@ $(function(){
 	});
 	$(document).on("click","img[name=delIntroImg]",function(){
 		$(this).parent().parent().remove();
+	});
+	
+	
+	$(document).on("click",".eduNoClass",function(){
+		/* alert('최종학력 선택 클릭'); */
+		if($(this).is(":checked")){
+			var chkEdu = $(this).parent().parent().prev().prev().find('select').val();
+			$('#eduNo').val(chkEdu);
+			/* alert($('#eduNoParam').val()); */
+		}	
 	});
 	
 });

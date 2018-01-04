@@ -28,6 +28,7 @@ public class ResumeVO {
 	private String resumeMilClass;
 	private String resumeMilReason;
 	private String resumeMilUnfinish;
+	private int careerNo;
 	private String resumeCareerList;
 	private int resumeSalStart;
 	private int resumeSalEnd;
@@ -254,6 +255,12 @@ public class ResumeVO {
 	public void setResumePhoto(String resumePhoto) {
 		this.resumePhoto = resumePhoto;
 	}
+	public int getCareerNo() {
+		return careerNo;
+	}
+	public void setCareerNo(int careerNo) {
+		this.careerNo = careerNo;
+	}
 	@Override
 	public String toString() {
 		return "ResumeVO [resumeNo=" + resumeNo + ", memNo=" + memNo + ", resumeTitle=" + resumeTitle + ", resumeName="
@@ -264,12 +271,13 @@ public class ResumeVO {
 				+ resumeVeteran + ", resumeSubsidy=" + resumeSubsidy + ", resumeMilTarget=" + resumeMilTarget
 				+ ", resumeMilStart=" + resumeMilStart + ", resumeMilEnd=" + resumeMilEnd + ", resumeMilDivision="
 				+ resumeMilDivision + ", resumeMilClass=" + resumeMilClass + ", resumeMilReason=" + resumeMilReason
-				+ ", resumeMilUnfinish=" + resumeMilUnfinish + ", resumeCareerList=" + resumeCareerList
-				+ ", resumeSalStart=" + resumeSalStart + ", resumeSalEnd=" + resumeSalEnd + ", resumeSalOpt="
-				+ resumeSalOpt + ", areaNo=" + areaNo + ", eduNo=" + eduNo + ", etNo=" + etNo + ", resumeVisibility="
-				+ resumeVisibility + ", resumePhoto=" + resumePhoto + ", occuNo=" + occuNo + ", secNo=" + secNo
-				+ ", resumeLastupdate=" + resumeLastupdate + "]";
+				+ ", resumeMilUnfinish=" + resumeMilUnfinish + ", careerNo=" + careerNo + ", resumeCareerList="
+				+ resumeCareerList + ", resumeSalStart=" + resumeSalStart + ", resumeSalEnd=" + resumeSalEnd
+				+ ", resumeSalOpt=" + resumeSalOpt + ", areaNo=" + areaNo + ", eduNo=" + eduNo + ", etNo=" + etNo
+				+ ", resumeVisibility=" + resumeVisibility + ", resumePhoto=" + resumePhoto + ", occuNo=" + occuNo
+				+ ", secNo=" + secNo + ", resumeLastupdate=" + resumeLastupdate + "]";
 	}
+	
 	
 	
     

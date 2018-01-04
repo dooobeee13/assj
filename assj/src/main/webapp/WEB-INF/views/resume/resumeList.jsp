@@ -6,21 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-
-
+<title>내 이력서 현황</title>
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
 </head>
 <body>
 
-	 <c:import url="../index/top.jsp" /> 
+<c:import url="../index/top.jsp" /> 
+
+
+
+
 
 <div class="container">
    
-   	
-   	<div id="resumeDiv">
-   		
-   			<table class="table">
+   <div class="row">
+   
+<c:import url="../mypage/mypageSide.jsp"></c:import>
+   
+   		<div class="col-lg-9 col-md-9">
+         	<table class="table">
 			<colgroup>
 				<col style="width:60%">
 				<col style="width:10%">
@@ -44,7 +50,9 @@
 			<c:if test="${!empty list}">
 				<c:forEach var="vo" items="${list}">
 					<tr>
-						<td>${vo.resumeTitle}</td>					
+						<td><a href="#" 
+	onclick="window.open('<c:url value='/resume/resumeView.do?resumeNo=${vo.resumeNo}'/>','new','resizable=no','width=300px','height=500');return false" 
+						class="goResumeDetail">${vo.resumeTitle}</a></td>					
 						<td>포트폴리오 갯수</td>					
 						<td>on / off</td>					
 						<td> 수정 / 삭제</td>
@@ -53,44 +61,9 @@
 			</c:if>
 		</tbody>
    			</table>
-   		</div>
-   	
-   	
-   	<div id="portDiv">
-   		<table class="table">
-			<colgroup>
-				<col style="width:40%">
-				<col style="width:20%">
-				<col style="width:15%">
-				<col style="width:*">
-			</colgroup>		
-		<thead>
-			<tr>
-				<th scope="col">파일명</th>
-				<th scope="col">등록/수정일</th>
-				<th scope="col">용량</th>
-				<th scope="col">-</th>
-			</tr>	
-		</thead>
-		<tbody>
-			<c:if test="${empty portList}">
-			<tr>
-				<td colspan="4" class="align_center">등록된 이력서가 없습니다.</td>
-			</tr>
-			</c:if>
-			<c:if test="${!empty portList}">
-				<c:forEach var="portVO" items="${portList}">
-					<tr>
-						<td>포트폴리오 파일명</td>					
-						<td>등록 수정일</td>					
-						<td> 22 MB</td>					
-						<td> 수정 / 삭제</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</tbody>
-   			</table>
-   	</div>
+        </div>
+   </div>  	
+ 
  
 </div>
 

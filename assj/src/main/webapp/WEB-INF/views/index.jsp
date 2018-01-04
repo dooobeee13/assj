@@ -253,8 +253,11 @@
 						</c:if>
 						<c:if test="${!empty sessionScope.memberVO}">
 							<br>
-							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 <a
-								href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 
+							<a href="<c:url value='/mypageMain.do' />">
+							<span class="smFont">MyPage 바로가기</span>
+							</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;<a
 								href="<c:url value='/logout.do'/>"><button type="button"
 									class="btn btn-default btn-sm">로그아웃</button></a>
 							<hr>
