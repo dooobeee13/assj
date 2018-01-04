@@ -307,14 +307,9 @@
 		<fieldset class="fsmain">
 
 			<div class="container">
-				<table class="table table-condended">
-					<thead>
-						<tr class="active">
-							<th class="sp11">직종/직무</th>
-						</tr>
-					</thead>
+				<div class="input-group"> 
+					<span class="sp11">직종/직무
 					<tr>
-						<td>* 직종/직무</td>
 						<td>
 							<div>
 								<div class="occupation"></div>
@@ -328,26 +323,14 @@
 						</td>
 
 					</tr>
-					<tr>
-						<td>* 경력여부</td>
-						<td>
-							<c:import url="/hire_noti/career.do" />
-						</td>
-					</tr>
+					</span> 
 					
-					<tr>
-						<td> *고용형태</td>
-						<td>
-							<c:import url="/hire_noti/empType.do"/>
-						</td>
-					</tr>
-				</table>	
+
+				</div>
 				<br>
-					
+				<c:import url="/hire_noti/career.do" />
 				
-				
-				
-				
+				<c:import url="/hire_noti/empType.do"/>
 				
 
 				<br> <br>

@@ -177,6 +177,11 @@ public class HireNotiController {
 		return "common/message";		
 	}
 	
+	/*@RequestMapping(value="/hire1_edit.do" , method=RequestMethod.GET)
+	public String hirenoti_edit(HttpSession session, Model model) {
+		
+	}
+	*/
 	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo, Model model) {
