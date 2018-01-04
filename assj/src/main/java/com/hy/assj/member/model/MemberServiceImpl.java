@@ -1,10 +1,16 @@
 package com.hy.assj.member.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.hy.assj.hirenoti.model.HireNotiSearchVO;
+import com.hy.assj.hirenoti.model.HireNotiVO;
+import com.hy.assj.notice.model.NoticeVO;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -89,6 +95,42 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return memberDao.selectMemberBySns(searchMap); 
+	}
+
+	@Override
+	public List<Map<String, Object>> scrapList(HireNotiSearchVO hireNotiSearchVO) {
+		return memberDao.scrapList(hireNotiSearchVO);
+	}
+
+	@Override
+	public int scrapTotalRecordCount(HireNotiSearchVO hireNotiSearchVO) {
+		return memberDao.scrapTotalRecordCount(hireNotiSearchVO);
+	}
+
+	@Override
+	@Transactional
+	public int scrapDelMulti(List<HireNotiVO> list) {
+		int cnt=0;
+		try {
+			for(HireNotiVO vo: list) {
+				int hnNo=vo.getHnNo();
+				
+				//체크한 스크랩공고만 삭제
+				if(hnNo!=0) {
+					cnt=memberDao.deleteScrap(hnNo);
+				}
+			}//for
+				
+		}catch(RuntimeException e) {
+			cnt=0;
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
+	@Override
+	public int deleteScrap(int hnNo) {
+		return memberDao.deleteScrap(hnNo);
 	}
 
 }

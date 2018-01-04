@@ -5,13 +5,19 @@
 <mapper namespace="config.mybatis.mapper.oracle.hireNoti">
 	<insert id="insertHireNoti" parameterType="HireNotiVO">
 		<selectKey resultType="int" keyProperty="hnNo" order="BEFORE">
-			select hire_note_seq.nextval from dual
+			select hire_noti_seq.nextval from dual
 		</selectKey>
-		insert into hire_noti 
-		values(#{hnNo}, #{hnNotiTitle}, #{cmNo}, #{hnSalStart}, #{hnSalEnd},#{hnViews},#{hnStart},
-		#{hnDeadline},#{hnHows},#{hnTask},#{hnEligiblity},#{hnPreference},#{hnStep},
+		insert into hire_noti(hn_no,hn_notititle,cm_no,hn_sal_start,hn_sal_end,hn_views,
+		hn_start,hn_deadline,hn_hows,hn_task,hn_eligibility,hn_preference,hn_step,
+		hn_benefits,hn_document,hn_addr,hn_detailaddr,hn_lat,hn_lng,hn_gender,
+		edu_no,career_no,HN_EXPYEAR_MIN,HN_EXPYEAR_MAX) 
+		
+		
+		values(#{hnNo}, #{hnNotiTitle}, #{cmNo}, #{hnSalStart}, #{hnSalEnd},#{hnViews},
+		to_date(#{hnStart}),to_date(#{hnDeadline}),
+		#{hnHows},#{hnTask},#{hnEligibility},#{hnPreference},#{hnStep},
 		#{hnBenefits},#{hnDocument},#{hnAddr},#{hnDetailAddr},#{hnLat},#{hnLng},
-		#{hnStatus},#{hnGender},#{hnRecruitNum},#{eduNo},#{careerNo})
+		#{hnGender},#{eduNo},#{careerNo},#{hnExpyearMin},#{hnExpyearMax})
 	</insert>
 	
 	<select id="selectAll" parameterType="SearchVO" resultType="HireNotiVO">
@@ -98,9 +104,7 @@
 	    	select get_hn_pos_seq, #{hnNo}, #{position} from dual
 		</foreach>
 	</update>
-	
 </mapper>
-
 
 
 

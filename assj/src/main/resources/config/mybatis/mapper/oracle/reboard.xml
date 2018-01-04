@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.reboard">
+
 	<sql id="searchWhere">
 		<if test="searchKeyword !=null and searchKeyword!=''">
 			where title like '%' || #{searchKeyword} || '%'

@@ -8,7 +8,7 @@
 			select news_seq.nextval from dual
 		</selectKey>
 		insert into news
-		values(#{newsNo},#{newsTitle},#{newsUrl},#{newsWriter},sysdate,#{newsContent})
+		values(#{newsNo},#{newsTitle},#{newsUrl},#{newsWriter},#{newsContent},sysdate)
 	</insert>
 	
 	<select id="selectNews"  resultType="map">

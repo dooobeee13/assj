@@ -9,5 +9,4 @@ public interface CmMemberDAO {
 	public int cmMemberOut(String cmId);
 	public int cmMemberEdit(CmMemberVO vo);
 	public int cmPwdEdit(CmMemberVO vo);
-	
 }

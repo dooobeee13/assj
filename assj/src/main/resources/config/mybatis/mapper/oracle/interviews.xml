@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.interviews">
+	<select id="selectInview" parameterType="int" resultType="map">
+		select e.es_no, e.mem_no, c.cm_no,m.mem_name,c.CM_NAME,hn.hn_notititle,e.ES_REGDATE,e.es_confirm, e.es_status
+		from emp_sup e left join member m
+		on e.MEM_NO = m.MEM_NO
+		left join hire_noti hn
+		on e.HN_NO = hn.HN_NO
+		left join comp_member c
+		on hn.CM_NO = c.CM_NO
+		where e.es_delflag = 'N' and c.cm_no = #{cmNo}
+	</select>
+	
+</mapper>

@@ -1,6 +1,12 @@
 package com.hy.assj.member.model;
 
+import java.util.List;
 import java.util.Map;
+
+import com.hy.assj.hirenoti.model.HireNotiSearchVO;
+import com.hy.assj.hirenoti.model.HireNotiVO;
+import com.hy.assj.notice.model.NoticeListVO;
+import com.hy.assj.notice.model.NoticeVO;
 
 public interface MemberService {
 	//아이디 중복검사시 사용하는 상수
@@ -19,6 +25,10 @@ public interface MemberService {
 	public int memberOut(String memId);
 	public int memberEdit(MemberVO vo);
 	public int memPwdEdit(MemberVO vo);
+	public List<Map<String, Object>> scrapList(HireNotiSearchVO hireNotiSearchVO);
+	public int scrapTotalRecordCount(HireNotiSearchVO hireNotiSearchVO);
+	public int deleteScrap(int hnNo);
+	public int scrapDelMulti(List<HireNotiVO> list);
 	
 	public MemberVO naverLogin(Map<String, String> map);
 }

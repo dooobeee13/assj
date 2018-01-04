@@ -24,6 +24,4 @@ public interface HireNotiService {
 	public List<SectorsVO> selectSectorsAll();
 	public List<EducationVO> selectEducationAll();
 	public List<PositionVO> selectPositionAll();
-	
-	
 }

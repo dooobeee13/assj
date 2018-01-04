@@ -76,14 +76,14 @@
 						<!--게시판 내용 반복문 시작  -->
 						<c:forEach var="vo" items="${list }" varStatus="status">
 							<tr style="text-align: center">
-								<td>${vo.no}</td>
-								<td style="text-align: left"><a
-									href="<c:url value='/board/countUpdate.do?no=${vo.no}'/>">
-										${vo.title}</a></td>
-								<td>${vo.name}</td>
-								<td><fmt:formatDate value="${vo.regdate}"
-										pattern="yyyy-MM-dd" /></td>
-								<td>${vo.readcount}</td>
+								<td>${sessionScope.hireNotiVO.hnNo}</td>
+								<td style="text-align: left">
+									${sessionScope.hireNotiVO.hnNotiTitle}</td>
+								<td>${sessionScope.cmMemberVO.cmManager}</td>
+								<td>
+								<fmt:formatDate value="${sessionScope.regdate}"pattern="yyyy-MM-dd" /></td>
+								<td>
+								<fmt:formatDate value="${vo.regdate}"pattern="yyyy-MM-dd" /></td>
 							</tr>
 						</c:forEach>
 						<!--반복처리 끝  -->

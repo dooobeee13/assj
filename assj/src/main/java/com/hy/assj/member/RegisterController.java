@@ -31,7 +31,6 @@ import com.ibatis.sqlmap.engine.scope.SessionScope;
 @Controller
 @RequestMapping("/member")
 public class RegisterController {
-
 	private static final Logger logger
 	=LoggerFactory.getLogger(RegisterController.class);
 	
@@ -47,13 +46,11 @@ public class RegisterController {
 	@RequestMapping(value="/register/register.do",method=RequestMethod.GET)
 	public String register_get() {
 		logger.info("회원가입 화면(get)");
-		
 		return "member/register/register";
 	}
 	
 	@RequestMapping(value="/register/register.do",method=RequestMethod.POST)
 	public String register_post(@ModelAttribute MemberVO vo ,Model model) {
-		
 		logger.info("회원가입 화면(post) 파라미터 vo={} ", vo);
 		
 		int result=memberService.insertMemMember(vo);
@@ -79,31 +76,25 @@ public class RegisterController {
 		
 		boolean result = memberService.duplicationId(dupliId);
 		System.out.println("중복검사 결과:" + result);
-		/*model.addAttribute("result", result);
 		
-		return "member/register/idcheck";*/
 		return String.valueOf(result);
 	}
-	
 	
 	@RequestMapping("/out/psMemOut.do")
 	public String memberOut_get() {
 		logger.info("개인회원탈퇴 화면(get)");
-		
 		return "member/out/psMemOut";
 	}
 	
 	@RequestMapping(value="/out/psMemOut2.do",method=RequestMethod.GET)
 	public String memberOut2_get() {
 		logger.info("개인회원탈퇴2 화면(get)");
-		
 		return "member/out/psMemOut2";
 	}
 	
 	@RequestMapping(value="/out/psMemOut2.do",method=RequestMethod.POST)
-	public String memberOut2_post(@RequestParam String memPwd,
-			HttpSession session, HttpServletResponse response,
-			Model model) {
+	public String memberOut2_post(@RequestParam String memPwd,HttpSession session, 
+			HttpServletResponse response,Model model) {
 		logger.info("개인회원탈퇴2 화면(post)");
 		
 		MemberVO vo= (MemberVO) session.getAttribute("memberVO");				
@@ -146,33 +137,30 @@ public class RegisterController {
 	@RequestMapping("/out/cmMemOut.do")
 	public String cmMemberOut_get() {
 		logger.info("기업회원탈퇴 화면(get)");
-		
 		return "member/out/cmMemOut";
 	}
 	
 	@RequestMapping(value="/out/cmMemOut2.do",method=RequestMethod.GET)
 	public String cmMemberOut2_get() {
 		logger.info("기업회원탈퇴 화면(get)");
-		
 		return "member/out/cmMemOut2";
 	}
 	
-	
 	@RequestMapping(value="/out/cmMemOut2.do",method=RequestMethod.POST)
-	public String cmMemberOut2_post(@RequestParam String cmPwd,
-			HttpSession session, HttpServletResponse response,
-			Model model) {
+	public String cmMemberOut2_post(@RequestParam String cmPwd,HttpSession session, 
+			HttpServletResponse response,Model model){
 		logger.info("기업회원탈퇴2 화면(post)");
 		
-		CmMemberVO cMvo= (CmMemberVO) session.getAttribute("cmMemberVO");				
+		CmMemberVO cMvo= (CmMemberVO)session.getAttribute("cmMemberVO");				
 		logger.info("회원탈퇴 처리, 파라미터 cmId={},cmPwd={}", cMvo.getCmId(),cmPwd);
 		
 		//로그인 체크
 		String msg="", url="/member/out/cmMemOut2.do";
-		int result=cmMemberService.loginCheck(cMvo.getCmId(), cmPwd);
+		int result=cmMemberService.loginCheck(cMvo.getCmId(),cmPwd);
 		if(result==CmMemberService.LOGIN_OK) {
 			int cnt=cmMemberService.cmMemberOut(cMvo.getCmId());
-			logger.info("회원탈퇴 결과,cnt{}",cnt);
+			logger.info("회원탈퇴 결과,cnt={}",cnt);
+			
 			if(cnt>0) {
 				msg="회원탈퇴처리되었습니다.";
 				url="/index.do";
@@ -205,9 +193,10 @@ public class RegisterController {
 		logger.info("개인회원정보 수정 화면(get)");
 		return "member/edit/psMemEdit";
 	}
+	
 	@RequestMapping(value="/edit/psMemEdit.do",method=RequestMethod.POST)
-	public String memberEdit_post(@RequestParam String memPwd,
-			HttpSession session,Model model){
+	public String memberEdit_post(@RequestParam String memPwd,HttpSession session,
+			Model model){
 		logger.info("개인회원정보 수정 화면(post)");
 		
 		MemberVO vo=(MemberVO) session.getAttribute("memberVO");				
@@ -323,7 +312,6 @@ public class RegisterController {
 	@RequestMapping(value="/login/psMemLogin.do",method=RequestMethod.GET)
 	public String psMemLogin_get() {
 		logger.info("개인회원 로그인 화면(get)");
-		
 		return "member/login/psMemLogin";
 	}
 	
@@ -398,7 +386,5 @@ public class RegisterController {
 		
 		return "common/message";
 	}
-	
-	
-	
+
 }

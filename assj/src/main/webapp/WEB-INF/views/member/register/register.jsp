@@ -326,12 +326,12 @@
 		.mem_register .agreeTable td{
 			padding:10px;
 		}
-		
-		
+		body{
+			background-color: #ebecee;
+		}
 		.modal {
        		 text-align: center;
 		}
-		 
 		 
 		@media screen and (min-width: 768px) { 
 	        .modal:before {

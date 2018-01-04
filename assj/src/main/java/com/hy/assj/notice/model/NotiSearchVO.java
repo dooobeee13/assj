@@ -17,9 +17,9 @@ public class NotiSearchVO extends SearchVO {
 	@Override
 	public String toString() {
 		return "NotiSearchVO [notititleNo=" + notititleNo + ", getSearchCondition()=" + getSearchCondition()
-				+ ", getSearchKeyword()=" + getSearchKeyword() + ", getSearchUseYn()=" + getSearchUseYn()
-				+ ", getCurrentPage()=" + getCurrentPage() + ", getBlockSize()=" + getBlockSize()
-				+ ", getFirstRecordIndex()=" + getFirstRecordIndex() + ", getLastRecordIndex()=" + getLastRecordIndex()
-				+ ", getRecordCountPerPage()=" + getRecordCountPerPage() + "]";
+		+ ", getSearchKeyword()=" + getSearchKeyword() + ", getSearchUseYn()=" + getSearchUseYn()
+		+ ", getCurrentPage()=" + getCurrentPage() + ", getBlockSize()=" + getBlockSize()
+		+ ", getFirstRecordIndex()=" + getFirstRecordIndex() + ", getLastRecordIndex()=" + getLastRecordIndex()
+		+ ", getRecordCountPerPage()=" + getRecordCountPerPage() + "]";
 	}
 }
