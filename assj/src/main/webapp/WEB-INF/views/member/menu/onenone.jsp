@@ -25,8 +25,6 @@
 	}
 	
 	.row fieldset {
-		/* width: 720px;
-		margin: 0 auto; */
 		padding: 40px;
 		background-color: #ffff;
 	}
@@ -62,30 +60,16 @@
 		vertical-align: bottom;
 		width:50px;
 	}
-  /*  	 #page-wrapper {
-    padding-left: 380px;
-  } */
-  
-  /* #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
-  } */
-  
+	
   /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 900px;
+    height: 1110px;
   } 
 
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   
