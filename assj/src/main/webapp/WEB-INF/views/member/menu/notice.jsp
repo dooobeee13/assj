@@ -52,11 +52,7 @@
 		});
 		
 		$('#step1').trigger('click');		
-		
-		
 	});
-	
-	
 </script>
 <script src="../../js/bootstrap.min.js"></script>
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +61,7 @@
 	#frame {
 		padding: 40px;
 		background-color: #ffff;
-		height: 830px;
+		height: 860px;
 	}
 	#searchTable {
 		float: right;
@@ -89,7 +85,7 @@
 		background: #ffff;
 		overflow-x: hidden;
 		overflow-y: auto;
-		height: 830px;
+		height: 860px;
 	}
 	
 	.sidebar-nav {
@@ -175,11 +171,10 @@
 			<div id="framedDiv" class="col-md-9">
 				<!-- 페이징 처리에 필요한 form 태그 -->
 				<form name="frmPage" method="post"
-					action="<c:url value='/reBoard/list.do'/>">
-					<input type="hidden" name="searchCondition"
-						value="${param.searchCondition }"> <input type="hidden"
-						name="searchKeyword" value="${param.searchKeyword }"> <input
-						type="hidden" name="currentPage">
+					action="<c:url value='/member/menu/notice.do'/>">
+					<input type="hidden" name="searchCondition" value="${param.searchCondition }"> 
+					<input type="hidden" name="searchKeyword" value="${param.searchKeyword }"> 
+					<input type="hidden" name="currentPage">
 				</form>
 
 				<div id="frame">
@@ -198,22 +193,21 @@
 					</div>
 					<br><br><br><br>
 					
-					
-					<c:if test="${!empty param.searchKeyword }">
+			
+		   		    <c:if test="${!empty param.searchKeyword}">
 						<!-- 검색의 경우 -->
-						<p>검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건
-							검색되었습니다.</p>
-					</c:if>
+						<p>검색어 :${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건 검색되었습니다.</p>
+					</c:if> 
 					<c:if test="${empty param.searchKeyword }">
 						<!-- 전체 조회의 경우 -->
-						<p>전체 조회 결과, <span id="resultSize">${pagingInfo.totalRecord }</span>건 조회되었습니다.</p>
+						<p>조회 결과, <span id="resultSize">${pagingInfo.totalRecord }</span>건 조회되었습니다.</p>
 					</c:if> 
 					
 					
 					<div class="form-group">
 						<div class="divSearch">
 							<form name="frmSearch" method="post"
-								action="<c:url value='/member/menu/notice.do'/>">
+								action="<c:url value='/member/menu/step.do'/>">
 								<table id="searchTable">
 									<tr>
 										<td style="width: 20%"><select class="form-control"
@@ -222,6 +216,10 @@
 													<c:if test="${param.searchCondition=='1'}"> 
 					            		selected
 					            	</c:if>>선택</option>
+					           				 	<option value="2018"
+													<c:if test="${param.searchCondition=='2018'}"> 
+					            		selected
+					            	</c:if>>2018</option>
 												<option value="2017"
 													<c:if test="${param.searchCondition=='2017'}"> 
 					            		selected
@@ -234,10 +232,6 @@
 													<c:if test="${param.searchCondition=='2015'}"> 
 					            		selected
 					            	</c:if>>2015</option>
-												<option value="2014"
-													<c:if test="${param.searchCondition=='2014'}"> 
-					            		selected
-					            	</c:if>>2014</option>
 										</select></td>
 										<td style="width: 70%"><input type="text"
 											class="form-control" size="8" maxlength="4"

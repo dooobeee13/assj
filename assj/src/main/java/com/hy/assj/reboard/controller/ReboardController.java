@@ -54,19 +54,18 @@ public class ReboardController {
 	
 		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
 		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-				
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                      //블럭당 보여질 페이지 수(5)
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());             //현재 페이지
+		pagingInfo.setTotalRecord(reboardService.selectTotalRecordCount(searchVo)); //총 레코드 수
+		
 		//SearchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("searchVo 최종값 : {}", searchVo);
 		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
 		
 		List<ReboardVO>list=reboardService.QnaList(searchVo);
-		
-		pagingInfo.setTotalRecord(reboardService.selectTotalRecordCount(searchVo));
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
@@ -106,14 +105,12 @@ public class ReboardController {
 	@RequestMapping(value="/qnaWrite.do",method=RequestMethod.GET)
 	public String qnaWrite_get() {
 		logger.info("Q&A 글쓰기화면");
-
 		return "member/menu/qnaWrite";
 	}
 	
 	@RequestMapping(value="/qnaWrite.do",method=RequestMethod.POST)
 	public String qnaWrite_post(@ModelAttribute ReboardVO reboardVO,Model model) {
 		logger.info("Q&A 글쓰기 개인회원(post) 파라미터 reboardVO={}",reboardVO);
-		
 		
 		int cnt=reboardService.insertQnA(reboardVO);
 		
@@ -134,7 +131,7 @@ public class ReboardController {
 		logger.info("Q&A게시판 조회수 증가,개인회원 파라미터 no={}", no);
 		
 		int cnt = reboardService.updateReadCount(no);
-		
+
 		model.addAttribute("no",no);
 
 		logger.info(" Q&A게시판 조회수 증가 결과, cnt={}", cnt);
@@ -170,7 +167,6 @@ public class ReboardController {
 		logger.info("Q&A게시판 수정화면 (post) 파리미터 reboardVo={}",reboardVo);
 		
 		int cnt=reboardService.updateQnA(reboardVo);
-		
 		
 		String msg="게시글 수정에 실패했습니다.",url="/member/menu/qnaEdit.do";
 		if(cnt>0) {

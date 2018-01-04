@@ -11,7 +11,6 @@ import com.hy.assj.common.SearchVO;
 @Repository
 public class ReboardDAOMybatis extends SqlSessionDaoSupport
 	implements ReboardDAO{
-
 	private String namespace="config.mybatis.mapper.oracle.reboard";
 	
 	@Override

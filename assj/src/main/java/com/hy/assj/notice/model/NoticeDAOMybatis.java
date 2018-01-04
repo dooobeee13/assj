@@ -19,32 +19,6 @@ public class NoticeDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().selectList(namespace+".noticeList", vo);
 	}
 
-	/*@Override
-	public List<Map<String, Object>> noticeList1(SearchVO vo) {
-		return getSqlSession().selectList(namespace+".noticeList1");
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList2() {
-		return getSqlSession().selectList(namespace+".noticeList2");
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList3() {
-		return getSqlSession().selectList(namespace+".noticeList3");
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList4() {
-		return getSqlSession().selectList(namespace+".noticeList4");
-	}
-*/
-	/*@Override
-	public List<Map<String,Object>> selectAll(SearchVO searchVo) {
-		return getSqlSession().selectList(namespace+".selectAll",searchVo);
-	}*/
-
-
 	@Override
 	public int updateReadCount(int no) {
 		return getSqlSession().update(namespace+".updateReadCount",no);
@@ -83,13 +57,5 @@ public class NoticeDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int selectTotalRecordCount(NotiSearchVO searchVo) {
 		return getSqlSession().selectOne(namespace+".selectTotalRecordCount",searchVo);
-	}
-	
-	/*@Override
-	public int selectTotalRecordCount1(SearchVO searchVo) {
-		return getSqlSession().selectOne(namespace+".selectTotalRecordCount1",searchVo);
-	}*/
-
-
-	
+	}	
 }

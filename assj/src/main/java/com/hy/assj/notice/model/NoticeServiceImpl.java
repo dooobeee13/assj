@@ -20,32 +20,6 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.noticeList(vo);
 	}
 
-	/*@Override
-	public List<Map<String, Object>> noticeList1(SearchVO vo) {
-		return noticeDao.noticeList1(vo);
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList2() {
-		return noticeDao.noticeList2();
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList3() {
-		return noticeDao.noticeList3();
-	}
-
-	@Override
-	public List<Map<String, Object>> noticeList4() {
-		return noticeDao.noticeList4();
-	}
-
-	@Override
-	public List<Map<String,Object>> selectAll(SearchVO searchVo) {
-		return noticeDao.selectAll(searchVo);
-	}*/
-
-
 	@Override
 	public int updateReadCount(int no) {
 		return noticeDao.updateReadCount(no);
@@ -76,9 +50,6 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDao.nextprev(no);
 	}
 
-	
-	
-	
 	@Override
 	@Transactional
 	public int deleteMulti(List<NoticeVO> list) {
@@ -86,6 +57,7 @@ public class NoticeServiceImpl implements NoticeService{
 		try {
 			for(NoticeVO vo: list) {
 				int noticeNo=vo.getNo();
+				
 				//체크한 상품만 삭제
 				if(noticeNo!=0) {
 					cnt=noticeDao.deleteNotice(noticeNo);
@@ -108,11 +80,5 @@ public class NoticeServiceImpl implements NoticeService{
 	public int selectTotalRecordCount(NotiSearchVO searchVo) {
 		return noticeDao.selectTotalRecordCount(searchVo);
 	}
-
-	/*@Override
-	public int selectTotalRecordCount1(SearchVO searchVo) {
-		return noticeDao.selectTotalRecordCount1(searchVo);
-	}*/
-
 	
 }

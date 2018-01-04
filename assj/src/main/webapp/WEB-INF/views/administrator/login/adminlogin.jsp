@@ -33,18 +33,18 @@ $(function(){
 		<form name="adminform" method="post" action="<c:url value='/administrator/login/adminlogin.do'/>" style="width: 100%; text-align: right;">
 			<table class="adMinLoginfrm" style="width:90%; text-align: center; ">
 				<colgroup>
-					<col style="width:35%;">
-					<col style="width:*;">
+					<col width="8em;">
+					<col> 
 				</colgroup>
 				<tbody>
 					<tr>
-						<th style="font-size:2em; text-align: right;">아이디</th>
-						<td style="font-size:2em;"><input id="userid" name="userid" class="one-text" type="text" placeholder=" 아이디를 입력하세요."></td>
+						<th style="font-size:1em; text-align: right; width:8em">아이디</th>
+						<td style="font-size:1em;"><input id="userid" name="userid" class="one-text" type="text" placeholder=" 아이디를 입력하세요."></td>
 						
 					</tr>
 					<tr>
-						<th style="font-size:2em; text-align: right;">비밀번호</th>
-						<td style="font-size:2em;"><input id="pwd" name="pwd" class="one-text" type="password" placeholder=" 비밀번호를 입력하세요."></td>
+						<th style="font-size:1em; text-align: right;">비밀번호</th>
+						<td style="font-size:1em;"><input id="pwd" name="pwd" class="one-text" type="password" placeholder=" 비밀번호를 입력하세요."></td>
 					</tr>
 				</tbody>
 			</table>

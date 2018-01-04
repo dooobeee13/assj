@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 ​
@@ -19,162 +18,145 @@
     <link rel="stylesheet" href="<c:url value='/css/index.css'/>" />
     <script type="text/javascript">
     	$(document).ready(function(){
-    		
-    		$(window).load(function(){
-    			//이메일 select 기본으로 naver.com지정
-     		   $("select option[value='naver.com']").attr("selected", true);
-
-     		   	//생년월일 받아오기
-     		 	if($('#birth').val()!=""){
-     		 		var birth=$('#birth').val();
-     		 		var memBirth=birth.split("-");
-     		 		
-	     		 	$('#memBirth1').val(memBirth[0]);
-	     		 	$('#memBirth2').val(memBirth[1]);
-	     		 	$('#memBirth3').val(memBirth[2]);	
-     		 	}
-     		   	
-     		   	//휴대폰번호 받아오기
-     		   	if($('#phone').val()!=""){
-     		   		var phone=$('#phone').val();
-     		   		var memPhone=phone.split("-");
-     		   		
-	     		   	$('#memPhone1').val(memPhone[0]).prop("selected",true);
-	     		 	$('#memPhone2').val(memPhone[1]);
-	     		 	$('#memPhone3').val(memPhone[2]);
-     		   	}
-     		   	
-     		   	//이메일 받아오기
-     		   	if($('#email').val()!=""){
-     		   		var email=$('#email').val();
-     		   		var memEmail=email.split("@");
-     		   		
-     		   		$('#memEmail1').val(memEmail[0]);
-     		   		$("#memEmail2").val(memEmail[1]).prop("selected", true);
-     		   	}
-     		});
-    		
-    		//이메일 직접입력시에 text박스 보여주기
-    		$('#memEmail2').change(function(){
-    			if($(this).val()=='etc'){
-    				$('#memEmail3').attr('style','visibility: visible');
-    				//$('#memEmail3').css('visibility','visible');
-    			}else{
-    				$('#memEmail3').css('visibility','hidden');
-    			}	
-    		});
-    		
-    		//개인회원 유효성검사
-    		$('#updateBtn').click(function(){
-    			if($('#memName').val()==""){
-    				alert('이름을 입력하세요.');
-    				$('#memName').focus();
-    				return false;
-    			}else if($('#memBirth1').val()==""||$('#memBirth1').val().length<4){
-    				alert('생년월일을 확인하세요.');
-    				$('#memBirth1').focus();
-    				return false;
-    			}else if($('#memBirth2').val()==""||$('#memBirth2').val().length<2){
-    				alert('생년월일을 확인하세요.');
-    				$('#memBirth2').focus();
-    				return false;
-    			}else if($('#memBirth3').val()==""||$('#memBirth3').val().length<2){
-    				alert('생년월일을 확인하세요.');
-    				$('#memBirth3').focus();
-    				return false;
-    			}else if($('#memPhone2').val()==""||$('#memPhone2').val().length<3){
-    				alert('휴대폰 번호를 확인해주세요.');
-    				$('#memPhone2').focus();
-    				return false;
-    			}else if($('#memPhone3').val()==""||$('#memPhone3').val().length<4){
-    				alert('휴대폰 번호를 확인해주세요.');
-    				$('#memPhone3').focus();
-    				return false;
-    			}else if(!$.validate_email($('#memEmail1').val())){
-    				alert('이메일을 확인하세요.');
-    				$('#memEmail1').focus();
-    				return false;
-    			}else if(($('#memEmail1').val()==""||$('#memEmail1').val().length<1)
-    					|| ($('#memEmail2').val()=='etc' && ($('#memEmail3').val()==""||$('#memEmail3').val().length<1))){
-    				alert('이메일을 확인하세요.');
-    				$('#memEmail1').focus();
-    				return false;
-    			}else{
-	    			$('#frm').prop('action','<c:url value="/member/edit/psMemEdit2.do"/>');
-	    			$('#frm').submit();		    				
-    			}
+			//이메일 select 기본으로 naver.com지정
+			$("select option[value='naver.com']").attr("selected", true);
 	
-    		});
-
-
-    		//아이디 정규식으로 받기
-    		$.validate_email=function(email){
-    			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
-    			return pattern.test(email);	
-    			//true이면 정규식 만족
-    			//false이면 에러
-    			
-    			/*
-    			정규식 /^[a-zA-Z0-9]+$/g
-    			a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
-    			닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
-    			*/
-    		}
-    		
-    		//수정버튼 클릭시 submit
-    		$('#updateBtn').click(function(){
-    			$('#frm').prop("action","<c:url value='/member/edit/psMemEdit2.do'/>");
-    			$('#frm').submit();
-    		});
-    		
-    		
-    		/* $('#regBtn').click(function(){
-    			
-    			
-    			var index=$('#upload').val().lastIndexOf("\\");
-    			var upload=$('#upload').val().substring(index+1);      
-
-    			$('#preview img').attr("src","/images/"+upload);
-  
-    			$('#myModal3').modal('hide');
-    		});  */
-    		
-    		var upload = document.querySelector('#upload');
-    	    var preview = document.querySelector('#preview');
-    	 
-    	    upload.addEventListener('change',function (e) {
-    	        var get_file = e.target.files;
-    	 
-    	        var image = document.createElement('img');
-    	 
-    	        /* FileReader 객체 생성 */
-    	        var reader = new FileReader();
-    	 
-    	        /* reader 시작시 함수 구현 */
-    	        reader.onload = (function (aImg) {
-    	 
-    	            return function (e) {
-    	                /* base64 인코딩 된 스트링 데이터 */
-    	                aImg.src = e.target.result
-    	            }
-    	        })(image)
-    	 
-    	        if(get_file){
-    	            /* 
-    	                get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
-    	                onload 에 설정했던 return 으로 넘어간다.
-    	                이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
-    	            */
-    	            reader.readAsDataURL(get_file[0]);
-    	        }
-    	 
-    	        $('#preview').html(image);
-    	        //preview.appendChild(image);
-    	    })
-    	        
-    });
- 
-    </script>
+			//생년월일 받아오기
+			if ($('#birth').val() != "") {
+				var birth = $('#birth').val();
+				var memBirth = birth.split("-");
+	
+				$('#memBirth1').val(memBirth[0]);
+				$('#memBirth2').val(memBirth[1]);
+				$('#memBirth3').val(memBirth[2]);
+			}
+	
+			//휴대폰번호 받아오기
+			if ($('#phone').val() != "") {
+				var phone = $('#phone').val();
+				var memPhone = phone.split("-");
+	
+				$('#memPhone1').val(memPhone[0]).prop("selected", true);
+				$('#memPhone2').val(memPhone[1]);
+				$('#memPhone3').val(memPhone[2]);
+			}
+	
+			//이메일 받아오기
+			if ($('#email').val() != "") {
+				var email = $('#email').val();
+				var memEmail = email.split("@");
+	
+				$('#memEmail1').val(memEmail[0]);
+				$("#memEmail2").val(memEmail[1]).prop("selected", true);
+			}
+	
+			//이메일 직접입력시에 text박스 보여주기
+			$('#memEmail2').change(function() {
+				if ($(this).val() == 'etc') {
+					$('#memEmail3').attr('style','visibility: visible');
+					//$('#memEmail3').css('visibility','visible');
+				} else {
+					$('#memEmail3').css('visibility','hidden');
+				}
+			});
+	
+			//개인회원 유효성검사
+			$('#updateBtn').click(function() {
+				if ($('#memName').val() == "") {
+					alert('이름을 입력하세요.');
+					$('#memName').focus();
+					return false;
+				} else if ($('#memBirth1').val() == ""|| $('#memBirth1').val().length < 4) {
+					alert('생년월일을 확인하세요.');
+					$('#memBirth1').focus();
+					return false;
+				} else if ($('#memBirth2').val() == ""|| $('#memBirth2').val().length < 2) {
+					alert('생년월일을 확인하세요.');
+					$('#memBirth2').focus();
+					return false;
+				} else if ($('#memBirth3').val() == ""|| $('#memBirth3').val().length < 2) {
+					alert('생년월일을 확인하세요.');
+					$('#memBirth3').focus();
+					return false;
+				} else if ($('#memPhone2').val() == ""|| $('#memPhone2').val().length < 3) {
+					alert('휴대폰 번호를 확인해주세요.');
+					$('#memPhone2').focus();
+					return false;
+				} else if ($('#memPhone3').val() == ""|| $('#memPhone3').val().length < 4) {
+					alert('휴대폰 번호를 확인해주세요.');
+					$('#memPhone3').focus();
+					return false;
+				} else if (!$.validate_email($('#memEmail1').val())) {
+					alert('이메일을 확인하세요.');
+					$('#memEmail1').focus();
+					return false;
+				} else if (($('#memEmail1').val() == "" || $('#memEmail1').val().length < 1)|| ($('#memEmail2').val() == 'etc' && 
+					($('#memEmail3').val() == "" || $('#memEmail3').val().length < 1))) {
+					alert('이메일을 확인하세요.');
+					$('#memEmail1').focus();
+					return false;
+				} else {
+					$('#frm').prop('action','<c:url value="/member/edit/psMemEdit2.do"/>');
+					$('#frm').submit();
+				}
+	
+			});
+	
+			//아이디 정규식으로 받기
+			$.validate_email = function(email) {
+				var pattern = new RegExp(
+						/^[a-zA-Z0-9]+$/g);
+				return pattern.test(email);
+				//true이면 정규식 만족
+				//false이면 에러
+	
+				/*
+				정규식 /^[a-zA-Z0-9]+$/g
+				a에서z 사이의 문자, A~Z사이의 문자, 0에서9사이의 숫자나
+				닫기 대괄호(])위의+기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미
+				 */
+			}
+	
+				//수정버튼 클릭시 submit
+				$('#updateBtn').click(function() {
+					$('#frm').prop("action","<c:url value='/member/edit/psMemEdit2.do'/>");
+					$('#frm').submit();
+				});
+	
+				var upload = document.querySelector('#upload');
+				var preview = document.querySelector('#preview');
+	
+				upload.addEventListener('change',function(e) {
+					var get_file = e.target.files;
+	
+					var image = document.createElement('img');
+	
+					/* FileReader 객체 생성 */
+					var reader = new FileReader();
+	
+					/* reader 시작시 함수 구현 */
+					reader.onload = (function(aImg) {
+	
+					return function(e) {
+						/* base64 인코딩 된 스트링 데이터 */
+						aImg.src = e.target.result
+					}
+				})(image)
+	
+				if (get_file) {
+					/* 
+					    get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+					    onload 에 설정했던 return 으로 넘어간다.
+					    이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+					 */
+					reader.readAsDataURL(get_file[0]);
+				}
+	
+				$('#preview').html(image);
+					//preview.appendChild(image);
+				})
+		});
+</script>
     <style type="text/css">
     	#psMemEdit2 h1{
     		font-weight:bold;
@@ -190,7 +172,6 @@
     		width:800px;
     	}
      	#psMemEdit2 fieldset{
- 		/* 	width:720px;*/
 			margin:0 auto;	 
 			padding:40px;
 			background-color:#ffff;	
@@ -236,9 +217,6 @@
 	
  	 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
@@ -246,9 +224,6 @@
   } 
   
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   
