@@ -59,4 +59,22 @@ public interface ResumeService {
 	int insertPF(PortfolioVO pfVO);
 	// 자기소개서
 	int insertIntro(IntroductionVO introVO);
+	
+	
+	Map<String,Object> selectResumeByResumeNo(int resumeNo);
+	
+	List<SchoolHistoryVO> selectSHByResumeNo(int resumeNo);
+	
+	List<EduHistoryVO> selectEHByResumeNo(int resumeNo);
+	
+	List<ActivitiesVO> selectActByResumeNo(int resumeNo);
+	
+	List<CertificateVO> selectCerByResumeNo(int resumeNo);
+	
+	List<SkillVO> selectSkillByResumeNo(int resumeNo);
+	
+	List<IntroductionVO> selectIntroByResumeNo(int resumeNo);
+	
+	List<PortfolioVO> selectPortByResumeNo(int resumeNo);
+	
 }

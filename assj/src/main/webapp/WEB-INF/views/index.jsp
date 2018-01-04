@@ -232,22 +232,11 @@
 							</c:if>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberVO}">
-							<%-- <br>
-							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 <a
-								href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-								href="<c:url value='/logout.do'/>"><button type="button"
-									class="btn btn-default btn-sm">로그아웃</button></a>
-							<hr>
-							<div id="memMenu">
-								&nbsp;<span class="smFont">==입사지원 ? | 스크랩 ? | 관심기업 ?==</span>
-								<p>========================= =========================
-									========================= =========================
-									=========================</p>
-							</div> --%>
+
 							<div class="memInfo">
 								<p>
 									<span><strong>${sessionScope.memberVO.memName}</strong> 님</span>
-									<span style="float: right; margin-top: 5px"><a href="#">My 홈 바로가기</a></span>
+									<span style="float: right; margin-top: 5px"><a href="<c:url value='/mypageMain.do' />">My 홈 바로가기</a></span>
 								</p>	
 								<p>
 									<span>등록한 이력서 <a href="#">0</a></span>
