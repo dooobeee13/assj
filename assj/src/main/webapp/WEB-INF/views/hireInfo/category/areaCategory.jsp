@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script>
 	$(function(){
-		$('form[name=searchForm] input[type=checkbox]').change(function(){
+		/* $('form[name=searchForm] input[type=checkbox]').change(function(){
 			var id = $(this).attr('id');
 			var name = $(this).attr('name');
 			var label = $('.category.sub .chklabel, .sCateName .cLi .chklabel').filter('[for='+ id +']');
@@ -33,7 +33,7 @@
 		$('.sCateName .step1').click(function(){
 			$(this).closest('.sCateName').prev().trigger('click');
 			$(this).closest('.sCateName').next().find('a[href="#aTabs-'+ $(this).data('no') +'"] label').trigger('click');
-		}); 
+		});  */
 		
 		/*
 		$('input[name=topArea]').change(function(){
@@ -83,7 +83,7 @@
 					<ul>
 						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">
 							<li class="col-md-6 <c:if test='${status.first}'>selected</c:if>">
-								<a href="#aTabs-${vo.areaNo}"><label class="chklabel" <%-- for="area_step1_${vo.areaNo}" --%>>${vo.areaName}</label></a>
+								<a href="#aTabs-${vo.areaNo}"><label class="chklabel" data-top="${vo.areaNo}">${vo.areaName}</label></a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -107,7 +107,7 @@
 									<c:if test="${!status.first}">"area-${vo.areaNo}" </c:if>
 									
 									<c:if test="${!status.first}">data-toparea="area-${top.areaNo}" </c:if>>
-									<label class="chklabel" data-name="${top.areaName}>${vo.areaName}" for=
+									<label class="chklabel" data-top="${top.areaNo}" data-name="${top.areaName}>${vo.areaName}" for=
 										<c:if test="${status.first}">"area-${top.areaNo}"</c:if>
 										<c:if test="${!status.first}">"area-${vo.areaNo}"</c:if>
 										><span>${vo.areaName}</span></label>

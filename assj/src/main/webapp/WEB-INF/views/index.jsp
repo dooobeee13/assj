@@ -28,46 +28,26 @@
 		
 	});
 </script>
+<style type="text/css">
+	.indexContent .memInfo {
+		padding: 20px;
+	}
+	
+	.indexContent .memInfo p strong {
+		font-size: 1.5em;
+	}
+	
+	.indexContent #slide {
+	    height: 180px;
+	    background: #ebecee;
+	    overflow-x: hidden;
+	    overflow-y: auto;
+  	}
+</style>
 </head>
 <body>
 	<c:import url="index/top.jsp" />
-	<!-- 슬라이드 -->
-	<fieldset id="slide">
-	<div id="carousel-example-generic" class="carousel slide">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="4"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="5"></li>
-		</ol>
-		<!-- Carousel items -->
-			<div class="carousel-inner" style="width:400px">
-				<div class="item active">
-					<img src="<c:url value='/images/slide1.png'/>" alt="slide1">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/images/slide2.png'/>" alt="slide2">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/images/slide3.png'/>" alt="slide3">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/images/slide4.png'/>" alt="slide4">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/images/slide5.png'/>" alt="slide5">
-				</div>
-				<div class="item">
-					<img src="<c:url value='/images/slide6.png'/>" alt="slide6">
-				</div>
-			</div>
-		</div>
-	</fieldset>
-	<!-- 슬라이드 끝 -->
-
+	
 	<div class="indexContent">
 		<section class="container">
 			<div class="row">
@@ -252,7 +232,7 @@
 							</c:if>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberVO}">
-							<br>
+							<%-- <br>
 							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 <a
 								href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 								href="<c:url value='/logout.do'/>"><button type="button"
@@ -263,7 +243,48 @@
 								<p>========================= =========================
 									========================= =========================
 									=========================</p>
+							</div> --%>
+							<div class="memInfo">
+								<p>
+									<span><strong>${sessionScope.memberVO.memName}</strong> 님</span>
+									<span style="float: right; margin-top: 5px"><a href="#">My 홈 바로가기</a></span>
+								</p>	
+								<p>
+									<span>등록한 이력서 <a href="#">0</a></span>
+								</p>
+								<p>
+									<span>스크랩한 공고 <a href="#">0</a></span>
+								</p>
+									<a href='/assj/logout.do' class="btn btn-primary btn-sm btn-block">로그아웃</a>
 							</div>
+							
+							<!-- 슬라이드 -->
+							<fieldset id="slide" style="width: 100%; height: 210px; position: relative;">
+								<div id="carousel-example-generic" class="carousel slide">
+									<div class="carousel-inner" style="height: 210px">
+										<div class="item active">
+											<img class="img-responsive" src="<c:url value='/images/slide1.png'/>" alt="slide1">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide2.png'/>" alt="slide2">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide3.png'/>" alt="slide3">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide4.png'/>" alt="slide4">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide5.png'/>" alt="slide5">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide6.png'/>" alt="slide6">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<!-- 슬라이드 끝 -->
+							
 						</c:if>
 						<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
 							<br>
