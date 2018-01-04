@@ -14,11 +14,11 @@
 
 <c:import url="../index/top.jsp" />
 
-<c:import url="mypageSide.jsp"></c:import>
 
  <div class="container">
 	
       <div class="row">
+<c:import url="mypageSide.jsp"></c:import>
       
         <div class="col-lg-6 col-md-6">
          	이력서 갯수

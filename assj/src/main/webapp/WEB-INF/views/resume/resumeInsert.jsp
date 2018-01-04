@@ -83,7 +83,7 @@ function OntextCheck(obj)
 					 <img class="img-responsive" style="width: 60px; height: 50px; float: left;" src="<c:url value='/images/assj_logo2.png' />" alt="로고">
 					</a>
 	
-				 <a class="navbar-brand" style="color: white;margin-left: 10px; " href="index.do">My 홈</a>
+				 <a class="navbar-brand" style="color: white;margin-left: 10px; " href="<c:url value='/mypageMain.do' />">My 홈</a>
 				
 				
 				  
@@ -97,7 +97,7 @@ function OntextCheck(obj)
 						class="dropdown-toggle" data-toggle="dropdown" href="#">이력서 관리</a>
 						<ul class="dropdown-menu">
 							<li><a href="<c:url value='/resume/resumeInsert.do'/>">이력서 등록</a></li>
-							<li><a href="#">이력서 현황</a></li>
+							<li><a href="<c:url value='/resume/resumeList.do' />">이력서 현황</a></li>
 							<li><a href="#">자소서 관리</a></li>
 							<li><a href="#">내 이력서 열람기업</a></li>
 							<li><a href="#">내 이력서 열람제한 설정</a></li>

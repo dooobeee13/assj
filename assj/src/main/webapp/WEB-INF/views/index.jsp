@@ -232,17 +232,11 @@
 							</c:if>
 						</c:if>
 						<c:if test="${!empty sessionScope.memberVO}">
-<<<<<<< HEAD
-							<br>
-							<b>&nbsp;&nbsp;&nbsp;${sessionScope.memberVO.memName}</b>님 
-							<a href="<c:url value='/mypageMain.do' />">
-							<span class="smFont">MyPage 바로가기</span>
-							</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
+
 							<div class="memInfo">
 								<p>
 									<span><strong>${sessionScope.memberVO.memName}</strong> 님</span>
-									<span style="float: right; margin-top: 5px"><a href="#">My 홈 바로가기</a></span>
+									<span style="float: right; margin-top: 5px"><a href="<c:url value='/mypageMain.do' />">My 홈 바로가기</a></span>
 								</p>	
 								<p>
 									<span>등록한 이력서 <a href="#">0</a></span>
