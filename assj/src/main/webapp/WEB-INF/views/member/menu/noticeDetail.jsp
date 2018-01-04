@@ -55,7 +55,7 @@
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 900px;
+    height: 1030px;
   } 
 
    .sidebar-nav {
@@ -168,11 +168,11 @@
 					</div>
 					<hr>
 					<c:if test="${!empty nexPre.NEXT_TITLE}">
-						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no='/>">${nexPre.NEXT_TITLE}</a>
+						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no=${nexPre.NEXT_NO}'/>">${nexPre.NEXT_TITLE}</a>
 					</c:if>
 					<br>
 					<c:if test="${!empty nexPre.PRE_TITLE}">
-						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no='/>">${nexPre.PRE_TITLE}</a><br>
+						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/countUpdate.do?no=${nexPre.PRE_NO}'/>">${nexPre.PRE_TITLE}</a><br>
 					</c:if>
 					<hr>
 					<div id="ListDiv">

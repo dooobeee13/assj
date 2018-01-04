@@ -43,6 +43,4 @@ public class CmRegisterController {
 		
 		return "common/message";	
 	}
-	
-	
 }

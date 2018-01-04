@@ -5,7 +5,7 @@
    <div class="checkbox posiselectDiv">
 	<c:forEach var="vo" items="${list}">
 		<label class="lb" for="position-${vo.positionNo}"> 
-			<input id="position-${vo.positionNo}" type="checkbox" value="${vo.positionNo}" 
+			<input id="position-${vo.positionNo}" type="checkbox" value="${vo.positionNo}"  name="positionList"
 				data-name="${vo.positionName}"> ${vo.positionName} 
 		</label>
 	</c:forEach>

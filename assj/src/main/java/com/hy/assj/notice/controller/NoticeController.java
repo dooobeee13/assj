@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
+import com.hy.assj.hirenoti.model.HireNotiListVO;
+import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.notice.model.NotiSearchVO;
 import com.hy.assj.notice.model.NoticeListVO;
 import com.hy.assj.notice.model.NoticeService;
@@ -44,64 +46,11 @@ public class NoticeController {
 	@RequestMapping(value="/notice.do",method=RequestMethod.GET)
 	public String notice_get(@ModelAttribute SearchVO searchVo, Model model) {
 		logger.info("공지사항 화면,searchVo={}",searchVo);
-		
-		/*//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-				
-		//SearchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("searchVo 최종값 : {}", searchVo);
-	
-
-		List<Map<String,Object>> list =noticeService.selectAll(searchVo);
-		logger.info("글목록 결과, list.size()={}", list.size());
-		
-		int totalRecord = noticeService.selectTotalRecordCount(searchVo);
-		logger.info("글 전체 개수 조회 결과, totalRecord={}", totalRecord);
-		
-		pagingInfo.setTotalRecord(totalRecord);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("pagingInfo", pagingInfo);*/
-		
 		return "member/menu/notice";	
 	}
-
-	/*@RequestMapping(value="/notice.do",method=RequestMethod.POST)
-	public String notice_post(@ModelAttribute SearchVO searchVo, Model model) {
-		logger.info("글 목록, 파라미터 searchVo={}", searchVo);
-
-		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-				
-		//SearchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("searchVo 최종값 : {}", searchVo);
-		
-		List<Map<String,Object>> list =noticeService.selectAll(searchVo);
-		logger.info("글목록 결과, list.size()={}", list.size());
-		
-		int totalRecord = noticeService.selectTotalRecordCount(searchVo);
-		logger.info("글 전체 개수 조회 결과, totalRecord={}", totalRecord);
-		
-		pagingInfo.setTotalRecord(totalRecord);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("pagingInfo", pagingInfo);
-		
-		return "member/menu/notice";	
-	}*/
 	
 	@RequestMapping("/step.do")
-	public String step1_get(@ModelAttribute NotiSearchVO searchVo, Model model) {
+	public String step(@ModelAttribute NotiSearchVO searchVo, Model model) {
 		logger.info("step 화면 notiNo={}", searchVo.getNotititleNo());
 		
 		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
@@ -155,87 +104,6 @@ public class NoticeController {
 		
 		return "member/menu/step2";
 	}
-	/*@RequestMapping("/step2.do")
-	public String step2_get(@ModelAttribute SearchVO searchVo,Model model) {
-		logger.info("step2 화면");
-		
-		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-				
-		//SearchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("searchVo 최종값 : {}", searchVo);
-		
-		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
-		
-		List<Map<String,Object>> list1=noticeService.noticeList1(searchVo);
-		
-		pagingInfo.setTotalRecord(noticeService.selectTotalRecordCount1(searchVo));
-		
-		model.addAttribute("list1", list1);
-		model.addAttribute("pagingInfo", pagingInfo);
-		
-		
-		return "member/menu/step2";
-	}
-
-	@RequestMapping("/step3.do")
-	public String step3_get(Model model) {
-		logger.info("step3 화면");
-		
-		List<Map<String,Object>> list2=noticeService.noticeList2();
-		
-		PaginationInfo page = new PaginationInfo();
-		page.setCurrentPage(1);
-		page.setBlockSize(10);
-		page.setRecordCountPerPage(10);
-		page.setTotalRecord(list2.size());
-		
-		model.addAttribute("list2", list2);
-		model.addAttribute("pagingInfo", page);
-		
-		return "member/menu/step3";
-	}
-
-	@RequestMapping("/step4.do")
-	public String step4_get(Model model) {
-		logger.info("step4 화면");
-		
-		List<Map<String,Object>> list3=noticeService.noticeList3();
-		
-		PaginationInfo page = new PaginationInfo();
-		page.setCurrentPage(1);
-		page.setBlockSize(10);
-		page.setRecordCountPerPage(10);
-		page.setTotalRecord(list3.size());
-		
-		model.addAttribute("list3", list3);
-		model.addAttribute("pagingInfo", page);
-		
-		return "member/menu/step4";
-	}
-
-	@RequestMapping("/step5.do")
-	public String step5_get(Model model) {
-		logger.info("step5 화면");
-		
-		List<Map<String,Object>> list4=noticeService.noticeList4();
-		
-		PaginationInfo page = new PaginationInfo();
-		page.setCurrentPage(1);
-		page.setBlockSize(10);
-		page.setRecordCountPerPage(10);
-		page.setTotalRecord(list4.size());
-		
-		model.addAttribute("list4", list4);
-		model.addAttribute("pagingInfo", page);
-		
-		return "member/menu/step5";
-	}*/
 	
 	@RequestMapping("/countUpdate.do")
 	public String countUpdate(@RequestParam(defaultValue="0") int no,
@@ -264,25 +132,11 @@ public class NoticeController {
 		Map<String,Object> map =noticeService.selectByNo(no);
 		Map<String,Object> nexPre=noticeService.nextprev(no);
 		
-		
-		/*
-		Map<String,Object> prev =noticeService.selectByNo(no-1);				
-		Map<String,Object> next =noticeService.selectByNo(no+1);*/
-		
 		logger.info("상세보기 결과, map={}", map);
-		/*logger.info("상세보기 결과, prev={}", prev);
-		logger.info("상세보기 결과, next={}", next);*/
-
-		
-		/*contents=contents.replace("\r\n", "<br>");
-			*/
-		
 
 		model.addAttribute("map", map);
 		model.addAttribute("nexPre", nexPre);
-	/*	model.addAttribute("prev", prev);
-		model.addAttribute("next", next);*/
-		
+
 		return "member/menu/noticeDetail";
 	}
 	
@@ -312,29 +166,15 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeEditOut.do",method=RequestMethod.GET)
 	public String noticeEditOut_get(Model model) {
-		logger.info("공지사항 수정,삭제(get)");
-		
-		//List<Map<String,Object>> list=noticeService.noticeList();
-		//List<Map<String,Object>> list1=noticeService.noticeList1();
-		/*List<Map<String,Object>> list2=noticeService.noticeList2();
-		List<Map<String,Object>> list3=noticeService.noticeList3();
-		List<Map<String,Object>> list4=noticeService.noticeList4();*/
-		
-		//model.addAttribute("list",list);
-		//model.addAttribute("list1",list1);
-		/*model.addAttribute("list2",list2);
-		model.addAttribute("list3",list3);
-		model.addAttribute("list4",list4);*/
-		
+		logger.info("공지사항 수정,삭제(get)");	
 		return "member/menu/noticeEditOut";
 	}
 	
 	@RequestMapping(value="/noticeWrite.do",method=RequestMethod.POST)
 	public String noticeWrite_post(@ModelAttribute NoticeVO noticeVO,Model model) {
-		logger.info("공지사항 글쓰기(post) 파라미터 NoticeVo{}",noticeVO);
+		logger.info("공지사항 글쓰기(post) 파라미터 NoticeVo={}",noticeVO);
 		
 		int cnt=noticeService.insertNotice(noticeVO);
-		
 		
 		String msg="공지사항 등록 실패",url="/member/menu/notice.do";
 		if(cnt>0){
@@ -349,11 +189,10 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeEdit.do",method=RequestMethod.GET)
 	public String noticeEdit_get(@RequestParam int no,Model model) {
-		logger.info("공지사항 수정화면 파라미터 no{}",no);
+		logger.info("공지사항 수정화면 파라미터 no={}",no);
 		
 		Map<String, Object> map=noticeService.selectByNo(no);
-		
-		logger.info("map{}",map);
+		logger.info("map={}",map);
 		
 		model.addAttribute("map",map);
 		
@@ -362,7 +201,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeEdit.do",method=RequestMethod.POST)
 	public String noticeEdit_post(@ModelAttribute NoticeVO noticeVO,Model model) {
-		logger.info("공지사항 수정 파라미터 noticeVO{}",noticeVO);
+		logger.info("공지사항 수정 파라미터 noticeVO={}",noticeVO);
 		
 		int cnt=noticeService.updateNotice(noticeVO);
 		
@@ -417,10 +256,10 @@ public class NoticeController {
 			msg="선택한 게시글 삭제 실패";
 		}//if
 		
-		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 
 		return "common/message";
 	}
+
 }

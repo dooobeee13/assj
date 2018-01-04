@@ -39,4 +39,29 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deleteNews(newsNo);
 	}
 
+	@Override
+	public int selectAdminLogin(String userid, String pwd) {
+		int cnt = 0;
+		
+		String Apwd = adminDao.selectAdminLogin(userid);
+		if(Apwd!=null) {
+			if(Apwd.equals(pwd)) {
+				cnt = AdminService.LOGIN_OK;
+			}else {
+				cnt = AdminService.PWD_DISAGREE;
+			}
+		}else {
+			cnt=AdminService.NOT_EXITST;
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int CreateAdmin(Map<String, Object> list) {
+		return adminDao.CreateAdmin(list);
+	}
+	
+	
+
 }

@@ -17,17 +17,13 @@
    		$('select option:eq(1)').css('color','red');
 		$('select option:eq(2)').css('color','blue');
 		$('select option:eq(3)').css('color','orange');
-		$('select option:eq(4)').css('color','green');		
-	
-		$('input[name=chkAll]').click(function(){	
-			$('tbody input[type=checkbox]').prop('checked', this.checked);
-		});
+		$('select option:eq(4)').css('color','green');	
 		
 		$('#btDeleteMulti').click(function(){
-			//선택한 상품들 삭제
+			//선택한 게시물 삭제
 			var len =$('tbody input[type=checkbox]:checked').length;
 			if(len==0){
-				alert('삭제할 상품을 먼저 체크하세요');
+				alert('삭제할 게시물을 먼저 체크하세요');
 				return;
 			}
 			
@@ -52,12 +48,16 @@
 			}); 
 		};
 		
+		$.step(0);
 		
 		$('#noticetitleNo').change(function(){
 			var idx = $(this).val();
 			$.step(idx);
 		});
 		
+		$('input[name=chkAll]').click(function(){ 
+			$('tbody input[type=checkbox]').prop('checked', this.checked);
+		});
 	});
 </script>
 <script src="../../js/bootstrap.min.js"></script>
@@ -180,7 +180,7 @@
 				<hr>
 				<br><br>
 				
-				<form class="form-inline" name="frmList" id="frmList" method="post" action="<c:url value='/admin/product/productList.do'/>">
+				<form class="form-inline" name="frmList" id="frmList" method="post">
 						<div class="form-group">	
 							<label for="noticetitleNo">구분 선택</label>&nbsp;
 							<select class="form-control" name="noticetitleNo" id="noticetitleNo">
@@ -434,10 +434,10 @@
 						</tbody>
 					</table>
 				</fieldset>	 --%>
-				</form>
 				<div class="total" id="all">
-				
+					
 				</div>
+				</form>
 			</div>
 				</div>
 		</div>

@@ -22,8 +22,6 @@
 </script>
 <style type="text/css">
 	#serviceCenter fieldset {
-		/* width:720px;
-		margin:0 auto;	 */
 		padding:20px;
 		background-color:#ffff;
 	}
@@ -57,18 +55,12 @@
 	
  /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
     height:1160px;
   } 
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   .sidebar-nav li {
@@ -159,6 +151,12 @@
 			</div>
 			<div class="well well-lg">
 			<table class="table table-bordered">	
+				<colgroup>
+					<col style="width:10%">
+					<col style="width:15%">
+					<col style="width:*%">
+					<col style="width:20%">
+				</colgroup>
 					<c:if test="${empty list}"> 
 					 <tr>
 						<td colspan='4'>공지사항이 없습니다.</td>
@@ -169,7 +167,7 @@
 							<th>번호</th>
 							<th>구분</th>
 							<th>제목</th>
-							<th>등록일</th>
+							<th>등록일시</th>
 						</tr>
 					<c:forEach var="map" items="${list}">
 						<tr>
@@ -202,6 +200,13 @@
 			</div>
 			<div class="well well-lg">
 			<table class="table table-bordered">
+			<colgroup>
+					<col style="width:10%">
+					<col style="width:*%">
+					<col style="width:15%">
+					<col style="width:15%">
+					<col style="width:10%">
+			</colgroup>
 			<c:if test="${!empty qlist}">
 					<tr>
 						<th>번호</th>
