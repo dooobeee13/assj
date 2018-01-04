@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="careerSelect">
-	<span class="sp11">경력여부</span>
+	
 	<label class="radio-inline" for="career0">
 		<input type="radio" id="career0"  name="careerNo" checked="checked" value="0">
 			경력무관
@@ -24,10 +24,42 @@
 	</label> <br> <br> -->
 </div>
 <div id="careeryear" style="display: none">
-	<input type="text" id="hnExpyearMin" name="hnExpyearMin"> 
-	<input type="text" id="hnExpyearMax" name="hnExpyearMax">
+	<select id="hnExpyearMin">
+		
+		<option value="0">선택</option>
+		<option value="1">1년</option>
+		<option value="2">2년</option>
+		<option value="3">3년</option>
+		<option value="4">4년</option>
+		<option value="5">5년</option>
+		<option value="6">6년</option>
+		<option value="7">7년</option>
+		<option value="8">8년</option>
+		<option value="9">9년</option>
+		<option value="10">10년</option>
+	</select>
+	~
+	<select id="hnExpyearMax">
+		<option value="0">선택</option>
+		<option value="1">1년</option>
+		<option value="2">2년</option>
+		<option value="3">3년</option>
+		<option value="4">4년</option>
+		<option value="5">5년</option>
+		<option value="6">6년</option>
+		<option value="7">7년</option>
+		<option value="8">8년</option>
+		<option value="9">9년</option>
+		<option value="10">10년</option>
+		<option value="11">11년</option>
+		<option value="12">12년</option>
+		<option value="13">13년</option>
+		<option value="14">14년</option>
+		<option value="15">15년</option>
+		<option value="16">16년</option>
+		<option value="17">17년</option>
+	</select>
 </div>
-
 <script>
 	$('.careerSelect label').change(function(){
 		var id = $(this).attr('for');

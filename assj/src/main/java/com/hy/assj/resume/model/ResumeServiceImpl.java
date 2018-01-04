@@ -136,6 +136,48 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeDao.insertIntro(introVO);
 	}
 
+	@Override
+	public Map<String,Object> selectResumeByResumeNo(int resumeNo) {
+		return resumeDao.selectResumeByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<SchoolHistoryVO> selectSHByResumeNo(int resumeNo) {
+		return resumeDao.selectSHByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<EduHistoryVO> selectEHByResumeNo(int resumeNo) {
+		return resumeDao.selectEHByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<ActivitiesVO> selectActByResumeNo(int resumeNo) {
+		return resumeDao.selectActByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<CertificateVO> selectCerByResumeNo(int resumeNo) {
+		return resumeDao.selectCerByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<SkillVO> selectSkillByResumeNo(int resumeNo) {
+		return resumeDao.selectSkillByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<IntroductionVO> selectIntroByResumeNo(int resumeNo) {
+		return resumeDao.selectIntroByResumeNo(resumeNo);
+	}
+
+	@Override
+	public List<PortfolioVO> selectPortByResumeNo(int resumeNo) {
+		return resumeDao.selectPortByResumeNo(resumeNo);
+	}
+
+	
+
 	
 	
 }
