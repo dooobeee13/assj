@@ -220,8 +220,8 @@
 					<li class="searchjob"><a href="#">지역별</a>
 						<c:import url="/index/navAreaCategory.do" />
 					</li>
-					<li class="searchjob"><a href="#">인재검색</a></li>
-					
+					<li class="searchjob"><a href="<c:url value='/TalentManagement/final-main.do'/>">인재검색</a></li>
+					<li class="searchjob"><a href="<c:url value='/newsInfo/newsmain.do'/>">공채 뉴스</a></li>
 					<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
 					<li class="searchjob"><a href='<c:url value="/hire_noti/hire1.do" />'>공고등록</a></li>
 					</c:if>
