@@ -86,7 +86,7 @@
 					<c:set var="subKey" value="subCategory-${vo.occuNo}"/>
 					<c:forEach var="sub" items="${map[subKey]}">
 						<li class="col-md-6">
-							<a href="#"><span>${sub.occuName}</span></a>
+							<a href="<c:url value="/hireInfo/home.do?type=occu&val=${stat.first ? vo.occuNo : sub.occuNo}"/>"><span>${sub.occuName}</span></a>
 						</li>
 					</c:forEach>
 					</ul>

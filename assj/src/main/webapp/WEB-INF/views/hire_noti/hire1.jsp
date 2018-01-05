@@ -16,44 +16,8 @@
 <link rel="stylesheet" type="text/css"  href="<c:url value='/css/jquery-ui.css'/>">
 <script type="text/javascript" src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=327f7603fcf7a8ba155dfe89ac2d2057&libraries=services"></script>
 
-<script>
-    function findZipcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullAddr = ''; // 최종 주소 변수
-                var extraAddr = ''; // 조합형 주소 변수
-                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    fullAddr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    fullAddr = data.jibunAddress;
-                }
-                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.userSelectedType === 'R'){
-                    //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                }
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address').value = fullAddr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('addressDetail').focus();
-            }
-        }).open();
-    }
-</script>
 
 
 <script type="text/javascript">
@@ -301,15 +265,22 @@
 <![endif]-->
 </head>
 <body>
+	<c:import url="../index/top.jsp" />
+	<div>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
 	<form name="frm" method="post" action="<c:url value='hire1.do'/>"
 		onsubmit="return send(this)">
 		<fieldset class="fsmain">
 
 			<div class="container">
-				<div class="input-group"> 
-					<span class="sp11">직종/직무
+				<table class="table table-condended">
+					<thead>
+						<tr class="active">
+							<th class="sp11">직종/직무</th>
+						</tr>
+					</thead>
 					<tr>
+						<td>* 직종/직무</td>
 						<td>
 							<div>
 								<div class="occupation"></div>
@@ -323,14 +294,21 @@
 						</td>
 
 					</tr>
-					</span> 
+					<tr>
+						<td>* 경력여부</td>
+						<td>
+							<c:import url="/hire_noti/career.do" />
+						</td>
+					</tr>
 					
-
-				</div>
+					<tr>
+						<td> *고용형태</td>
+						<td>
+							<c:import url="/hire_noti/empType.do"/>
+						</td>
+					</tr>
+				</table>	
 				<br>
-				<c:import url="/hire_noti/career.do" />
-				
-				<c:import url="/hire_noti/empType.do"/>
 				
 
 				<br> <br>
@@ -474,7 +452,7 @@
 								<option value="7000~8000">7000~8000만원</option>
 								<option value="8000~9000">8000~9000만원</option>
 								<option value="9000~10000">9000~1억</option>
-								<option value="10000">1억이상</option>
+								<option value="10000~0">1억이상</option>
 
 						</select></td>
 					</tr>
@@ -505,7 +483,101 @@
 							<input type="button" onclick="findZipcode()" value="우편번호 찾기"><br>
 							<input type="text" name="hnAddr" id="address" placeholder="  기본주소 " size="50">
 						
-							<input type="text" id="addressDetail" name="hnDetailAddr" placeholder="  상세주소 "></td>
+							<input type="text" id="addressDetail" name="hnDetailAddr" placeholder="  상세주소 ">
+							<div id="map" style="width:100%; height: 400px; display: none"></div>
+							<p class="text-danger" style="margin-top: 20px; display: none;">지도를 움직여 정확한 위치를 표시하세요</p>
+							<input type="hidden" id="lat" name="hnLat" >
+							<input type="hidden" id="lng" name="hnLng" >
+							<input type="hidden" id="sigungu" name="sigungu" >
+							
+							
+							<script>
+								var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+							        mapOption = {
+							            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+							            level: 5 // 지도의 확대 레벨
+							        };
+		
+							    //지도를 미리 생성
+							    var map = new daum.maps.Map(mapContainer, mapOption);
+							    //주소-좌표 변환 객체를 생성
+							    var geocoder = new daum.maps.services.Geocoder();
+							    //마커를 미리 생성
+							    var marker = new daum.maps.Marker({
+							        position: new daum.maps.LatLng(37.537187, 127.005476),
+							        map: map
+							    });
+							    
+							    daum.maps.event.addListener(map, 'center_changed', function() {        
+								    
+								    // 지도 중심좌표를 얻어옵니다 
+								    var latlng = map.getCenter(); 
+								    
+								    marker.setPosition(latlng);
+								    
+								    $('#lat').val(latlng.getLat());
+								    $('#lng').val(latlng.getLng());
+								    
+								});
+							
+							    function findZipcode() {
+							        new daum.Postcode({
+							            oncomplete: function(data) {
+							                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							                var fullAddr = ''; // 최종 주소 변수
+							                var extraAddr = ''; // 조합형 주소 변수
+							                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							                    fullAddr = data.roadAddress;
+							                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+							                    fullAddr = data.jibunAddress;
+							                }
+							                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+							                if(data.userSelectedType === 'R'){
+							                    //법정동명이 있을 경우 추가한다.
+							                    if(data.bname !== ''){
+							                        extraAddr += data.bname;
+							                    }
+							                    // 건물명이 있을 경우 추가한다.
+							                    if(data.buildingName !== ''){
+							                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+							                    }
+							                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+							                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+							                }
+							                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+							                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+							                document.getElementById('address').value = fullAddr;
+							                document.getElementById('sigungu').value = data.sigungu;
+							                // 커서를 상세주소 필드로 이동한다.
+							                document.getElementById('addressDetail').focus();
+							                
+							                geocoder.addressSearch(data.address, function(results, status) {
+							                    // 정상적으로 검색이 완료됐으면
+							                    if (status === daum.maps.services.Status.OK) {
+							                        var result = results[0]; //첫번째 결과의 값을 활용
+							
+							                        // 해당 주소에 대한 좌표를 받아서
+							                        var coords = new daum.maps.LatLng(result.y, result.x);
+							                        // 지도를 보여준다.
+							                        mapContainer.style.display = "block";
+							                        $('#map').next().css('display', 'block');
+							                        map.relayout();
+							                        // 지도 중심을 변경한다.
+							                        map.setCenter(coords);
+							                        // 마커를 결과값으로 받은 위치로 옮긴다.
+							                        marker.setPosition(coords)
+							                        $('#lat').val(coords.getLat());
+							            		    $('#lng').val(coords.getLng());
+							                    }
+							                });
+							            }
+							        }).open();
+							    }
+							</script>
+						</td>
 
 					</tr>
 				</table>
@@ -714,7 +786,9 @@
 	</div>
 	</form>
 	<!-- 모달 전체 윈도우 -->
-
+	</div>
+	
+	<c:import url="../index/footer.jsp" />
 </body>
 </html>
 

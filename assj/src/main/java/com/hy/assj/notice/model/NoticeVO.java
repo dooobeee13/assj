@@ -12,7 +12,6 @@ public class NoticeVO {
 	private int readcount;
 	private String contents;
 	
-	
 	public int getNo() {
 		return no;
 	}

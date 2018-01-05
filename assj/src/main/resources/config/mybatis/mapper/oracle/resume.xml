@@ -67,7 +67,7 @@
 		resume_addr,resume_detailaddr,resume_phone,resume_email,resume_status,
 		resume_gender,resume_hobby,resume_specialty,resume_married,resume_veteran,
 		resume_subsidy,resume_mil_target,resume_mil_start,resume_mil_end,resume_mil_division,
-		resume_mil_class,resume_mil_reason,resume_mil_unfinish,resume_career_list,resume_sal_start,
+		resume_mil_class,resume_mil_reason,resume_mil_unfinish,career_no,resume_career_list,resume_sal_start,
 		resume_sal_end,resume_sal_opt,area_no,edu_no,et_no,
 		resume_visibility,resume_photo,occu_no,sec_no,resume_lastupdate)
 		values(
@@ -75,7 +75,7 @@
 		#{resumeAddr},#{resumeDetailaddr},#{resumePhone},#{resumeEmail},#{resumeStatus},
 		#{resumeGender},#{resumeHobby},#{resumeSpecialty},#{resumeMarried},#{resumeVeteran},
 		#{resumeSubsidy},#{resumeMilTarget},#{resumeMilStart},#{resumeMilEnd},#{resumeMilDivision},
-		#{resumeMilClass},#{resumeMilReason},#{resumeMilUnfinish},#{resumeCareerList},#{resumeSalStart},
+		#{resumeMilClass},#{resumeMilReason},#{resumeMilUnfinish},#{careerNo},#{resumeCareerList},#{resumeSalStart},
 		#{resumeSalEnd},#{resumeSalOpt},#{areaNo},#{eduNo},#{etNo},
 		#{resumeVisibility},#{resumePhoto},#{occuNo},#{secNo},sysdate)
 		
@@ -165,6 +165,52 @@
 			#{introNo},#{resumeNo},#{introTitle},#{introContent}
 		)
 	</insert>
+	
+	
+	<select id="selectResumeByResumeNo" parameterType="int" resultType="map">
+		select r.*,et.et_name,a.area_name,edu.edu_name,occu.occu_name,sec.sec_name,car.CAREER_NAME
+		from resume r join emp_type et
+		on r.ET_NO = et.et_no
+		join area a
+		on r.AREA_NO = a.AREA_NO
+		join education edu
+		on r.EDU_NO = edu.EDU_NO
+		join occupation occu
+		on r.OCCU_NO = occu.OCCU_NO
+		join sectors sec
+		on r.SEC_NO = sec.SEC_NO 
+		join career car
+		on r.career_no = car.CAREER_NO
+		where resume_no=#{resumeNo}
+	</select>
+	
+	<select id="selectSHByResumeNo" parameterType="int" resultType="SchoolHistoryVO">
+		select * from school_history where resume_no=#{resumeNo} order by sh_no
+	</select>
+	
+	<select id="selectEHByResumeNo" parameterType="int" resultType="EduHistoryVO">
+		select * from edu_history where resume_no=#{resumeNo} order by eh_no
+	</select>
+	
+	<select id="selectActByResumeNo" parameterType="int" resultType="ActivitiesVO">
+		select * from activities where resume_no=#{resumeNo} order by act_no
+	</select>
+	
+	<select id="selectCerByResumeNo" parameterType="int" resultType="CertificateVO">
+		select * from certificate where resume_no=#{resumeNo} order by cer_no
+	</select>
+	
+	<select id="selectSkillByResumeNo" parameterType="int" resultType="SkillVO">
+		select * from skill where resume_no=#{resumeNo} order by skill_no
+	</select>
+	
+	<select id="selectIntroByResumeNo" parameterType="int" resultType="IntroductionVO">
+		select * from introduction where resume_no = #{resumeNo} order by intro_no
+	</select>
+	
+	<select id="selectPortByResumeNo" parameterType="int" resultType="PortfolioVO">
+		select * from portfolio where resume_no = #{resumeNo} order by port_no
+	</select>
 	
 </mapper>
 

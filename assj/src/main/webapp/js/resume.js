@@ -10,18 +10,18 @@ $(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	$('#detailCareer').hide();
 	$('#lbChk').hide();
-	$('input[name=optionsRadios1]').change(function(){
+	$('input[name=careerNo]').change(function(){
 		var radioValue=$(this).val();
-		if(radioValue=="신입"){
+		if(radioValue=="1"){
 			$('#detailCareer').hide();
 			$('#lbChk').hide();
 			$('#chkDetailTip').removeAttr("checked");
 			$('#detailCarTip').hide();
-		}else if(radioValue=="경력"){
+		}else if(radioValue=="2"){
 			$('#detailCareer').show();
 			$('#lbChk').show();
 			$('#chkDetailTip').removeAttr("checked");
-		}else if(radioValue=="임원/CEO"){
+		}else if(radioValue=="3"){
 			$('#detailCareer').show();
 			$('#lbChk').show();
 		}
@@ -395,7 +395,12 @@ $(function(){
 			$(this).attr("value",dp);
 		});
 		
+		
+		
+		
+		
 	});
+	
 	
 	
 });

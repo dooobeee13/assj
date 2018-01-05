@@ -134,6 +134,48 @@ public class ResumeDAOMybatis extends SqlSessionDaoSupport implements ResumeDAO 
 		return getSqlSession().insert(namespace+".insertIntro", introVO);
 	}
 
+	@Override
+	public Map<String,Object> selectResumeByResumeNo(int resumeNo) {
+		return getSqlSession().selectOne(namespace+".selectResumeByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<SchoolHistoryVO> selectSHByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectSHByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<EduHistoryVO> selectEHByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectEHByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<ActivitiesVO> selectActByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectActByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<CertificateVO> selectCerByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectCerByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<SkillVO> selectSkillByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectSkillByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<IntroductionVO> selectIntroByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectIntroByResumeNo", resumeNo);
+	}
+
+	@Override
+	public List<PortfolioVO> selectPortByResumeNo(int resumeNo) {
+		return getSqlSession().selectList(namespace+".selectPortByResumeNo", resumeNo);
+	}
+
+	
+
 	
 	
 }

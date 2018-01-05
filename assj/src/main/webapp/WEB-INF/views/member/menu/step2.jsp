@@ -8,10 +8,16 @@
 <html>
 <![CDATA[
 <table class='table table-hover'>
-
+		<colgroup>
+			<col style="width:10%">
+			<col style="width:10%">
+			<col style="width:15%">
+			<col style="width:*%">
+			<col style="width:20%">
+		</colgroup>
 		<thead>
 			<tr>
-				<th><input type="checkbox" name="chkAll"></th>
+				<th><input type="checkbox" name="chkAll" id="chkAll"></th>
 				<th>번호</th>
 				<th>구분</th>
 				<th>제목</th>
@@ -47,7 +53,7 @@
 							</c:if>
 						</td>
 						<td>
-							<a href="<c:url value='/member/menu/countUpdate.do?no=${map.NO}'/>">${map.TITLE}</a>
+							<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${map.NO}'/>">${map.TITLE}</a>
 						</td>
 						<td>
 							<a href="<c:url value='/member/menu/noticeEdit.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >수정</button></a>&nbsp;
@@ -58,27 +64,25 @@
 			</c:if>
 		</tbody>
 </table>
-
 <div class='divPage'>
+	<ul class="pagination">
 	<!-- 페이지 번호 추가 -->		
 	<!-- 이전 블럭으로 이동 ◀ -->
 	<c:if test='${pagingInfo.firstPage>1 }'>
-		<a href='#' onclick='pageFunc(${pagingInfo.firstPage-1})'>		
-			<img src='<c:url value="/images/first.JPG"/>'>
-		</a>	
+		<li><a href="javascript:void(0)" onclick="pageFunc(${pagingInfo.firstPage-1})">«</a></li>
 	</c:if>	
 	
 	<!-- [1][2][3][4][5][6][7][8][9][10] -->
 	<c:forEach var='i' begin='${pagingInfo.firstPage}' 
 		end='${pagingInfo.lastPage}'>
 		<c:if test='${i==pagingInfo.currentPage}'>
-			<span style='font-weight:bold;color:blue'>${i }</span>
+			<li><a href="javascript:void(0)" style="background-color:#607D8B; color:white">${i }</a></li>
 		</c:if>
 		<c:if test='${i!=pagingInfo.currentPage}'>
-			<a href='javascript:void(0)' onclick='pageFunc(${i})'>
-			[${i}]</a>
+			<li><a href="javascript:void(0)" onclick="pageFunc(${i })">${i }</a></li>
  		</c:if>				
 	</c:forEach>
+	
 	<script>
 		function pageFunc(currentPage) {
 			var searchCondition = $('#searchCondition').val();
@@ -89,11 +93,10 @@
 	
 	<!-- 다음 블럭으로 이동 ▶ -->
 	<c:if test='${pagingInfo.lastPage < pagingInfo.totalPage}'>
-		<a href='#' onclick='pageFunc(${pagingInfo.lastPage+1})'>	
-			<img src='<c:url value="/images/last.JPG"/>'>
-		</a>	
+		<li><a href="javascript:void(0)" onclick="pageFunc(${pagingInfo.lastPage+1})">»</a></li>	
 	</c:if>
 	
 	<!--  페이지 번호 끝 -->
-</div>]]>
+</div>
+]]>
 </html></result>

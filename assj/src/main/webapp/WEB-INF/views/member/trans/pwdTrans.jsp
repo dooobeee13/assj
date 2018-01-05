@@ -11,8 +11,7 @@
 <title>비밀번호 변경</title>
 <!-- Bootstrap -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
  <!-- Bootstrap -->
 <script src="../../js/bootstrap.min.js"></script>
@@ -56,14 +55,11 @@
 		width:800px;	
 	}
 	#pwdTrans {
-   		/* width:720px;*/
    		padding:40px; 
    		margin:0 auto;	
    		background-color:#ffff;
      }
 	#pwdTrans fieldset{
-		/* width:600px;
- 		margin:0 auto; */
 		padding:20px;
 		background-color:#dde6f7;
 	}
@@ -87,24 +83,16 @@
 	#pwdTrans h1{
 		font-weight:bold;
 	}
-	
-
 		
  	 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 900px;
+    height: 870px;
   } 
 
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   
@@ -129,12 +117,6 @@
     line-height: 3em;
   } 
 </style>
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 	<body>
 		 <c:import url="../../index/top.jsp" />

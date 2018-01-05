@@ -21,8 +21,6 @@
 </script>
 <style type="text/css">
 	#psMemOut fieldset{
-	/* 	width:720px;
-		margin:0 auto;	*/
 		padding:20px; 
 		background-color:#ffff;
 	}
@@ -59,20 +57,13 @@
 	
   /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 1490px;
+    height: 1460px;
   } 
   
-  
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   

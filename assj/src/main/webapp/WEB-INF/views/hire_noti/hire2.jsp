@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="top.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,13 +18,12 @@
 
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet"> 
-<style type="text/css"> 
+<!--  <style type="text/css"> 
 	.se1{
 		padding-left: 200px;
 		padding-right: 200px;
 	}
-	
-</style>
+</style> -->
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -32,53 +33,89 @@
 </head>
 <body>
 	<header>
+		<h1 class="text-center">전체공고 / 지원자 관리</h1>
 	</header>
-	<h1 class="text-center">전체공고 / 지원자 관리</h1>
+	
 
 	<section class="se1">
-	<ul class="nav nav-tabs" id="">
-		<li><a href="#">진행중(0건)</a></li>
-		<li><a href="#">대기(0건)</a></li>
-		<li><a href="#">마감(0건)</a></li>
-		<li><a href="#">전체(0건)</a></li>
-		<li><input type="button" class="btn btn-primary btn-md" value="채용공고 등록" 
-		onClick="self.location='hire1.do';"></li>
-		
-	</ul>
-	
-		<div class="table table-hover">
-			<table >
-				
+		<nav>
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="#">전체공고(0)</a></li>
+					<li><a href="#">└진행중공고(0)</a></li>
+					<li><a href="#">└대기중공고(0)</a></li>
+					<li><a href="#">└마감된공고(0)</a></li>
+					<li><a href="#">문자이메일 발송 내역</a></li>
+				</ul>
+			</div>
+		</nav>
+		<header>
+			<div>
+				<ul class="nav nav-tabs" id="">
+					<li><a href="#">진행중(0건)</a></li>
+					<li><a href="#">대기(0건)</a></li>
+					<li><a href="#">마감(0건)</a></li>
+					<li><a href="#">전체(0건)</a></li>
+					<li><input type="button" class="btn btn-primary btn-md"
+						value="채용공고 등록" onClick="self.location='hire1.do';"></li>
+				</ul>
+			</div>
+		</header>
+
+		<table class="table table-hover" >
 				<caption>공고 게시판</caption>
-				<colgroup>
-					<col style="width: 100px;" />
-					<col style="width: 300px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-				</colgroup>
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
 						<th scope="col">제목</th>
-						<th scope="col">담당자</th>
-						<th scope="col">시작일</th>
-						<th scope="col">마감일</th>
+
+						<th scope="col">공고시작일</th>
+						<th scope="col">공고마감일</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="5" style="text-align: center;">해당하는 데이터가 없습니다.</td>
+							<td colspan="4" style="text-align: center;">해당하는 데이터가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:if test="${!empty list}">
 						<!--게시판 내용 반복문 시작  -->
-					
+							<c:forEach var="vo" items="${list}">
+								<tr>
+									<td>${vo['HN_NO']}</td>
+									<td><a href="#">${vo['HN_NOTITITLE']}</a></td>
+									<td><fmt:formatDate value="${vo['HN_START']}" 
+											pattern="yyyy-MM-dd" />
+									</td>
+									<td><fmt:formatDate value="${vo['HN_DEADLINE']}" 
+											pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:forEach>
 						<!--반복처리 끝  -->
 					</c:if>
 				</tbody>
 			</table>
+				<div class="divSearch">
+			<form name="frmSearch" method="post"
+				action="<c:url value='/hire_noti/hire2.do'/>">
+				<select name="searchCondition">
+					<option value="title"
+						<c:if test="${param.searchCondition=='title' }"> 
+            		selected
+            	</c:if>>공고제목</option>
+					<option value="name"
+						<c:if test="${param.searchCondition=='name' }"> 
+            		selected
+            	</c:if>>공고마감</option>
+				</select> 
+		
+					<input type="text" name="searchKeyword" title="검색어 입력" placeholder="검색어 입력"
+						value="${param.searchKeyword }"> 
+					<input type="submit"value="검색">  
+				
+			</form>
+		
 		</div>
 		<div class="divPage">
 			<!-- 페이지 번호 추가 -->
@@ -109,39 +146,6 @@
 
 			<!--  페이지 번호 끝 -->
 		</div>
-		<div class="divSearch">
-			<form name="frmSearch" method="post"
-				action="<c:url value='/hire_noti/hire2.do'/>">
-				<select name="searchCondition">
-					<option value="title"
-						<c:if test="${param.searchCondition=='title' }"> 
-            		selected
-            	</c:if>>공고제목</option>
-					<option value="name"
-						<c:if test="${param.searchCondition=='name' }"> 
-            		selected
-            	</c:if>>담당자명</option>
-				</select> 
-		
-					<input type="text" name="searchKeyword" title="검색어 입력" placeholder="검색어 입력"
-						value="${param.searchKeyword }"> 
-					<input type="submit"value="검색">  
-				
-			</form>
-		</div>
-
 	</section>
-	<nav>
-		<div class="col-md-2">
-			<ul class="nav nav-pills nav-stacked">
-				<li ><a href="#">전체공고(0)</a></li>
-				<li><a href="#">└진행중공고(0)</a></li>
-				<li><a href="#">└대기중공고(0)</a></li>
-				<li><a href="#">└마감된공고(0)</a></li>
-				<li ><a href="#">문자이메일 발송 내역</a></li>
-			</ul>
-		</div>
-	</nav>
-
 </body>
 </html>
