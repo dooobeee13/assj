@@ -60,9 +60,7 @@
 						value="채용공고 등록" onClick="self.location='hire1.do';"></li>
 				</ul>
 			</div>
-		</header>
-
-		<table class="table table-hover" >
+			<table class="table table-hover" >
 				<caption>공고 게시판</caption>
 				<thead>
 					<tr>
@@ -84,7 +82,7 @@
 							<c:forEach var="vo" items="${list}">
 								<tr>
 									<td>${vo['HN_NO']}</td>
-									<td><a href="#">${vo['HN_NOTITITLE']}</a></td>
+									<td><a href="<c:url value='/hire_noti/hire1Detail.do?hnNo=${vo["HN_NO"]}'/>">${vo['HN_NOTITITLE']}</a></td>
 									<td><fmt:formatDate value="${vo['HN_START']}" 
 											pattern="yyyy-MM-dd" />
 									</td>
@@ -96,6 +94,8 @@
 					</c:if>
 				</tbody>
 			</table>
+		</header>
+
 				<div class="divSearch">
 			<form name="frmSearch" method="post"
 				action="<c:url value='/hire_noti/hire2.do'/>">
@@ -117,7 +117,7 @@
 			</form>
 		
 		</div>
-		<div class="divPage">
+		<div class="divPage" >
 			<!-- 페이지 번호 추가 -->
 			<!-- 이전 블럭으로 이동 ◀ -->
 			<c:if test="${pagingInfo.firstPage>1 }">

@@ -11,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
@@ -22,6 +24,9 @@ import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
 import com.hy.assj.hirenoti.model.HireNotiService;
 import com.hy.assj.hirenoti.model.HireNotiVO;
+import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.recruit.model.RHireNotiVO;
+import com.hy.assj.recruit.model.RMemberVO;
 import com.hy.assj.vo.CareerVO;
 import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
@@ -180,12 +185,6 @@ public class HireNotiController {
 		return "common/message";		
 	}
 	
-	/*@RequestMapping(value="/hire1_edit.do" , method=RequestMethod.GET)
-	public String hirenoti_edit(HttpSession session, Model model) {
-		
-	}
-	*/
-	
 	@RequestMapping("/hire2.do")
 	public String list(@ModelAttribute SearchVO searchVo,HttpSession session, Model model) {
 		logger.info("공고 목록, 파라미터 = {}", searchVo);
@@ -219,8 +218,7 @@ public class HireNotiController {
 /*		model.addAttribute("pagingInfo",pagingInfo);*/
 		
 		return "hire_noti/hire2";
-		
-		
-	}
 	
+	}
+
 }

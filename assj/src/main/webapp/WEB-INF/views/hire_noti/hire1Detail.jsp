@@ -358,7 +358,7 @@
 					<tr>
 						<td> 모집인원</td>
 						<td>
-							<input type="text" id="collect_cnt" class="frm_input01 input_length2 _filter" name="hnRecruitNum" value="0"
+							<input type="text" id="collect_cnt" class="frm_input01 input_length2 _filter" name="hnRecruitNum" value="${vo.hnRecruitNum }"
 							data-filter="numeric" maxlength="6"><span class="input_txt">명</span>
 						</td>
 
@@ -367,7 +367,7 @@
 					<tr>
 						<td>*담당업무</td>
 						<td><textarea id="hnTask" title="담당업무" name="hnTask" 
-								placeholder="담당업무를 입력하세요." maxlength="300"></textarea></td>
+								placeholder="담당업무를 입력하세요." maxlength="300">${vo.hnTask}</textarea></td>
 
 					</tr>
 					<tr>
@@ -414,13 +414,13 @@
 					<tr>
 						<td>우대조건</td>
 						<td><textarea id="ta11" title="우대사항" name="hnPreference"
-								placeholder="우대사항을 입력해주세요." maxlength="300"></textarea></td>
+								placeholder="우대사항을 입력해주세요." maxlength="300">${vo.hnPreference}</textarea></td>
 
 					</tr>
 					<tr>
 						<td>자격요건</td>
-						<td><textarea id="ta11" title="자격요건" name="hnEligibility"
-								placeholder="자격요건을 입력해주세요." maxlength="300"></textarea></td>
+						<td><textarea id="ta11" title="자격요건" name="hnEligibility" 
+								placeholder="자격요건을 입력해주세요." maxlength="300">${vo.hnEligibility}</textarea></td>
 
 					</tr>
 					<tr>
@@ -446,13 +446,13 @@
 					<tr>
 						<td>채용절차</td>
 						<td><textarea id="ta11" title="채용절차" name="hnStep"
-								placeholder="채용절차를 입력하세요." maxlength="300"></textarea></td>
+								placeholder="채용절차를 입력하세요." maxlength="300">${vo.hnStep}</textarea></td>
 
 					</tr>
 					<tr>
 						<td>제출서류</td>
 						<td><textarea id="ta11" title="제출서류" name="hnDocument"
-								placeholder="제출서류를 입력해주세요." maxlength="300"></textarea></td>
+								placeholder="제출서류를 입력해주세요." maxlength="300">${vo.hnDocument}</textarea></td>
 
 					</tr>
 
@@ -488,7 +488,7 @@
 					<tr>
 						<td>복리후생</td>
 						<td><textarea id="ta11" title="복리후생" name="hnBenefits"
-								placeholder="복리후생을 입력해주세요." maxlength="300"></textarea></td>
+								placeholder="복리후생을 입력해주세요." maxlength="300">${vo.hnBenefits}</textarea></td>
 
 
 					</tr>
@@ -510,9 +510,9 @@
 						<td>
 							<input type="text" id="zipcode" placeholder="우편번호">
 							<input type="button" onclick="findZipcode()" value="우편번호 찾기"><br>
-							<input type="text" name="hnAddr" id="address" placeholder="  기본주소 " size="50">
+							<input type="text" name="hnAddr" id="address" value="${vo.hnAddr }" size="50">
 						
-							<input type="text" id="addressDetail" name="hnDetailAddr" placeholder="  상세주소 ">
+							<input type="text" id="addressDetail" name="hnDetailAddr" value="${vo.hnDetailAddr }" >
 							<div id="map" style="width:69%; height: 400px; display: none"></div>
 							<p class="text-danger" style="margin-top: 20px; display: none;">지도를 움직여 정확한 위치를 표시하세요</p>
 							<input type="hidden" id="lat" name="hnLat" >
@@ -622,8 +622,8 @@
 					<tr>
 						<td>*접수기간</td>
 						<td><input type="text" name="hnStart" id="startDay"
-							value="${vo.startDay }"> ~ <input type="text"
-							name="hnDeadline" id="endDay" value="${vo.endDay }">
+							value="${dateSearchVO.startDay }"> ~ <input type="text"
+							name="hnDeadline" id="endDay" value="${dateSearchVO.endDay }">
 
 						</td>
 					</tr>
