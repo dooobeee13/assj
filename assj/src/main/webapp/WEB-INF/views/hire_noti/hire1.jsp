@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="top.jsp"%>
+<%-- <%@ include file="top.jsp"%> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,9 +17,6 @@
 <script type="text/javascript" src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=327f7603fcf7a8ba155dfe89ac2d2057&libraries=services"></script>
-
-
-
 <script type="text/javascript">
 	
  	$.applyDatePicker = function(id) {
