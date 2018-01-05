@@ -87,7 +87,7 @@ $(function(){
 								<th>뉴스 내용</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="background: white;">
 							<c:if test="${empty list }">
 								<tr>
 									<td colspan="4" style="text-align: center;">데이터가 존재하지 않습니다.</td>

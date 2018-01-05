@@ -1,6 +1,5 @@
 package com.hy.assj.hirenoti.model;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class HireNotiVO {
@@ -21,8 +20,8 @@ public class HireNotiVO {
 	private String hnDocument; // 제출서류
 	private String hnAddr; // 근무지주소
 	private String hnDetailAddr; // 근무지(상세주소)
-	private int hnLat; // 위도
-	private int hnLng; // 경도
+	private double hnLat; // 위도
+	private double hnLng; // 경도
 	private String hnStatus; // 공고상태
 	private String hnGender; // 성별
 	private int hnRecruitNum; // 모집인원
@@ -31,15 +30,16 @@ public class HireNotiVO {
 	
 	private int eduNo; // 학력코드(FK)
 	private int careerNo; // 경력코드(FK)
-	
-	
 	private int areaNo;
+	private String sigungu;
+	
 	private List<Integer> occuList;
 	private List<Integer> empTypeList;
 	private List<Integer> rankList;
 	private List<Integer> positionList;
 	private List<Integer> majorList;
 	private List<Integer> sectorList;
+	
 	public int getHnNo() {
 		return hnNo;
 	}
@@ -142,16 +142,16 @@ public class HireNotiVO {
 	public void setHnDetailAddr(String hnDetailAddr) {
 		this.hnDetailAddr = hnDetailAddr;
 	}
-	public int getHnLat() {
+	public double getHnLat() {
 		return hnLat;
 	}
-	public void setHnLat(int hnLat) {
+	public void setHnLat(double hnLat) {
 		this.hnLat = hnLat;
 	}
-	public int getHnLng() {
+	public double getHnLng() {
 		return hnLng;
 	}
-	public void setHnLng(int hnLng) {
+	public void setHnLng(double hnLng) {
 		this.hnLng = hnLng;
 	}
 	public String getHnStatus() {
@@ -238,6 +238,12 @@ public class HireNotiVO {
 	public void setSectorList(List<Integer> sectorList) {
 		this.sectorList = sectorList;
 	}
+	public String getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
+	}
 	@Override
 	public String toString() {
 		return "HireNotiVO [hnNo=" + hnNo + ", hnNotiTitle=" + hnNotiTitle + ", cmNo=" + cmNo + ", hnSalStart="
@@ -247,9 +253,9 @@ public class HireNotiVO {
 				+ ", hnDocument=" + hnDocument + ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat="
 				+ hnLat + ", hnLng=" + hnLng + ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnRecruitNum="
 				+ hnRecruitNum + ", hnExpyearMin=" + hnExpyearMin + ", hnExpyearMax=" + hnExpyearMax + ", eduNo="
-				+ eduNo + ", careerNo=" + careerNo + ", areaNo=" + areaNo + ", occuList=" + occuList + ", empTypeList="
-				+ empTypeList + ", rankList=" + rankList + ", positionList=" + positionList + ", majorList=" + majorList
-				+ ", sectorList=" + sectorList + "]";
+				+ eduNo + ", careerNo=" + careerNo + ", areaNo=" + areaNo + ", sigungu=" + sigungu + ", occuList="
+				+ occuList + ", empTypeList=" + empTypeList + ", rankList=" + rankList + ", positionList="
+				+ positionList + ", majorList=" + majorList + ", sectorList=" + sectorList + "]";
 	}
 	
 }

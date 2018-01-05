@@ -271,7 +271,8 @@ public class RegisterController {
 		CmMemberVO cmMemberVO=(CmMemberVO)session.getAttribute("cmMemberVO");
 		CmMemberVO vo=cmMemberService.selectMember(cmMemberVO.getCmId());
 		
-		model.addAttribute("vo={}",vo);
+		model.addAttribute("vo",vo);
+		logger.info("vo={}",vo);
 		
 		return "member/edit/cmMemEdit";
 	}

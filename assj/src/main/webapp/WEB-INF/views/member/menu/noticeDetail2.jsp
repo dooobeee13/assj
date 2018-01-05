@@ -6,6 +6,8 @@
 <html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 <link rel="stylesheet" href="<c:url value='/css/Search-ADMIN.css'/>">
+<script src="../../js/bootstrap.min.js"></script>
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
 <script src="https://d3js.org/d3.v3.min.js"></script>     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>" ></script>
@@ -101,6 +103,7 @@ $(function(){
 	},function(){
 		$(this).css('opacity','1');
 	});
+	
 });
 
 window.onload=function(){
@@ -150,7 +153,37 @@ function closeNav() {
 //모달쪽
 
 </script>
-
+<style type="text/css">
+	.container fieldset {
+		width:70%;
+		padding:80px;
+		background-color:#ffff;
+	}
+	.container #searchTable{
+		float:right;
+	}
+	.container table th,table{
+		text-align:center;
+	}
+	.container #title{
+		font-size:0.6em;
+	}
+	.container #date{
+		text-align: right;
+	}
+	.container .well{
+		background: #e3e8ef;
+	}
+	.container #list{
+		background-color:#ebecee;
+	}
+	.container #ListDiv{
+		text-align: right;
+	}
+	.container #contentsDiv{
+		height:280px;
+	}
+</style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -190,7 +223,7 @@ function closeNav() {
 					</ul>
 					<li class="col-li-1-nb s2" style="cursor: pointer;"><div class="col-div-80-100">구인구직</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o2">
-						<li>공고페이지관리</li>
+						<li><a href="/assj/member/menu/noticeEditOut.do">공고페이지관리</a></li>
 						<li>관리대상공고</li>
 						<li>달력형식으로 공고 보기</li>
 					</ul>
@@ -202,7 +235,7 @@ function closeNav() {
 					<li class="col-li-1-nb s4" style="cursor: pointer;"><div class="col-div-80-100">커뮤니티관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o4">
 						<li>게시판</li>
-						<li><a href="/assj/member/menu/noticeEditOut.do">공지글</a></li>
+						<li>공지글</li>
 						<li>일반글</li>
 						<li><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
 						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
@@ -217,138 +250,57 @@ function closeNav() {
 			</div>
 		</div>
 		<!-- 섹션 부분 -->
-		<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;">
-			<div class="col-div-100-20">
-			<!-- 메인 화면 통계부분 처리 -->
-				<div class="main-stati">
-					<div class="col-div-100-20 divMainbox">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 회원</h2>
+	 	<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;"> 
+			<div class="col-div-80-20 "> 	
+				<div class="container">
+					<fieldset>
+				<h4>공지사항</h4>
+				<hr>
+				<div>	
+					<div class="well well-lg">
+						<h4>
+						<c:if test="${map.NOTITITLE=='공지'}">
+							<span style="color:red">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='이벤트'}">
+							<span style="color:blue">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='오픈'}">
+							<span style="color:orange">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>
+						<c:if test="${map.NOTITITLE=='뉴스'}">
+							<span style="color:green">[<b>${map.NOTITITLE}</b>]</span>			
+						</c:if>			
+						<span id="title">${map.TITLE }</span>
+						</h4>
+						
+						<p id="date">등록일:<fmt:formatDate value="${map.REGDATE}" pattern="yyyy-mm-dd hh-mm-ss"/>&nbsp;&nbsp; 조회수:${map.READCOUNT}</p>
 					</div>
+					<div id="contentsDiv">
+						${map.CONTENTS}
+					</div>
+					<hr>
+					<c:if test="${!empty nexPre.NEXT_TITLE}">
+						다음글 <span class="glyphicon glyphicon-triangle-top"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${nexPre.NEXT_NO}'/>">${nexPre.NEXT_TITLE}</a>
+					</c:if>
+					<br>
+					<c:if test="${!empty nexPre.PRE_TITLE}">
+						이전글 <span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${nexPre.PRE_NO}'/>">${nexPre.PRE_TITLE}</a><br>
+					</c:if>
+					<hr>
+					<div id="ListDiv">
+					<a href="<c:url value='/member/menu/noticeEditOut.do'/>"><button type="button" class="btn btn-default btn-sm" id="list" style="background-color:#607D8B;color:#ffff" >목록으로</button></a>
+					</div>
+				</div>
+			</fieldset>
 					
-					<div class="col-div-35-80" style="padding-top:1em;">
-						<img alt="" src="<c:url value='/icon/visitorimg.png'/>">
-					</div>
-					<div class="col-div-65-80" style="padding-top:2em;">
-						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>총 회원 수 : </span><strong>10,223명</strong></li>
-							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>오늘 가입자 수 : </span><strong>56명</strong></li>
-						</ul>
-					</div>
-				</div>
-				<div class="main-stati">
-					<div class="col-div-100-20 divMainbox">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 이력서</h2>
-					</div>
-					<div class="col-div-35-80" style="padding-top:1em;">
-						<img alt="" src="<c:url value='/icon/curriculum.png'/>">
-					</div>
-					<div class="col-div-65-80" style="padding-top:2em;">
-						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>총 이력서 : </span><strong>4,658 장</strong></li>
-							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 이력서 : </span><strong>56장</strong></li>
-						</ul>
-					</div>
-				</div>
-				<div class="main-stati">
-					<div class="col-div-100-20 divMainbox">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 1:1 문의 현황</h2>
-					</div>
-					<div class="col-div-35-80" style="padding-top:2.5em;">
-						<img alt="" src="<c:url value='/icon/QNA.png'/>">
-					</div>
-					<div class="col-div-65-80" style="padding-top:2em;">
-						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>오늘의 총 문의 : </span><strong>120개 </strong></li>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>새로운 문의 : </span><strong>36개 </strong></li>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>기다리는 문의 : </span><strong>14개</strong></li>
-						</ul>
-					</div>
-				</div>
-				<div class="main-stati">
-					<div class="col-div-100-20 divMainbox">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 공고</h2>
-					</div>
-					<div class="col-div-35-80" style="padding-top:1em;">
-						<img alt="" src="<c:url value='/icon/user.png'/>">
-					</div>
-					<div class="col-div-65-80" style="padding-top:2em;">
-						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>총 공고 수 : </span><strong>1,400 개</strong></li>
-							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 공고 : </span><strong>14 개</strong></li>
-						</ul>
-					</div>
 				</div>
 			</div>
-			<div class="col-div-100-70 ">
-				<div class="col-div-50-100 statics" style="margin:1em; background:white; width:45%;">
-					<div class="col-div-100-10 divMainbox" style="text-align: center;">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 회원 통계</h2>
-					</div>
-					<div class="col-div-100-90" id="chart" style="width:90%; margin-left:1em;">
-					
-					</div>
-				</div>
-				<div class="col-div-50-100 statics" style="margin:1em; background:white; width:45%;">
-					<div class="col-div-100-10 divMainbox" style="text-align: center;">
-						<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 현재 모집하고 있는 기업 별 공채 비율</h2>
-					</div>
-					<div class="col-div-100-90" id="PieData">
-					
-					</div>
-				</div>
-			</div>	
-		</div>
-		<div id="mySidenav" class="sidenav">
-		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="font-size: 27px">&times;</a>
-		  <a href="#" class="AdminChat">관리자 채팅방</a>
-		  <a href="#"></a>
-		  <a href="<c:url value='/index.do'/>">공채 홈페이지 가기</a>
-		  <a href="#" class="CreateAdmin">새로운 관리자 생성</a>
-		  <a href="#">로그아웃</a>
-		</div>
-	</article>
-	<div id="modalLayer">
-	  <div class="modalContent">
-		  <div style="padding:5px; margin:0 auto; width:95%; height:90%; position:relative;">
-	  		<img class="closeModal"src="<c:url value='/icon/xbutton.png'/>" style="float:right;margin-bottom:1em; width:22px;">
-		  <div class="newsDetail" style="margin:0 auto; width:100%; height:95%;">
-		 	<div class="col-div-100-20 divMainbox" style="margin-bottom:1em;">
-				<h2 class="divMainbox-title" style="padding-left:1em; text-align:center;">관리자 채팅</h2>
-			</div>
-		  		<!-- 채팅용 화면 -->
-		    	<div style="width:93%;height:80%;overflow-y:scroll; border:1px solid #b8b8b8;padding: 1em; background:white; overflow-x:hidden;">
-		    	<!-- 개인 채팅 내용 -->
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<h2 style="font-size:1em; text-align:right;font-weight: bold;margin-top:0;">내가 보낸 메세지</h2>
-		    			<p class="Mycontent">하앍 여러분이 굳이 말 안해도 전 다 사랑해옇ㅎㅎㅎㅎㅎㅎ</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
-		    	</div>
-		    	
-		    	<!-- 채팅판 -->
-		    	<div style="width:93%; padding:1em;">
-		    		<div class="col-div-70-100">
-		    			<textarea rows="7" cols="37" style="resize: none;"></textarea>
-		    		</div>
-		    		<div class="col-div-30-100" style="float:right;">
-		    			<input class="one-button" style="float:right; padding:0.4em; width:60px" type="button" value=" 전 송 ">
-		    		</div>
-		    	</div>
-		  </div>
+			  </div>
 	  	</div>
-	  </div>
-	</div>
-</div>
 </body>
 </html>
+				
+				
+				
+				

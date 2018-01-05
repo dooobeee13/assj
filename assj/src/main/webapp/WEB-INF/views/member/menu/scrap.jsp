@@ -241,7 +241,7 @@
 											</td>
 											<td>${vo['SCRAP_NO']}</td>						
 											<td>${vo['CM_NAME']}</td>
-											<td><a href="">${vo['HN_NOTITITLE']}</a></td>
+											<td><a href="<c:url value="/recruit/recruitDetail.do?hnNo=${vo.HN_NO}"/>">${vo['HN_NOTITITLE']}</a></td>
 											<td><fmt:formatDate value="${vo['HN_START']}"
 												pattern='yyyy-MM-dd' /></td>
 											<td><fmt:formatDate value="${vo['HN_DEADLINE']}"
