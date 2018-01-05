@@ -176,6 +176,11 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeDao.selectPortByResumeNo(resumeNo);
 	}
 
+	@Override
+	public ResumeVO selectMyResume(int resumeNo) {
+		return resumeDao.selectMyResume(resumeNo);
+	}
+
 	
 
 	

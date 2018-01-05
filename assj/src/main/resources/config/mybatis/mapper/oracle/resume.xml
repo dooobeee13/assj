@@ -212,6 +212,10 @@
 		select * from portfolio where resume_no = #{resumeNo} order by port_no
 	</select>
 	
+	<select id="selectMyResume" parameterType="int" resultType="ResumeVO">
+		select * from resume where resume_no= #{resumeNo}
+	</select>
+	
 </mapper>
 
 

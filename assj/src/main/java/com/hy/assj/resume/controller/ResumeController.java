@@ -488,6 +488,44 @@ public class ResumeController {
 		
 		return "resume/resumeView";
 	}
-
+	
+	
+	@RequestMapping(value="/resumeUpdate.do", method=RequestMethod.GET)
+	public String resumeUpdate_get(@RequestParam(defaultValue="0")int resumeNo,Model model) {
+		
+		List<AreaVO> areaListTop = resumeService.selectAllAreaTop();
+		
+		List<AreaVO> selectBasicArea = resumeService.selectBasicArea();
+		
+		List<MajorVO> majorListTop = resumeService.selectAllMajorTop();
+		
+		List<MajorVO> majorListBasicDetail = resumeService.selectMajorBasicD();
+		
+		List<EmpTypeVO> ETList = resumeService.selectAllET();
+		
+		List<SectorsVO> sectorsListTop = resumeService.selectAllSectorsTop();
+		
+		List<OccupationVO> occuListTop = resumeService.selectAllOccuTop();
+		
+		List<SectorsVO> selectBasicSec = resumeService.selectBasicSec();
+		
+		List<OccupationVO> selectBasicOccu = resumeService.selectBasicOccu();
+		
+		model.addAttribute("areaListTop", areaListTop);		
+		model.addAttribute("majorListTop", majorListTop);
+		model.addAttribute("ETList", ETList);		
+		model.addAttribute("sectorsListTop", sectorsListTop);
+		model.addAttribute("occuListTop", occuListTop);		
+		model.addAttribute("majorListBasicDetail", majorListBasicDetail);		
+		model.addAttribute("selectBasicArea", selectBasicArea);	
+		model.addAttribute("selectBasicSec", selectBasicSec);	
+		model.addAttribute("selectBasicOccu", selectBasicOccu);	
+		
+		ResumeVO resumeVO = resumeService.selectMyResume(resumeNo);
+		
+		model.addAttribute("resumeVO", resumeVO);
+		
+		return "resume/resumeUpdate";
+	}
 	
 }

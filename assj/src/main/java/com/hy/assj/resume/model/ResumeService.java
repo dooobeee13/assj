@@ -77,4 +77,7 @@ public interface ResumeService {
 	
 	List<PortfolioVO> selectPortByResumeNo(int resumeNo);
 	
+	
+	ResumeVO selectMyResume(int resumeNo);
+	
 }

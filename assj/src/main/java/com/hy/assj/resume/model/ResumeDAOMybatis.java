@@ -174,6 +174,11 @@ public class ResumeDAOMybatis extends SqlSessionDaoSupport implements ResumeDAO 
 		return getSqlSession().selectList(namespace+".selectPortByResumeNo", resumeNo);
 	}
 
+	@Override
+	public ResumeVO selectMyResume(int resumeNo) {
+		return getSqlSession().selectOne(namespace+".selectMyResume", resumeNo);
+	}
+
 	
 
 	

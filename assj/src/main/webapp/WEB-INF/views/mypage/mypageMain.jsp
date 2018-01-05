@@ -19,7 +19,7 @@
 	
       <div class="row">
 <c:import url="mypageSide.jsp"></c:import>
-      
+      <div class="col-md-9" style="background-color: white; height: 1000px;">
         <div class="col-lg-6 col-md-6">
          	이력서 갯수
         </div>
@@ -31,7 +31,7 @@
         <div class="col-lg-6 col-md-6">
           스크랩
         </div>
-        
+        </div>
       </div>
  </div>
  <c:import url="../index/footer.jsp" />
