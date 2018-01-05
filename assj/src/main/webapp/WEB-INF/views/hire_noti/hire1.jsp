@@ -31,6 +31,31 @@
 	}
  
 	$(function() {
+		$('#hn_submit').click(function(){
+			if($('#hnNotiTitle').val()==""){
+				alert('공고제목을 입력하세요');
+				$('#hnNotiTitle').focus();
+				return false;
+			}else if($('#startDay').val()==""){
+				alert('공고시작일을 입력하세요');
+				$('#startDay').focus();
+				return false;
+			}else if($('#endDay').val()==""){
+				alert('공고마감일을 입력하세요');
+				$('#endDay').focus();
+				return false;
+			}else if($('#hnTask').val()==""){
+				alert('담당업무를 입력하세요');
+				$('#hnTask').focus();
+				return false;
+			}else if($('#address').val()==""){
+				alert('근무지주소를 입력하세요');
+				$('#address').focus();
+				return false;
+			}		
+		});		
+		
+		
 		$('#savebtn').click(function() {
 			$('#rank_position').modal('hide');
 		});
@@ -167,6 +192,10 @@
 	text-align: center;
 }
 #ta11 {
+	width: 350px;
+	height: 100px;
+}
+#hnTask {
 	width: 350px;
 	height: 100px;
 }
@@ -324,7 +353,7 @@
 						</tr>
 					</thead>
 					<tr>
-						<td>*모집인원</td>
+						<td> 모집인원</td>
 						<td>
 							<input type="text" id="collect_cnt" class="frm_input01 input_length2 _filter" name="hnRecruitNum" value="0"
 							data-filter="numeric" maxlength="6"><span class="input_txt">명</span>
@@ -334,7 +363,7 @@
 
 					<tr>
 						<td>*담당업무</td>
-						<td><textarea id="ta11" title="담당업무" name="hnTask"
+						<td><textarea id="hnTask" title="담당업무" name="hnTask" 
 								placeholder="담당업무를 입력하세요." maxlength="300"></textarea></td>
 
 					</tr>
@@ -434,7 +463,7 @@
 						</tr>
 					</thead>
 					<tr>
-						<td>*급여</td>
+						<td>급여</td>
 						<td><select name="sal">
 								<option value="0~1500">0~1500만원이하</option>
 								<option value="1500~2000">1500~2000만원</option>
@@ -481,7 +510,7 @@
 							<input type="text" name="hnAddr" id="address" placeholder="  기본주소 " size="50">
 						
 							<input type="text" id="addressDetail" name="hnDetailAddr" placeholder="  상세주소 ">
-							<div id="map" style="width:100%; height: 400px; display: none"></div>
+							<div id="map" style="width:69%; height: 400px; display: none"></div>
 							<p class="text-danger" style="margin-top: 20px; display: none;">지도를 움직여 정확한 위치를 표시하세요</p>
 							<input type="hidden" id="lat" name="hnLat" >
 							<input type="hidden" id="lng" name="hnLng" >
@@ -590,8 +619,8 @@
 					<tr>
 						<td>*접수기간</td>
 						<td><input type="text" name="hnStart" id="startDay"
-							value="${dateSearchVO.startDay }"> ~ <input type="text"
-							name="hnDeadline" id="endDay" value="${dateSearchVO.endDay }">
+							value="${vo.startDay }"> ~ <input type="text"
+							name="hnDeadline" id="endDay" value="${vo.endDay }">
 
 						</td>
 					</tr>
@@ -655,7 +684,7 @@
 
 				</table>
 			</div>
-			<input type="submit" class="btn btn-primary btn-lg" value="채용공고 등록" />
+			<input type="submit" class="btn btn-primary btn-lg" id="hn_submit" value="채용공고 등록" />
 
 		</fieldset>
 	

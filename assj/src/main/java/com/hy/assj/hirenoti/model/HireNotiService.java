@@ -25,6 +25,7 @@ public interface HireNotiService {
 	public List<SectorsVO> selectSectorsAll();
 	public List<EducationVO> selectEducationAll();
 	public List<PositionVO> selectPositionAll();
+	public HireNotiVO selectHnByNo(int hnNo);
 
 	public List<Map<String, Object>> selecthireNoti(int cmNo);
 

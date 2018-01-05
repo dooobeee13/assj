@@ -112,7 +112,7 @@ $(function(){
 					'</tr>';
 					if(data.newsUrl!=" "){
 					input+='<tr style="height:40%;">'+
-					'<td style="background:#F4FFFE;"><img width="300px;" style="padding:2px; background:#B0CEEC; margin:0 auto; margin:1em; border:2px solid #2e6da4;border-radius:15px" src="${pageContext.request.contextPath}/imageTest/'+data.newsUrl+'"/></td>'+
+					'<td style="background:#F4FFFE; padding:0"><img width="300px;" style="padding:2px; background:#B0CEEC; margin:0 auto; margin-top:30px;margin-bottom:30px; border:2px solid #2e6da4;border-radius:15px" src="${pageContext.request.contextPath}/imageTest/'+data.newsUrl+'"/></td>'+
 					'</tr>';
 					}
 					input+= '<tr style="height:30%;">'+
@@ -157,9 +157,10 @@ function bgLayerClear(){
     }
 }
 </script>
+<link rel="stylesheet" href="<c:url value='/css/Search-ADMIN.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/newsInfo.css'/>">
 <div style="margin:0 auto; width:900px;">
-	<div class="header"><img src="<c:url value='/icon/newsInfos.png'/>">&nbsp; 공 채 뉴 스</div>
+	<div class="header" style="border-radius: 4px 4px 16px 16px;"><img src="<c:url value='/icon/newsInfos.png'/>">&nbsp; 공 채 뉴 스</div>
 	<div class="row">
 	  <div class="column line-1">
 	    	<c:forEach var="i" begin="0" end="${fn:length(list)-1 }" step="4">
@@ -199,9 +200,9 @@ function bgLayerClear(){
 	  </div>
 </div>
 <div id="modalLayer">
-  <div class="modalContent">
-  <div style="padding:5px; margin:0 auto; width:95%; height:90%;">
-  	<img class="closeModal"src="<c:url value='/icon/xbutton.png'/>" style="float:right;margin-bottom:1em;">
+  <div class="modalContent" style=" height: auto; padding-bottom:40px;">
+  <div style=" margin:0 auto; width:100%; height:90%;">
+  	<img class="closeModal"src="<c:url value='/icon/xbutton.png'/>" style="float:right;margin-bottom:1em;width: 22px;">
 	  <div class="newsDetail" style="padding:5px; margin:0 auto; width:95%; height:10%;">
 	    
 	  </div>

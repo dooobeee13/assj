@@ -115,6 +115,11 @@ public class HireNotiDAOMybatis extends SqlSessionDaoSupport implements HireNoti
 	public List<Map<String, Object>> selecthireNoti(int cmNo) {
 		return getSqlSession().selectList(namespace+".selecthireNoti",cmNo);
 	}
+
+	@Override
+	public HireNotiVO selectHnByNo(int hnNo) {
+		return getSqlSession().selectOne(namespace+".selectHnByNo",hnNo);
+	}
 	
 
 }
