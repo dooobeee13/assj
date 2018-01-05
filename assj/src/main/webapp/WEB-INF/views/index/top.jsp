@@ -220,8 +220,8 @@
 					<li class="searchjob"><a href="#">지역별</a>
 						<c:import url="/index/navAreaCategory.do" />
 					</li>
-					<li class="searchjob"><a href="#">인재검색</a></li>
-					<li class="searchjob"><a href="#">생각중</a></li>
+					<li class="searchjob"><a href="<c:url value='/TalentManagement/final-main.do'/>">인재검색</a></li>
+					<li class="searchjob"><a href="<c:url value='/newsInfo/newsmain.do'/>">공채 뉴스</a></li>
 					<li class="searchjob"><a href="#">구상중</a></li>
 				</ul>
 			</div>

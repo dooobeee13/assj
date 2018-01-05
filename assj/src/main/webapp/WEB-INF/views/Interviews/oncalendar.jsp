@@ -1,9 +1,11 @@
+<%@page import="com.hy.assj.common.DateSearchVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-
+<html>
 <link rel="stylesheet" href="<c:url value='/codebase/dhtmlxscheduler.css'/>">
 <script src="<c:url value='/codebase/dhtmlxscheduler.js'/>"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -24,13 +26,17 @@ $(function(){
 		location.href="<c:url value='/Interviews/forinterview.do'/>";
 	});
 	
+	$('#goselect').click(function(){
+		window.open('<c:url value="/Interviews/interviewdate.do"/>',' ','width=475, height=600, top=300, left=650, location=no,menubar=no, status=no, toolbar=no');
+	});
+	
 	
 });
 </script>
 <link rel="stylesheet" href="<c:url value='/codebase/dhtmlxscheduler.css'/>">
 <script type="text/javascript">
 window.onload=function(){
-
+	
 	scheduler.config.xml_date="%Y-%m-%d %H:%i";
 	scheduler.config.time_step = 30;
 	scheduler.config.multi_day = true;
@@ -39,6 +45,8 @@ window.onload=function(){
 	scheduler.config.limit_time_select = true;
 	scheduler.config.details_on_dblclick = true;
 	scheduler.config.details_on_create = true;
+	 scheduler.config.buttons_left = [];
+	 scheduler.config.buttons_right = ["dhx_cancel_btn"];
 
 	scheduler.templates.event_class=function(start, end, event){
 		var css = "";
@@ -67,111 +75,32 @@ window.onload=function(){
 
 	var subject = [
 		{ key: '', label: '면접형태선택' },
+		{ key: '1차 면접', label: '1차 면접' },
+		{ key: '2차 면접', label: '2차 면접' },
+		{ key: '3차 면접', label: '3차 면접' },
+		{ key: '4차 면접', label: '4차 면접' },
 		{ key: '단독면접', label: '단독면접' },
-		{ key: '집단면접', label: '집단면접' }
-	];
-	var selectors = [
-		{ key: '', label: '면접대상선택' },
-		{ key: '정채연', label: '정채연' },
-		{ key: '유라', label: '유라' },
-		{ key: '권나라', label: '권나라' }
+		{ key: '집단면접', label: '집단면접' },
+		{ key: '최종 면접', label: '최종 면접' },
+		{ key: '최종 합격', label: '최종 합격' }
 	];
 
 	scheduler.config.lightbox.sections=[
-		{name:"면접 대상", height:25, type:"select", options: selectors, map_to:"selectors" },
-		{name:"면접 종류", height:25, type:"select", options: subject, map_to:"subject" },
-		{name:"description", height:130, map_to:"text", type:"textarea" , focus:true},
-		{name:"time", height:72, type:"time", map_to:"auto" }
+		{name:"면접명", height:25, type:"textarea", options: subject, map_to:"title" },
+		{name:"현 지원자 상태", height:25, type:"textarea", options: subject, map_to:"content" },
+		{name:"비고", height:80, type:"textarea", options: subject, map_to:"df" },
+		{name:"제목", height:25, type:"text", options: subject, map_to:"text" }
 	];
-
-	scheduler.init('scheduler_here', new Date(2017, 3, 20), "month");
+	
+	scheduler.init('scheduler_here', new Date(), "month");
 
 	scheduler.parse([
-		{ start_date: "2017-04-18 09:00", end_date: "2017-04-18 12:00", text:"정채연", subject: '단독면접' },
-		{ start_date: "2017-04-21 10:00", end_date: "2017-04-21 14:00", text:"권나라", subject: '집단면접' },
-		{ start_date: "2017-04-23 16:00", end_date: "2017-04-23 17:00", text:"유라", subject: '집단면접' }
+		<c:forEach var="i" begin="0" end="${fn:length(list)-1}" step="1">
+			<c:set var="vo" value="${list[i]}"/>
+			{ start_date: "${vo['INTERV_START']}", end_date: "${vo['INTERV_END']}",  title: "${vo['HN_NOTITITLE']} 부분", content:"${vo['ES_STATUS']}", text: "${vo['MEM_NAME']} 님,  ${vo['INTERV_LOC']}", df: "${vo['INTERV_REMARK']}" }
+			<c:if test="${i!=fn:length(list)-1}">,</c:if>
+		</c:forEach>
 	], "json");
-	
-	
-	$(".dhx_cal_ltitle").on("click",function(){
-		event.preventDefault();
-	});
-	
-	  scheduler.attachEvent("onBeforeLightbox", function(id) { //라이트박스 열었을때
-          var ev = scheduler.getEvent(id);
-          var pschNo = ev.pschid;
-          $('#pschNo').val(pschNo);
-          console.log(scheduler.map);
-          
-          if(ev.content==null){ //스케줄 신규등록일시
-              scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){ //세이브버튼 클릭 시(신규등록)
-              
-              
-              if (!ev.text) {
-                  alert("제목을 입력하세요");
-                  return false;
-              }
-              else if (!ev.selectors) {
-                  alert("면접 대상을 선택해주세요");
-                  return false;
-              }
-              else if (!ev.subject) {
-                  alert("면접 종류를 선택해주세요");
-                  return false;
-              }
-              else {
-                 var start_date = ev.start_date; //시작날짜
-                 var end_date = ev.end_date; //끝날짜
-                 var text = ev.text; //면접 내용
-                 var member = ev.selectors; //면접자
-                 var category = ev.subject; //면접 종류
-                 
-                 $('#startDay').val(start_date);
-                 $('#endDay').val(end_date);
-                 $('#text').val(text);
-                 $('#member').val(member);
-                 $('#category').val(category);
-                 
-                 $('#schfrm').submit();
-                 return true;  
-              } 
-              
-          }); 
-          
-          }else if(ev.content!=null){ //값이있을시(수정)
-              scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){ //세이브버튼 클릭 시(기존 값 수정)
-            	  if (!ev.text) {
-                      alert("제목을 입력하세요");
-                      return false;
-                  }
-                  else if (!ev.selectors) {
-                      alert("면접 대상을 선택해주세요");
-                      return false;
-                  }
-                  else if (!ev.subject) {
-                      alert("면접 종류를 선택해주세요");
-                      return false;
-                  }
-                   else {
-                	   var start_date = ev.start_date; //시작날짜
-                       var end_date = ev.end_date; //끝날짜
-                       var text = ev.text; //면접 내용
-                       var member = ev.selectors; //면접자
-                       var category = ev.subject; //카테고리
-                       
-                       $('#startDay').val(start_date);
-                       $('#endDay').val(end_date);
-                       $('#text').val(text);
-                       $('#member').val(member);
-                       $('#category').val(category);
-                     
-                   $('#schfrm').attr("action", "schedulerEditContent.do");   
-                    $('#schfrm').submit(); 
-                 }
-             });
-           }
-          return true; 
-    });   
 	
 };
 </script>
@@ -232,7 +161,7 @@ window.onload=function(){
 			height:530px;
 		}
 	</style>
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -258,7 +187,7 @@ window.onload=function(){
 		<!-- 윗 부분 -->
 		<div class="col-div-80-20" style="height:60px;padding-top:15px; padding-left:2em;margin-left: 8em;">
 			<div class="col-div-10-100" style="float:right; margin-bottom:1em; margin-right:1em;">
-				<button class="one-button search-button" style="width:10em;margin-bottom:0.2em; "> 면접 등록 </button>		
+				<button class="one-button search-button" id="goselect" style="width:10em;margin-bottom:0.2em; "> 면접 등록 </button>		
 			</div>
 		</div>
 		<div class="col-div-80-20 rele-titles">
