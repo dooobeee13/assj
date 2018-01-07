@@ -116,5 +116,10 @@ public class HireNotiServiceImpl implements HireNotiService{
 	@Override
 	public List<Map<String, Object>> selecthireNoti(int cmNo) {
 		return hirenotiDao.selecthireNoti(cmNo);
+	}
+
+	@Override
+	public HireNotiVO selectHnByNo(int hnNo) {
+		return hirenotiDao.selectHnByNo(hnNo);
 	}	
 }
