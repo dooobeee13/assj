@@ -10,6 +10,13 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript">
+
+function delchk(){
+	return confirm("이력서를 삭제하시겠습니까?");
+}
+
+</script>
 </head>
 <body>
 
@@ -55,7 +62,8 @@
 						class="goResumeDetail">${vo.resumeTitle}</a></td>					
 						<td>포트폴리오 갯수</td>					
 						<td>on / off</td>					
-						<td> 수정 / 삭제</td>
+						<td><a href="<c:url value='/resume/resumeUpdate.do?resumeNo=${vo.resumeNo }' />" >수정</a> / 
+						<a href="<c:url value='/resume/resumeDelete.do?resumeNo=${vo.resumeNo }' />" onclick="return delchk();" >삭제</a></td>
 					</tr>
 				</c:forEach>
 			</c:if>

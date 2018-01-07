@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>이력서 등록</title>
+<title>이력서 수정</title>
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -64,21 +64,6 @@ function OntextCheck(obj)
                }
        document.getElementById("txtbyte").value = _byte;
 }
-$(function(){
-	if($('input[name=careerNo]').val() == '1'){
-		
-	}else if($('input[name=careerNo]').val() == '2'){
-		$('#detailCareer').show();
-		$('#carLB').show();
-		$('#carLB2').show();
-		$('#lbChk').show();
-	}else if($('input[name=careerNo]').val() == '3'){
-		$('#detailCareer').show();
-		$('#carLB').show();
-		$('#carLB2').show();
-		$('#lbChk').show();
-	}
-});
 </script>
 </head>
 <body>
@@ -147,8 +132,8 @@ $(function(){
 	<div class="container-fluid" id="main">
 
 		<div class="row">
-			<form name="resumeForm" id="resumeForm" method="post" action="<c:url value='/resume/resumeUpdate.do'/>" enctype="multipart/form-data">
-			<input type="hidden" name="resumeNo" id="resumeNo" value="${resumeVO.resumeNo }">
+			<form name="resumeForm" id="resumeForm" method="post" action="<c:url value='/resume/resumeInsert.do'/>" enctype="multipart/form-data">
+			
 			<input type="hidden" name="resumePhone" id="resumePhone">
 			<input type="hidden" name="resumeMilStart" id="resumeMilStart">
 			<input type="hidden" name="resumeMilEnd" id="resumeMilEnd">
@@ -242,29 +227,30 @@ $(function(){
 						</h4>
 						<div class="form-group">
 							<label for="insertLb">제목<span class="res-star">*</span></label> 
-							<input type="text" class="form-control" maxlength="100" name="resumeTitle" id="resumeTitle" value="${resumeVO.resumeTitle }" placeholder="이력서 제목을 입력하세요.(100자까지 입력가능)"> 
+							<input type="text" class="form-control" maxlength="100" name="resumeTitle" id="resumeTitle" placeholder="이력서 제목을 입력하세요.(100자까지 입력가능)" value="${resumeVO.resumeTitle }"> 
 							
 							<br> 
 							<label for="insertLb">이름<span class="res-star">*</span></label> 
-							<input type="text" class="form-control" name="resumeName" id="resumeName" value="${resumeVO.resumeName}" placeholder="이름"> 
+							<input type="text" class="form-control" name="resumeName" id="resumeName" placeholder="이름" value="${resumeVO.resumeName}"> 
 							<br>
 							<label for="insertLb">생년월일<span class="res-star">*</span></label>
 							<br>
 							 <label class="form-inline"> 
-							 
-								<input type="text" name="resumeBirth" class="form-control startDP" value="${resumeVO.resumeBirth}" >														
+							 	
+								<input type="text" name="resumeBirth" class="form-control startDP" value="${resumeVO.resumeBirth}">														
 							
 							</label> 
 							<br>
 							<label for="insertLb">주소<span class="res-star">*</span></label>
-							<input type="text" name="resumeAddr" id="resumeAddr" class="form-control" value="${resumeVO.resumeAddr}" placeholder="주소">
-							<input type="text" name="resumeDetailaddr" id="resumeDetailaddr" class="form-control" value="${resumeVO.resumeDetailaddr}" placeholder="상세주소">
+							<input type="text" name="resumeAddr" id="resumeAddr" class="form-control" placeholder="주소" value="${resumeVO.resumeAddr}">
+							<input type="text" name="resumeDetailaddr" id="resumeDetailaddr" class="form-control" placeholder="상세주소" value="${resumeVO.resumeDetailaddr}">
 							<br> 
 							<label for="insertLb">휴대폰<span class="res-star">*</span></label>
 							<br> 
+							
 							<label class="form-inline"> 
 								<select id="hp1" name="hp1" class="form-control" style="width: 80px">
-									<option value="010" ${hparr1 eq "010"?"selected":"" }>010</option>
+									 <option value="010" ${hparr1 eq "010"?"selected":"" }>010</option>
 						            <option value="011"  ${hparr1 eq "011"?"selected":"" }>011</option>
 						            <option value="016"  ${hparr1 eq "016"?"selected":"" }>016</option>
 						            <option value="017"  ${hparr1 eq "017"?"selected":"" }>017</option>
@@ -272,6 +258,7 @@ $(function(){
 						            <option value="019"  ${hparr1 eq "019"?"selected":"" }>019</option>
 								</select>
 								-
+								
 							<input type="text" name="hp2" id="hp2"  class="form-control" style="width: 80px" value="${hparr2}">
 							-
 							<input type="text" name="hp3" id="hp3"  class="form-control" style="width: 80px" value="${hparr3}">
@@ -314,29 +301,29 @@ $(function(){
 							<label for="insertLb">결혼 여부</label> 
 							<br> 
 							<label class="radio-inline"> 
-								<input type="radio" name="resumeMarried" id="resumeMarried" value="미혼" ${resumeVO.resumeMarried eq "미혼"?"checked":"" }>미혼
+								<input type="radio" name="resumeMarried"  value="미혼" ${resumeVO.resumeMarried eq "미혼"?"chekced":"" }>미혼
 							</label> 
 							<label class="radio-inline"> 
-								<input type="radio" name="resumeMarried" id="resumeMarried" value="기혼" ${resumeVO.resumeMarried eq "기혼"?"checked":"" }>기혼
+								<input type="radio" name="resumeMarried"  value="기혼" ${resumeVO.resumeMarried eq "기혼"?"chekced":"" }>기혼
 							</label>
 							<label class="radio-inline"> 
-								<input type="radio" name="resumeMarried" id="resumeMarried" value="비공개" ${resumeVO.resumeMarried eq "비공개"?"checked":"" }>비공개
+								<input type="radio" name="resumeMarried"  value="비공개" ${resumeVO.resumeMarried eq "비공개"?"chekced":"" }>비공개
 							</label> 
-							<br> <br>
+							<br> <br>	
 							<label for="insertLb">보훈대상</label> 
 							<br> 
 							<select name="resumeVeteran" id="resumeVeteran" class="form-control">
-								<option value="비대상" ${resumeVO.resumeVeteran eq "비대상"?"selected":"" }>비대상</option>
-								<option value="대상" ${resumeVO.resumeVeteran eq "대상"?"selected":"" }>대상</option>
+								<option value="비대상" ${resumeVO.resumeVeteran eq "비대상"?"chekced":"" }>비대상</option>
+								<option value="대상" ${resumeVO.resumeVeteran eq "대상"?"chekced":"" }>대상</option>
 							</select> 
 							<br> 
 							<label for="insertLb">고용 지원금 대상</label> 
-							<br> 
+							<br> 	
 							<label class="radio-inline"> 
-							<input type="radio" name="resumeSubsidy" value="비대상" ${resumeVO.resumeSubsidy eq "비대상"?"checked":"" }>비대상
+							<input type="radio" name="resumeSubsidy" value="비대상" ${resumeVO.resumeSubsidy eq "비대상"?"chekced":"" }>비대상
 							</label> 
 							<label class="radio-inline"> 
-							<input type="radio" name="resumeSubsidy" value="대상" ${resumeVO.resumeSubsidy eq "대상"?"checked":"" }>대상
+							<input type="radio" name="resumeSubsidy" value="대상" ${resumeVO.resumeSubsidy eq "대상"?"chekced":"" }>대상
 							</label>
 						</div>
 					</div>
@@ -414,7 +401,7 @@ $(function(){
 						<select name="resumeMilDivision" id="resumeMilDivision" class="form-control">
 						<option value=""></option>
 							<c:forEach var="division" items="${divisionArr}">
-								<option value="${division }"  ${resumeVO.resumeMilDivision eq "${division}"?"selected":""}>${division }</option>
+								<option value="${division }" ${resumeMilDivision eq "${division }"?"selected":""}>${division }</option>
 							</c:forEach>
 						</select> 
 						<br>
@@ -709,18 +696,17 @@ $(function(){
 					<div class="my-auto">
 						<h4 class="mb-5">경력 사항</h4>
 						<label> 
-						<input type="radio" name="careerNo" id="rdNewcomer" value="1" ${resumeVO.careerNo eq "1"?"checked":""}> 신입
+						<input type="radio" name="careerNo" id="rdNewcomer" value="1" checked> 신입
 						</label>
 						<label> 
-						<input type="radio" name="careerNo" id="rdCareer" value="2" ${resumeVO.careerNo eq "2"?"checked":""}>경력 
+						<input type="radio" name="careerNo" id="rdCareer" value="2">경력 
 						</label>
 						<label>
-						<input type="radio" name="careerNo" id="rdExec" value="3" ${resumeVO.careerNo eq "3"?"checked":""}> 임원/CEO
+						<input type="radio" name="careerNo" id="rdExec" value="3"> 임원/CEO
 						</label>
 						<div id="careerDiv">
 						<label id="carLB">경력 기간</label>
 						<br>
-						
 							<label class="form-inline" id="carLB2">
 								<select name="careerYear" id="careerYear" class="form-control">
 								<c:forEach begin="1" end="9" varStatus="1" var="i">
@@ -736,31 +722,17 @@ $(function(){
 								</c:forEach>
 								</select>
 								개월
+							
 							</label>
-							<textarea rows="20" name="resumeCareerList" class="form-control" id="detailCareer" >${resumeVO.resumeCareerList }</textarea>
+							<textarea rows="20" name="resumeCareerList" class="form-control" id="detailCareer"></textarea>
 						</div>
 						<script type="text/javascript">
 						$(function(){
-							
 							
 							$('#detailCareer').hide();
 							$('#carLB').hide();
 							$('#carLB2').hide();
 							$('#lbChk').hide();
-							
-							if($('input[name=careerNo]').val()=='2'){
-								$('#detailCareer').show();
-								$('#carLB').show();
-								$('#carLB2').show();
-								$('#lbChk').show();
-							}else if($('input[name=careerNo]').val()=='3'){
-								$('#detailCareer').show();
-								$('#carLB').show();
-								$('#carLB2').show();
-								$('#lbChk').show();
-							}
-							
-							
 							$('input[name=careerNo]').change(function(){
 								var radioValue=$(this).val();
 								if(radioValue=="1"){
@@ -799,6 +771,7 @@ $(function(){
 							
 							$('#careerYear').change(function(){
 								if($(this).val()=='10'){
+									alert('10년이상');
 									$('#careerMonth').val("0").prop("selected","true");
 									$('#careerMonth').attr("disabled","disabled");
 								}else{
@@ -1052,19 +1025,7 @@ $(function(){
 
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="pt">
 				<div class="my-auto">
-				<%-- <c:if test="${empty resumeVO.resumePortfolio }">
-				
-				</c:if>
-				<c:if test="${!empty resumeVO.resumePortfolio }">
-				
-				</c:if>
-					<div>
-					<div style=' padding: 5px; margin-bottom: 10px'>
-					<span></span><span name='PFIntroView' style='margin-left: 20px; '>내용 보기</span>
-					</div>
-						<div style=' padding: 5px; margin-bottom: 10px'> 
-						</div>
-					</div> --%>
+					
 					
 				</div>
 				
@@ -1158,7 +1119,6 @@ $(function(){
 					<label>근무형태<span class="res-star">*</span></label>
 						<select name="etNo" class="form-control">
 							<c:forEach var="ETList" items="${ETList}">
-								
 								<option value="${ETList.etNo}">${ETList.etName}</option>
 							</c:forEach>
 						
@@ -1374,8 +1334,6 @@ $(function(){
 		$.applyDatePicker("input[name=resumeBirth]");
 		$.applyDatePicker("input[name='shVOList[0].shAyear']");
 		$.applyDatePicker("input[name='shVOList[0].shGyear']");
-		$.applyDatePicker("input[name='resumeMilStart']");
-		$.applyDatePicker("input[name='resumeMilEnd']");
 		
 		var divIndex = 0;
 		$(document).on("click",".cCate",function(){

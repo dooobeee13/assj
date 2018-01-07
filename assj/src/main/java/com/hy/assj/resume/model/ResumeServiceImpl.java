@@ -181,6 +181,21 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeDao.selectMyResume(resumeNo);
 	}
 
+	@Override
+	public int updateResume(ResumeVO resumeVO) {
+		return resumeDao.updateResume(resumeVO);
+	}
+
+	@Override
+	public int updatePF(PortfolioVO pfVO) {
+		return resumeDao.updatePF(pfVO);
+	}
+
+	@Override
+	public int deleteResume(int resumeNo) {
+		return resumeDao.deleteResume(resumeNo);
+	}
+
 	
 
 	

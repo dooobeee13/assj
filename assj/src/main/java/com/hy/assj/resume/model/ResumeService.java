@@ -80,4 +80,9 @@ public interface ResumeService {
 	
 	ResumeVO selectMyResume(int resumeNo);
 	
+	int updateResume(ResumeVO resumeVO);
+	
+	int updatePF(PortfolioVO pfVO);
+	
+	int deleteResume(int resumeNo);
 }
