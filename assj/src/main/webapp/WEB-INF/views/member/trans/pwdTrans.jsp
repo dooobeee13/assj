@@ -85,7 +85,7 @@
 	}
 		
  	 /* 사이드바 스타일 */
-  #sidebar-wrapper {
+/*   #sidebar-wrapper {
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
@@ -115,7 +115,7 @@
   .sidebar-nav > .sidebar-brand {
     font-size: 1.3em;
     line-height: 3em;
-  } 
+  }  */
 </style>
 </head>
 	<body>
@@ -125,7 +125,7 @@
 		
 		<div class="row">
 		<!-- 사이드바 -->
-		<div id="page-wrapper" class="col-md-3">
+		<%-- <div id="page-wrapper" class="col-md-3">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h1>My Page</h1></li>
@@ -153,9 +153,9 @@
 				<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 		<!-- /사이드바 -->
-		
+		<c:import url="../../mypage/mypageSide.jsp"/>
 		<!-- 본문 -->
    			<div class="col-md-9">
 			<form name="frm" method="post" action="<c:url value='/member/trans/pwdTrans.do'/>">

@@ -16,4 +16,6 @@ public interface ReboardService {
 	public int selectTotalRecordCount(SearchVO searchVo);
 	public boolean deleteReBoard(Map<String, String> map);
 	public int reply(ReboardVO vo);
+	public int groupDelete(int no);
+	public int solDelete(int no);
 }

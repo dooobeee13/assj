@@ -86,5 +86,16 @@ public class ReboardServiceImpl implements ReboardService{
 		return cnt;		
 	}
 
+	@Override
+	public int groupDelete(int no) {
+		return reboardDao.groupDelete(no);
+	}
+
+	@Override
+	public int solDelete(int no) {
+		return reboardDao.solDelete(no);
+	}
+
+
 
 }
