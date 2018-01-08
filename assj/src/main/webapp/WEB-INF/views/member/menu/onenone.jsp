@@ -11,8 +11,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#cancel').click(function(){
-			location.href="edit3.jsp";
+		$('#sendBtn').click(function(){
+			if($('#id').val()==null){
+				alert('로그인후에 문의주세요');
+				return false;
+			}else if($('#email').val()==""){
+				alert('개인정보에서 이메일을 입력해주세요');
+				return false;
+			}else if($('#title').val()==""){
+				alert('제목을 입력해주세요');
+				return false;
+			}else if($('input:radio[name=questionNo]:checked').val()== undefined){
+				alert('분류를 지정해주세요');
+				return false;
+			}else if($('#content').val()==""){
+				alert('내용을 입력해주세요');
+				return false;
+			}else if(!($('#emailCheckbox').is(':checked'))){
+				alert('약관을 동의해주세요');
+				return false;
+			}
+				
 		});
 	});
 </script>
@@ -154,57 +173,65 @@
 				<h4>※ 평일 17시 이전에 보내주신 문의는 당일 답변을 원칙으로 합니다.<br> 
 				&nbsp;&nbsp;&nbsp;&nbsp;그 외 시간에 문의하신 내용은 다음 근무시간에 답변해드리겠습니다.<br> 
 				&nbsp;&nbsp;&nbsp;&nbsp;(평일 17시 이후 : 다음날 /주말 : 다음주 월요일)</h4><br><br>
-				<form role="form" class="form-inline">
+				<form role="form" class="form-inline" method="post" action="<c:url value='/member/menu/onenone.do'/>">
+					<c:if test="${!empty vo.memId}">
+						<input type="text" name="id" id="id" value="${vo.memId}">
+						<input type="text" name="email" id="email" value="${vo.memEmail}">
+					</c:if>
+					<c:if test="${!empty cmVo.cmId}">
+						<input type="text" name="id" id="id" value="${cmVo.cmId}">
+						<input type="text" name="email" id="email" value="${cmVo.cmEmail}">
+					</c:if>		
 					<table id="email">
 						<tr>
 							<td class="titleTD">제목</td>
-							<td><input type="text" class="form-control" size="75"></td>
+							<td><input type="text" class="form-control" size="75" name="title" id="title"></td>
 						</tr>
 						<tr>
 							<td class="titleTD" id="divide">분류</td>
 							<td><label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="이력서 문의">
+									name="questionNo" value="1">
 									이력서 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="입사지원 문의">
+									name="questionNo" value="2">
 									입사지원 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="검색 문의">
+									name="questionNo" value="3">
 									검색 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="신고(불량기업/공고 등)">
+									name="questionNo" value="4">
 									신고(불량기업/공고 등)
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="회원가입/탈퇴/ID/PW">
+									name="questionNo" value="5">
 									회원가입/탈퇴/ID/PW
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="공고 문의">
+									name="questionNo" value="6">
 									공고 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="지원자관리 문의">
+									name="questionNo" value="7">
 									지원자관리 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="이메일/알림 문의">
+									name="questionNo" value="8">
 									이메일/알림 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="결제/유료 상품 문의">
+									name="questionNo" value="9">
 									결제/유료 상품 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="제안사항">
+									name="questionNo" value="10">
 									제안사항
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="연봉정보 수정요청">
+									name="questionNo" value="11">
 									연봉정보 수정요청
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="SIAT 인적성검사 문의">
+									name="questionNo" value="12">
 									SIAT 인적성검사 문의
 							</label> <label class="radio-inline"> <input type="radio"
-									name="optionsRadios" id="optionsRadios1" value="기타"> 기타
+									name="questionNo" value="13"> 기타
 							</label></td>
 						</tr>
 						<tr>
 							<td class="titleTD" id="comments">내용</td>
-							<td><textarea class="form-control" rows="10" cols="78"></textarea></td>
+							<td><textarea class="form-control" rows="10" cols="78" name="content" id="content"></textarea></td>
 						</tr>
 					</table>
 					<div class="well well-lg">
@@ -212,16 +239,15 @@
 						- 보유 기간 : 문의처리 후 1년간 보관
 					</div>
 					<br> 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="CpCheckbox5" value="option1">&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다. <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="emailCheckbox">&nbsp;위 ‘개인정보 수집 및 이용’ 에 동의합니다. <br>
 					<br>
 					<br>
-				</form>
 				<br>
 				<div id="btnDiv">
-					<button id="personal" type="button" class="btn btn-primary btn-lg">보내기</button>
-					<button id="company" type="button" class="btn btn-default btn-lg"
-						id="cancel">취소</button>
+					<button type="submit" class="btn btn-primary btn-lg" id="sendBtn">보내기</button>
+					<button type="button" class="btn btn-default btn-lg" id="cancelBtn">취소</button>
 				</div>
+				</form>
 			</fieldset>
 		</div>
 		</div>

@@ -37,6 +37,36 @@
 		where cm_id=#{cmId}
 	</update>
 	
+	<resultMap type="HireNotiWithEsAndResumeVO" id="HireNotiWithEsAndResumeVO">
+		<id property="hnNo" column=""/>
+		<result property="hnNotititle" column=""/>
+		<result property="hnStart" column=""/>
+		<result property="hnDeadline" column=""/>
+		
+		<collection property="cResumeVoList" ofType="CResumeVO" >
+			<id property="resumeNo" column=""/>
+			<result property="name" column=""/>
+			<result property="birth" column=""/>
+			<result property="age" column=""/>
+			<result property="gender" column=""/>
+			<result property="schoolName" column=""/>
+			<result property="major" column=""/>
+			<result property="careerNo" column=""/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectHireNotiWithApplicants" resultType="HireNotiWithEsAndResumeVO">
+		select h.HN_NO, h.HN_NOTITITLE, h.HN_START, h.HN_DEADLINE, r.RESUME_NO, r.RESUME_NAME as name,
+		r.RESUME_BIRTH as birth, extract(year from sysdate) - extract(year from r.RESUME_BIRTH) as age,  
+		r.RESUME_GENDER as gender, s.SH_SNAME as schoolName, s.SH_MAJOR as major, r.career_no
+		from hire_noti h 
+		left outer join emp_sup e on h.hn_no=e.hn_no
+		join resume r on e.resume_no = r.resume_no
+		left outer join school_history s on r.RESUME_NO = s.RESUME_NO
+		where h.HN_NO = 1 
+		and r.EDU_NO = s.SH_EDU_NO
+	</select>
+	
 </mapper>
 
 

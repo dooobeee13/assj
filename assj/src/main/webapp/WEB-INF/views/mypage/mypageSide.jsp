@@ -18,20 +18,13 @@
  		
  	 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 580px;
+    /* height: 580px; */
   } 
-  
-  
+
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   
@@ -63,6 +56,17 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <script type="text/javascript">
+  $(function(){
+	  var h = $('#page-wrapper').next().css("height");
+	 
+	 // $('#page-wrapper').attr("height",h);
+	  
+	/*  $('#page-wrapper').css("height",function(){
+		 $('#page-wrapper').next().css("height")
+	 }); */
+  });
+  </script>
   <body>
  	
 		<!-- 사이드바 -->

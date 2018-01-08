@@ -15,6 +15,10 @@
 			alert("이름을 입력하세요");
 			form.name.focus();
 			return false;			
+		}else if(form.name.value=="관리자"){
+			alert("이름을 사용할수 없습니다");
+			form.name.focus();
+			return false;
 		}else if(!form.pwd.value){
 			alert("비밀번호를 입력하세요");
 			form.pwd.focus();

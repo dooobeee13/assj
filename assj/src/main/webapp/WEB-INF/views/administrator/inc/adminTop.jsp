@@ -202,8 +202,8 @@ function closeNav() {
 					<li class="col-li-1-nb s4" style="cursor: pointer;"><div class="col-div-80-100">커뮤니티관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o4">
 						<li>게시판</li>
-						<li>공지글</li>
-						<li>일반글</li>
+						<li><a href="/assj/member/menu/noticeEditOut.do">공지글</a></li>
+						<li><a href="/assj/member/menu/question.do">이메일 문의</a></li>
 						<li><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
 						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
 					</ul>

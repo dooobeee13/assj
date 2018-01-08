@@ -15,7 +15,7 @@
 
 	<div class="detail thinScroll">
 		<div class="row tab">
-			<div class="col-md-5" style="border-right: 1px solid #d3d3d3">
+			<div class="col-md-5">
 				<div class="category thinScroll top">
 					<ul>
 						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">

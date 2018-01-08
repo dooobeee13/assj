@@ -27,45 +27,20 @@
 	</div>
 
 	<div id="wrap">
-		<!-- header -->				
-		<%-- <header id="header">
-			<h1><a href="<c:url value='/index.do'/>">
-			<img alt="로고 이미지" src="${pageContext.request.contextPath}/images/herbLogo7.jpg" height="95px" /></a></h1>
-			<nav id="headerRight">
-				<ul class="views">
-					<!-- 로그인 안된 경우 -->
-					<c:if test="${empty sessionScope.userid }">										
-						<li><a href="<c:url value='/login/login.do'/>">로그인</a></li>
-						<li><a href="<c:url value='/member/agreement.do'/>">회원가입</a></li>
-					</c:if>
 					
-					<!-- 로그인 된 경우 -->
-					<c:if test="${!empty sessionScope.userid }">										
-						<li><a href="<c:url value='/login/logout.do'/>">로그아웃</a></li>
-						<li><a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a></li>
-						<li><a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a></li>
-					</c:if>
-										            
-					<li><a href="<c:url value='/shop/cart/cartList.do'/>">장바구니</a></li>
-					<li><a href="<c:url value='/shop/order/orderList.do'/>">주문내역</a></li>
-					<li><a href="<c:url value='/shop/mypage.do'/>">마이페이지</a></li>
-					<li><a href="<c:url value='/board/list.do'/>">고객센터</a></li>					
-				</ul>				
-			</nav>
-		</header> --%>
-
+		<header id="header">
 		<nav id="top_navi">
 			<div id='cssmenu'>
 				<ul class="nav nav-tabs">			   
 				   <li ><a href="<c:url value='/hire_noti/hire1.do'/>" data-toggle="tab"><span>공고등록</span></a></li>
 				   <li><a href="<c:url value='/hire_noti/hire2.do'/>" data-toggle="tab"><span>공고.지원자 관리</span></a></li>
 				   <li><a href="<c:url value='/hire_noti/hire3.do'/>" data-toggle="tab"><span>인재검색</span></a></li>
-				   <li><a href="#tab4" data-toggle="tab"><span>인재관리</span></a></li>
-				   <li><a href="#tab5" data-toggle="tab"><span>인적성검사</span></a></li>
 				   <li><a href="#tab6" data-toggle="tab"><span>면접관리</span></a></li>
 				</ul>
 			</div>
 		</nav>
+		</header>
+
 		
 		
 		

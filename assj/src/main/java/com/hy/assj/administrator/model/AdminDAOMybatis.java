@@ -6,6 +6,9 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.hy.assj.common.SearchVO;
+import com.hy.assj.question.model.QuestionVO;
+import com.hy.assj.question.model.QuestionViewVO;
 import com.hy.assj.vo.NewsVO;
 
 @Repository
@@ -68,5 +71,29 @@ public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 		return null;
 	}
 	
+	@Override
+	public List<Map<String, Object>> questionList(SearchVO searchVo) {
+		return getSqlSession().selectList(adminspace+".questionList",searchVo);
+	}
+
+	@Override
+	public int questionListTotal() {
+		return getSqlSession().selectOne(adminspace+".questionListTotal");
+	}
+
+	@Override
+	public int questionDelete(int no) {
+		return getSqlSession().delete(adminspace+".questionDelete",no);
+	}
+
+	@Override
+	public QuestionViewVO selectByquestion(int no) {
+		return getSqlSession().selectOne(adminspace+".selectByquestion",no);
+	}
+
+	@Override
+	public int UpdateReplyFlag(int no) {
+		return getSqlSession().update(adminspace+".UpdateReplyFlag",no);
+	}
 	
 }

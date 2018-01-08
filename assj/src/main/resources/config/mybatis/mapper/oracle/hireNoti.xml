@@ -107,6 +107,9 @@
 			order by hn_no desc
 	</select>
 	
+	<select id="selectHnByNo" parameterType="int" resultType="HireNotiVO">
+		select * from hire_noti where hn_no=#{hnNo}
+	</select>
 
 </mapper>
 

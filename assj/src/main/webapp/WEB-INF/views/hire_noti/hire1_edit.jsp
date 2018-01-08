@@ -302,7 +302,7 @@
 </head>
 <body>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
-	<form name="frm" method="post" action="<c:url value='hire1.do'/>"
+	<form name="frm" method="post" action="<c:url value='/hire1_edit.do'/>"
 		onsubmit="return send(this)">
 		<fieldset class="fsmain">
 

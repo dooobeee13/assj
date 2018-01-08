@@ -138,7 +138,6 @@ public class ReboardController {
 		
 		return "redirect:/member/menu/qnaDetail.do?no="+no;
 	}
-	
 
 	@RequestMapping("/qnaDetail.do")
 	public String qnaDetail_get(@RequestParam(defaultValue="0") int no,Model model) {
@@ -151,6 +150,17 @@ public class ReboardController {
 		return "/member/menu/qnaDetail";
 	}
 	
+ 	@RequestMapping("/AdminQnaDetail.do")
+	public String AdminQnaDetail(@RequestParam(defaultValue="0") int no,Model model) {
+		logger.info("Q&A상세보기,파라미터 no={}", no);
+		
+		ReboardVO vo=reboardService.selectByNo(no);
+		
+		model.addAttribute("vo",vo);
+		
+		return "member/menu/AdminQnaDetail";
+	}
+ 	
 	@RequestMapping(value="/edit.do",method=RequestMethod.GET)
 	public String qnaEdit_get(@RequestParam(defaultValue="0") int no,Model model) {
 		logger.info("Q&A게시판 수정화면 파라미터no={}",no);
@@ -231,7 +241,64 @@ public class ReboardController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-		
 	}
+	
+	@RequestMapping("/adminQnaDelete.do")
+	public String adminQnaDelete(@RequestParam int no,Model model) {
+		logger.info("adminQna 삭제 파라미터 no={}",no);
+		
+		ReboardVO vo=reboardService.selectByNo(no); //123
+		
+		int cnt=0;
+		String msg="게시글 삭제 실패",url="/member/menu/adminQna.do";
+		if(vo.getStep()==0) {
+			cnt=reboardService.groupDelete(no);
+		}else {
+			cnt=reboardService.solDelete(no);
+		}	
+		if(cnt>0){
+			msg="게시글이 삭제되었습니다";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping(value="/adminQnaReply.do",method=RequestMethod.GET)
+	public String adminQnaReply_get(@RequestParam(defaultValue="0") int no,Model model) {
+		logger.info("adminQna답변하기 (get)");
+		
+		ReboardVO vo=reboardService.selectByNo(no);
+		logger.info("admin답변하기 조회 결과, vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return "member/menu/adminQnaReply";
+	}
+	
+	@RequestMapping(value="/adminQnaReply.do", method=RequestMethod.POST)
+	public String adminQnaReply_post(@ModelAttribute ReboardVO vo,
+			Model model) {
+		logger.info("adminQna답변하기 처리, 파라미터 vo={}", vo);
+		
+		int cnt = reboardService.reply(vo);
+		logger.info("답변하기 처리, 결과 cnt={}", cnt);
+		
+		String msg="", url="";
+		if(cnt>0) {
+			msg="답변하기 성공";
+			url="/member/menu/adminQna.do";
+		}else {
+			msg="답변하기 실패";
+			url="/member/menu/adminQnaReply.do?no="+vo.getNo();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
+	
 	
 }
