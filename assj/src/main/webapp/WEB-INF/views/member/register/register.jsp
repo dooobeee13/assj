@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,11 +12,11 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     
-    <script type="text/javascript">
-    
+    <script type="text/javascript">    
     	$(document).ready(function(){	
    		   $("select option[value='naver.com']").attr("selected", true);
 
+   		   $('#start').attr('checked', true);
    		   //개인회원가입,기업회원가입 버튼 클릭시 아래 정보 바뀌기
     		$('#personal').click(function(){
     			$('#PersonMember').show();
@@ -370,8 +369,7 @@
          }
      }
  }).open();
-}
-		  
+}	  
     </script>
     
     <style type="text/css">
@@ -647,7 +645,7 @@
 				
 				<div class="form-group"><span class="r">*</span>
 					<label for="cmRegnum">사업자 등록번호</label> 
-					<input type="text" class="form-control" id="cmRegnum" name="cmRegnum">
+					<input type="text" class="form-control" maxlength="12" id="cmRegnum" name="cmRegnum">
 					<span id="info">&nbsp;&nbsp;( 예시:[510-05-65408] )</span>
 				</div><br>
 				<div class="form-group"><span class="r">*</span>
@@ -712,10 +710,10 @@
 					<label for="cmHomepage">홈페이지 주소</label> 
 					<input type="text" class="form-control"size="40" id="cmHomepage" name="cmHomepage">
 				</div><br>
-				<div class="form-group">&nbsp;
+				<div class="form-group"><span class="r">*</span>
 					<label for="ccNo">기업구분</label> 
 					<label class="radio-inline">
-					<input type="radio" name="ccNo" value="1"> 일반
+					<input type="radio" name="ccNo" value="1" id="start"> 일반
 					</label>
 					<label class="radio-inline">
 					<input type="radio" name="ccNo" value="2"> 인재파견

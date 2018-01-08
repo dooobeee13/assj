@@ -169,7 +169,7 @@ function closeNav() {
 }
 
 //모달쪽
-function pageFunc(curPage){
+	function pageFunc(curPage){
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
 	}
@@ -282,8 +282,9 @@ function pageFunc(curPage){
 			<!-- 페이징 처리에 필요한 form 태그 -->
 				<form name="frmPage" method="post" 
 					action="<c:url value='/member/menu/replySearch.do'/>">
-					<input type="hidden" name="currentPage">
-					<input type="hidden" name="searchKeyword">
+					<input type="hidden" name="searchKeyword" 
+						value="${param.searchKeyword }">
+					<input type="hidden" name="currentPage">			
 				</form>
 			<!-- 태그 끝 -->
 			<div id="frame">
@@ -297,7 +298,7 @@ function pageFunc(curPage){
 					<table id="searchTable">
 						<tr>
 							<td style=width:80%>
-								<input type="text" class="form-control" size="8" maxlength="4" name="searchKeyword" placeholder="회원ID를 입력하세요" value="${param.searchKeyword }">
+								<input type="text" class="form-control" size="8" maxlength="20" name="searchKeyword" placeholder="회원ID를 입력하세요" value="${param.searchKeyword }">
 							</td>
 							<td style=width:20%>
 								<input type="submit" class="btn btn-primary btn-sm" value="검색" >

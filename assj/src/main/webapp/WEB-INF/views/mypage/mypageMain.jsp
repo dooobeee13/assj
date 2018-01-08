@@ -18,7 +18,6 @@
 			$(this).attr("class","active");
 		});
 		
-		
 		$('#mypage ul li:eq(0)').click(function(){
 			$('iframe').prop("src","<c:url value='/member/menu/frameScrap.do'/>")
 		});
@@ -70,7 +69,7 @@
       					<td>스크랩</td>
       				</tr>
       		</table>     		
-      <br>
+      		<br>
 			 <div id="mypage">
 					<ul class="nav nav-tabs nav-justified">
 						<li><a id="step1">최근공고</a></li>
@@ -79,7 +78,6 @@
 						<li><a id="step4">스크랩한 공고</a></li>
 					</ul>
 			 </div>
-			
       </fieldset>  
       </div>
  </div>

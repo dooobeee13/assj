@@ -53,6 +53,10 @@ public class RegisterController {
 	public String register_post(@ModelAttribute MemberVO vo ,Model model) {
 		logger.info("회원가입 화면(post) 파라미터 vo={} ", vo);
 		
+		if(vo.getMemGender()==null) {
+			vo.setMemGender("");
+		}
+		
 		int result=memberService.insertMemMember(vo);
 		
 		String msg="",url="/index.do";
