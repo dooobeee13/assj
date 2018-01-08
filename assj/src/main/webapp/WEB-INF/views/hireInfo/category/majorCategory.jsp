@@ -13,7 +13,7 @@
 					<ul>
 						<c:set var="topCateogryList" value="${map['topCategory']}" />
 						<c:forEach var="vo" items="${topCateogryList}" varStatus="status">
-							<li style="position: relative;" <c:if test='${status.first}'>class="selected"</c:if>><a href="#aTabs-${vo.majorNo}"><label class="chklabel">${vo.majorName}</label></a></li>
+							<li style="position: relative;" <c:if test='${status.first}'>class="selected"</c:if>><a href="#aTabs-${vo.majorNo}"><label class="chklabel" data-top="${vo.majorNo}">${vo.majorName}</label></a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -26,7 +26,7 @@
 							<c:forEach var="vo" items="${map[subKey]}">
 								<li class="col-md-4">
 									<input type="checkbox" class="sc_chk" id="major-${vo.majorNo}" name="majorList" value="${vo.majorNo}"> 
-									<label class="chklabel" data-name="${top.majorName}>${vo.majorName}" for="major-${vo.majorNo}">
+									<label class="chklabel" data-name="${top.majorName}>${vo.majorName}" data-top="${top.majorNo}" for="major-${vo.majorNo}">
 										<span>${vo.majorName}</span>
 									</label>
 								</li>
