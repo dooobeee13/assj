@@ -46,7 +46,9 @@
 		vertical-align: bottom;
 		width:60px;
 	}
-	
+	.red{
+		color:red;
+	}
 	 /* 사이드바 스타일 */
   #sidebar-wrapper {
     /* position:absolute;
@@ -224,7 +226,14 @@
 							</c:if>  
 					 </c:if> 
 					</td>
-					<td>${reboardVO.name}</td>
+					<td>
+						<c:if test="${reboardVO.name=='관리자'}">
+							<span class="red">${reboardVO.name}</span>
+						</c:if>
+						<c:if test="${reboardVO.name!='관리자'}">
+							${reboardVO.name}						
+						</c:if>
+					</td>
 					<td><fmt:formatDate value="${reboardVO.regdate}" 
 						pattern="yyyy-MM-dd" /> </td>
 					<td>${reboardVO.readCount}</td>		

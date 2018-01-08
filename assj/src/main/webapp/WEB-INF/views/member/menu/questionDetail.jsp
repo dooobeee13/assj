@@ -104,54 +104,7 @@ $(function(){
 		$(this).css('opacity','1');
 	});
 	
-	
-	$("select option:eq(0)").attr("selected", true);			 
-		$('select option:eq(1)').css('color','red');
-	$('select option:eq(2)').css('color','blue');
-	$('select option:eq(3)').css('color','orange');
-	$('select option:eq(4)').css('color','green');	
-	
-	$('#btDeleteMulti').click(function(){
-		//선택한 게시물 삭제
-		var len =$('tbody input[type=checkbox]:checked').length;
-		if(len==0){
-			alert('삭제할 게시물을 먼저 체크하세요');
-			return;
-		}
-		
-		$('#frmList').prop('action',
-			'<c:url value="/member/menu/deleteMulti.do"/>');
-		$('#frmList').submit();			
-	});
 
-	$.step = function(idx, currentPage){
-		var url = '<c:url value="/member/menu/step2.do"/>?notititleNo=' + idx;
-		if (currentPage) {
-			url += '&currentPage=' + currentPage;
-		}
-		
-		$.ajax({
-			url: url,
-			dataType:"xml",
-			success :function(res){
-				$('.total').html('');
-				$('.total').html($(res).find('result').find('html').text());
-			}
-		}); 
-	};
-	
-	$.step(0);
-	
-	$('#noticetitleNo').change(function(){
-		var idx = $(this).val();
-		$.step(idx);
-	});
-	
-	
-	$('#all').on('click', '#chkAll', function(){
-		$('tbody input[type=checkbox]').prop('checked', this.checked);
-	})
-	
 });
 
 window.onload=function(){
@@ -202,30 +155,52 @@ function closeNav() {
 
 </script>
 <style type="text/css">
-	#frame {
-	    padding: 30px;
-		background-color: #ffff;
+	.container fieldset{
+		/* margin:0 auto; */
+		width:70%;
+		padding:60px;
+		background-color:#ffff;
 	}
-	.divSearch{
-		text-align:left;
+	.container .form-group{
+		margin:10px;
 	}
-	table th,table{
+	.container #contents{
+		vertical-align:top;
+	}
+	.container #btnDiv{
 		text-align:center;
-		margin:0 auto;
-		border-top:1px bold;
 	}
-	#size{
-		font-size:1.3em;
+	.container #adminDiv{
+		text-align:right;
+	}
+	.container #adminDiv img{
+		vertical-align:bottom;
+	}
+	.container #size{
+		font-size:1.5em;
 		vertical-align: middle;
 	}
-    .align_right{
-		float:right;
-		margin-right:60px;
-		vertical-align: bottom;
-	} 
-	.divPage {
+	.Advertising{
+		position: relative;
+		width: 100%;
+		height: 20%;
+		margin:10px;
+		float: right;
+		box-sizing: border-box;
+		background:#FBFFFF;
+		box-shadow: 2px 2px 2px #b8b8b8;
+		border-radius: 12px 12px 0 0;
+	}
+	
+	.Advertising-div{
+		position: absolute;
+		top: 30px;
+		right: 20px;		
+		padding:0;
 		margin:0 auto;
-		text-align: center;
+		width:22%;
+		height:100%;
+		box-sizing: border-box;
 	}
 </style>
 <head>
@@ -295,34 +270,103 @@ function closeNav() {
 		</div>
 		<!-- 섹션 부분 -->
 		<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;">
-			<div class="col-div-100-20">
-<!-- 본문 -->
-			<div id="frame">
-				<h3><b>공지사항 관리</b></h3>
-				<hr>
-				<form class="form-inline" name="frmList" id="frmList" method="post">
-						<div class="form-group">	
-							<label for="noticetitleNo">구분 선택</label>&nbsp;
-							<select class="form-control" name="noticetitleNo" id="noticetitleNo">
-								<option value="0">전체</option>
-								<option value="1">공지</option>
-								<option value="2">이벤트</option>
-								<option value="3">오픈</option>
-								<option value="4">뉴스</option>
-							</select>
-							<span id="size" class="glyphicon glyphicon-list"></span>
-						</div>
-						<br><br><br>
-						<div class="align_right">
-							<a href="/assj/member/menu/noticeWrite.do"><input type="button" class="btn btn-default" value="공고 등록" ></a>&nbsp;
-							<input type="button" class="btn btn-default" id="btDeleteMulti" value="선택 삭제" >
-						</div><br>
-				<div class="total" id="all">			
-				</div>
-				</form>
+			<div class="col-div-100-20">	
+				<div class="container">
+					<fieldset>
+		<form role="form" class="form-inline">	 
+			<h1>이메일 문의</h1>
+			<div id="adminDiv">
+				<b>${vo.id}</b>님 문의사항 입니다.				
 			</div>
+			<hr>
+			<div class="form-group">
+				<label for="questionTitle">구분</label>&nbsp;&nbsp;
+				<input type="text" class="form-control" id="questionTitle" name="questionTitle" size="18" value="${vo.questionTitle}" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="title">이메일</label>&nbsp;&nbsp;
+				<input type="text" class="form-control" id="email" name="email" size="32" value="${vo.email}" readonly="readonly">
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="title">제목</label>&nbsp;&nbsp;  
+				<input type="text" class="form-control" id="title" name="title" size="73" value="${vo.title}" readonly="readonly">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			</div>
+			<div class="form-group">
+				<label for="contents" id="contents">내용</label>&nbsp;&nbsp;  
+				<textarea class="form-control" rows="13" cols="75" id="content" name="content" readonly="readonly">${vo.content}</textarea>
+			</div>
+			<br>
+			<br>
+			<div id="btnDiv">
+				<a href="<c:url value='/member/menu/questionReply.do?no=${vo.no}'/>"><button type="button" class="btn btn-default btn-sm" id="editBtn" style="background-color:#607D8B;color:#ffff">답변</button></a>&nbsp;
+				<a href="<c:url value='/member/menu/question.do'/>"><button type="button" class="btn btn-default btn-sm" id="cancleBtn">취소</button><br></a>
+			</div>
+		 </form> 
+		</fieldset>
+		
+		<div class="Advertising-div">	
+				<!-- 메인 화면 통계부분 처리 -->
+				<div class="Advertising">
+						<div class="col-div-100-20 divMainbox">
+							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 회원</h2>
+						</div>
+						
+						<div class="col-div-35-80" style="padding-top:1em;">
+							<img alt="" src="<c:url value='/icon/visitorimg.png'/>">
+						</div>
+						<div class="col-div-65-80" style="padding-top:2em;">
+							<ul>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>총 회원 수 : </span><strong>10,223명</strong></li>
+								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>오늘 가입자 수 : </span><strong>56명</strong></li>
+							</ul>
+						</div>
+					</div>
+					<div class="Advertising">
+						<div class="col-div-100-20 divMainbox">
+							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 이력서</h2>
+						</div>
+						<div class="col-div-35-80" style="padding-top:1em;">
+							<img alt="" src="<c:url value='/icon/curriculum.png'/>">
+						</div>
+						<div class="col-div-65-80" style="padding-top:2em;">
+							<ul>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>총 이력서 : </span><strong>4,658 장</strong></li>
+								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 이력서 : </span><strong>56장</strong></li>
+							</ul>
+						</div>
+					</div>
+					<div class="Advertising">
+						<div class="col-div-100-20 divMainbox">
+							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 1:1 문의 현황</h2>
+						</div>
+						<div class="col-div-35-80" style="padding-top:2.5em;">
+							<img alt="" src="<c:url value='/icon/QNA.png'/>">
+						</div>
+						<div class="col-div-65-80" style="padding-top:2em;">
+							<ul>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>오늘의 총 문의 : </span><strong>120개 </strong></li>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>새로운 문의 : </span><strong>36개 </strong></li>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>기다리는 문의 : </span><strong>14개</strong></li>
+							</ul>
+						</div>
+					</div>
+					<div class="Advertising">
+						<div class="col-div-100-20 divMainbox">
+							<h2 class="divMainbox-title" style="padding-left:1em;">&#149; 공고</h2>
+						</div>
+						<div class="col-div-35-80" style="padding-top:1em;">
+							<img alt="" src="<c:url value='/icon/user.png'/>">
+						</div>
+						<div class="col-div-65-80" style="padding-top:2em;">
+							<ul>
+								<li style="border-left:1.5px solid #b8b8b8;"><span>총 공고 수 : </span><strong>1,400 개</strong></li>
+								<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 공고 : </span><strong>14 개</strong></li>
+							</ul>
+						</div>
+					</div>
+				</div>			
 				</div>
-			
+			</div>
 			  </div>
 	  	</div>
 </body>

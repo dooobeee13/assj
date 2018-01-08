@@ -12,4 +12,35 @@
 		values(admin_seq.nextval,#{userid},#{pwd},#{name})
 	</insert>
 	
+	<select id="questionList" resultType="map" parameterType="SearchVO">	
+		select *
+		from
+		(
+		    select rownum as RNUM, blist.*
+		    from(
+		          select * from question_view order by no desc		        
+		    ) blist
+		) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>
+	</select>
+	
+	<select id="questionListTotal" resultType="int">
+		select count(*) from question
+	</select>
+	
+	<delete id="questionDelete" parameterType="int">
+		delete from question where no=#{no}
+	</delete>
+	
+	<select id="selectByquestion" parameterType="int" resultType="questionViewVo">
+		select * from question_view where no=#{no}
+	</select>
+	
+	<update id="UpdateReplyFlag" parameterType="int">
+		update question
+		set reply_flag='Y'
+		where no=#{no}
+	</update>
 </mapper>

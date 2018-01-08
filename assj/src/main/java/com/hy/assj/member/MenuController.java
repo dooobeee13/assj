@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hy.assj.cmMember.model.CmMemberService;
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
@@ -22,6 +24,8 @@ import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.question.model.QuestionService;
+import com.hy.assj.question.model.QuestionVO;
 
 @Controller
 @RequestMapping("/member/menu")
@@ -32,10 +36,45 @@ public class MenuController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private CmMemberService cmMemberService;
+	
+	@Autowired
+	private QuestionService questionServicce;
+	
 	@RequestMapping(value="/onenone.do",method=RequestMethod.GET)
-	public String onenone_get() {
-		logger.info("1:1이메일문의 화면");
+	public String onenone_get(HttpSession session,Model model) {
+		logger.info("1:1이메일문의 화면(get)");
+		
+		if(session.getAttribute("memberVO")!=null) {			
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			MemberVO vo=memberService.selectMember(memberVO.getMemId());
+			model.addAttribute("vo",vo);
+		}else if(session.getAttribute("cmMemberVO")!=null) {
+			CmMemberVO cmMemberVO=(CmMemberVO) session.getAttribute("cmMemberVO");
+			CmMemberVO cmVo=cmMemberService.selectMember(cmMemberVO.getCmId());
+			model.addAttribute("cmVo",cmVo);
+		}
+		
 		return "member/menu/onenone";	
+	}
+	
+	@RequestMapping(value="/onenone.do",method=RequestMethod.POST)
+	public String onenone_post(@ModelAttribute QuestionVO questionVo,Model model) {
+		logger.info("이메일 문의(post) 파라미터 questionVO={}",questionVo);
+		
+		int cnt=questionServicce.insertQuestion(questionVo);
+		
+		String msg="이메일 문의 실패했습니다",url="/member/menu/onenone.do";
+		if(cnt>0) {
+			msg="빠른 답변해드리도록 최선을 다하겠습니다.감사합니다";
+			url="/index.do";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 	@RequestMapping("/psService.do")
@@ -138,4 +177,5 @@ public class MenuController {
 
 		return "common/message";
 	}
+	
 }

@@ -66,5 +66,15 @@ public class ReboardDAOMybatis extends SqlSessionDaoSupport
 	public int replyReboard(ReboardVO vo) {
 		return getSqlSession().insert(namespace+".replyReboard", vo);
 	}
+
+	@Override
+	public int groupDelete(int no) {
+		return getSqlSession().delete(namespace+".groupDelete",no);
+	}
+
+	@Override
+	public int solDelete(int no) {
+		return getSqlSession().delete(namespace+".solDelete",no);
+	}
 	
 }

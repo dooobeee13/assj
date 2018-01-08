@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.question">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword!=''">
+			where id=#{searchKeyword} 
+		</if>
+	</sql>
+	
+	<insert id="insertQuestion" parameterType="questionVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select question_seq.nextval from dual		
+		</selectKey>
+		insert into question(no,id,email,title,question_no,content)
+		values(#{no},#{id},#{email},#{title},#{questionNo},#{content})
+	</insert>
+	
+	<insert id="insertQuestionReply" parameterType="questionReplyVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select question_reply_seq.nextval from dual		
+		</selectKey>
+		insert into question_reply(no,admin_no,reply_content,group_no)
+		values(#{no},#{adminNo},#{replyContent},#{groupNo})
+	</insert>
+	
+	<select id="replyList" resultType="map" parameterType="searchVO">
+		select *
+		from
+		(
+		    select rownum as RNUM, blist.*
+		    from(
+		        select * from reply_list_view 
+		        <include refid="searchWhere"></include> 
+		        order by no desc
+		    ) blist
+		) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>
+		
+	</select>
+	
+	<select id="replyListTotalCount" resultType="int" parameterType="searchVO">
+		select count(*) from reply_list_view
+		<include refid="searchWhere"></include> 
+	</select>
+	
+	<delete id="replyDelete" parameterType="int">
+		delete from question_reply where no=#{no}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+

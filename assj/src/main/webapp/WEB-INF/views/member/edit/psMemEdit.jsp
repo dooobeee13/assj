@@ -45,38 +45,9 @@
 	padding: 8px;
 }
 
-/* 사이드바 스타일 */
-#sidebar-wrapper {
-	background: #ffff;
-	overflow-x: hidden;
-	overflow-y: auto;
-	height: 600px;
-}
-
-.sidebar-nav {
-	list-style: none;
-}
-
-.sidebar-nav li {
-	text-indent: 0.8em;
-	line-height: 2.2em;
-}
-
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: #7a6666;
-}
-
-.sidebar-nav li a:hover {
-	color: #cccc;
-	background: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar-nav>.sidebar-brand {
-	font-size: 1.3em;
-	line-height: 3em;
-}
+ #sidebar-wrapper {
+    height: 600px;
+ } 
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,56 +61,8 @@
 
 	<div class="container">
 		<div class="row">
-			<!-- 사이드바 -->
-			<div id="page-wrapper" class="col-md-3">
-				<div id="sidebar-wrapper">
-					<ul class="sidebar-nav">
-						<li class="sidebar-brand"><h1>My Page</h1></li>
-						<hr>
-						<li><h5>
-								<b>이력서 관리</b>
-							</h5></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
-					</ul>
-					<hr>
-					<ul class="sidebar-nav">
-						<li class="sidebar-brand"><h5>
-								<b>맞춤채용 정보</b>
-							</h5></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
-					</ul>
-					<hr>
-					<ul class="sidebar-nav">
-						<li class="sidebar-brand"><h5>
-								<b>스크랩한 공고</b>
-							</h5></li>
-						<li><a href="<c:url value='/member/menu/scrap.do'/>"><span
-								class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
-						<li><a href="#"><span
-								class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
-					</ul>
-					<ul class="sidebar-nav">
-						<li class="sidebar-brand"><h5>
-								<b>개인정보 관리</b>
-							</h5></li>
-						<li><a
-							href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span
-								class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
-						<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span
-								class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /사이드바 -->
-
+			<c:import url="../../mypage/mypageSide.jsp"/>
+	
 			<!-- 본문 -->
 			<div class="col-md-9">
 				<div id="psMemEdit">

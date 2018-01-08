@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hy.assj.common.SearchVO;
+import com.hy.assj.question.model.QuestionVO;
+import com.hy.assj.question.model.QuestionViewVO;
 import com.hy.assj.vo.NewsVO;
 
 @Service
@@ -62,6 +65,29 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.CreateAdmin(list);
 	}
 	
-	
+	@Override
+	public List<Map<String, Object>> questionList(SearchVO searchVo) {
+		return adminDao.questionList(searchVo);
+	}
+
+	@Override
+	public int questionListTotal() {
+		return adminDao.questionListTotal();
+	}
+
+	@Override
+	public int questionDelete(int no) {
+		return adminDao.questionDelete(no);
+	}
+
+	@Override
+	public QuestionViewVO selectByquestion(int no) {
+		return adminDao.selectByquestion(no);
+	}
+
+	@Override
+	public int UpdateReplyFlag(int no) {
+		return adminDao.UpdateReplyFlag(no);
+	}
 
 }

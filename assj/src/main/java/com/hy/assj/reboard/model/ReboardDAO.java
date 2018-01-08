@@ -18,4 +18,6 @@ public interface ReboardDAO {
 	public void deleteReBoard(Map<String, String> map);
 	public int updateSortNo(ReboardVO vo);
 	public int replyReboard(ReboardVO vo);
+	public int groupDelete(int no);
+	public int solDelete(int no);
 }

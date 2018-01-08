@@ -60,7 +60,12 @@ $(function(){
 		location.href='<c:url value="/administrator/adminmain.do"/>';
 	})
 	
+	$('.blue').css("color","blue");
+	$('.red').css("color","red");
 	
+	$('#chkAll').click(function(){
+		$('tbody input[type=checkbox]').prop('checked', this.checked);
+	});
 	//채팅 모달
 	var modalLayer = $("#modalLayer");
 	var modalLink = $(".modalLink");
@@ -103,54 +108,6 @@ $(function(){
 	},function(){
 		$(this).css('opacity','1');
 	});
-	
-	
-	$("select option:eq(0)").attr("selected", true);			 
-		$('select option:eq(1)').css('color','red');
-	$('select option:eq(2)').css('color','blue');
-	$('select option:eq(3)').css('color','orange');
-	$('select option:eq(4)').css('color','green');	
-	
-	$('#btDeleteMulti').click(function(){
-		//선택한 게시물 삭제
-		var len =$('tbody input[type=checkbox]:checked').length;
-		if(len==0){
-			alert('삭제할 게시물을 먼저 체크하세요');
-			return;
-		}
-		
-		$('#frmList').prop('action',
-			'<c:url value="/member/menu/deleteMulti.do"/>');
-		$('#frmList').submit();			
-	});
-
-	$.step = function(idx, currentPage){
-		var url = '<c:url value="/member/menu/step2.do"/>?notititleNo=' + idx;
-		if (currentPage) {
-			url += '&currentPage=' + currentPage;
-		}
-		
-		$.ajax({
-			url: url,
-			dataType:"xml",
-			success :function(res){
-				$('.total').html('');
-				$('.total').html($(res).find('result').find('html').text());
-			}
-		}); 
-	};
-	
-	$.step(0);
-	
-	$('#noticetitleNo').change(function(){
-		var idx = $(this).val();
-		$.step(idx);
-	});
-	
-	
-	$('#all').on('click', '#chkAll', function(){
-		$('tbody input[type=checkbox]').prop('checked', this.checked);
-	})
 	
 });
 
@@ -199,7 +156,10 @@ function closeNav() {
 }
 
 //모달쪽
-
+function pageFunc(curPage){
+		document.frmPage.currentPage.value=curPage;
+		frmPage.submit();
+	}
 </script>
 <style type="text/css">
 	#frame {
@@ -214,6 +174,9 @@ function closeNav() {
 		margin:0 auto;
 		border-top:1px bold;
 	}
+	table th{
+		background-color:#f4e453;
+	}
 	#size{
 		font-size:1.3em;
 		vertical-align: middle;
@@ -226,6 +189,9 @@ function closeNav() {
 	.divPage {
 		margin:0 auto;
 		text-align: center;
+	}
+	.align_right{
+		margin-right:0;
 	}
 </style>
 <head>
@@ -297,33 +263,112 @@ function closeNav() {
 		<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;">
 			<div class="col-div-100-20">
 <!-- 본문 -->
+			<!-- 페이징 처리에 필요한 form 태그 -->
+				<form name="frmPage" method="post" 
+					action="<c:url value='/member/menu/question.do'/>">
+					<input type="hidden" name="currentPage">
+				</form>
+			<!-- 태그 끝 -->
 			<div id="frame">
-				<h3><b>공지사항 관리</b></h3>
+				<h3><b>이메일 문의사항 관리</b></h3>
 				<hr>
-				<form class="form-inline" name="frmList" id="frmList" method="post">
-						<div class="form-group">	
-							<label for="noticetitleNo">구분 선택</label>&nbsp;
-							<select class="form-control" name="noticetitleNo" id="noticetitleNo">
-								<option value="0">전체</option>
-								<option value="1">공지</option>
-								<option value="2">이벤트</option>
-								<option value="3">오픈</option>
-								<option value="4">뉴스</option>
-							</select>
-							<span id="size" class="glyphicon glyphicon-list"></span>
+				<form class="form-inline" name="frmList" id="frmList" method="post">		
+						( 전체,<b>${pagingInfo.totalRecord}</b>건 문의사항이 있습니다 )
+						<br>
+						<div class="align_right">
+							<a href="<c:url value='/member/menu/replySearch.do'/>"><input type="button" class="form-control" value="답변확인"></a>
+							<input type="button" class="form-control" value="전체메일">
 						</div>
 						<br><br><br>
-						<div class="align_right">
-							<a href="/assj/member/menu/noticeWrite.do"><input type="button" class="btn btn-default" value="공고 등록" ></a>&nbsp;
-							<input type="button" class="btn btn-default" id="btDeleteMulti" value="선택 삭제" >
-						</div><br>
-				<div class="total" id="all">			
-				</div>
-				</form>
-			</div>
-				</div>
-			
+				<table class='table table-bordered'>
+			<colgroup>
+				<col style="width:6%">
+				<col style="width:6%">
+				<col style="width:8%">
+				<col style="width:17%">
+				<col style="width:15%">
+				<col style="width:*%">
+				<col style="width:14%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th><input type="checkbox" name="chkAll" id="chkAll"></th>
+					<th>번호</th>
+					<th>답변여부</th>
+					<th>회원ID</th>
+					<th>구분</th>
+					<th>제목</th>
+					<th>관리</th>
+				</tr>
+			</thead>
+			<tbody>  
+				<c:if test="${empty list}"> 
+					 <tr>
+						<td colspan='7'>문의사항이 없습니다.</td>
+					</tr>
+				</c:if> 
+				<c:if test="${!empty list}">
+					<c:forEach var="map" items="${list}" varStatus="status"> 
+						<tr>
+							<td><input type="checkbox" 
+							name="queItems[${status.index}].email"
+							value="${map.EMAIL}"></td>
+							<td>${map.NO}</td>
+							<td>
+								<c:if test="${map.REPLY_FLAG=='Y'}">
+									<span class="blue">O</span>
+								</c:if>
+								<c:if test="${map.REPLY_FLAG=='N'}">
+									<span class="red">X</span>
+								</c:if> 
+							</td>
+							<td>${map.ID}</td>
+							<td>${map.QUESTION_TITLE}</td>
+							<td><a href="<c:url value='/member/menu/questionDetail.do?no=${map.NO}'/>">${map.TITLE}</a></td>
+							<td>
+								<a href="<c:url value='/member/menu/questionReply.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >답변</button></a>&nbsp;
+								<a href="<c:url value='/member/menu/questionDelete.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >삭제</button></a><br>
+							</td>
+						</tr>
+						</c:forEach> 
+					</c:if>
+				</tbody>
+		</table>
+	</form>			
+	
+		<div class="divPage">
+		<ul class="pagination">
+		<!-- 페이지 번호 추가 -->		
+		<!-- 이전 블럭으로 이동 ◀ -->
+		<c:if test="${pagingInfo.firstPage>1 }">
+			<li><a href="javascript:void(0)" onclick="pageFunc(${pagingInfo.firstPage-1})">«</a></li>
+		</c:if>	
+		
+		<!-- [1][2][3][4][5][6][7][8][9][10] -->
+		<c:forEach var="i" begin="${pagingInfo.firstPage}" 
+			end="${pagingInfo.lastPage}">
+			<c:if test="${i==pagingInfo.currentPage}">
+				<li><a href="javascript:void(0)" style="background-color:#337ab7; color:white">${i }</a></li>
+			</c:if>
+			<c:if test="${i!=pagingInfo.currentPage}">
+				<li><a href="javascript:void(0)" onclick="pageFunc(${i })">${i }</a></li>
+	 		</c:if>				
+		</c:forEach>
+		
+		<!-- 다음 블럭으로 이동 ▶ -->
+		<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+			<li><a href="javascript:void(0)" onclick="pageFunc(${pagingInfo.lastPage+1})">»</a></li>
+		</c:if>
+		
+		<!--  페이지 번호 끝 -->
+		</ul>
+		</div>
+		
 			  </div>
 	  	</div>
+	  	</div>
+	  	</article>
+	  	</div>
+	  	
 </body>
 </html>
