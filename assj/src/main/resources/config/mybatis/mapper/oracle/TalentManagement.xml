@@ -88,6 +88,13 @@
 					#{resumeGender}
 				</foreach>
 			</if>
+			<if test="universityType != null">
+				AND EDU_NAME in
+				<foreach collection="universityType" item="universityType" 
+					index="index" open="(" close=")" separator=",">
+					#{universityType}
+				</foreach>
+			</if>
 		</trim>
 		) blist
 		)

@@ -22,6 +22,14 @@ public interface AdminDAO {
 	public String selectAdminLogin(String userid);
 	
 	public int CreateAdmin(Map<String, Object> list);
+	
+	public int insertChat(Map<String, Object> list);
+	
+	public List<Map<String, Object>> selectLastChat();
+	
+	public List<Map<String, Object>> selectByLastChatNo(int lastNo);
+	
+	public Map<String, Object> selectLastNo();
 
 	public List<Map<String, Object>> questionList(SearchVO searchVo);
 	

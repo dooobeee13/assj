@@ -87,19 +87,15 @@
 			style="padding-top: 4em;">
 			<ul class="col-ul-100-100" style="height: 60%; text-align: center;">
 				<li class="col-li-1 bb-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="1">
-					<input type="checkbox" name="Educol" value="대학교 4학년" style="display:none;"/>대학교 4학년</li>
+					<input type="checkbox" name="Educol" value="대학교졸업(4년)" style="display:none;"/>대학교 4학년</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="2">
-					<input type="checkbox" name="Educol" value="대학교(2,3년)" style="display:none;"/>대학교(2,3년)</li>
+					<input type="checkbox" name="Educol" value="대학졸업(2, 3년)" style="display:none;"/>대학(2,3년)</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="3">
-					<input type="checkbox" name="Educol" value="대학원(석/박사)" style="display:none;"/>대학원(석/박사)</li>
+					<input type="checkbox" name="Educol" value="석사졸업" style="display:none;"/>대학원(석사)</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="4">
-					<input type="checkbox" name="Educol" value="고등학교" style="display:none; "/>고등학교</li>
-				<li class="col-li-1" style="border: none; padding-left: 1em; background:none;">
-					<label style="font-size: 1em;"><input type="checkbox"
-						style="vertical-align: middle; display: inline-block;" value="재학·휴학·수료·중퇴·자퇴
-						제외">재학·휴학·수료·중퇴·자퇴
-						제외</label>
-				</li>
+					<input type="checkbox" name="Educol" value="박사졸업" style="display:none;"/>대학원(박사)</li>
+				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="5">
+					<input type="checkbox" name="Educol" value="고등학교 졸업" style="display:none;"/>고등학교</li>
 			</ul>
 		</div>
 	</div>

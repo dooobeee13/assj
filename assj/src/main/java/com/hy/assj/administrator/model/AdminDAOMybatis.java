@@ -49,6 +49,27 @@ public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 	public int CreateAdmin(Map<String, Object> list) {
 		return getSqlSession().insert(adminspace+".CreateAdmin",list);
 	}
+
+	@Override
+	public int insertChat(Map<String, Object> list) {
+		return getSqlSession().insert(adminspace+".insertChat",list);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLastChat() {
+		return getSqlSession().selectList(adminspace+".selectLastChat");
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByLastChatNo(int lastNo) {
+		return getSqlSession().selectList(adminspace+".selectByLastChatNo",lastNo);
+	}
+
+	@Override
+	public Map<String, Object> selectLastNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
 	public List<Map<String, Object>> questionList(SearchVO searchVo) {
