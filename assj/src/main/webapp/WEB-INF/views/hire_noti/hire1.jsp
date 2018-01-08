@@ -291,7 +291,7 @@
 <![endif]-->
 </head>
 <body>
-	<c:import url="../index/top.jsp" />
+	<c:import url="../company/cTop.jsp" />
 	<div>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
 	<form name="frm" method="post" action="<c:url value='hire1.do'/>"

@@ -1,6 +1,6 @@
 package com.hy.assj.cmMember.model;
 
-import com.hy.assj.member.model.MemberVO;
+import java.util.List;
 
 public interface CmMemberDAO {
 	public int insertCmMemMember(CmMemberVO vo);
@@ -10,5 +10,9 @@ public interface CmMemberDAO {
 	public int cmMemberEdit(CmMemberVO vo);
 	public int cmPwdEdit(CmMemberVO vo);
 	
-	
+	HireNotiWithEsAndResumeVO selectHireNotiByHnNo(int hnNo);
+	List<HireNotiWithEsAndResumeVO> selectHireNotiByCmNo(int cmNo);
+	List<HireNotiWithEsAndResumeVO> selectHnSummary(int cmNo);
+	int updateEmpSup(int esNo, String status);
+	HireNotiWithEsAndResumeVO selectlatestHnNo(int cmNo);
 }

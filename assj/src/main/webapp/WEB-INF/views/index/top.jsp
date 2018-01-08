@@ -126,7 +126,7 @@
 			<div class="row">
 				<div class="col-md-2 col-md-offset-3">
 					<a href="<c:url value='/index.do' />">
-						<img class="img-responsive" src="<c:url value='/images/assj_logo2.png' />" alt="임시 로고">
+						<img class="img-responsive" src="<c:url value='/images/assj_logo2.png' />" alt="알쓸신잡 로고">
 					</a>
 				</div>
 				<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->

@@ -274,7 +274,20 @@
 		delete from scrap 
 		where mem_no = #{memNo} and hn_no = #{hnNo} 
 	</delete>
-
+	
+	<insert id="insertEmpSup" parameterType="Map">
+		<selectKey keyProperty="esNo" order="BEFORE" resultType="int">
+			select emp_sup_seq.nextval from dual
+		</selectKey>
+		insert into emp_sup(es_no, mem_no, hn_no, resume_no)
+		values(#{esNo},#{memNo},#{hnNo},#{resumeNo})
+	</insert>
+	
+	<delete id="deleteEmpSup" parameterType="Map">
+		delete from emp_sup
+		where mem_no = #{memNo} and hn_no = #{hnNo}
+	</delete>
+	
 </mapper>
 
 

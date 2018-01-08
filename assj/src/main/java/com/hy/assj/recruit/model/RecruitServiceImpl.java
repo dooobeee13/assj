@@ -1,6 +1,8 @@
 package com.hy.assj.recruit.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,24 @@ public class RecruitServiceImpl implements RecruitService {
 		}
 	}
 
+	@Override
+	public String apply(Map<String, Integer> empSupMap) {
+		recruitDao.insertEmpSup(empSupMap);
+		return null;
+	}
+
 	
+	@Override
+	public String deleteApply(RMemberVO memberInfo, int hnNo) {
+		if (memberInfo == null) {
+			return RecruitService.REQUIRED_LOGIN;
+		} else {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("hnNo", hnNo);
+			map.put("memNo", memberInfo.getMemNo());
+			recruitDao.deleteEmpSup(map);
+			return RecruitService.DELETE_APPY;
+		}
+	}
 
 }

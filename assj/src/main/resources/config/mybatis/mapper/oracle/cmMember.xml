@@ -37,34 +37,74 @@
 		where cm_id=#{cmId}
 	</update>
 	
-	<resultMap type="HireNotiWithEsAndResumeVO" id="HireNotiWithEsAndResumeVO">
-		<id property="hnNo" column=""/>
-		<result property="hnNotititle" column=""/>
-		<result property="hnStart" column=""/>
-		<result property="hnDeadline" column=""/>
+	<resultMap type="HireNotiWithEsAndResumeVO" id="HireNotiWithEsAndResumeVOMap">
+		<id property="hnNo" column="hn_no"/>
+		<result property="hnNotititle" column="hn_notititle"/>
+		<result property="hnStart" column="hn_start"/>
+		<result property="hnDeadline" column="hn_deadline"/>
+		<result property="deadlineStatus" column="deadlineStatus"/>
 		
-		<collection property="cResumeVoList" ofType="CResumeVO" >
-			<id property="resumeNo" column=""/>
-			<result property="name" column=""/>
-			<result property="birth" column=""/>
-			<result property="age" column=""/>
-			<result property="gender" column=""/>
-			<result property="schoolName" column=""/>
-			<result property="major" column=""/>
-			<result property="careerNo" column=""/>
+		<collection property="cEsWithResumeList" ofType="CEsWithResumeVO">
+			<id property="esNo" column="es_no"/>
+			<result property="status" column="status"/>
+			<result property="resumeNo" column="resume_no"/>
+			<result property="name" column="name"/>
+			<result property="birth" column="birth"/>
+			<result property="age" column="age"/>
+			<result property="gender" column="gender"/>
+			<result property="salEnd" column="salEnd"/>
+			<result property="schoolName" column="schoolname"/>
+			<result property="major" column="major"/>
+			<result property="careerNo" column="career_no"/>
+			<result property="eduNo" column="edu_no"/>
 		</collection>
 	</resultMap>
 	
-	<select id="selectHireNotiWithApplicants" resultType="HireNotiWithEsAndResumeVO">
-		select h.HN_NO, h.HN_NOTITITLE, h.HN_START, h.HN_DEADLINE, r.RESUME_NO, r.RESUME_NAME as name,
-		r.RESUME_BIRTH as birth, extract(year from sysdate) - extract(year from r.RESUME_BIRTH) as age,  
-		r.RESUME_GENDER as gender, s.SH_SNAME as schoolName, s.SH_MAJOR as major, r.career_no
+	<sql id="selectHireNotiWithApplicants">
+		select 	h.HN_NO, h.cm_no, h.HN_NOTITITLE, h.HN_START, h.HN_DEADLINE, 
+		        case when sysdate &lt; h.HN_START then '대기' 
+		             when sysdate &lt; h.HN_DEADLINE then '진행'
+		             else '마감' end as deadlineStatus, es.*	
 		from hire_noti h 
-		left outer join emp_sup e on h.hn_no=e.hn_no
-		join resume r on e.resume_no = r.resume_no
-		left outer join school_history s on r.RESUME_NO = s.RESUME_NO
-		where h.HN_NO = 1 
-		and r.EDU_NO = s.SH_EDU_NO
+		left outer join (select es_no, hn_no, e.es_status as status, r.RESUME_NO, r.RESUME_NAME as name, r.edu_no,
+		                 r.RESUME_BIRTH as birth, extract(year from sysdate) - extract(year from r.RESUME_BIRTH) + 1 as age,  
+		                 r.RESUME_GENDER as gender, r.RESUME_SAL_END as salEnd, s.SH_SNAME as schoolName, s.SH_MAJORDETAIL as major, r.career_no
+		                 from emp_sup e join resume r on e.resume_no = r.resume_no
+		                 left outer join school_history s on r.RESUME_NO = s.RESUME_NO
+		                 where r.EDU_NO = s.SH_EDU_NO) es on h.hn_no=es.hn_no
+	</sql>
+	
+	<select id="selectHireNoti" resultMap="HireNotiWithEsAndResumeVOMap">
+		<include refid="selectHireNotiWithApplicants"/>
+		<if test="hnNo != null and hnNo !=0">
+			where h.HN_NO = #{hnNo}
+		</if>
+		<if test="cmNo != null and cmNo !=0">
+			where h.cm_no = #{cmNo}
+			order by h.hn_no desc
+		</if>
+	</select>
+	
+	<select id="selectHnSummary" resultType="HireNotiWithEsAndResumeVO">
+		select hn_no, hn_notititle, hn_start, hn_deadline, case when sysdate &lt; HN_START then '대기' 
+		             when sysdate &lt; HN_DEADLINE then '진행'
+		             else '마감' end as deadlineStatus
+		from hire_noti
+		where cm_no = #{cmNo}
+	</select>
+	
+	<update id="updateEmpSup">
+		update emp_sup set es_status = #{status}
+		where es_no = #{esNo}
+	</update>
+	
+	<select id="selectlatestHnNo" resultMap="HireNotiWithEsAndResumeVOMap">
+		<include refid="selectHireNotiWithApplicants"/>
+		where h.hn_no = (select hn_no
+					     from (select hn_no from hire_noti
+					           where cm_no = #{cmNo}
+					           order by hn_no desc)
+					     where rownum = 1)
 	</select>
 	
 </mapper>
