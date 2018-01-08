@@ -166,6 +166,16 @@ public class AdminController {
 	public void createAdmin() {
 		
 	}
+	@RequestMapping("/login/adminLogout.do")
+	public String AdminLogout(HttpSession session, Model model) {
+		String msg = "로그아웃되었습니다.", url="/administrator/login/adminlogin.do";
+		session.invalidate();
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
 	
 	@RequestMapping(value="/login/createadmin.do",method=RequestMethod.POST)
 	public String createAdmin_post(@RequestParam String userid, @RequestParam String pwd, @RequestParam String name, Model model) {

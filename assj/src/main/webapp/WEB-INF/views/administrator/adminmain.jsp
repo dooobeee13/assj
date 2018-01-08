@@ -417,7 +417,7 @@ function EnterPress(){
 		  <a href="#"></a>
 		  <a href="<c:url value='/index.do'/>">공채 홈페이지 가기</a>
 		  <a href="#" class="CreateAdmin">새로운 관리자 생성</a>
-		  <a href="#">로그아웃</a>
+		  <a href="<c:url value='/administrator/login/adminLogout.do'/>">로그아웃</a>
 		</div>
 	</article>
 	<div id="modalLayer">

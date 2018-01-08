@@ -5,7 +5,6 @@
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 <link rel="stylesheet" href="<c:url value='/css/Search-ADMIN.css'/>">
-<link rel="stylesheet" href="<c:url value='/c3/c3.css'/>">
 <script src="https://d3js.org/d3.v3.min.js"></script>     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>

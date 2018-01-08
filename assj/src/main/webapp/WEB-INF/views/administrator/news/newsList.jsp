@@ -4,7 +4,6 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 <link rel="stylesheet" href="<c:url value='/css/Search-ADMIN.css'/>">
 <script src="https://d3js.org/d3.v3.min.js"></script>     
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
