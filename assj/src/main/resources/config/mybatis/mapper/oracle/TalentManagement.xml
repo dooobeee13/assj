@@ -32,34 +32,30 @@
 	</select>
 	
 	<select id="selectResume" parameterType="TalentManagementVO" resultType="map">
-		select * from(
-		
-		select rownum as RNUM, blist.* from (
-		
 		select * from totalresume
 		
 		<trim prefix="where" prefixOverrides="AND |OR">
 		
 			<if test="areaTopName != null">
 				AREA_TOP_NAME in
-				<foreach collection="areaTopName" item="Name" 
+				<foreach collection="areaTopName" item="areaTopName" 
 					index="index" open="(" close=")" separator=",">
-					#{Name}
+					#{areaTopName}
 				</foreach>
 				
 			</if>
 			
 			<if test="areaName != null">
 				AND AREA_NAME in
-				<foreach collection="areaName" item="area" 
+				<foreach collection="areaName" item="areaName" 
 					index="index" open="(" close=")" separator=",">
-					#{area}
+					#{areaName}
 				</foreach>
 			</if>
 			
 			<if test="etName != null">
 				AND ET_NAME in
-				<foreach collection="etName" item="etname" 
+				<foreach collection="etName" item="etName" 
 					index="index" open="(" close=")" separator=",">
 					#{etname}
 				</foreach>
@@ -67,32 +63,66 @@
 			
 			<if test="occuName != null">
 				AND OCCU_NAME in
-				<foreach collection="occuName" item="occuname" 
+				<foreach collection="occuName" item="occuName" 
 					index="index" open="(" close=")" separator=",">
-					#{occuname}
+					#{occuName}
 				</foreach>
 			</if>
 			
 			<if test="secName != null">
 				AND SEC_NAME in
-				<foreach collection="secName" item="secname" 
+				<foreach collection="secName" item="secName" 
 					index="index" open="(" close=")" separator=",">
-					#{secname}
+					#{secName}
 				</foreach>
 			</if>
 			
 			<if test="resumeGender != null">
-				AND RESUME_GENDER in
+				AND MEM_GENDER in
 				<foreach collection="resumeGender" item="resumeGender" 
 					index="index" open="(" close=")" separator=",">
 					#{resumeGender}
 				</foreach>
 			</if>
+			<if test="universityType != null">
+				AND EDU_NAME in
+				<foreach collection="universityType" item="universityType" 
+					index="index" open="(" close=")" separator=",">
+					#{universityType}
+				</foreach>
+			</if>
+			<if test="careerCheckBox != null">
+				AND CAREER_NAME in
+				<foreach collection="careerCheckBox" item="careerCheckBox" 
+					index="index" open="(" close=")" separator=",">
+					#{careerCheckBox}
+				</foreach>
+			</if>
+			<if test="salStart != null">
+				<![CDATA[ AND RESUME_SAL_START >=#{salStart}]]>
+				
+			</if>
+			<if test="salEnd != null">
+			<![CDATA[ AND RESUME_SAL_END <=#{salEnd}]]>
+			</if>
+			
+			<if test="hopeSalsDesi != null">
+				AND RESUME_SAL_OPT in
+				<foreach collection="hopeSalsDesi" item="hopeSalsDesi" 
+					index="index" open="(" close=")" separator=",">
+					#{hopeSalsDesi}
+				</foreach>
+			</if>
+			
+			<if test="oldStart != null">
+				<![CDATA[ AND RESUME_OLD >=#{oldStart}]]>
+				
+			</if>
+			<if test="oldEnd != null">
+			<![CDATA[ AND RESUME_OLD <=#{oldEnd}]]>
+			</if>
+			
 		</trim>
-		) blist
-		)
-			<![CDATA[
-			where RNUM > #{currentPage} and RNUM<=#{currentPage}+#{countPerPage}]]>		
 	</select>
 </mapper>
 

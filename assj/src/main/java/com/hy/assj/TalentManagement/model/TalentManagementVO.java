@@ -18,20 +18,43 @@ public class TalentManagementVO {
 	private List<String> occuName; //HopeOccu
 	private List<String> areaName; //area
 	private List<String> secName; //희망 업종
-	private String countPerPage; //한페이지당 보여줄 데이터 개수
-	private String currentPage;//현재 페이지
+	private List<String> major;//전공
+	private List<String> hopeSalsDesi;
+	private String salStart;
+	private String salEnd;
+	private String oldStart;
+	private String oldEnd;
 	
-	public String getCountPerPage() {
-		return countPerPage;
+	
+	public String getOldStart() {
+		return oldStart;
 	}
-	public void setCountPerPage(String countPerPage) {
-		this.countPerPage = countPerPage;
+	public void setOldStart(String oldStart) {
+		this.oldStart = oldStart;
 	}
-	public String getCurrentPage() {
-		return currentPage;
+	public String getOldEnd() {
+		return oldEnd;
 	}
-	public void setCurrentPage(String currentPage) {
-		this.currentPage = currentPage;
+	public void setOldEnd(String oldEnd) {
+		this.oldEnd = oldEnd;
+	}
+	public List<String> getHopeSalsDesi() {
+		return hopeSalsDesi;
+	}
+	public void setHopeSalsDesi(List<String> hopeSalsDesi) {
+		this.hopeSalsDesi = hopeSalsDesi;
+	}
+	public String getSalStart() {
+		return salStart;
+	}
+	public void setSalStart(String salStart) {
+		this.salStart = salStart;
+	}
+	public String getSalEnd() {
+		return salEnd;
+	}
+	public void setSalEnd(String salEnd) {
+		this.salEnd = salEnd;
 	}
 	public List<String> getUniversityType() {
 		return UniversityType;
@@ -105,7 +128,7 @@ public class TalentManagementVO {
 	public void setMajor(List<String> major) {
 		this.major = major;
 	}
-	private List<String> major;//전공
+	
 	
 	
 }

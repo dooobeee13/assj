@@ -8,36 +8,8 @@ $(function(){
 	
 	
 	$('[data-toggle="tooltip"]').tooltip();
-	$('#detailCareer').hide();
-	$('#lbChk').hide();
-	$('input[name=careerNo]').change(function(){
-		var radioValue=$(this).val();
-		if(radioValue=="1"){
-			$('#detailCareer').hide();
-			$('#lbChk').hide();
-			$('#chkDetailTip').removeAttr("checked");
-			$('#detailCarTip').hide();
-		}else if(radioValue=="2"){
-			$('#detailCareer').show();
-			$('#lbChk').show();
-			$('#chkDetailTip').removeAttr("checked");
-		}else if(radioValue=="3"){
-			$('#detailCareer').show();
-			$('#lbChk').show();
-		}
-		
-		
-	});
-	$('#detailCarTip').hide();
 	
-	$('input[name=chkDetailTip]').change(function(){
-		
-		if($(this).is(':checked')){
-			$('#detailCarTip').show();
-		}else{
-			$('#detailCarTip').hide();
-		}
-	});
+	
 	
 	
 	var actCnt = 0;
@@ -365,8 +337,8 @@ $(function(){
 		var $resumePhone = $('#hp1').val() + "-" + $('#hp2').val() + "-" + $('#hp3').val()
 		$('#resumePhone').attr("value",$resumePhone);
 		
-		var $resumeMilStart = $('#mil_start_year').val() + "/" + $('#mil_start_month').val();
-		var $resumeMilEnd = $('#mil_end_year').val() + "/" + $('#mil_end_month').val();
+		var $resumeMilStart = $('#mil_start_year').val() + "-" + $('#mil_start_month').val();
+		var $resumeMilEnd = $('#mil_end_year').val() + "-" + $('#mil_end_month').val();
 		
 		var resumeSalOpt1 = "";
 		var resumeSalOpt2 = "";

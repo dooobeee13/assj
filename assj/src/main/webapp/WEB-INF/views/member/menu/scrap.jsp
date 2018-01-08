@@ -49,6 +49,7 @@
 
 <style type="text/css">
 	#scrap fieldset{
+		width:100%;
 		padding:15px;
 		background-color:#ffff;
 	}
@@ -81,75 +82,16 @@
 	
     /* 사이드바 스타일 */
   #sidebar-wrapper {
-    background: #ffff;
-    overflow-x: hidden;
-    overflow-y: auto;
     height: 1120px;
   } 
 
-  .sidebar-nav {
-    list-style: none;
-  }
-  
-  .sidebar-nav li {
-    text-indent: 0.8em;
-    line-height: 2.2em;
-  }
-  
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #7a6666;
-  }
-  
-  .sidebar-nav li a:hover {
-    color: #cccc;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  .sidebar-nav > .sidebar-brand {
-    font-size: 1.3em;
-    line-height: 3em;
-  } 
 </style>
 </head>
 	<body>
 	<c:import url="../../index/top.jsp" />
 		<div class="container">
-		
-		<!-- 사이드바 -->
-		<div class="row">
-		<div id="page-wrapper" class="col-md-3">
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h1>My Page</h1></li>
-				<hr>
-				<li><h5><b>이력서 관리</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
-			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
-				<li><a href="<c:url value='/member/menu/scrap.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
-			</ul>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
-				<li><a href="<c:if test="${!empty sessionScope.memberVO}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
-				<li><a href="<c:url value='/member/trans/pwdTrans.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>비밀번호 변경</a></li>
-			</ul>
-		</div>
-		</div>
-		<!-- /사이드바 -->
-		
+
+		<c:import url="../../mypage/mypageSide.jsp"/>
 		<!-- 본문 -->
    			<div class="col-md-9">
 			 <div id="scrap">
@@ -183,7 +125,7 @@
 								</c:if>>제목</option>
 							</select>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="text" placeholder=" 검색어를 입력하세요" size="76" name="searchKeyword" value="${param.searchKeyword }">
+							<input type="text" placeholder=" 검색어를 입력하세요" size="73" name="searchKeyword" value="${param.searchKeyword }">
 							<button type="submit" class="btn btn-primary btn-sm">검색</button>
 						</div>
 					</form>	
@@ -287,7 +229,6 @@
 			</div>
 		</div>
 		
-		</div>
 	<c:import url="../../index/footer.jsp" />
 	</body>
 </html>

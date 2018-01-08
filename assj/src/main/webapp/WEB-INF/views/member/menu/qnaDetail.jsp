@@ -224,8 +224,10 @@
 				<br>
 				<hr>
 				<div id="bottonBtn">
-					<a href="<c:url value='/member/menu/edit.do?no=${vo.no}'/>"><button type="button" class="btn btn-default btn-sm" onclick="trans()">수정</button></a>
-					<button type="button" class="btn btn-default btn-sm" id="btn_delete" data-toggle="modal" data-target="#myModal1">삭제</button>
+					<c:if test="${vo.name!='관리자'}">					
+						<a href="<c:url value='/member/menu/edit.do?no=${vo.no}'/>"><button type="button" class="btn btn-default btn-sm" onclick="trans()">수정</button></a>
+						<button type="button" class="btn btn-default btn-sm" id="btn_delete" data-toggle="modal" data-target="#myModal1">삭제</button>
+					</c:if>
 					<a href="<c:url value='/member/menu/qnaReply.do?no=${vo.no}'/>"><button type="button" class="btn btn-default btn-sm">답변</button></a>&nbsp;
 					<a href="<c:url value='/member/menu/qnaBoard.do'/>"><button type="button" class="btn btn-default btn-sm">목록</button></a>
 				</div>

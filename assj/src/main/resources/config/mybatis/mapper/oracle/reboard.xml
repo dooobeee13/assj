@@ -111,6 +111,13 @@
 			#{groupNo},#{step}+1,#{sortNo}+1)
 	</insert>	
 	
+	<delete id="groupDelete" parameterType="int">
+		delete from reboard where groupno=#{no}	
+	</delete>
+	
+	<delete id="solDelete" parameterType="int">
+		delete from reboard where no=#{no}
+	</delete>
 </mapper>
 
 

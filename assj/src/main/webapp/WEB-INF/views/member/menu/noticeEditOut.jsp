@@ -298,7 +298,7 @@ function closeNav() {
 			<div class="col-div-100-20">
 <!-- 본문 -->
 			<div id="frame">
-				<h4>공지사항 관리</h4>
+				<h3><b>공지사항 관리</b></h3>
 				<hr>
 				<form class="form-inline" name="frmList" id="frmList" method="post">
 						<div class="form-group">	

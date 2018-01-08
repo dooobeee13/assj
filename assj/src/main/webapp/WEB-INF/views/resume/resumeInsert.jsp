@@ -682,8 +682,80 @@ function OntextCheck(obj)
 						<input type="radio" name="careerNo" id="rdExec" value="3"> 임원/CEO
 						</label>
 						<div id="careerDiv">
+						<label id="carLB">경력 기간</label>
+						<br>
+							<label class="form-inline" id="carLB2">
+								<select name="careerYear" id="careerYear" class="form-control">
+								<c:forEach begin="1" end="9" varStatus="1" var="i">
+									<option value="${i }">${i }</option>							
+								</c:forEach>
+								<option value="10">10년 이상</option>
+								</select>
+								년
+								<select name="careerMonth" id="careerMonth"  class="form-control">
+								<c:forEach var="j" begin="0" end="11" varStatus="1">
+								<option value="${j }">${j }</option>
+								
+								</c:forEach>
+								</select>
+								개월
+							
+							</label>
 							<textarea rows="20" name="resumeCareerList" class="form-control" id="detailCareer"></textarea>
 						</div>
+						<script type="text/javascript">
+						$(function(){
+							
+							$('#detailCareer').hide();
+							$('#carLB').hide();
+							$('#carLB2').hide();
+							$('#lbChk').hide();
+							$('input[name=careerNo]').change(function(){
+								var radioValue=$(this).val();
+								if(radioValue=="1"){
+									$('#detailCareer').hide();
+									$('#carLB').hide();
+									$('#carLB2').hide();
+									$('#lbChk').hide();
+									$('#chkDetailTip').removeAttr("checked");
+									$('#detailCarTip').hide();
+								}else if(radioValue=="2"){
+									$('#detailCareer').show();
+									$('#carLB').show();
+									$('#carLB2').show();
+									$('#lbChk').show();
+									$('#chkDetailTip').removeAttr("checked");
+								}else if(radioValue=="3"){
+									$('#detailCareer').show();
+									$('#carLB').show();
+									$('#carLB2').show();
+									$('#lbChk').show();
+								}
+								
+								
+							});
+							$('#detailCarTip').hide();
+							
+							$('input[name=chkDetailTip]').change(function(){
+								
+								if($(this).is(':checked')){
+									$('#detailCarTip').show();
+								}else{
+									$('#detailCarTip').hide();
+								}
+							});
+							
+							
+							$('#careerYear').change(function(){
+								if($(this).val()=='10'){
+									$('#careerMonth').val("0").prop("selected","true");
+									$('#careerMonth').attr("disabled","disabled");
+								}else{
+									$('#careerMonth').removeAttr("disabled");
+								}
+							});
+						});
+						</script>
 						<label id="lbChk">
 						<input type="checkbox" name="chkDetailTip" id="chkDetailTip">경력 기술서 쓰는 요령</label>
 						<div id="detailCarTip">

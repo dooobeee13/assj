@@ -13,9 +13,9 @@
 			<div class="col-div-100-80">
 				<div class="col-div-100-50 CareerCheckBox"
 					style="padding-top: 1em; padding-left: 1em; text-align: center;">
-					<label><input id="career" class="mini-checkbox" type="checkbox" value="경력">경력</label> 
-					<label><input id="newcomer" class="mini-checkbox" type="checkbox" value="신입">신입</label>
-					<label><input id="none" class="mini-checkbox" type="checkbox" value="">무관</label>
+					<label><input name="manCareer" id="career" class="mini-checkbox" type="checkbox" value="경력">경력</label> 
+					<label><input name="newcomer" id="newcomer" class="mini-checkbox" type="checkbox" value="신입">신입</label>
+					<label><input name="ceo" id="none" class="mini-checkbox" type="checkbox" value="임원/CEO">임원/CEO</label>
 				</div>
 				<div class="col-div-100-50" style="padding-top: 0.5em; text-align: center;">
 					<select class="one-list" id="CareerDayStart">
@@ -53,24 +53,16 @@
 				</div>
 				<div class="col-div-100-50"
 					style="padding-top: 0.5em; text-align: center;">
-					<select class="one-list" id="oldStart">
+					<select class="one-list OldStart">
 						<option value="">선택</option>
-						<option value="20">20살</option>
-						<option value="21">21살</option>
-						<option value="22">22살</option>
-						<option value="23">23살</option>
-						<option value="24">24살</option>
-						<option value="25">25살</option>
-						<option value="26">26살</option>
-					</select> ~ <select class="one-list" id="oldEnd">
+						<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
+					</select> ~ <select class="one-list OldEnd">
 						<option value="">선택</option>
-						<option value="20">20살</option>
-						<option value="21">21살</option>
-						<option value="22">22살</option>
-						<option value="23">23살</option>
-						<option value="24">24살</option>
-						<option value="25">25살</option>
-						<option value="26">26살</option>
+						<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -87,19 +79,15 @@
 			style="padding-top: 4em;">
 			<ul class="col-ul-100-100" style="height: 60%; text-align: center;">
 				<li class="col-li-1 bb-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="1">
-					<input type="checkbox" name="Educol" value="대학교 4학년" style="display:none;"/>대학교 4학년</li>
+					<input type="checkbox" name="Educol" value="대학교졸업(4년)" style="display:none;"/>대학교 4학년</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="2">
-					<input type="checkbox" name="Educol" value="대학교(2,3년)" style="display:none;"/>대학교(2,3년)</li>
+					<input type="checkbox" name="Educol" value="대학졸업(2, 3년)" style="display:none;"/>대학(2,3년)</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="3">
-					<input type="checkbox" name="Educol" value="대학원(석/박사)" style="display:none;"/>대학원(석/박사)</li>
+					<input type="checkbox" name="Educol" value="석사졸업" style="display:none;"/>대학원(석사)</li>
 				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="4">
-					<input type="checkbox" name="Educol" value="고등학교" style="display:none; "/>고등학교</li>
-				<li class="col-li-1" style="border: none; padding-left: 1em; background:none;">
-					<label style="font-size: 1em;"><input type="checkbox"
-						style="vertical-align: middle; display: inline-block;" value="재학·휴학·수료·중퇴·자퇴
-						제외">재학·휴학·수료·중퇴·자퇴
-						제외</label>
-				</li>
+					<input type="checkbox" name="Educol" value="박사졸업" style="display:none;"/>대학원(박사)</li>
+				<li class="col-li-1 bt-none" style="width: 80%; margin-left: 2.2em; padding:0;" value="5">
+					<input type="checkbox" name="Educol" value="고등학교 졸업" style="display:none;"/>고등학교</li>
 			</ul>
 		</div>
 	</div>

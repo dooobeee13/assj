@@ -67,7 +67,7 @@
 		resume_addr,resume_detailaddr,resume_phone,resume_email,resume_status,
 		resume_gender,resume_hobby,resume_specialty,resume_married,resume_veteran,
 		resume_subsidy,resume_mil_target,resume_mil_start,resume_mil_end,resume_mil_division,
-		resume_mil_class,resume_mil_reason,resume_mil_unfinish,career_no,resume_career_list,resume_sal_start,
+		resume_mil_class,resume_mil_reason,resume_mil_unfinish,career_no,resume_career_month,resume_career_list,resume_sal_start,
 		resume_sal_end,resume_sal_opt,area_no,edu_no,et_no,
 		resume_visibility,resume_photo,occu_no,sec_no,resume_lastupdate)
 		values(
@@ -75,7 +75,7 @@
 		#{resumeAddr},#{resumeDetailaddr},#{resumePhone},#{resumeEmail},#{resumeStatus},
 		#{resumeGender},#{resumeHobby},#{resumeSpecialty},#{resumeMarried},#{resumeVeteran},
 		#{resumeSubsidy},#{resumeMilTarget},#{resumeMilStart},#{resumeMilEnd},#{resumeMilDivision},
-		#{resumeMilClass},#{resumeMilReason},#{resumeMilUnfinish},#{careerNo},#{resumeCareerList},#{resumeSalStart},
+		#{resumeMilClass},#{resumeMilReason},#{resumeMilUnfinish},#{careerNo},#{resumeCareerMonth},#{resumeCareerList},#{resumeSalStart},
 		#{resumeSalEnd},#{resumeSalOpt},#{areaNo},#{eduNo},#{etNo},
 		#{resumeVisibility},#{resumePhoto},#{occuNo},#{secNo},sysdate)
 		
@@ -211,6 +211,46 @@
 	<select id="selectPortByResumeNo" parameterType="int" resultType="PortfolioVO">
 		select * from portfolio where resume_no = #{resumeNo} order by port_no
 	</select>
+	
+	<select id="selectMyResume" parameterType="int" resultType="ResumeVO">
+		select * from resume where resume_no= #{resumeNo}
+	</select>
+	
+	<update id="updateResume" parameterType="ResumeVO">
+		update resume
+		set		
+		resume_title=#{resumeTitle},resume_name=#{resumeName},resume_birth=#{resumeBirth},
+		resume_addr=#{resumeAddr},resume_detailaddr=#{resumeDetailaddr},resume_phone=#{resumePhone},
+		resume_email=#{resumeEmail},resume_status=#{resumeStatus},
+		resume_gender=#{resumeGender},resume_hobby=#{resumeHobby},resume_specialty=#{resumeSpecialty},
+		resume_married=#{resumeMarried},resume_veteran=#{resumeVeteran},
+		resume_subsidy=#{resumeSubsidy},resume_mil_target=#{resumeMilTarget},resume_mil_start=#{resumeMilStart},
+		resume_mil_end=#{resumeMilEnd},resume_mil_division=#{resumeMilDivision},
+		resume_mil_class=#{resumeMilClass},resume_mil_reason=#{resumeMilReason},resume_mil_unfinish=#{resumeMilUnfinish},
+		career_no=#{careerNo},resume_career_month=#{resumeCareerMonth},resume_career_list=#{resumeCareerList},
+		resume_sal_start=#{resumeSalStart},
+		resume_sal_end=#{resumeSalEnd},resume_sal_opt=#{resumeSalOpt},area_no=#{areaNo},edu_no=#{eduNo},et_no=#{etNo},
+		resume_visibility=#{resumeVisibility},resume_photo=#{resumePhoto},occu_no=#{occuNo},sec_no=#{secNo},resume_lastupdate=sysdate
+				
+		where resume_no = #{resumeNo}
+		
+	</update>
+	
+	<update id="updatePF" parameterType="PortfolioVO">
+		update portfolio
+		set
+		port_intro,port_filename,port_orifname,port_filesize
+		values(
+			#{portIntro},#{portFilename},#{portOrifname},#{portFilesize}
+		)
+		where port_no = #{portNo}
+		
+	</update>
+	
+	
+	<delete id="deleteResume" parameterType="int">
+		delete from resume where resume_no = #{resumeNo}
+	</delete>
 	
 </mapper>
 

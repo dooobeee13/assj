@@ -4,7 +4,6 @@
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 <link rel="stylesheet" href="<c:url value='/css/Search-ADMIN.css'/>">
 <script src="https://d3js.org/d3.v3.min.js"></script>     
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
@@ -62,9 +61,6 @@ $(function(){
 .newsList td, .newsList th{
 	border:1px solid #b8b8b8;
 }
-.newsList th{
-	background:#607D8B;
-}
 .newsList td{
 	height:3em;
 }
@@ -74,17 +70,17 @@ $(function(){
 				<div class="col-div-100">
 					<table class="newsList"style="width: 90%; border:1px solid #b8b8b8;">
 						<colgroup>
-							<col style="width: 5%">
+							<col style="width: 10%">
 							<col style="width: 8%">
 							<col style="width: 40%">
 							<col style="width: 80%">
 						</colgroup>
 						<thead>
 							<tr style="text-align: center; height:4em;">
-								<th>선택</th>
-								<th>뉴스 번호</th>
-								<th>뉴스 제목</th>
-								<th>뉴스 내용</th>
+								<th class="divMainbox">선택</th>
+								<th class="divMainbox">뉴스 번호</th>
+								<th class="divMainbox">뉴스 제목</th>
+								<th class="divMainbox">뉴스 내용</th>
 							</tr>
 						</thead>
 						<tbody style="background: white;">
@@ -97,7 +93,7 @@ $(function(){
 								<c:forEach var="map" items="${list }">
 									<tr style="height:3.5em;">
 										<td style="text-align: center;"><input type="radio" name="Editselect" value="${map['NEWS_NO'] }"></td>
-										<td style="text-align: center; border-right:2px solid #607D8B;">${map['NEWS_NO'] }</td>
+										<td style="text-align: center;">${map['NEWS_NO'] }</td>
 										<td style="padding-left: 1em;">${map['NEWS_TITLE'] }</td>
 										<c:if test="${fn:length(map['NEWS_CONTENT'])>80 }">
 											<td style="padding-left: 1em;">${fn:substring(map['NEWS_CONTENT'],0,80) }
@@ -124,15 +120,15 @@ $(function(){
 						</colgroup>
 						<tbody>
 							<tr style="height:5%; border:none; ">
-								<th style="border:none;"><h1>공채 뉴스 수정</h1></th>
+								<th  style="border:none;"><h1>공채 뉴스 수정</h1></th>
 							</tr>
 							<tr style="height:5%;">
-								<th style="background:#607D8B; text-align: center;">제목</th>
-								<td style="background:#607D8B; padding:1.4em;"><input type="hidden" id="newsNo" name="newsNo"><input id="newsTitle" name="newsTitle" type="text" size="50" style="height:3em; font-size: large;"></td>
+								<th class="divMainbox" style="text-align: center;">제목</th>
+								<td class="divMainbox" style="padding:1.4em;"><input type="hidden" id="newsNo" name="newsNo"><input id="newsTitle" name="newsTitle" type="text" size="50" style="height:3em; font-size: large;"></td>
 							</tr>
 							<tr style="height:35%;">
-								<th style="background:#F4FFFE; text-align: center;">내용</th>
-								<td style="background:#F4FFFE; padding:5em; padding-left:2em;"><textarea id="newsContent" name="newsContent" rows="25" cols="80" style="resize: none;"></textarea></td>
+								<th style="background:white; text-align: center;">내용</th>
+								<td style="background:white; padding:5em; padding-left:2em;"><textarea id="newsContent" name="newsContent" rows="25" cols="80" style="resize: none;"></textarea></td>
 							</tr>
 						</tbody>
 					</table>

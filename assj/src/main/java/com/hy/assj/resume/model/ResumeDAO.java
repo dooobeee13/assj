@@ -75,5 +75,13 @@ public interface ResumeDAO {
 	List<IntroductionVO> selectIntroByResumeNo(int resumeNo);
 	
 	List<PortfolioVO> selectPortByResumeNo(int resumeNo);
+	
+	ResumeVO selectMyResume(int resumeNo);
+	
+	int updateResume(ResumeVO resumeVO);
+	
+	int updatePF(PortfolioVO pfVO);
+	
+	int deleteResume(int resumeNo);
 
 }
