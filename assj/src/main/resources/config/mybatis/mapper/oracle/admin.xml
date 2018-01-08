@@ -12,7 +12,6 @@
 		values(admin_seq.nextval,#{userid},#{pwd},#{name})
 	</insert>
 	
-<<<<<<< HEAD
 	<insert id="insertChat" parameterType="map">
 		insert into adminchat
 		values(adminchat_seq.nextval,#{userid},#{content},sysdate)
@@ -45,7 +44,6 @@
 		
 		order by rownum desc
 	</select>
-=======
 	<select id="questionList" resultType="map" parameterType="SearchVO">	
 		select *
 		from
@@ -77,5 +75,4 @@
 		set reply_flag='Y'
 		where no=#{no}
 	</update>
->>>>>>> branch 'master' of https://github.com/dooobeee13/assj.git
 </mapper>
