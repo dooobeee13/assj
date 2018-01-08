@@ -491,7 +491,7 @@
 							<dt class="col-xs-5">기업형태</dt>
 							<dd class="col-xs-7">중소기업(일반법인)</dd>
 							<dt class="col-xs-5">홈페이지</dt>
-							<dd class="col-xs-7">jobkorea.co.kr</dd>
+							<dd class="col-xs-7">${vo.compMemberVo.cmHomepage}</dd>
 						</dl>
 					</div>
 				</div>

@@ -26,6 +26,8 @@ public interface HireNotiDAO {
 	public List<SectorsVO> selectSectorsAll();
 	public List<EducationVO> selectEducationAll();
 	public List<PositionVO> selectPositionAll();
+	public List<Map<String, Object>> selecthireNoti(int cmNo);
+	public HireNotiVO selectHnByNo(int hnNo);
 	
 	int insertMajor(Map<String, Object> map);
 	int insertRank(Map<String, Object> map);
@@ -33,4 +35,5 @@ public interface HireNotiDAO {
 	int insertSector(Map<String, Object> map);
 	int insertEmpType(Map<String, Object> map);
 	int insertPosition(Map<String, Object> map);
+	
 }

@@ -29,6 +29,7 @@ public class ResumeVO {
 	private String resumeMilReason;
 	private String resumeMilUnfinish;
 	private int careerNo;
+	private int resumeCareerMonth;
 	private String resumeCareerList;
 	private int resumeSalStart;
 	private int resumeSalEnd;
@@ -261,6 +262,12 @@ public class ResumeVO {
 	public void setCareerNo(int careerNo) {
 		this.careerNo = careerNo;
 	}
+	public int getResumeCareerMonth() {
+		return resumeCareerMonth;
+	}
+	public void setResumeCareerMonth(int resumeCareerMonth) {
+		this.resumeCareerMonth = resumeCareerMonth;
+	}
 	@Override
 	public String toString() {
 		return "ResumeVO [resumeNo=" + resumeNo + ", memNo=" + memNo + ", resumeTitle=" + resumeTitle + ", resumeName="
@@ -271,12 +278,14 @@ public class ResumeVO {
 				+ resumeVeteran + ", resumeSubsidy=" + resumeSubsidy + ", resumeMilTarget=" + resumeMilTarget
 				+ ", resumeMilStart=" + resumeMilStart + ", resumeMilEnd=" + resumeMilEnd + ", resumeMilDivision="
 				+ resumeMilDivision + ", resumeMilClass=" + resumeMilClass + ", resumeMilReason=" + resumeMilReason
-				+ ", resumeMilUnfinish=" + resumeMilUnfinish + ", careerNo=" + careerNo + ", resumeCareerList="
-				+ resumeCareerList + ", resumeSalStart=" + resumeSalStart + ", resumeSalEnd=" + resumeSalEnd
-				+ ", resumeSalOpt=" + resumeSalOpt + ", areaNo=" + areaNo + ", eduNo=" + eduNo + ", etNo=" + etNo
-				+ ", resumeVisibility=" + resumeVisibility + ", resumePhoto=" + resumePhoto + ", occuNo=" + occuNo
-				+ ", secNo=" + secNo + ", resumeLastupdate=" + resumeLastupdate + "]";
+				+ ", resumeMilUnfinish=" + resumeMilUnfinish + ", careerNo=" + careerNo + ", resumeCareerMonth="
+				+ resumeCareerMonth + ", resumeCareerList=" + resumeCareerList + ", resumeSalStart=" + resumeSalStart
+				+ ", resumeSalEnd=" + resumeSalEnd + ", resumeSalOpt=" + resumeSalOpt + ", areaNo=" + areaNo
+				+ ", eduNo=" + eduNo + ", etNo=" + etNo + ", resumeVisibility=" + resumeVisibility + ", resumePhoto="
+				+ resumePhoto + ", occuNo=" + occuNo + ", secNo=" + secNo + ", resumeLastupdate=" + resumeLastupdate
+				+ "]";
 	}
+
 	
 	
 	

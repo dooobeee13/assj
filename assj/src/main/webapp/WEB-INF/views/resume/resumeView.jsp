@@ -131,8 +131,11 @@
 						</thead>
 						<tbody>
 							<tr>
+							<%-- <fmt:parseNumber var="rcy" value="${map['RESUME_CAREER_MONTH']/ 12 }" integerOnly="true"></fmt:parseNumber>
+							<fmt:parseNumber var="rcm" value="${map['RESUME_CAREER_MONTH'] mod 12 }" integerOnly="true"></fmt:parseNumber>
+							 --%>	
 								<td class="center-td"><strong>${map['EDU_NAME']}</strong></td>
-								<td class="center-td"><strong>${map['CAREER_NAME'] }</strong></td>
+								<td class="center-td"><strong>${map['CAREER_NAME'] } ( ${map['RESUME_CAREER_MONTH']} 개월 )</strong></td>
 								<td class="center-td"><strong>${map['ET_NAME']}</strong></td>
 								<td class="center-td txt_view"><strong>${map['RESUME_SAL_START']}만원 ~ ${map['RESUME_SAL_END']}만원</strong>
 								</td>
@@ -165,7 +168,7 @@
 						<tr>
 							<th>병역대상</th>
 							<td colspan="3" class="break-word">
-							<c:if test="${map['RESUME_MIL_TARGET']}=='군필'">
+							<c:if test="${map['RESUME_MIL_TARGET']=='군필'}">
 								[ ${map['RESUME_MIL_TARGET']} ] ${map['RESUME_MIL_START']} - ${map['RESUME_MIL_END']}
 								<span class="res-cut"> | </span>
 								 ${map['RESUME_MIL_DIVISION']}
@@ -174,14 +177,28 @@
 								<span class="res-cut"> | </span>
 								${map['RESUME_MIL_REASON']}							
 							</c:if>
-						<%-- 	<c:if test="${map['RESUME_MIL_TARGET']=='면제' || map['RESUME_MIL_TARGET']=='미필'}">
+							<c:if test="${map['RESUME_MIL_TARGET']=='복무중'}">
+								[ ${map['RESUME_MIL_TARGET']} ] ${map['RESUME_MIL_START']} - ${map['RESUME_MIL_END']}
+								<span class="res-cut"> | </span>
+								 ${map['RESUME_MIL_DIVISION']}
+								<span class="res-cut"> | </span>
+								${map['RESUME_MIL_CLASS']} 
+								<span class="res-cut"> | </span>
+								${map['RESUME_MIL_REASON']}							
+							</c:if>
+						 	<c:if test="${map['RESUME_MIL_TARGET']=='면제'}">
+								[ ${map['RESUME_MIL_TARGET']} ]
+								<span class="res-cut"> | </span>
+								${map['RESUME_MIL_UNFINISH']}		
+							</c:if>
+							<c:if test="${map['RESUME_MIL_TARGET']=='미필'}">
 								[ ${map['RESUME_MIL_TARGET']} ]
 								<span class="res-cut"> | </span>
 								${map['RESUME_MIL_UNFINISH']}		
 							</c:if>
 							<c:if test="${map['RESUME_MIL_TARGET'] == '대상아님'}">
 								[ ${map['RESUME_MIL_TARGET']} ]
-							</c:if> --%>
+							</c:if> 
 						</tr>
 					</table>
 				</div>

@@ -37,16 +37,40 @@
 	.notification .notiItem:hover {
 		border: 2px solid red;
 	}
+	
+	.notification .notiItem a {
+		color: black;
+		text-decoration: none;
+		display: block;
+	}
 </style>
 
 <div class="row notification">
-	<c:forEach begin="1" end="12">
+	<%-- <c:forEach begin="1" end="12">
 		<div class="panel panel-default col-md-3 notiItem">
 			<div class="panel-heading notiTitle text-center"><img src="//img11.jobkorea.kr/Images/Logo/180/u/t/utopia10_180.gif?20171213170002" alt="교보정보통신" ></div>
 			<div class="panel-body">
 				<div class="compName">교보정보통신</div>
 				<div class="notiContent">교보정보통신 각 부문별 경력 직원 모집</div>
 				<div class="deadLine"><span class="label label-warning">D-8</span></div>
+			</div>
+		</div>
+	</c:forEach> --%>
+	
+	<c:forEach var="vo" items="${hnList}">
+		<div class="panel panel-default col-md-3 notiItem">
+			<div class="panel-heading notiTitle text-center"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'><img src="<c:url value='/images/cmLogo/${vo.cmLogo}'/>" alt="${vo.cmName}" ></a></div>
+			<div class="panel-body">
+				<div class="compName"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.cmName}</a></div>
+				<div class="notiContent"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.hnNotititle }</a></div>
+				<div class="deadLine">
+					<c:if test="${vo.dday == 0}">
+					<span class="label label-danger">오늘 마감</span>
+					</c:if>
+					<c:if test="${vo.dday > 0}">
+					<span class="label label-warning">D - ${vo.dday}</span>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</c:forEach>

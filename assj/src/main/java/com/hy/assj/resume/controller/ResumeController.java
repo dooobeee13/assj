@@ -1,6 +1,7 @@
 package com.hy.assj.resume.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -142,6 +143,7 @@ public class ResumeController {
 			@ModelAttribute ResumeVO resumeVO,@ModelAttribute SchoolHistoryVO shVO,@ModelAttribute EduHistoryVO ehVO,
 			@ModelAttribute ActivitiesVO actVO,@ModelAttribute CertificateVO cerVO,@ModelAttribute SkillVO skillVO,
 			@ModelAttribute PortfolioVO pfVO,@ModelAttribute IntroductionVO introVO,
+			@RequestParam(defaultValue="0") int careerYear,@RequestParam(defaultValue="0") int careerMonth,
 			HttpServletRequest request,HttpSession session,MultipartHttpServletRequest mhsr,Model model) {
 		logger.info("이력서 등록 resumeVO={}",resumeVO);		
 				
@@ -168,6 +170,13 @@ public class ResumeController {
 		if(resumeVO.getResumePhoto()==null || resumeVO.getResumePhoto().isEmpty() ) {
 			resumeVO.setResumePhoto("사진없음");
 		}
+		
+		int carRes = 0;
+		carRes = careerYear*12 + careerMonth;
+		
+		
+		
+		resumeVO.setResumeCareerMonth(carRes);
 				
 		resumeVO.setMemNo(memberVO.getMemNo());
 		resumeVO.setAreaNo(resumeVO.getAreaNo());
@@ -488,6 +497,211 @@ public class ResumeController {
 		
 		return "resume/resumeView";
 	}
+	
+	
+	@RequestMapping(value="/resumeUpdate.do", method=RequestMethod.GET)
+	public String resumeUpdate_get(@RequestParam(defaultValue="0")int resumeNo,Model model) {
+		
+		List<AreaVO> areaListTop = resumeService.selectAllAreaTop();
+		
+		List<AreaVO> selectBasicArea = resumeService.selectBasicArea();
+		
+		List<MajorVO> majorListTop = resumeService.selectAllMajorTop();
+		
+		List<MajorVO> majorListBasicDetail = resumeService.selectMajorBasicD();
+		
+		List<EmpTypeVO> ETList = resumeService.selectAllET();
+		
+		List<SectorsVO> sectorsListTop = resumeService.selectAllSectorsTop();
+		
+		List<OccupationVO> occuListTop = resumeService.selectAllOccuTop();
+		
+		List<SectorsVO> selectBasicSec = resumeService.selectBasicSec();
+		
+		List<OccupationVO> selectBasicOccu = resumeService.selectBasicOccu();
+		
+		model.addAttribute("areaListTop", areaListTop);		
+		model.addAttribute("majorListTop", majorListTop);
+		model.addAttribute("ETList", ETList);		
+		model.addAttribute("sectorsListTop", sectorsListTop);
+		model.addAttribute("occuListTop", occuListTop);		
+		model.addAttribute("majorListBasicDetail", majorListBasicDetail);		
+		model.addAttribute("selectBasicArea", selectBasicArea);	
+		model.addAttribute("selectBasicSec", selectBasicSec);	
+		model.addAttribute("selectBasicOccu", selectBasicOccu);	
+		
+		ResumeVO resumeVO = resumeService.selectMyResume(resumeNo);
+		
+		String[] hpArr = resumeVO.getResumePhone().split("-");
+		logger.info("수정 get, resumeVO.getResumeNo()={}",resumeVO.getResumeNo());
+		String hparr1 ="", hparr2="",hparr3="";
+		
+		hparr1 = hpArr[0];
+		hparr2 = hpArr[1];
+		hparr3 = hpArr[2];
+		
+		int careerM = resumeVO.getResumeCareerMonth();
+		int cy = 0, cm=0;
+		cy = careerM / 12;
+		cm = careerM % 12;
+		
+		model.addAttribute("cy", cy);
+		model.addAttribute("cm", cm);
+		
+		
+		model.addAttribute("hparr1",hparr1);
+		model.addAttribute("hparr2",hparr2);
+		model.addAttribute("hparr3",hparr3);
+		
+		model.addAttribute("resumeVO", resumeVO);
+		
+		return "resume/resumeUpdate";
+	}
+	
+	
+	@Transactional
+	@RequestMapping(value="/resumeUpdate.do", method=RequestMethod.POST)
+	public String resumeUpdate_post(
+			@ModelAttribute ResumeVO resumeVO,@ModelAttribute SchoolHistoryVO shVO,@ModelAttribute EduHistoryVO ehVO,
+			@ModelAttribute ActivitiesVO actVO,@ModelAttribute CertificateVO cerVO,@ModelAttribute SkillVO skillVO,
+			@ModelAttribute PortfolioVO pfVO,@ModelAttribute IntroductionVO introVO,
+			@RequestParam(defaultValue="0") int careerYear,@RequestParam(defaultValue="0") int careerMonth,
+			HttpServletRequest request,HttpSession session,MultipartHttpServletRequest mhsr,Model model) {
+		logger.info("이력서 등록 resumeVO={}",resumeVO);		
+				
+		//이미지 업로드 처리
+		String imageURL="";
+		try {
+			List<Map<String, Object>> list 
+			=fileUtil.fileupload(request, FileuploadUtil.RESUME_PHOTO);
+			for(Map<String, Object> map: list) {
+				imageURL=(String) map.get("filename"); 
+				resumeVO.setResumePhoto(imageURL);
+				logger.info("이미지 업로드, imageURL={}",imageURL);
+			}
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		session=request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		logger.info("회원 session, memberVO={}",memberVO);
+		
+		if(resumeVO.getResumePhoto()==null || resumeVO.getResumePhoto().isEmpty() ) {
+			resumeVO.setResumePhoto("사진없음");
+		}
+		
+		int carRes = 0;
+		if(careerMonth == 0) {
+			carRes = careerYear*12;
+		}else {
+			carRes = careerYear*12 + careerMonth;			
+		}
+		
+		resumeVO.setResumeCareerMonth(carRes);
+				
+		resumeVO.setMemNo(memberVO.getMemNo());
+		resumeVO.setAreaNo(resumeVO.getAreaNo());
+		resumeVO.setEtNo(resumeVO.getEtNo());
+		resumeVO.setOccuNo(resumeVO.getOccuNo());
+		resumeVO.setSecNo(resumeVO.getSecNo());
+		
+		logger.info("이력서 수정전 resumeVO={}",resumeVO);
+		int cnt = resumeService.updateResume(resumeVO);
+		
+		logger.info("이력서 수정 결과 cnt={}",cnt);
+		logger.info("이력서 수정후 resumeVO={}",resumeVO);
+		
+		int resumeVoNo = resumeVO.getResumeNo();
+		
+		//파일 업로드 처리
+		
+				String fileName="", originalFileName="";
+				long fileSize=0;
+				int pfcnt = 0;
+				String[] portIntro = request.getParameterValues("portIntro");
+				
+				try {
+					List<Map<String, Object>> list2
+					=fileUtil.fileupload(request, FileuploadUtil.RESUME_PORTFOLIO);
+					
+					for(Map<String, Object> map: list2) {
+						fileName=(String) map.get("filename"); 
+						originalFileName = (String) map.get("originalFilename");
+						fileSize = (long) map.get("fileSize");
+						logger.info("포트폴리오 업로드, originalFileName={}",originalFileName);
+						
+						String str = portIntro[pfcnt];
+						
+						str = str.replaceAll("\r\n", "<br>");
+						
+						pfVO.setPortFilename(fileName);
+						pfVO.setPortFilesize(fileSize);
+						pfVO.setPortOrifname(originalFileName);
+						pfVO.setPortIntro(str);
+						pfVO.setResumeNo(resumeVoNo);
+						logger.info("포트폴리오 update 전,pfVO={} ",pfVO);
+						int pfres = resumeService.updatePF(pfVO);
+						logger.info("포트폴리오 수정 결과 pfres={}",pfres);
+						
+						pfcnt++;
+					}
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		
+		String msg="", url="";
+		
+		int shCnt = 0;
+		int ehCnt = 0;
+		int actCnt = 0;
+		int cerCnt = 0;
+		int skillCnt = 0;
+		
+		
+		
+		if(cnt>0) {
+			msg="이력서 수정 완료.";
+			url="/resume/resumeList.do";
+		}else {
+			msg="이력서 수정 실패";
+			url="/resume/resumeList.do";
+		}
 
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);	
+		
+		return "common/message";
+	}
+	
+	
+	@RequestMapping("/resumeDelete.do")
+	public String resumeDelete(@RequestParam(defaultValue="0") int resumeNo, Model model) {
+		
+		logger.info("이력서 삭제 파라미터 resumeNo={}",resumeNo);
+		int cnt = 0;
+		
+		cnt = resumeService.deleteResume(resumeNo);
+		
+		String msg="",url="";
+		if(cnt>0) {
+			msg="이력서 삭제 완료.";
+			url="/resume/resumeList.do";
+		}else {
+			msg="이력서 수정 실패";
+			url="/resume/resumeList.do";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);	
+		
+		
+		return "common/message";
+	}
 	
 }

@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.hireInfo.model.HireInfoService;
+import com.hy.assj.main.model.MHireNotiVO;
+import com.hy.assj.main.model.MainService;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
 import com.hy.assj.vo.AreaVO;
@@ -40,10 +42,15 @@ public class IndexController {
 	@Autowired
 	private HireInfoService hireInfoService;
 	
+	@Autowired
+	private MainService mainService;
+	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
-	public String index_get() {
+	public String index_get(Model model) {
 		logger.info("메인페이지 요청(get)");
+		List<MHireNotiVO> hnList = mainService.selectHireNotiList();
 		
+		model.addAttribute("hnList", hnList);
 		return "index";
 	}
 	
@@ -202,6 +209,7 @@ public class IndexController {
 	public String navOccuCategory(Model model) {
 		Map<String, List<OccupationVO>> map = hireInfoService.getOccupationListMap();
 		model.addAttribute("map", map);
+		model.addAttribute("test", "test");
 		return  "index/cateOccu";
 	}
 	

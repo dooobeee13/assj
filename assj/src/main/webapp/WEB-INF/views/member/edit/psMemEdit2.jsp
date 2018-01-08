@@ -301,7 +301,13 @@
 					<td>
 					<label class="radio-inline">
 					<input type="radio" name="memGender" value="남자"
-					<c:if test="${vo.memGender=='남자'}">checked</c:if>> 남자
+					
+					
+					<c:if test="${vo.memGender=='남자'}">checked</c:if>
+					
+					
+					
+					> 남자
 					</label>
 					<label class="radio-inline">
 					<input type="radio" name="memGender" value="여자"

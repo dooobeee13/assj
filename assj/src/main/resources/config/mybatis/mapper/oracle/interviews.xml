@@ -14,4 +14,35 @@
 		where e.es_delflag = 'N' and c.cm_no = #{cmNo}
 	</select>
 	
+	<select id="selectByHireNotice" parameterType="int" resultType="map">
+		select * from hire_noti where cm_no=#{no}
+	</select>
+	
+	<select id="selectEmpSupbyHN" parameterType="int" resultType="map">
+		select * from emp_sup e left join member m
+		on e.MEM_NO = m.MEM_NO
+		where e.hn_no = #{hnNo}
+	</select>
+	
+	<insert id="insertInterview" parameterType="map">
+		insert into interview
+		values(interview_seq.nextval,#{interviewMember},
+		to_date(#{startDay}), to_date(#{endDay}),
+		#{location}, #{interviewTitle}, #{remarks})
+	</insert>
+	
+	<update id="updateInterviewerStatus" parameterType="map">
+		update interview_views
+		set es_status = #{interviewKinds}
+		where hn_no=#{interviewMember} and mem_name=#{interviewer}
+	</update>
+	
+	<select id="selectCalendar" parameterType="int" resultType="map">
+		select * from interview_views where hn_no=#{hnNo}
+	</select>
+	
+	<select id="interviewCount" resultType="int">
+		select count(*) from interview
+	</select>
+	
 </mapper>

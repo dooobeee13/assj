@@ -11,6 +11,38 @@
 		if(success==1){
 			self.close();
 		}
+		
+		$('select[name=interviewMember]').change(function(){
+			var names = $('select[name=interviewMember] option:selected').text();
+			$('input[name=interviewer]').val("");
+			$('input[name=interviewer]').val(names);
+		});
+
+		$('select[name=notiTitle]').change(function(){
+			var hnNo = $(this).val();
+			var titles = $('select[name=notiTitle] option:selected').text();
+			$('input[name=interviewTitle]').val("");
+			$('input[name=interviewTitle]').val(titles);
+			
+			if(hnNo=='선택하세요'){
+				$('#interviewMember').html("<option value='0'>선택하세요</option>");
+				return false;
+			}
+			$.ajax({
+				url:'<c:url value="/Interviews/empSupMember.do"/>',
+				data:{"hnNo":hnNo},
+				success:function(data){
+					var itemData = "<option value='0'>선택하세요</option>";
+					$.each(data,function(idx, item){
+						itemData+="<option value='"+this.HN_NO+"'>"+this.MEM_NAME+"</option>";
+					});
+					$('#interviewMember').html(itemData);
+				},
+				error:function(xhr, status, error){
+					alert("에러발생 : "+status+"=>"+error);
+				}
+			});
+		});
 	});
 </script>
 <style type="text/css">
@@ -37,7 +69,7 @@
 	<h2 class="divMainbox-title" style="margin:0 auto; float:none; font-weight: bold;">면접일 등록</h2>
 </div>
 	<form name="interviewform" method="post"
-		action=""
+		action="<c:url value='/Interviews/insertInterview.do'/>"
 		style="width: 100%; text-align: center;">
 		<table class="adMinLoginfrm" style="width: 90%; text-align: center;">
 			<colgroup>
@@ -48,33 +80,62 @@
 				<tr>
 					<th style="font-size: 1em; text-align: right;">면접명</th>
 					<td style="font-size: 1em;">
-					<select class="select_list" style="padding:0; width:70%; height:30px;">
-						<option>선택하세요.</option>
+					<select class="select_list" id="notiTitle" name="notiTitle" style="padding:0; width:100%; height:30px;">
+						<option>선택하세요</option>
+						<c:if test="${!empty list }">
+							<c:forEach var="map" items="${list }">
+								<option value="${map['HN_NO'] }">${map['HN_NOTITITLE'] }</option>
+							</c:forEach>
+						</c:if>
 					</select></td>
 
 				</tr>
 				<tr>
-					<th style="font-size: 1em; text-align: right;">면접 대상자</th>
+					<th style="font-size: 0.8em; text-align: right;">면접 대상자</th>
 					<td style="font-size: 1em;">
-						<select class="select_list" style="padding:0; width:70%;">
+						<select id="interviewMember" name="interviewMember" class="select_list" style="padding:0; width:100%;">
 							<option>선택하세요</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<th style="font-size: 1em; text-align: right;">면접 일시</th>
+					<th style="font-size: 0.8em; text-align: right;">면접 종류</th>
+					<td style="font-size: 1em;">
+						<select id="interviewKinds" name="interviewKinds" class="select_list" style="padding:0; width:100%;">
+							<option>선택하세요</option>
+							<option value="1차 면접">1차 면접</option>
+							<option value="1차 면접">1차 면접 합격</option>
+							<option value="2차 면접">2차 면접</option>
+							<option value="2차 면접">2차 면접 합격</option>
+							<option value="3차 면접">3차 면접</option>
+							<option value="3차 면접">3차 면접 합격</option>
+							<option value="4차 면접">4차 면접</option>
+							<option value="4차 면접">4차 면접 합격</option>
+							<option value="집단 면접">집단 면접</option>
+							<option value="집단 면접">집단 면접 합격</option>
+							<option value="개인 면접">개인 면접</option>
+							<option value="개인 면접">개인 면접 합격</option>
+							<option value="최종 면접">최종 면접</option>
+							<option value="최종 합격">최종 합격</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th style="font-size: 0.8em; text-align: right;">면접 일시</th>
 					<td style="font-size: 1em;"><%@include file="dateselect.jsp" %></td>
 				</tr>
 				<tr>
-					<th style="font-size: 1em; text-align: right;">면접장소</th>
-					<td style="font-size: 1em;"><input id="name" name="name" class="one-text" type="text" placeholder="면접 장소를 입력해주세요."></td>
+					<th style="font-size: 0.8em; text-align: right;">면접장소</th>
+					<td style="font-size: 1em;"><input id="location" name="location" class="one-text" type="text" placeholder="면접 장소를 입력해주세요."></td>
 				</tr>
 				<tr>
-					<th style="font-size: 1em; text-align: right;">특이 사항</th>
-					<td style="font-size: 1em;"><input id="name" name="name" class="one-text" type="text" placeholder=" 비고."></td>
+					<th style="font-size: 0.8em; text-align: right;">세부 내용</th>
+					<td style="font-size: 1em;"><input id="remarks" name="remarks" class="one-text" type="text" placeholder=" 비고."></td>
 				</tr>
 			</tbody>
 		</table>
+			<input type="hidden" id="interviewer" name="interviewer"/>
+			<input type="hidden" id="interviewTitle" name="interviewTitle"/>
 		<br> <input class="one-button" type="submit" value="등록하기"
 			style="font-size: 1em;">&nbsp;&nbsp;&nbsp;
 			<input class="one-button" type="button" value="취소"

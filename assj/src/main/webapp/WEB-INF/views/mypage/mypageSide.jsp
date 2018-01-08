@@ -56,6 +56,17 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <script type="text/javascript">
+  $(function(){
+	  var h = $('#page-wrapper').next().css("height");
+	 
+	 // $('#page-wrapper').attr("height",h);
+	  
+	/*  $('#page-wrapper').css("height",function(){
+		 $('#page-wrapper').next().css("height")
+	 }); */
+  });
+  </script>
   <body>
  	
 		<!-- 사이드바 -->

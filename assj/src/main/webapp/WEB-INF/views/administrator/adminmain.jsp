@@ -339,10 +339,10 @@ function closeNav() {
 		    	<!-- 채팅판 -->
 		    	<div style="width:93%; padding:1em;">
 		    		<div class="col-div-70-100">
-		    			<textarea rows="7" cols="54" style="resize: none;"></textarea>
+		    			<textarea rows="7" cols="37" style="resize: none;"></textarea>
 		    		</div>
 		    		<div class="col-div-30-100" style="float:right;">
-		    			<input style="float:right; padding:0.4em;" type="button" value=" 전 송 ">
+		    			<input class="one-button" style="float:right; padding:0.4em; width:60px" type="button" value=" 전 송 ">
 		    		</div>
 		    	</div>
 		  </div>

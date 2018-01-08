@@ -2,6 +2,7 @@ package com.hy.assj.hirenoti.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
@@ -21,6 +24,9 @@ import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
 import com.hy.assj.hirenoti.model.HireNotiService;
 import com.hy.assj.hirenoti.model.HireNotiVO;
+import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.recruit.model.RHireNotiVO;
+import com.hy.assj.recruit.model.RMemberVO;
 import com.hy.assj.vo.CareerVO;
 import com.hy.assj.vo.EducationVO;
 import com.hy.assj.vo.EmpTypeVO;
@@ -38,8 +44,6 @@ public class HireNotiController {
 	@Autowired
 	private HireNotiService hirenotiService;
 	
-	@Autowired
-	private CmMemberService cmMemberService;
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
 	public String hireNoti1() {
@@ -150,16 +154,20 @@ public class HireNotiController {
 	
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, HttpSession session,
+	public String write_post(@ModelAttribute HireNotiVO hirenotiVo, String sal, HttpSession session,
 			Model model) {
 		logger.info("공고등록 처리-파라미터, vo={}", hirenotiVo);
+		String[] sals = sal.split("~");
+		hirenotiVo.setHnSalStart(Integer.parseInt(sals[0]));
+		hirenotiVo.setHnSalEnd(Integer.parseInt(sals[1]));
+		
+		System.out.println("최종 vo:" + hirenotiVo);
 		
 		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
 		int cmNo = cmMemberVo.getCmNo();
 		hirenotiVo.setCmNo(cmNo);
-		hirenotiVo.setAreaNo(20);
 		
-		int cnt =hirenotiService.insertHireNoti(hirenotiVo);
+		int cnt = hirenotiService.insertHireNoti(hirenotiVo);
 		logger.info("공고등록  처리 결과, cnt={}", cnt);
 		
 		String msg="", url="";
@@ -177,17 +185,15 @@ public class HireNotiController {
 		return "common/message";		
 	}
 	
-	/*@RequestMapping(value="/hire1_edit.do" , method=RequestMethod.GET)
-	public String hirenoti_edit(HttpSession session, Model model) {
-		
-	}
-	*/
-	
 	@RequestMapping("/hire2.do")
-	public String list(@ModelAttribute SearchVO searchVo, Model model) {
+	public String list(@ModelAttribute SearchVO searchVo,HttpSession session, Model model) {
 		logger.info("공고 목록, 파라미터 = {}", searchVo);
 		
-		//Paging 처리에 필요한 변수를 계산해주는 PasinationInfo생성
+		CmMemberVO cmMemberVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		int cmNo = cmMemberVo.getCmNo();
+		
+			
+	/*	//Paging 처리에 필요한 변수를 계산해주는 PasinationInfo생성
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
@@ -198,23 +204,21 @@ public class HireNotiController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		logger.info("searchVo 최종값 : {}", searchVo);
+		logger.info("searchVo 최종값 : {}", searchVo);*/
 		
-		List<HireNotiVO>list =hirenotiService.selectAll(searchVo);
-		logger.info("글목록 결과, list.size()={}", list.size());
+		List<Map<String, Object>>list =hirenotiService.selecthireNoti(cmNo);
+		logger.info("공고목록 결과, list.size()={}", list.size());
 		
-		/*
-		//int totalRecord = hirenotiService.selectTotalRecordCount(searchVo);
+		/*int totalRecord = hirenotiService.selectTotalRecordCount(searchVo);
 		logger.info("글 전체 개수 조회 결과, totalRecord={}", totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);*/
 		
 		model.addAttribute("list",list);
-		model.addAttribute("pagingInfo",pagingInfo);
+/*		model.addAttribute("pagingInfo",pagingInfo);*/
 		
 		return "hire_noti/hire2";
-		
-		
-	}
 	
+	}
+
 }

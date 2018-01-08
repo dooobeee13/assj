@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
 
-<script type="text/javascript" src="<c:url value='/js/jquery-3.2.1.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/paging.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>">
@@ -731,7 +730,6 @@ $(function(){
 	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
 
 		var currentPage = $('#currentPage').val();
-		alert(countPerPage);
 		$.ajax({
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			type:"POST",
