@@ -13,9 +13,9 @@
 			<div class="col-div-100-80">
 				<div class="col-div-100-50 CareerCheckBox"
 					style="padding-top: 1em; padding-left: 1em; text-align: center;">
-					<label><input id="career" class="mini-checkbox" type="checkbox" value="경력">경력</label> 
-					<label><input id="newcomer" class="mini-checkbox" type="checkbox" value="신입">신입</label>
-					<label><input id="none" class="mini-checkbox" type="checkbox" value="">무관</label>
+					<label><input name="manCareer" id="career" class="mini-checkbox" type="checkbox" value="경력">경력</label> 
+					<label><input name="newcomer" id="newcomer" class="mini-checkbox" type="checkbox" value="신입">신입</label>
+					<label><input name="ceo" id="none" class="mini-checkbox" type="checkbox" value="임원/CEO">임원/CEO</label>
 				</div>
 				<div class="col-div-100-50" style="padding-top: 0.5em; text-align: center;">
 					<select class="one-list" id="CareerDayStart">
@@ -53,24 +53,16 @@
 				</div>
 				<div class="col-div-100-50"
 					style="padding-top: 0.5em; text-align: center;">
-					<select class="one-list" id="oldStart">
+					<select class="one-list OldStart">
 						<option value="">선택</option>
-						<option value="20">20살</option>
-						<option value="21">21살</option>
-						<option value="22">22살</option>
-						<option value="23">23살</option>
-						<option value="24">24살</option>
-						<option value="25">25살</option>
-						<option value="26">26살</option>
-					</select> ~ <select class="one-list" id="oldEnd">
+						<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
+					</select> ~ <select class="one-list OldEnd">
 						<option value="">선택</option>
-						<option value="20">20살</option>
-						<option value="21">21살</option>
-						<option value="22">22살</option>
-						<option value="23">23살</option>
-						<option value="24">24살</option>
-						<option value="25">25살</option>
-						<option value="26">26살</option>
+						<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
 					</select>
 				</div>
 			</div>

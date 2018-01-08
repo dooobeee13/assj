@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="TStopion_div option_flo career-old"
 	style="width: 1189px; margin-left: 4em; margin-bottom: 4em; overflow-y: auto;">
 	<!-- 경력/나이 부분 시작 -->
@@ -11,9 +12,9 @@
 			</div>
 			<div class="col-div-70-100 CareerCheckBox"
 				style="padding-top: 60px; padding-left: 9em;">
-				<label><input class="one-checkbox" type="checkbox" value="경력">경력</label> 
-				<label><input class="one-checkbox" type="checkbox" value="신입">신입</label> 
-				<label><input class="one-checkbox" type="checkbox" value="">무관</label>
+				<label><input name="manCareer" class="one-checkbox" type="checkbox" value="경력">경력</label> 
+				<label><input name="newcomer" class="one-checkbox" type="checkbox" value="신입">신입</label> 
+				<label><input name="ceo" class="one-checkbox" type="checkbox" value="임원/CEO">임원/CEO</label>
 			</div>
 		</div>
 		<div class="col-div-100-50">
@@ -60,24 +61,16 @@
 				<strong class="title_strong" style="margin: 0;">나이</strong>
 			</div>
 			<div class="col-div-70-100" style="padding-left: 6em;">
-				<select class="one-list" style="height: 3em; width: 10em;">
+				<select class="one-list OldStart" style="height: 3em; width: 10em;">
 					<option>선택</option>
-					<option>20살</option>
-					<option>21살</option>
-					<option>22살</option>
-					<option>23살</option>
-					<option>24살</option>
-					<option>25살</option>
-					<option>26살</option>
-				</select> ~ <select class="one-list" style="height: 3em; width: 10em;">
+					<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
+				</select> ~ <select class="one-list OldEnd" style="height: 3em; width: 10em;">
 					<option>선택</option>
-					<option>20살</option>
-					<option>21살</option>
-					<option>22살</option>
-					<option>23살</option>
-					<option>24살</option>
-					<option>25살</option>
-					<option>26살</option>
+					<c:forEach var="i" begin="18" end="80" step="1">
+					<option value="${i }">${i }살</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>

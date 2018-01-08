@@ -242,6 +242,18 @@ $(function(){
 		$(this).addClass('select');
 		$('.o8s').show();
 	});
+	$('.009s').click(function(){
+		$('.hope-sectors').hide();
+		$('.sectors-choose li').removeClass('select');
+		$(this).addClass('select');
+		$('.o9s').show();
+	});
+	$('.010s').click(function(){
+		$('.hope-sectors').hide();
+		$('.sectors-choose li').removeClass('select');
+		$(this).addClass('select');
+		$('.o10s').show();
+	});
 	
 	
 	
@@ -600,21 +612,22 @@ $(function(){
 			}else{
 				$(this).addClass('select');
 				EduColDetail.push($(this).children().val());
-				/* $.ajax({
-					url:"<c:url value='/TalentManagement/resumed.do'/>",
-					data:"EduColDetail="+EduColDetail,
-					success:function(){
-						
-					},
-					error:function(xhr, status, error){
-						alert("에러="+error);
-					}
-				}); */
 			}
 		})
 	});
 	
+	//면접후 급여확정인지, 회사내규에 따라 하는지
+	var HopeSalsDesi = new Array();
+	$('.HopeSalsDesi').click(function(){
+		if(!$(this).is(':checked')){
+			var itemtoRemove = $(this).val();
+			HopeSalsDesi.splice($.inArray(itemtoRemove, HopeSalsDesi),1);
+		}else if($(this).is(':checked')){
+			HopeSalsDesi.push($(this).val());
+		}
+	});
 	
+	//경력,신입,ceo 체크 조건
 	var CareerCheckBox = new Array();
 	$('.CareerCheckBox input[type=checkbox]').click(function(){
 		if(!$(this).is(':checked')){
@@ -625,10 +638,38 @@ $(function(){
 		}
 	});
 	
+	//희망급여 조건
+	//최소조건
+	var SalStart="";
+	var SalEnd="";
+	$('#resumeSalStart').change(function(){
+		SalStart=$(this).val();
+		$.send();
+	});
+	//최고조건
+	$('#resumeSalEnd').change(function(){
+		SalEnd=$(this).val();
+		$.send();
+	});
 	
 	
-	$.send=function(curPage){
-		$('#currentPage').val(curPage);
+	//나이로 검색 조건
+	var OldStart="";
+	var OldEnd="";
+	
+	$('.OldStart').change(function(){
+		OldStart=$(this).val();
+		$.send();
+	});
+	//나이최고차
+	$('.OldEnd').change(function(){
+		OldEnd=$(this).val();
+		$.send();
+	});
+	
+	
+	
+	$.send=function(){
 		
 		jQuery.ajaxSettings.traditional = true;
 		
@@ -648,8 +689,11 @@ $(function(){
 				"HopeOccu":HopeOccu,
 				"area":area,
 				"Hopesectors":Hopesectors,
-				"countPerPage":countPerPage,
-				"currentPage":currentPage
+				"SalStart":SalStart,
+				"SalEnd":SalEnd,
+				"HopeSalsDesi":HopeSalsDesi,
+				"OldStart":OldStart,
+				"OldEnd":OldEnd
 			},
 			
 			success:function(res){
@@ -661,160 +705,36 @@ $(function(){
 						'<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>'+
 						'<div style="float:left; margin-left:100px;">'+
 							'<strong style="">'+this.RESUME_NAME+'</strong><br>'+
-						'<span>(<b>'+this.RESUME_GENDER+'</b> <b>'+this.RESUME_BIRTH+'</b>)</span>'+
+						'<span>(<b>'+this.MEM_GENDER+'</b> <b>'+this.RESUME_BIRTHS+'</b>&nbsp;<b>'+this.RESUME_OLD+'세</b>)</span>'+
 						'</div>'+
 					'</td>'+
-					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
+					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">취미 : '+this.RESUME_HOBBY +'</span>'+
 						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
 						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">'+this.EDU_NAME+'</p>'+
 						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
-						if(this.RESUME_SAL_START!=null){
+						if(this.RESUME_SAL_START!=''){
 							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
 						}else{
 							totalResumes+='<span>면접 후 결정</span>';
 						}
 						totalResumes+='</span> | <span>'+this.AREA_NAME+'</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">'+this.OCCU_NAME+' '+ this.SEC_NAME+'</p>'+
 					'</td>'+
-					'<td style="text-align:center;">'+this.LAST_UPDATE+'</td>'+
+					'<td style="text-align:center;">'+this.RESUME_LASTUPDATES+'</td>'+
 				'</tr>'
 				});
 				
 				$('.resume_body').html(totalResumes);
-				
-				if(totalCount==0){
-					return false;		
-				}
-				//페이징처리
-				pagination($("#currentPage").val(), 6, 10, totalCount);
-				
-				$('#divPage').html("");
-				
-				//이전 블럭
-				if(firstPage>1){
-					var anchorEl = $("<a href='#'></a>").html("<img src='<c:url value='/images1/first.JPG'/>'>").attr('onclick','$.send('+(firstPage-1)+')');
-					$('#divPage').append(anchorEl);
-				}
-				
-				for(var i=firstPage;i<=lastPage;i++){
-					var anchorEl="";
-					
-					if(i==currentPage){
-						var anchorEl = $("<span style='font-weight:bold; color:blue;'></span>").html(i);
-					}else{
-						var anchorEl = $("<a href='#'></a>").html("["+i+"]").attr('onclick','$.send('+i+')');
-					}
-					
-					$('#divPage').append(anchorEl);
-				}//for
-				
-				//다음 블럭으로 이동
-				if(lastPage<totalPage){
-					var anchorEl = $('<a href="#"></a>').html("<img src='<c:url value='/images1/last.JPG'/>'>").attr('onclick','$.send('+(lastPage+1)+')');
-					$("#divPage").append(anchorEl);
-				}
 			},
 			error:function(xhr, status, error){
 				alert("에러 발생 : "+status+"=>"+error);
 			}
 		});
 	}
-	$('#countPerPage').change(function(){
-		countPerPage=$(this).val();
-	});
-	
-	var countPerPage = $('#countPerPage>option:selected').val();
 	
 	jQuery.ajaxSettings.traditional = true;/*이게 없으면 AJAX로 배열의 형태 데이터값을 보내지 못함*/
 	
-	
-	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox]').click(function(){
-
-		var currentPage = $('#currentPage').val();
-		$.ajax({
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			type:"POST",
-			url:"<c:url value='/TalentManagement/resumed.do'/>",
-			data:{"EduColDetail":EduColDetail,
-				"Educol":Educol,
-				"major":major,
-				"position":position,
-				"rank":rank,
-				"empType":empType,
-				"MiniArea":MiniArea,
-				"Gender":Gender,
-				"CareerCheckBox":CareerCheckBox,
-				"HopeOccu":HopeOccu,
-				"area":area,
-				"Hopesectors":Hopesectors,
-				"countPerPage":countPerPage,
-				"currentPage":currentPage
-			},
-			
-			success:function(res){
-				var totalResumes = "";
-				$.each(res,function(idx, item){
-					totalResumes+='<tr style="border:1px solid #b8b8b8;">'+
-					'<td style="text-align:center;"><a href="#"><img src="<c:url value='/icon/star.jpeg'/>"></a></td>'+
-					'<td style="height:120px;">'+
-						'<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>'+
-						'<div style="float:left; margin-left:100px;">'+
-							'<strong style="">'+this.RESUME_NAME+'</strong><br>'+
-						'<span>(<b>'+this.RESUME_GENDER+'</b> <b>'+this.RESUME_BIRTH+'</b>)</span>'+
-						'</div>'+
-					'</td>'+
-					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
-						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
-						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">'+this.EDU_NAME+'</p>'+
-						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
-						if(this.RESUME_SAL_START!=null){
-							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
-						}else{
-							totalResumes+='<span>면접 후 결정</span>';
-						}
-						totalResumes+='</span> | <span>'+this.AREA_NAME+'</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">'+this.OCCU_NAME+' '+ this.SEC_NAME+'</p>'+
-					'</td>'+
-					'<td style="text-align:center;">'+this.LAST_UPDATE+'</td>'+
-				'</tr>'
-				});
-				
-				$('.resume_body').html(totalResumes);
-				
-				if(totalCount==0){
-					return false;		
-				}
-				//페이징처리
-				pagination($("#currentPage").val(), 6, 10, totalCount);
-				
-				$('#divPage').html("");
-				
-				//이전 블럭
-				if(firstPage>1){
-					var anchorEl = $("<a href='#'></a>").html("<img src='<c:url value='/images1/first.JPG'/>'>").attr('onclick','$.send('+(firstPage-1)+')');
-					$('#divPage').append(anchorEl);
-				}
-				
-				for(var i=firstPage;i<=lastPage;i++){
-					var anchorEl="";
-					
-					if(i==currentPage){
-						var anchorEl = $("<span style='font-weight:bold; color:blue;'></span>").html(i);
-					}else{
-						var anchorEl = $("<a href='#'></a>").html("["+i+"]").attr('onclick','$.send('+i+')');
-					}
-					
-					$('#divPage').append(anchorEl);
-				}//for
-				
-				//다음 블럭으로 이동
-				if(lastPage<totalPage){
-					var anchorEl = $('<a href="#"></a>').html("<img src='<c:url value='/images1/last.JPG'/>'>").attr('onclick','$.send('+(lastPage+1)+')');
-					$("#divPage").append(anchorEl);
-				}
-			},
-			error:function(xhr, status, error){
-				alert("에러 발생 : "+status+"=>"+error);
-			}
-		});
+	$('.EduColDetaillist li, .EduCollist li, input[name=EduSelectBox], .positionSelectVal>li, .rankSelectVal>li, .empTypeselectVal>li, .AreaSelectLI li,input[name=Genderm],input[name=Gender],.CareerCheckBox input[type=checkbox],.hope-occupation input[type=checkbox],input[name=AreaSelectBox],.hope-sectors input[type=checkbox],.HopeSalsDesi').click(function(){
+		$.send();
 	});
 	
 	//직종부분
@@ -824,31 +744,7 @@ $(function(){
 		
 			$('form[name=divform]').prop('action','<c:url value="/TalentManagement/final-main.do"/>');
 			$('form[name=divform]').submit();
-	}); */
-	
-	/* $.ajax({
-        url : '/TalentManagement/resume.do',
-        type : 'post',
-        data : param,
-        success : function(data) {
-          console.log('return string : ' + data);
-        },
-        error : function() { console.log('error');}
-      }); */
-     
-      
-     /*  $('.rankSelectVal>li').click(function(){
-    	 if($(this).hasClass('select')){
-    		 $('.select').val(function(idx){
-    			 if($(this).val()!=''){
-    			 test.push($(this).val());
-    			 }
-    		 })
-    		 alert(test);
-    	 } 
-      }); */
-	
-	
+	}); */	
 });
 </script>
 <link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
@@ -932,57 +828,25 @@ $(function(){
 							<div style="float:left;"><img src="<c:url value='/icon/beb42.jpeg'/>" style="position:absolute; margin-left:30px; margin-top:-10px;"></div>
 							<div style="float:left; margin-left:100px;">
 								<strong style="">${vo.RESUME_NAME }</strong><br>
-							<span>(<b>${vo.RESUME_GENDER } </b><b>${vo.RESUME_BIRTH }</b>)</span>
+							<span>(<b>${vo.MEM_GENDER } </b><b>${vo.RESUME_BIRTHS }</b>&nbsp;<b>${vo.RESUME_OLD}세</b>)</span>
 							</div>
 						</td>
-						<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">${vo.RESUME_CAREER_LIST }경력부분</span>
+						<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">취미 : ${vo.RESUME_HOBBY }</span>
 							<span class="career_exper_titles">${vo.RESUME_TITLE }</span>
 							<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">${vo.EDU_NAME }</p>
 							<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>
-							<c:if test="${!empty vo.RESUME_HOPE_SALARY }">
-								${ vo.RESUME_HOPE_SALARY }
+							<c:if test="${!empty vo.RESUME_SAL_START }">
+								${ vo.RESUME_SAL_START }~${ vo.RESUME_SAL_END }
 							</c:if>
-							<c:if test="${empty vo.RESUME_HOPE_SALARY }">
+							<c:if test="${empty vo.RESUME_SAL_START }">
 								면접 후 결정 
 							</c:if>
 							
 							</span> | <span>${vo.AREA_NAME }</span></p><p style="margin-top:8px; margin-bottom:8px; color:#b8b8b8;">${vo.OCCU_NAME } ${vo.SEC_NAME }</p>
 						</td>
-						<td style="text-align:center;">${vo.LAST_UPDATE }</td>
+						<td style="text-align:center;">${vo.RESUME_LASTUPDATES }</td>
 					</tr>
 				</c:forEach>
-					<!-- <tr style="border:1px solid #b8b8b8;">
-						<td style="text-align:center;"><a href="#"><img src="icon/star.jpeg"></a></td>
-						<td style="height:120px;">
-							<div style="float:left;"><img src="icon/beb42.jpeg"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>
-							<div style="float:left; margin-left:100px;">
-								<strong style="">유이령</strong><br>
-							<span>(여 1993년, 25세)</span>
-							</div>
-						</td>
-						<td><span class="career_exper" style="color:#6b80f1;">경력 사항 부분</span>
-							<span class="career_exper_titles">이력서 제목 부분</span>
-							<p class="career_edu_title">당산대학교 님들과</p>
-							<p class="career_and_hope"><a href="#">급식체 검정능력 1급 </a><span>|</span><span>면접 후 결정</span>|<span>서울,인천</span></p>
-						</td>
-						<td style="text-align:center;">2017-01-01</td>
-					</tr>
-					<tr style="border:1px solid #b8b8b8;">
-						<td style="text-align:center;"><a href="#"><img src="icon/star.jpeg"></a></td>
-						<td style="height:120px;">
-							<div style="float:left;"><img src="icon/beb42.jpeg"  style="position:absolute; margin-left:30px; margin-top:-10px;"></div>
-							<div style="float:left; margin-left:100px;">
-								<strong style="">정채연</strong><br>
-							<span>(여 1997년, 20세)</span>
-							</div>
-						</td>
-						<td><span class="career_exper" style="color:#6b80f1;">경력 사항 부분</span>
-							<span class="career_exper_titles">이력서 제목 부분</span>
-							<p class="career_edu_title">당산대학교 님들과</p>
-							<p class="career_and_hope"><a href="#">급식체 검정능력 1급 </a><span>|</span><span>면접 후 결정</span>|<span>서울,인천</span></p>
-						</td>
-						<td style="text-align:center;">2017-01-01</td>
-					</tr> -->
 				</tbody>
 			</table>
 			
