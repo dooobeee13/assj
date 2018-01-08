@@ -93,6 +93,16 @@
 		delete from scrap where hn_no=#{hnNo}
 	</delete>
 	
+	<select id="countResumeByMemNo" resultType="_int">
+		select count(*) from resume
+		where mem_no = #{memNo}
+	</select>
+	
+	<select id="countScrapByMemNo" resultType="_int">
+		select count(*) from scrap
+		where mem_no = #{memNo}
+	</select>
+	
 </mapper>
 
 

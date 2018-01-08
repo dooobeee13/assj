@@ -46,4 +46,9 @@ public class RecruitDAOMybatis extends SqlSessionDaoSupport implements RecruitDA
 		return getSqlSession().delete(namespace + ".deleteEmpSup", empSupMap);
 	}
 
+	@Override
+	public List<RHireNotiVO> selectHireNoti() {
+		return getSqlSession().selectList(namespace + ".selectHireNoti");
+	}
+
 }

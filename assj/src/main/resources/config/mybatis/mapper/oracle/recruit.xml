@@ -28,6 +28,7 @@
 		<result property="hnRecruitNum" column="hn_recruit_num"/>
 		<result property="hnExpyearMin" column="hn_expyear_min"/>
 		<result property="hnExpyearMax" column="hn_expyear_max"/>
+		<result property="dday" column="dday"/>
 		
 		<association property="educationVo" javaType="EducationVO">
 			<id property="eduNo" column="edu_no"/>
@@ -131,7 +132,7 @@
 	<sql id="selectHireNoti">
 		select h.*, he.et_no, et.et_name, hm.major_no, m.major_name, ho.occu_no, o.occu_name, hp.position_no, p.position_name, 
 		hr.rank_no, r.rank_name, hs.sec_no, s.sec_name, h.area_no, a.area_name, ta.area_no as top_area_no, ta.area_name as top_area_name, 
-		cm.*, ed.*, ca.*
+		cm.*, ed.*, ca.*, h.hn_deadline - trunc(sysdate) dday
 		from hire_noti h 
 		left outer join hn_et      he on h.hn_no = he.hn_no
 		left outer join hn_major   hm on h.hn_no = hm.hn_no
@@ -152,10 +153,15 @@
 		left outer join career     ca on h.career_no = ca.career_no
 	</sql>	
 
-
 	<select id="selectHireNotiByHnNo" resultMap="RHireNotiVO">
 		<include refid="selectHireNoti" />
 		where h.hn_no = #{hnNo}
+	</select>
+	
+	<select id="selectHireNoti" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		where h.hn_deadline - trunc(sysdate) >= 0 and sysdate > h.hn_start
+		order by h.hn_no desc
 	</select>
 	
 	<select id="selectHireNotiBySearchValue" parameterType="RSearchValue" resultMap="RHireNotiVO">

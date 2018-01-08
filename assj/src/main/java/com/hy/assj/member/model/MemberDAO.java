@@ -22,4 +22,7 @@ public interface MemberDAO {
 	public int countMemberBySns(Map<String, String> map);
 	public int insertMemberBySns(MemberVO vo);
 	
+	int countResumeByMemNo(int memNo);
+	int countScrapByMemNo(int memNo);
+	
 }

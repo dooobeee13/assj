@@ -27,6 +27,7 @@ import com.hy.assj.main.model.MHireNotiVO;
 import com.hy.assj.main.model.MainService;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.recruit.model.RHireNotiVO;
 import com.hy.assj.vo.AreaVO;
 import com.hy.assj.vo.OccupationVO;
 
@@ -46,9 +47,25 @@ public class IndexController {
 	private MainService mainService;
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
-	public String index_get(Model model) {
+	public String index_get(HttpSession session, Model model) {
 		logger.info("메인페이지 요청(get)");
-		List<MHireNotiVO> hnList = mainService.selectHireNotiList();
+		//List<MHireNotiVO> hnList = mainService.selectHireNotiList();
+		List<RHireNotiVO> hnList = mainService.selectHireNotiList();
+		
+		MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
+		CmMemberVO cmVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		
+		if (memVo != null) {
+			int memNo = memVo.getMemNo();
+			model.addAttribute("numOfResume", mainService.countResumeByMemNo(memNo));
+			model.addAttribute("numOfScrap", mainService.countScrapByMemNo(memNo));
+		}
+		
+		if (cmVo != null) {
+			int cmNo = cmVo.getCmNo();
+			model.addAttribute("numOfcurrHn", mainService.countCurrHireNoti(cmNo));
+			model.addAttribute("numOfUnopened", mainService.countUnopendEs(cmNo));
+		}
 		
 		model.addAttribute("hnList", hnList);
 		return "index";

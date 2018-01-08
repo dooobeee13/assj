@@ -59,9 +59,9 @@
 	
 	<c:forEach var="vo" items="${hnList}">
 		<div class="panel panel-default col-md-3 notiItem">
-			<div class="panel-heading notiTitle text-center"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'><img src="<c:url value='/images/cmLogo/${vo.cmLogo}'/>" alt="${vo.cmName}" ></a></div>
+			<div class="panel-heading notiTitle text-center"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'><img src="<c:url value='/images/cmLogo/${vo.compMemberVo.cmLogo}'/>" alt="${vo.compMemberVo.cmName}" ></a></div>
 			<div class="panel-body">
-				<div class="compName"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.cmName}</a></div>
+				<div class="compName"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.compMemberVo.cmName}</a></div>
 				<div class="notiContent"><a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.hnNotititle }</a></div>
 				<div class="deadLine">
 					<c:if test="${vo.dday == 0}">

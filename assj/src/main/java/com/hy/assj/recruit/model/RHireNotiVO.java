@@ -37,6 +37,7 @@ public class RHireNotiVO {
 	private int hnRecruitNum;
 	private int hnExpyearMin;
 	private int hnExpyearMax;
+	private int dday;
 	
 	private RCompMemberVO compMemberVo;
 	private EducationVO educationVo;
@@ -48,7 +49,6 @@ public class RHireNotiVO {
 	private List<SectorsVO> sectorList;
 	private List<RankVO> rankList;
 	private List<EmpTypeVO> empTypeList;
-	
 	public int getHnNo() {
 		return hnNo;
 	}
@@ -187,6 +187,12 @@ public class RHireNotiVO {
 	public void setHnExpyearMax(int hnExpyearMax) {
 		this.hnExpyearMax = hnExpyearMax;
 	}
+	public int getDday() {
+		return dday;
+	}
+	public void setDday(int dday) {
+		this.dday = dday;
+	}
 	public RCompMemberVO getCompMemberVo() {
 		return compMemberVo;
 	}
@@ -255,10 +261,11 @@ public class RHireNotiVO {
 				+ ", hnPreference=" + hnPreference + ", hnStep=" + hnStep + ", hnBenefits=" + hnBenefits
 				+ ", hnDocument=" + hnDocument + ", hnAddr=" + hnAddr + ", hnDetailAddr=" + hnDetailAddr + ", hnLat="
 				+ hnLat + ", hnLng=" + hnLng + ", hnStatus=" + hnStatus + ", hnGender=" + hnGender + ", hnRecruitNum="
-				+ hnRecruitNum + ", hnExpyearMin=" + hnExpyearMin + ", hnExpyearMax=" + hnExpyearMax + ", compMemberVo="
-				+ compMemberVo + ", educationVo=" + educationVo + ", careerVo=" + careerVo + ", areaVo=" + areaVo
-				+ ", majorList=" + majorList + ", positionList=" + positionList + ", occupationList=" + occupationList
-				+ ", sectorList=" + sectorList + ", rankList=" + rankList + ", empTypeList=" + empTypeList + "]";
+				+ hnRecruitNum + ", hnExpyearMin=" + hnExpyearMin + ", hnExpyearMax=" + hnExpyearMax + ", dday=" + dday
+				+ ", compMemberVo=" + compMemberVo + ", educationVo=" + educationVo + ", careerVo=" + careerVo
+				+ ", areaVo=" + areaVo + ", majorList=" + majorList + ", positionList=" + positionList
+				+ ", occupationList=" + occupationList + ", sectorList=" + sectorList + ", rankList=" + rankList
+				+ ", empTypeList=" + empTypeList + "]";
 	}
 	
 }

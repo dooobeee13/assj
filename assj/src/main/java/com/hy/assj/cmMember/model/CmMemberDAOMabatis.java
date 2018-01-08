@@ -75,5 +75,15 @@ public class CmMemberDAOMabatis extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace + ".selectlatestHnNo", cmNo);
 	}
 
+	@Override
+	public int countCurrHireNoti(int cmNo) {
+		return getSqlSession().selectOne(namespace + ".countCurrHireNoti", cmNo);
+	}
+
+	@Override
+	public int countUnopendEs(int cmNo) {
+		return getSqlSession().selectOne(namespace + ".countUnopendEs", cmNo);
+	}
+
 
 }

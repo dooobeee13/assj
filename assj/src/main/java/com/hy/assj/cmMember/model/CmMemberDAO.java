@@ -15,4 +15,6 @@ public interface CmMemberDAO {
 	List<HireNotiWithEsAndResumeVO> selectHnSummary(int cmNo);
 	int updateEmpSup(int esNo, String status);
 	HireNotiWithEsAndResumeVO selectlatestHnNo(int cmNo);
+	int countCurrHireNoti(int cmNo);
+	int countUnopendEs(int cmNo);
 }

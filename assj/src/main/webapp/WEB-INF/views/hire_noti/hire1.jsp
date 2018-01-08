@@ -203,7 +203,7 @@
 	width: 70%;
 	margin-top: 5%;
 	margin-right: 15%;
-	margin-left: 15%;
+	//margin-left: 15%;
 }
 .major {
 	padding: 10px;

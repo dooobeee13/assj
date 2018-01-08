@@ -43,6 +43,9 @@
 	    overflow-x: hidden;
 	    overflow-y: auto;
   	}
+  	.indexContent .media-left {
+		vertical-align: middle;
+	}
 </style>
 </head>
 <body>
@@ -239,10 +242,10 @@
 									<span style="float: right; margin-top: 5px"><a href="<c:url value='/mypageMain.do' />">My 홈 바로가기</a></span>
 								</p>	
 								<p>
-									<span>등록한 이력서 <a href="#">0</a></span>
+									<span>등록한 이력서 <a href="/assj/resume/resumeList.do">${numOfResume}개</a></span>
 								</p>
 								<p>
-									<span>스크랩한 공고 <a href="#">0</a></span>
+									<span>스크랩한 공고 <a href="/assj/member/menu/scrap.do">${numOfScrap}개</a></span>
 								</p>
 									<a href='/assj/logout.do' class="btn btn-primary btn-sm btn-block">로그아웃</a>
 							</div>
@@ -297,10 +300,10 @@
 									<span style="float: right; margin-top: 5px"><a href="<c:url value='/hnmanage.do' />">기업 홈 바로가기</a></span>
 								</p>	
 								<p>
-									<span>진행중인 공고 <a href="<c:url value='/hnmanage.do' />">0건</a></span>
+									<span>진행중인 공고 <a href="<c:url value='/hnmanage.do' />">${numOfcurrHn}건</a></span>
 								</p>
 								<p>
-									<span>미열람 입사지원 <a href="<c:url value='/hnmanage.do' />">0건</a></span>
+									<span>미열람 입사지원 <a href="<c:url value='/hnmanage.do' />">${numOfUnopened}건</a></span>
 								</p>
 									<a href='/assj/logout2.do' class="btn btn-primary btn-sm btn-block">로그아웃</a>
 							</div>

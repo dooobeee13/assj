@@ -107,6 +107,17 @@
 					     where rownum = 1)
 	</select>
 	
+	<select id="countCurrHireNoti" resultType="_int">
+		select count(*) from hire_noti
+		where cm_no = #{cmNo} and sysdate between hn_start and hn_deadline+1
+	</select>
+	
+	<select id="countUnopendEs" resultType="_int">
+		select count(*) from emp_sup e
+		join hire_noti h on e.hn_no = h.hn_no
+		where cm_no = #{cmNo} and (es_status is null or es_status = '')
+	</select>
+	
 </mapper>
 
 
