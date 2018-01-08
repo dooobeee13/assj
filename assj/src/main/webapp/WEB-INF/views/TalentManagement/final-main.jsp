@@ -666,7 +666,7 @@ $(function(){
 					'</td>'+
 					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
 						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
-						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>'+
+						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">'+this.EDU_NAME+'</p>'+
 						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
 						if(this.RESUME_SAL_START!=null){
 							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
@@ -764,7 +764,7 @@ $(function(){
 					'</td>'+
 					'<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">경력부분</span>'+
 						'<span class="career_exper_titles">'+this.RESUME_TITLE+'</span>'+
-						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>'+
+						'<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">'+this.EDU_NAME+'</p>'+
 						'<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>';
 						if(this.RESUME_SAL_START!=null){
 							totalResumes+='<span>'+this.RESUME_SAL_START+'~'+this.RESUME_SAL_END+'</span>';
@@ -937,7 +937,7 @@ $(function(){
 						</td>
 						<td style="padding-left: 3em;"><span class="career_exper" style="color:#6b80f1;">${vo.RESUME_CAREER_LIST }경력부분</span>
 							<span class="career_exper_titles">${vo.RESUME_TITLE }</span>
-							<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">당산대학교 님들과(셀렉해야됌)</p>
+							<p class="career_edu_title" style="margin-top:8px; margin-bottom:8px;">${vo.EDU_NAME }</p>
 							<p class="career_and_hope" style="margin-top:8px; margin-bottom:8px;"><a href="#">자격증 부분 </a><span> | </span><span>
 							<c:if test="${!empty vo.RESUME_HOPE_SALARY }">
 								${ vo.RESUME_HOPE_SALARY }
@@ -991,13 +991,13 @@ $(function(){
 		</div><!-- TSdetail -->
 
 		<div class="TSside" style="position:relative;float:left; text-align: center; border:1px solid #b8b8b8; border-radius: 10px 10px 40px 40px;"><!-- 오른쪽 사이드바 -->
-			<div class="col-div-80-15 side-manu" style="border-radius: 1em;">
-				<span class="chbox-span" style="color:#5B5B5B; padding-top:0.4em;">최근 본 공고</span>&nbsp;&nbsp;<span class="chbox-span" style="cursor: pointer; color:#ff3c00;">0건</span>
+			<div class="col-div-80-15 side-manu" style="border-radius: 1em;text-align:center;">
+				<span class="chbox-span" style=" color:#5B5B5B; padding-top:0.4em;">최근 본 공고</span>&nbsp;&nbsp;<span class="chbox-span" style="cursor: pointer; color:#ff3c00;">0건</span>
 			</div>
-			<div class="col-div-80-20 side-manu" style="background:#92a2f4; border-radius: 1em; color:white; padding-top:1.1em; border:1px solid #6b80f1; cursor: pointer;">
+			<div class="col-div-80-20 side-manu" style="text-align:center;background:#92a2f4; border-radius: 1em; color:white; padding-top:1.1em; border:1px solid #6b80f1; cursor: pointer;">
 				<span>기업회원로그인</span>
 			</div>
-			<div class="col-div-80-20 side-manu" style="background:#45b7ad; border-radius: 1em; color:white; padding-top:1.1em; cursor: pointer;">
+			<div class="col-div-80-20 side-manu" style="text-align:center;background:#45b7ad; border-radius: 1em; color:white; padding-top:1.1em; cursor: pointer;">
 				<span>일반회원로그인</span>
 			</div>
 		</div><!-- TSside -->

@@ -17,4 +17,7 @@ public interface AdminService {
 	public int deleteNews(int newsNo);
 	public int selectAdminLogin(String userid,String pwd);
 	public int CreateAdmin(Map<String, Object> list);
+	public int insertChat(Map<String, Object> list);
+	public List<Map<String, Object>> selectLastChat();
+	public List<Map<String, Object>> selectByLastChatNo(int lastNo);
 }

@@ -61,6 +61,21 @@ public class AdminServiceImpl implements AdminService {
 	public int CreateAdmin(Map<String, Object> list) {
 		return adminDao.CreateAdmin(list);
 	}
+
+	@Override
+	public int insertChat(Map<String, Object> list) {
+		return adminDao.insertChat(list);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLastChat() {
+		return adminDao.selectLastChat();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectByLastChatNo(int lastNo) {
+		return adminDao.selectByLastChatNo(lastNo);
+	}
 	
 	
 

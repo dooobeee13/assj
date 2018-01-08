@@ -12,4 +12,36 @@
 		values(admin_seq.nextval,#{userid},#{pwd},#{name})
 	</insert>
 	
+	<insert id="insertChat" parameterType="map">
+		insert into adminchat
+		values(adminchat_seq.nextval,#{userid},#{content},sysdate)
+	</insert>
+	
+	<select id="selectByLastChatNo" parameterType="int" resultType="map">
+		
+		select * from adminchat
+		<![CDATA[ 
+		where chat_no > #{chat_no}]]>
+	</select>
+	
+	<select id="selectLastChat" resultType="map">
+		select rownum, lists.*  from
+		(
+			select * from adminchat order by chat_no desc
+		) lists
+		<![CDATA[ 
+		where rownum <=60]]>
+		
+		order by rownum desc
+	</select>
+	<select id="selectLastNo" resultType="map">
+		select rownum, lists.*  from
+		(
+			select * from adminchat order by chat_no desc
+		) lists
+		<![CDATA[ 
+		where rownum <=1]]>
+		
+		order by rownum desc
+	</select>
 </mapper>
