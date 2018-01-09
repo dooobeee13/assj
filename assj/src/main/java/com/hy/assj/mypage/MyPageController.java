@@ -57,7 +57,7 @@ public class MyPageController {
 				
 		
 		List<Map<String, Object>> list=memberService.scrapList(hireNotiSearchVo);		
-		List<MHireNotiVO> hnList = mainService.selectHireNotiList();
+		List<MHireNotiVO> hnList = mainService.selectHnSummaryList();
 		
 		model.addAttribute("list",list);
 		model.addAttribute("hnList", hnList);

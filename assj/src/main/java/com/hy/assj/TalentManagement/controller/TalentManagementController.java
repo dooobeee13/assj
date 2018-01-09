@@ -29,8 +29,7 @@ public class TalentManagementController {
 	@RequestMapping(value="/TalentManagement/final-main.do",method=RequestMethod.GET)
 	public String Main_get(Model model) {
 		TalentManagementVO vo = new TalentManagementVO();
-		vo.setCountPerPage("10");
-		vo.setCurrentPage("0");
+
 		List<Map<String, Object>> Resumelist = tmService.selectResume(vo);
 
 		model.addAttribute("Resumelist",Resumelist);
@@ -222,7 +221,7 @@ public class TalentManagementController {
 		
 	}
 	
-	@RequestMapping("/TalentManagement/resumed.do")
+	@RequestMapping(value="/TalentManagement/resumed.do",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> resumde(@RequestParam(required=false) List<String> EduColDetail,//자주 찾는 대학
 										@RequestParam(required=false) List<String> Educol,//몇년제 졸업인지
 										@RequestParam(required=false) List<String> major, //전공
@@ -235,9 +234,24 @@ public class TalentManagementController {
 										@RequestParam(required=false) List<String> HopeOccu, //희망직종
 										@RequestParam(required=false) List<String> area, //지역
 										@RequestParam(required=false) List<String> Hopesectors, //희망 업종
-										@RequestParam String countPerPage,
-										@RequestParam String currentPage
-										, HttpServletResponse response) {
+										@RequestParam(required=false) String SalStart,
+										@RequestParam(required=false) String SalEnd,
+										@RequestParam(required=false) List<String> HopeSalsDesi,
+										@RequestParam(required=false) String OldStart,
+										@RequestParam(required=false) String OldEnd,
+										HttpServletResponse response) {
+		if(SalStart=="") {
+			SalStart=null;
+		}
+		if(SalEnd=="") {
+			SalEnd=null;
+		}
+		if(OldStart=="") {
+			OldStart=null;
+		}
+		if(OldEnd=="") {
+			OldEnd=null;
+		}
 		response.setContentType("text/html;charset=UTF-8");
 		logger.info("EduColDetail={}, Educol={}",EduColDetail,Educol);
 		logger.info("major={}, position={}",major,position);
@@ -245,7 +259,9 @@ public class TalentManagementController {
 		logger.info("MiniArea={},Gender={}",MiniArea,Gender);
 		logger.info("CareerCheckBox={},HopeOccu={}",CareerCheckBox,HopeOccu);
 		logger.info("area={},Hopesectors={}",area,Hopesectors);
-		
+		logger.info("SalStart={},SalEnd={}",SalStart,SalEnd);
+		logger.info("HopeSalsDesi={},",HopeSalsDesi);
+		logger.info("OldStart={},OldEnd={}",OldStart,OldEnd);
 		TalentManagementVO vo = new TalentManagementVO();
 		vo.setAreaTopName(MiniArea);//
 		vo.setAreaName(area);//
@@ -259,17 +275,14 @@ public class TalentManagementController {
 		vo.setUniversityType(Educol);
 		vo.setSecName(Hopesectors);//
 		vo.setMajor(major);
-		
-		int cur = Integer.parseInt(currentPage);
-		int page = Integer.parseInt(countPerPage);
-		if((cur-1)==0) {
-			vo.setCurrentPage("0");
-		}else {
-			vo.setCurrentPage((cur*page)+"");
-		}
-		vo.setCountPerPage(countPerPage);
+		vo.setSalStart(SalStart);
+		vo.setSalEnd(SalEnd);
+		vo.setHopeSalsDesi(HopeSalsDesi);
+		vo.setOldEnd(OldEnd);
+		vo.setOldStart(OldStart);
 		
 		List<Map<String, Object>> Resumelist = tmService.selectResume(vo);
+		logger.info("Resumelist 결과 size()={}",Resumelist.size());
 
 		return Resumelist;
 	}

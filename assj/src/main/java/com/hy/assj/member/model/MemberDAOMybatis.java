@@ -109,5 +109,13 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	public int cmMemDelete(int cmNo) {
 		return getSqlSession().delete(namespace+".cmMemDelete",cmNo);
 	}
+	public int countResumeByMemNo(int memNo) {
+		return getSqlSession().selectOne(namespace + ".countResumeByMemNo", memNo);
+	}
+
+	@Override
+	public int countScrapByMemNo(int memNo) {
+		return getSqlSession().selectOne(namespace + ".countScrapByMemNo", memNo);
+	}
 	
 }
