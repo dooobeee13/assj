@@ -171,7 +171,8 @@
 													</a>
 												</div>
 												<div>
-													<a href="javascript:loginWithKakao()"> 
+													<!-- <a href="javascript:loginWithKakao()">  -->
+													<a href="https://kauth.kakao.com/oauth/authorize?client_id=e7a7a838c3daff237d66d1209dab8b43&redirect_uri=http://localhost:9090/assj/kakaologin.do&response_type=code"> 
 														<img class="img-responsive" style="width: 150px" src="<c:url value='/images/kakaoLogin.png' />">
 													</a>
 													<script>

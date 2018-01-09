@@ -197,7 +197,7 @@ public class MenuController {
 		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
 						
 		List<Map<String,Object>> list= memberService.psMemManage(searchVO);
-		
+		System.out.println("size : " + list.size());
 		model.addAttribute("list",list);
 		model.addAttribute("pagingInfo",pagingInfo);
 
