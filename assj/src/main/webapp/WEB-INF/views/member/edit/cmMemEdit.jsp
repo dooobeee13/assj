@@ -34,17 +34,18 @@
 		if ($('#cmMail').val() != "") {
 			var Email = $('#cmMail').val();
 			var setEmail = Email.split("@");
-
-			$('#cmEmail1').val(setEmail[0]);
-			
-			if($(setEmail[1]).val()!='naver.com' || $(setEmail[1]).val()!='hanmail.net' 
-					|| $(setEmail[1]).val()!='gmail.com' || $(setEmail[1]).val()!='nate.com' 
-					|| $(setEmail[1]).val()!='daum.net' || $(setEmail[1]).val()!='hotmail.com'){
-				$('#cmEmail2').val('etc').prop("selected",true);
-				$('#cmEmail3').attr('style', 'visibility: visible');
-				$('#cmEmail3').val(setEmail[1]);
-			}else{
-				$('#cmEmail2').val(setEmail[1]).prop("selected", true);
+			if(setEmail[0]!=""){
+				$('#cmEmail1').val(setEmail[0]);
+				
+				if($(setEmail[1]).val()!='naver.com' || $(setEmail[1]).val()!='hanmail.net' 
+						|| $(setEmail[1]).val()!='gmail.com' || $(setEmail[1]).val()!='nate.com' 
+						|| $(setEmail[1]).val()!='daum.net' || $(setEmail[1]).val()!='hotmail.com'){
+					$('#cmEmail2').val('etc').prop("selected",true);
+					$('#cmEmail3').attr('style', 'visibility: visible');
+					$('#cmEmail3').val(setEmail[1]);
+				}else{
+					$('#cmEmail2').val(setEmail[1]).prop("selected", true);
+				}
 			}
 		}
 		

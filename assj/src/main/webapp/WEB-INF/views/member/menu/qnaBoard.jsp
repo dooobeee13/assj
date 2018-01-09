@@ -155,12 +155,12 @@
 				
 				<c:if test="${!empty param.searchKeyword }">
 					<!-- 검색의 경우 -->
-					<p>검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건 
+					<p><span class="glyphicon glyphicon-search"></span> 검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건 
 						검색되었습니다.</p>
 				</c:if>
 				<c:if test="${empty param.searchKeyword }">
 					<!-- 전체 조회의 경우 -->
-					<p>전체 조회 결과, ${pagingInfo.totalRecord }건 조회되었습니다.</p>
+					<p><span class="glyphicon glyphicon-search"></span> 전체 조회 결과, ${pagingInfo.totalRecord }건 조회되었습니다.</p>
 				</c:if>
 				
 				<div class="divSearch">
