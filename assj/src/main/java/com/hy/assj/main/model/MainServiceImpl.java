@@ -55,6 +55,35 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
+	public List<MNoticeVO> getRecentNoticeList() {
+		return mainDao.selectRecentNotice();
+	}
+
+	@Override
+	public List<MNewsVO> getRecentNews() {
+		return mainDao.selectRecentNews();
+	}
+
+	@Override
+	public List<MNewsVO> selectNewsByKeyword(String keyword) {
+		return mainDao.selectNewsByKeyword(keyword);
+	}
+
+	@Override
+	public List<MOccupationVO> selectOccuByKeyword(String keyword) {
+		return mainDao.selectOccuByKeyword(keyword);
+	}
+
+	@Override
+	public List<MSectorsVO> selectSecByKeyword(String keyword) {
+		return mainDao.selectSecByKeyword(keyword);
+	}
+
+	@Override
+	public List<RHireNotiVO> selectHireNotiByKeyword(String keyword) {
+		return recruitDao.selectHireNotiByKeyword(keyword);
+	}
+	
 	public List<MHireNotiVO> selectHnSummaryList() {
 		return mainDao.selectHireNotiList();
 	}

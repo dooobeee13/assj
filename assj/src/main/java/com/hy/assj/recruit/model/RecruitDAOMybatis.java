@@ -51,4 +51,9 @@ public class RecruitDAOMybatis extends SqlSessionDaoSupport implements RecruitDA
 		return getSqlSession().selectList(namespace + ".selectHireNoti");
 	}
 
+	@Override
+	public List<RHireNotiVO> selectHireNotiByKeyword(String keyword) {
+		return getSqlSession().selectList(namespace + ".selectHireNotiByKeyword", keyword);
+	}
+
 }

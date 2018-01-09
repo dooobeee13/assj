@@ -15,4 +15,29 @@ public class MainDAOMybatis extends SqlSessionDaoSupport implements MainDAO {
 		return getSqlSession().selectList(namespace + ".selectHireNotiList");
 	}
 
+	@Override
+	public List<MNoticeVO> selectRecentNotice() {
+		return getSqlSession().selectList(namespace + ".selectRecentNotice");
+	}
+
+	@Override
+	public List<MNewsVO> selectRecentNews() {
+		return getSqlSession().selectList(namespace + ".selectRecentNews");
+	}
+
+	@Override
+	public List<MOccupationVO> selectOccuByKeyword(String keyword) {
+		return getSqlSession().selectList(namespace + ".selectOccuByKeyword", keyword);
+	}
+
+	@Override
+	public List<MSectorsVO> selectSecByKeyword(String keyword) {
+		return getSqlSession().selectList(namespace + ".selectSecByKeyword", keyword);
+	}
+
+	@Override
+	public List<MNewsVO> selectNewsByKeyword(String keyword) {
+		return getSqlSession().selectList(namespace + ".selectNewsByKeyword", keyword);
+	}
+
 }

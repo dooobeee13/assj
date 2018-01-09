@@ -158,6 +158,17 @@
 		where h.hn_no = #{hnNo}
 	</select>
 	
+	<select id="selectHireNotiByKeyword" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		where hn_notititle like '%' || #{keyword} ||'%' 
+		or cm.CM_NAME like '%' || #{keyword} ||'%' 
+		or ta.area_name like '%' || #{keyword} ||'%' 
+		or a.area_name like '%' || #{keyword} ||'%'
+		or sec_name like '%' || #{keyword} ||'%' 
+		or occu_name like '%' || #{keyword} ||'%'
+		or major_name like '%' || #{keyword} ||'%'
+	</select>
+	
 	<select id="selectHireNoti" resultMap="RHireNotiVO">
 		<include refid="selectHireNoti" />
 		where h.hn_deadline - trunc(sysdate) >= 0 and sysdate > h.hn_start

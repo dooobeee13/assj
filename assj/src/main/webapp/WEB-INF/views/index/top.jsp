@@ -142,16 +142,18 @@
 					</a>
 				</div>
 				<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->
+				<form action="/assj/search.do" method="post">
 				<div class="col-md-4 col-sm-6">
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+						<input type="text" name="keyword" class="form-control" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<button class="btn btn-default" type="submit">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</span>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</header>
@@ -251,6 +253,7 @@
 					</li>
 					<li class="searchjob"><a href="<c:url value='/TalentManagement/final-main.do'/>">인재검색</a></li>
 					<li class="searchjob"><a href="<c:url value='/newsInfo/newsmain.do'/>">공채 뉴스</a></li>
+					<li class="searchjob"><a href="<c:url value='/board/freeBoardList.do'/>">자유게시판</a></li>
 					<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
 					<li class="searchjob"><a href='<c:url value="/hire_noti/hire1.do" />'>공고등록</a></li>
 					</c:if>
