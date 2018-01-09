@@ -3,6 +3,7 @@ package com.hy.assj.member.model;
 import java.util.List;
 import java.util.Map;
 
+import com.hy.assj.common.SearchVO;
 import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.notice.model.NoticeListVO;
@@ -29,6 +30,13 @@ public interface MemberService {
 	public int scrapTotalRecordCount(HireNotiSearchVO hireNotiSearchVO);
 	public int deleteScrap(int hnNo);
 	public int scrapDelMulti(List<HireNotiVO> list);
+	public List<Map<String,Object>> psMemManage(SearchVO searchVO);
+	public int psMemTotalCount(SearchVO searchVO);
+	public int psMemDelete(int memNo);
+	public List<Map<String,Object>> cmMemManage(SearchVO searchVO);
+	public int cmMemTotalCount(SearchVO searchVO);
+	public int cmMemDelete(int cmNo);
+	public int empSupCount(int memNo);
 	
 	public MemberVO naverLogin(Map<String, String> map);
 }

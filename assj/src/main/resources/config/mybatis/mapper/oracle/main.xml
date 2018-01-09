@@ -6,7 +6,41 @@
 	<select id="selectHireNotiList" resultType="MHireNotiVO">
 		select h.hn_no, c.CM_HOMEPAGE, c.CM_LOGO, c.cm_name, h.HN_NOTITITLE, h.hn_deadline - trunc(sysdate) dday
 		from hire_noti h join comp_member c on h.cm_no = c.cm_no
-		where h.hn_deadline - trunc(sysdate) >= 0
+		where h.hn_deadline - trunc(sysdate) >= 0 and sysdate > h.hn_start
+		order by h.hn_no desc
+	</select>
+	
+	<select id="selectRecentNotice" resultType="MNoticeVO">
+		select a.* 
+		from (select nt.notititle, n.* from notice n
+		      join noticetitle nt on n.noticetitle_no = nt.noticetitle_no
+		      order by no desc) a
+		where rownum &lt; 11
+	</select>
+	
+	<select id="selectRecentNews" resultType="MNewsVO">
+		select a.*
+		from (select * from news
+		      order by news_no desc) a
+		where rownum &lt; 9
+	</select>
+	
+	<select id="selectNewsByKeyword" resultType="MNewsVO">
+		select * from news
+		where news_title like '%' || #{keyword} || '%'  
+		order by news_no desc
+	</select>
+	
+	<select id="selectOccuByKeyword" resultType="MOccupationVO">
+		select a.occu_no, a.occu_name, a.occu_remark, b.occu_name as top_occu_name 
+		from occupation a join occupation b on a.OCCU_TOP_NO = b.OCCU_NO
+		where a.occu_name like '%' || #{keyword} || '%' or b.occu_name like '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="selectSecByKeyword" resultType="MSectorsVO">
+		select a.sec_no, a.sec_name, a.sec_remark, b.sec_name as top_sec_name 
+		from sectors a join sectors b on a.sec_top_no = b.sec_no
+		where a.sec_name like '%' || #{keyword} || '%' or b.sec_name like '%' || #{keyword} || '%'
 	</select>
 </mapper>
 

@@ -21,11 +21,11 @@ public class RecruitDAOTest {
 	@Autowired
 	private RecruitDAO dao;
 	
-	/*@Test
+	@Test
 	public void selectHireNoti() {
-		List<RHireNotiVO> list = dao.selectHireNotiByHnNo(2);
-		System.out.println(list);
-	}*/
+		RHireNotiVO vo = dao.selectHireNotiByHnNo(2);
+		System.out.println(vo);
+	}
 	
 	/*@Test
 	public void selectHireNotiBySearchValue() {
@@ -59,13 +59,13 @@ public class RecruitDAOTest {
 		System.out.println("insert scrap 결과 : " + cnt);
 	}*/
 	
-	@Test
+	/*@Test
 	public void deleteScrap() {
 		RScrapVO vo = new RScrapVO();
 		vo.setHnNo(3);
 		vo.setMemNo(1);
 		int cnt = dao.deleteScrap(vo);
 		System.out.println("delete scrap 결과 : " + cnt);
-	}
+	}*/
 	
 }

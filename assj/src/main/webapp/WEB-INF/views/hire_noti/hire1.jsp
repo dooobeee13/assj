@@ -56,9 +56,22 @@
 		});		
 		
 		
-		$('#savebtn').click(function() {
+		$('#saverank').click(function() {
 			$('#rank_position').modal('hide');
+			
 		});
+		$('#saveoccu').click(function() {
+			$('#occupation_task').modal('hide');
+			
+		});
+		$('#savemajor').click(function() {
+			$('#myModal').modal('hide');
+			
+		});
+		$('#savesec').click(function() {
+			$('#sectors').modal('hide');
+		});
+		
 		
  		$.applyDatePicker('#startDay');
 		$.applyDatePicker('#endDay'); 
@@ -203,7 +216,7 @@
 	width: 70%;
 	margin-top: 5%;
 	margin-right: 15%;
-	margin-left: 15%;
+	//margin-left: 15%;
 }
 .major {
 	padding: 10px;
@@ -291,7 +304,7 @@
 <![endif]-->
 </head>
 <body>
-	<c:import url="../index/top.jsp" />
+	<c:import url="../company/cTop.jsp" />
 	<div>
 	<h1 style="text-align: center">어떤 인재를 원하시나요??</h1>
 	<form name="frm" method="post" action="<c:url value='hire1.do'/>"
@@ -707,7 +720,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">변경 사항 저장</button>
+					<button type="button" class="btn btn-primary" id="savemajor">변경 사항 저장</button>
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->
@@ -748,7 +761,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="savebtn">변경
+					<button type="button" class="btn btn-primary" id="saverank">변경
 						사항 저장</button>
 				</div>
 			</div>
@@ -775,7 +788,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">변경 사항 저장</button>
+					<button type="button" class="btn btn-primary" id="saveoccu">변경 사항 저장</button>
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->
@@ -803,7 +816,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">변경 사항 저장</button>
+					<button type="button" class="btn btn-primary" id="savesec">변경 사항 저장</button>
 				</div>
 			</div>
 			<!-- 모달 콘텐츠 -->

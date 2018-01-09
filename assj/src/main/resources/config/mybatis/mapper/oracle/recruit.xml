@@ -28,6 +28,7 @@
 		<result property="hnRecruitNum" column="hn_recruit_num"/>
 		<result property="hnExpyearMin" column="hn_expyear_min"/>
 		<result property="hnExpyearMax" column="hn_expyear_max"/>
+		<result property="dday" column="dday"/>
 		
 		<association property="educationVo" javaType="EducationVO">
 			<id property="eduNo" column="edu_no"/>
@@ -131,7 +132,7 @@
 	<sql id="selectHireNoti">
 		select h.*, he.et_no, et.et_name, hm.major_no, m.major_name, ho.occu_no, o.occu_name, hp.position_no, p.position_name, 
 		hr.rank_no, r.rank_name, hs.sec_no, s.sec_name, h.area_no, a.area_name, ta.area_no as top_area_no, ta.area_name as top_area_name, 
-		cm.*, ed.*, ca.*
+		cm.*, ed.*, ca.*, h.hn_deadline - trunc(sysdate) dday
 		from hire_noti h 
 		left outer join hn_et      he on h.hn_no = he.hn_no
 		left outer join hn_major   hm on h.hn_no = hm.hn_no
@@ -152,10 +153,26 @@
 		left outer join career     ca on h.career_no = ca.career_no
 	</sql>	
 
-
 	<select id="selectHireNotiByHnNo" resultMap="RHireNotiVO">
 		<include refid="selectHireNoti" />
 		where h.hn_no = #{hnNo}
+	</select>
+	
+	<select id="selectHireNotiByKeyword" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		where hn_notititle like '%' || #{keyword} ||'%' 
+		or cm.CM_NAME like '%' || #{keyword} ||'%' 
+		or ta.area_name like '%' || #{keyword} ||'%' 
+		or a.area_name like '%' || #{keyword} ||'%'
+		or sec_name like '%' || #{keyword} ||'%' 
+		or occu_name like '%' || #{keyword} ||'%'
+		or major_name like '%' || #{keyword} ||'%'
+	</select>
+	
+	<select id="selectHireNoti" resultMap="RHireNotiVO">
+		<include refid="selectHireNoti" />
+		where h.hn_deadline - trunc(sysdate) >= 0 and sysdate > h.hn_start
+		order by h.hn_no desc
 	</select>
 	
 	<select id="selectHireNotiBySearchValue" parameterType="RSearchValue" resultMap="RHireNotiVO">
@@ -274,7 +291,20 @@
 		delete from scrap 
 		where mem_no = #{memNo} and hn_no = #{hnNo} 
 	</delete>
-
+	
+	<insert id="insertEmpSup" parameterType="Map">
+		<selectKey keyProperty="esNo" order="BEFORE" resultType="int">
+			select emp_sup_seq.nextval from dual
+		</selectKey>
+		insert into emp_sup(es_no, mem_no, hn_no, resume_no)
+		values(#{esNo},#{memNo},#{hnNo},#{resumeNo})
+	</insert>
+	
+	<delete id="deleteEmpSup" parameterType="Map">
+		delete from emp_sup
+		where mem_no = #{memNo} and hn_no = #{hnNo}
+	</delete>
+	
 </mapper>
 
 

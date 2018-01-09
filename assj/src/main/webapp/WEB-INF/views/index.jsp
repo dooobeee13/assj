@@ -43,6 +43,9 @@
 	    overflow-x: hidden;
 	    overflow-y: auto;
   	}
+  	.indexContent .media-left {
+		vertical-align: middle;
+	}
 </style>
 </head>
 <body>
@@ -59,8 +62,11 @@
 									<a href="#new_noti" aria-controls="home" role="tab" data-toggle="tab">취업속보</a>
 								</li>
 								<li role="presentation">
-									<a href="#jobInterview" aria-controls="profile" role="tab" data-toggle="tab">직무분석</a>
+									<a href="#notice" aria-controls="profile" role="tab" data-toggle="tab">공지사항</a>
 								</li>
+<!-- 								<li role="presentation">
+									<a href="#jobInterview" aria-controls="profile" role="tab" data-toggle="tab">직무분석</a>
+								</li> -->
 								<li role="presentation">
 									<a href="#jobFair" aria-controls="messages" role="tab" data-toggle="tab">채용박람회</a>
 								</li>
@@ -74,8 +80,11 @@
 									<c:import url="index/new_notification.jsp" />
 								</div>
 
-								<div role="tabpanel" class="tab-pane" id="jobInterview">
+								<%-- <div role="tabpanel" class="tab-pane" id="jobInterview">
 									<c:import url="index/jobInterview.jsp" />
+								</div> --%>
+								<div role="tabpanel" class="tab-pane" id="notice">
+									<c:import url="index/notice.jsp" />
 								</div>
 
 								<div role="tabpanel" class="tab-pane" id="jobFair">
@@ -239,10 +248,10 @@
 									<span style="float: right; margin-top: 5px"><a href="<c:url value='/mypageMain.do' />">My 홈 바로가기</a></span>
 								</p>	
 								<p>
-									<span>등록한 이력서 <a href="#">0</a></span>
+									<span>등록한 이력서 <a href="/assj/resume/resumeList.do">${numOfResume}개</a></span>
 								</p>
 								<p>
-									<span>스크랩한 공고 <a href="#">0</a></span>
+									<span>스크랩한 공고 <a href="/assj/member/menu/scrap.do">${numOfScrap}개</a></span>
 								</p>
 									<a href='/assj/logout.do' class="btn btn-primary btn-sm btn-block">로그아웃</a>
 							</div>
@@ -276,7 +285,9 @@
 							
 						</c:if>
 						<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
-							<br>
+						
+						
+							<%-- <br>
 							<b>&nbsp;&nbsp;&nbsp;${sessionScope.cmMemberVO.cmName}</b>님 <a
 								href="#"><span class="smFont">MyPage 바로가기</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
 								href="<c:url value='/logout2.do'/>"><button type="button"
@@ -287,7 +298,48 @@
 								<p>========================= =========================
 									========================= =========================
 									=========================</p>
+							</div> --%>
+							
+							<div class="memInfo">
+								<p>
+									<span><strong>${sessionScope.cmMemberVO.cmName}</strong> 님</span>
+									<span style="float: right; margin-top: 5px"><a href="<c:url value='/hnmanage.do' />">기업 홈 바로가기</a></span>
+								</p>	
+								<p>
+									<span>진행중인 공고 <a href="<c:url value='/hnmanage.do' />">${numOfcurrHn}건</a></span>
+								</p>
+								<p>
+									<span>미열람 입사지원 <a href="<c:url value='/hnmanage.do' />">${numOfUnopened}건</a></span>
+								</p>
+									<a href='/assj/logout2.do' class="btn btn-primary btn-sm btn-block">로그아웃</a>
 							</div>
+							
+							<!-- 슬라이드 -->
+							<fieldset id="slide" style="width: 100%; height: 210px; position: relative;">
+								<div id="carousel-example-generic" class="carousel slide">
+									<div class="carousel-inner" style="height: 210px">
+										<div class="item active">
+											<img class="img-responsive" src="<c:url value='/images/slide1.png'/>" alt="slide1">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide2.png'/>" alt="slide2">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide3.png'/>" alt="slide3">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide4.png'/>" alt="slide4">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide5.png'/>" alt="slide5">
+										</div>
+										<div class="item">
+											<img class="img-responsive" src="<c:url value='/images/slide6.png'/>" alt="slide6">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<!-- 슬라이드 끝 -->
 						</c:if>
 					</div>
 

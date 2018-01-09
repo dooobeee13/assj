@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
@@ -178,4 +179,85 @@ public class MenuController {
 		return "common/message";
 	}
 	
+	@RequestMapping("/psMemManage.do")
+	public String psMemManage(@ModelAttribute SearchVO searchVO,Model model) {
+		logger.info("개인회원 관리");
+		
+		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
+		pagingInfo.setTotalRecord(memberService.psMemTotalCount(searchVO)); //총 레코드 수
+		
+		//SearchVo에 값 셋팅
+		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("searchVO 최종값 : {}", searchVO);
+		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
+						
+		List<Map<String,Object>> list= memberService.psMemManage(searchVO);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo",pagingInfo);
+
+		return "member/menu/psMemManage";
+	}
+	
+	@RequestMapping("/cmMemManage.do")
+	public String cmMemManage(@ModelAttribute SearchVO searchVO,Model model) {
+		logger.info("기업회원 관리");
+		
+		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
+		pagingInfo.setTotalRecord(memberService.cmMemTotalCount(searchVO)); //총 레코드 수
+		
+		//SearchVo에 값 셋팅
+		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("searchVO 최종값 : {}", searchVO);
+		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
+						
+		List<Map<String,Object>> list= memberService.cmMemManage(searchVO);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo",pagingInfo);
+
+		return "member/menu/cmMemManage";
+	}
+	
+	@RequestMapping("/psMemDelete.do")
+	public String psMemDelete(@RequestParam int memNo,Model model) {
+		logger.info("개인회원 삭제 파라미터 memNo={}",memNo);
+		
+		int cnt=memberService.psMemDelete(memNo);
+		String msg="개인회원 삭제실패",url="/member/menu/psMemManage.do";
+		if(cnt>0) {
+			msg="개인회원 삭제성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+
+	@RequestMapping("/cmMemDelete.do")
+	public String cmMemDelete(@RequestParam int cmNo,Model model) {
+		logger.info("기업회원 삭제 파라미터 cmNo={}",cmNo);
+		
+		int cnt=memberService.cmMemDelete(cmNo);
+		String msg="기업회원 삭제실패",url="/member/menu/cmMemManage.do";
+		if(cnt>0) {
+			msg="기업회원 삭제성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
 }

@@ -1,48 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:forEach begin="1" end="2">
+<c:forEach var="vo" items="${hnList}" begin="0" end="3">
 	<div class="media">
 		<div class="media-left">
-			<a href="#"> <img
-				src="https://jpassets.jobplanet.co.kr/production/uploads/company/logo/327158/thumb_KakaoTalk_20171101_180550094.jpg"
-				class="media-object">
+			<a href="#"> 
+				<img src="<c:url value='/images/cmLogo/${vo.compMemberVo.cmLogo}'/>" class="media-object">
 			</a>
 		</div>
 
 		<div class="media-body">
 			<div class="media-heading">
-				<a href="#">광고 기획자에 도전하실 분 모십니다! (신입)</a> &nbsp;<span
-					class="label label-warning">D-20 (채용시 마감)</span>
+				<a href="#">${vo.hnNotititle }</a> &nbsp;
+				<c:if test="${vo.dday == 0}">
+				<span class="label label-danger">오늘 마감</span>
+				</c:if>
+				<c:if test="${vo.dday == 1}">
+				<span class="label label-danger">내일 마감</span>
+				</c:if>
+				<c:if test="${vo.dday > 1}">
+				<span class="label label-warning">D - ${vo.dday}</span>
+				</c:if>
 			</div>
-			<div>(주)이루다웍스</div>
-			<div>
+			<div>${vo.compMemberVo.cmName}</div>
+			<div style="white-space: nowrap; overflow: hidden;">
 				<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;
-				<span class="tags">서울</span> <span class="tags">마케팅</span> <span
-					class="tags">전략마케팅</span> <span class="tags">광고기획/카피라이터</span> <span
-					class="tags">중소기업</span> <span class="tags">신입</span>
-			</div>
-		</div>
-	</div>
-	<div class="media">
-		<div class="media-left">
-			<a href="#"> <img
-				src="https://jpassets.jobplanet.co.kr/production/uploads/company/logo/89723/thumb_______.png"
-				class="media-object">
-			</a>
-		</div>
-
-		<div class="media-body">
-			<div class="media-heading">
-				<a href="#">회계 담당자</a> &nbsp;<span class="label label-warning">D-35
-					(채용시 마감)</span>
-			</div>
-			<div>라이엇게임즈코리아</div>
-			<div>
-				<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;
-				<span class="tags">서울</span> <span class="tags">회계사</span> <span
-					class="tags">외국계 (외국 법인기업)</span> <span class="tags">경력</span>
+				<span class="tags">${vo.areaVo.topAreaVo.areaName}</span><span class="tags"><c:if test="${empty vo.careerVo}">경력무관</c:if><c:if test="${!empty vo.careerVo}">${vo.careerVo.careerName}</c:if>
+				</span><c:forEach var="tag" items="${vo.occupationList}"><span class="tags">${tag.occuName}</span></c:forEach><c:forEach var="tag" items="${vo.sectorList}" ><span class="tags">${tag.secName}</span></c:forEach>
+					
 			</div>
 		</div>
 	</div>
 </c:forEach>
+
+	

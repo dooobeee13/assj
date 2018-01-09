@@ -82,14 +82,26 @@
 	background-color: #fff;
 }
 
+.top .searchCategory .panel-body {
+	padding: 15px 0;
+}
+
+.top .searchCategory .panel-body span {
+	float: left;
+}
+
+.top .searchCategory .panel-body span a {
+	color: black;
+}
+
 .top .searchCategory .panel-body span:before {
 	content: '';
-	padding-right: 1px;
+	padding-right: 6px;
 }
 
 .top .searchCategory .panel-body span:after {
 	content: '';
-	padding-left: 1px;
+	padding-left: 6px;
 }
 
 .top .navbar-collapse .searchjob{
@@ -126,20 +138,22 @@
 			<div class="row">
 				<div class="col-md-2 col-md-offset-3">
 					<a href="<c:url value='/index.do' />">
-						<img class="img-responsive" src="<c:url value='/images/assj_logo2.png' />" alt="임시 로고">
+						<img class="img-responsive" src="<c:url value='/images/assj_logo2.png' />" alt="알쓸신잡 로고" style="position: relative;bottom: 3px;">
 					</a>
 				</div>
 				<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->
+				<form action="/assj/search.do" method="post">
 				<div class="col-md-4 col-sm-6">
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+						<input type="text" name="keyword" class="form-control" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<button class="btn btn-default" type="submit">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</span>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</header>
@@ -163,51 +177,68 @@
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">지역별</div>
 								<div class="panel-body">
-									<span>서울</span> <span>경기</span> <span>인천</span> <span>부산</span>
-									<span>대구</span> <span>대전</span> <span>광주</span> <span>울산</span>
-									<span>강원</span> <span>경남</span> <span>경북</span> <span>전남</span>
-									<span>전북</span> <span>충남</span> <span>충북</span> <span>제주</span>
-									<span>세종</span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=1">서울</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=2">경기</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=3">인천</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=4">부산</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=5">대구</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=7">대전</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=6">광주</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=8">울산</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=10">강원</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=11">경남</a></span>
+								    <span><a href="/assj//hireInfo/home.do?type=area&val=12">경북</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=13">전남</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=14">전북</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=15">충남</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=area&val=16">충북</a></span> <span><a href="/assj//hireInfo/home.do?type=area&val=17">제주</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=area&val=9">세종</a></span>
 								</div>
 							</div>
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">직업별(직종)</div>
 								<div class="panel-body">
-									<span>경영·사무</span> <span>생산·제조</span> <span>건설</span> <span>영업·고객상담</span>
-									<span>IT·인터넷</span> <span>유통·무역</span> <span>디자인</span> <span>미디어</span>
-									<span>서비스</span> <span>교육</span> <span>의료</span> <span>전문직</span>
-									<span>특수계층·공공</span>
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=1">경영·사무</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=8">생산·제조</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=9">건설</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=2">영업·고객상담</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=3">IT·인터넷</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=10">유통·무역</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=4">디자인</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=11">미디어</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=5">서비스</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=12">교육</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=7">의료</a></span> <span><a href="/assj//hireInfo/home.do?type=topOccu&val=6">전문직</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topOccu&val=13">특수계층·공공</a></span>
 								</div>
 							</div>
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">기업별</div>
 								<div class="panel-body">
-									<span>대기업</span> <span>외국계 기업</span> <span>공사·공기업·공공기관</span> <span>상장기업</span>
-									<span>강소·인증기업</span>
+									<span><a href="/assj//hireInfo/home.do?type=cs&val=1">대기업</a></span> <span><a href="/assj//hireInfo/home.do?type=cs&val=5">외국계 기업</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=cs&val=2">중견기업</a></span> <span><a href="/assj//hireInfo/home.do?type=cs&val=4">중소기업</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=cs&val=10">공사·공기업</a></span> <span><a href="/assj//hireInfo/home.do?type=cs&val=7">벤처</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=cs&val=3">강소기업</a></span><span><a href="/assj//hireInfo/home.do?type=cs&val=6">코스닥</a></span>
 								</div>
 							</div>
 							<div class="clearfix"></div>
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">전공별</div>
 								<div class="panel-body">
-									<span>기계공학</span> <span>전기공학</span> <span>건축토목</span> <span>재료금속</span>
-									<span>산업공학</span> <span>법학상경</span> <span>어문학</span> <span>화학공학</span>
-									<span>생명공학</span> <span>디자인</span> <span>컴퓨터공학</span> <span>전공무관</span>
+									<span><a href="/assj//hireInfo/home.do?type=major&val=46">기계공학</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=41">전기공학</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=major&val=43">건축토목</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=38">재료금속</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=major&val=45">산업공학</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=66">사범</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=major&val=26">어문학</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=37">컴퓨터공학</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=major&val=40">화학공학</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=39">생명공학</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=major&val=67">의학/약학</a></span> <span><a href="/assj//hireInfo/home.do?type=major&val=10">법학</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=major&val=52">경영</a></span> 
 								</div>
 							</div>
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">산업별(업종)</div>
 								<div class="panel-body">
-									<span>제조·화학</span> <span>서비스업</span> <span>은행·금융업</span> <span>IT·통신</span>
-									<span>미디어</span> <span>의료·제약·복지</span> <span>건설업</span> <span>판매·유통</span>
-									<span>교육업</span> <span>기관·협회</span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=3">제조·화학</a></span> <span><a href="/assj//hireInfo/home.do?type=topSec&val=1">서비스업</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=9">은행·금융업</a></span> <span><a href="/assj//hireInfo/home.do?type=topSec&val=5">IT·통신·웹</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=6">건설업</a></span><span><a href="/assj//hireInfo/home.do?type=topSec&val=2">의료·제약·복지</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=8">미디어·디자인</a></span><span><a href="/assj//hireInfo/home.do?type=topSec&val=7">교육업</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=4">판매·유통</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=topSec&val=10">기관·협회</a></span>
 								</div>
 							</div>
 							<div class="panel panel-default col-md-4 total">
 								<div class="panel-heading">학력별</div>
 								<div class="panel-body">
-									<span>고졸채용</span> <span>2·3년제 채용</span> <span>4년제졸업</span> <span>석박사채용</span>
-									<span>대구</span> <span>대전</span> <span>광주</span> <span>울산</span>
+									<span><a href="/assj//hireInfo/home.do?type=edu&val=1">고졸채용</a></span> <span><a href="/assj//hireInfo/home.do?type=edu&val=2">2·3년제 채용</a></span> 
+									<span><a href="/assj//hireInfo/home.do?type=edu&val=3">4년제졸업</a></span> <span><a href="/assj//hireInfo/home.do?type=edu&val=4">석사채용</a></span>
+									<span><a href="/assj//hireInfo/home.do?type=edu&val=5">박사채용</a></span>
 								</div>
 							</div>
 	
@@ -222,6 +253,7 @@
 					</li>
 					<li class="searchjob"><a href="<c:url value='/TalentManagement/final-main.do'/>">인재검색</a></li>
 					<li class="searchjob"><a href="<c:url value='/newsInfo/newsmain.do'/>">공채 뉴스</a></li>
+					<li class="searchjob"><a href="<c:url value='/board/freeBoardList.do'/>">자유게시판</a></li>
 					<c:if test="${!empty sessionScope.cmMemberVO.cmId}">
 					<li class="searchjob"><a href='<c:url value="/hire_noti/hire1.do" />'>공고등록</a></li>
 					</c:if>

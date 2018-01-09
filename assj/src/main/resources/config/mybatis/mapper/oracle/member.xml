@@ -93,6 +93,46 @@
 		delete from scrap where hn_no=#{hnNo}
 	</delete>
 	
+	<select id="psMemManage" resultType="map" parameterType="searchVO">
+		select * from member 
+		where mem_id like '%' || #{searchKeyword} || '%'
+		order by mem_no desc
+	</select>	
+	<select id="psMemTotalCount" resultType="int" parameterType="searchVO">
+		select count(*) from member 
+		where mem_id like '%' || #{searchKeyword} || '%'
+	</select>
+	<select id="cmMemManage" resultType="map" parameterType="searchVO">
+		select * from comp_member 
+		where cm_id like '%' || #{searchKeyword} || '%'
+		order by cm_no desc
+	</select>
+	<select id="cmMemTotalCount" resultType="int" parameterType="searchVO">
+		select count(*) from comp_member 
+		where cm_id like '%' || #{searchKeyword} || '%'
+	</select>
+	
+	<delete id="psMemDelete" parameterType="int">
+		delete from member where mem_no=#{memNo}
+	</delete>
+	<delete id="cmMemDelete" parameterType="int">
+		delete from comp_member where cm_no=#{cmNo}
+	</delete>
+
+	<select id="countResumeByMemNo" resultType="_int">
+		select count(*) from resume
+		where mem_no = #{memNo}
+	</select>
+	
+	<select id="countScrapByMemNo" resultType="_int">
+		select count(*) from scrap
+		where mem_no = #{memNo}
+	</select>
+	
+	<select id="empSupCount" parameterType="int" resultType="int">
+		select count(*) from emp_sup where mem_no=#{memNo}
+	</select>
+	
 </mapper>
 
 

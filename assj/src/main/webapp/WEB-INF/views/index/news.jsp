@@ -18,15 +18,22 @@
 	
 </style>
 <div class="row news">
-	<c:forEach begin="1" end="8">
+	<c:forEach var="news" items="${newsList}">
 		<div class="col-sm-3 col-xs-6">
 			<div>
-				<img class="img-responsive"
-					src="//file1.jobkorea.co.kr/GoodJob/News/13671-13680/13671/Image.jpg"
-					alt='직장인 및 대학생 37.2% "연말이라 우울"'>
+				<a href="<c:url value='/newsInfo/newsmain.do'/>">
+					<img class="img-responsive" src=
+					<c:if test="${empty news.newsUrl}">
+						"<c:url value='/images/noimage2.gif'/>"
+					</c:if>
+					<c:if test="${!empty news.newsUrl}">
+						"<c:url value='/imageTest/${news.newsUrl}'/>"
+					</c:if>
+					 alt='${news.newsTitle}"'>
+				</a>
 			</div>
 			<div class="txBx">
-				<p><a href="#">직장인 및 대학생 37.2% "연말이라 우울"</a></p>
+				<p><a href="<c:url value='/newsInfo/newsmain.do'/>">${news.newsTitle}</a></p>
 			</div>
 		</div>
 	</c:forEach>

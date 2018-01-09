@@ -46,10 +46,10 @@ public class HireNotiController {
 	
 	
 	@RequestMapping(value="/hire1.do", method=RequestMethod.GET)
-	public String hireNoti1() {
-		
+	public String hireNoti1(Model model) {
 		logger.info("공고 등록 정보");
-		
+
+		model.addAttribute("topIndex", 1);
 		return "hire_noti/hire1";
 	}
 	

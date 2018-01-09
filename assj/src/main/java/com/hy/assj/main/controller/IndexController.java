@@ -23,10 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.hireInfo.model.HireInfoService;
+import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.main.model.MHireNotiVO;
+import com.hy.assj.main.model.MNewsVO;
+import com.hy.assj.main.model.MNoticeVO;
+import com.hy.assj.main.model.MOccupationVO;
+import com.hy.assj.main.model.MSectorsVO;
 import com.hy.assj.main.model.MainService;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.recruit.model.RHireNotiVO;
 import com.hy.assj.vo.AreaVO;
 import com.hy.assj.vo.OccupationVO;
 
@@ -46,11 +52,31 @@ public class IndexController {
 	private MainService mainService;
 	
 	@RequestMapping(value="/index.do",method=RequestMethod.GET)
-	public String index_get(Model model) {
+	public String index_get(HttpSession session, Model model) {
 		logger.info("메인페이지 요청(get)");
-		List<MHireNotiVO> hnList = mainService.selectHireNotiList();
+		//List<MHireNotiVO> hnList = mainService.selectHireNotiList();
+		List<RHireNotiVO> hnList = mainService.selectHireNotiList();
+		List<MNoticeVO> noticeList = mainService.getRecentNoticeList();
+		List<MNewsVO> newsList = mainService.getRecentNews();
+		
+		MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
+		CmMemberVO cmVo = (CmMemberVO) session.getAttribute("cmMemberVO");
+		
+		if (memVo != null) {
+			int memNo = memVo.getMemNo();
+			model.addAttribute("numOfResume", mainService.countResumeByMemNo(memNo));
+			model.addAttribute("numOfScrap", mainService.countScrapByMemNo(memNo));
+		}
+		
+		if (cmVo != null) {
+			int cmNo = cmVo.getCmNo();
+			model.addAttribute("numOfcurrHn", mainService.countCurrHireNoti(cmNo));
+			model.addAttribute("numOfUnopened", mainService.countUnopendEs(cmNo));
+		}
 		
 		model.addAttribute("hnList", hnList);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
 		return "index";
 	}
 	
@@ -68,7 +94,7 @@ public class IndexController {
 		if(result==MemberService.LOGIN_OK) {
 			//로그인 성공
 			MemberVO memberVO=memberService.selectMember(vo.getMemId());
-			
+	
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
 
@@ -84,6 +110,7 @@ public class IndexController {
 				ck.setMaxAge(0);   //쿠키 삭제
 				response.addCookie(ck);				
 			}
+
 			
 			msg=memberVO.getMemName()+"님 로그인되었습니다.";
 			url="/index.do";
@@ -220,5 +247,30 @@ public class IndexController {
 		return  "index/cateArea";
 	}
 	
+	@RequestMapping(value = "search.do", method = RequestMethod.POST)
+	public String search(@RequestParam(required=false, defaultValue="") String keyword,
+			Model model) {
+		if (keyword.equals("")) {
+			model.addAttribute("msg","검색어를 입력해 주세요");
+			model.addAttribute("url","/index.do");
+			return "common/message";
+		} 
+		List<MNewsVO> newsList = mainService.selectNewsByKeyword(keyword);
+		List<MOccupationVO> occuList = mainService.selectOccuByKeyword(keyword);
+		List<MSectorsVO> secList = mainService.selectSecByKeyword(keyword);
+		List<RHireNotiVO> hnList = mainService.selectHireNotiByKeyword(keyword);
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("occuList", occuList);
+		model.addAttribute("secList", secList);
+		model.addAttribute("hnList", hnList);
+		
+		System.out.println(newsList);
+		System.out.println(occuList);
+		System.out.println(secList);
+		System.out.println(hnList);
+		
+		return "index/search";
+	}
 	
 }

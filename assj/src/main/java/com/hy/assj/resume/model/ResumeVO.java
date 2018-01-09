@@ -1,15 +1,20 @@
 package com.hy.assj.resume.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
 
+
+/**
+ * @author Administrator
+ *
+ */
 public class ResumeVO {
 	
 	private int resumeNo;
 	private int memNo;
 	private String resumeTitle;
 	private String resumeName;
-	private String resumeBirth;
+	private Date resumeBirth;
 	private String resumeAddr;
 	private String resumeDetailaddr;
 	private String resumePhone;
@@ -68,11 +73,11 @@ public class ResumeVO {
 		this.resumeName = resumeName;
 	}
 	
-	
-	public String getResumeBirth() {
+
+	public Date getResumeBirth() {
 		return resumeBirth;
 	}
-	public void setResumeBirth(String resumeBirth) {
+	public void setResumeBirth(Date resumeBirth) {
 		this.resumeBirth = resumeBirth;
 	}
 	public String getResumeAddr() {
@@ -285,6 +290,7 @@ public class ResumeVO {
 				+ resumePhoto + ", occuNo=" + occuNo + ", secNo=" + secNo + ", resumeLastupdate=" + resumeLastupdate
 				+ "]";
 	}
+	
 
 	
 	

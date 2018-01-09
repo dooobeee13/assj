@@ -85,7 +85,7 @@
 							<th>이름</th>
 							<td>${map['RESUME_NAME']}</td>
 							<th>나이/성별</th>
-							<td><fmt:formatDate value="${map['RESUME_BIRTH']}" pattern="YYYY"/>년(${age}세)<span class="res-cut">&nbsp;|&nbsp;</span>${map['RESUME_GENDER']}
+							<td><fmt:formatDate value="${map['RESUME_BIRTH']}" pattern="YYYY"/>년(${map['age']}세)<span class="res-cut">&nbsp;|&nbsp;</span>${map['RESUME_GENDER']}
 							</td>
 						</tr>
 						<tr>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hy.assj.common.SearchVO;
 import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.notice.model.NoticeVO;
@@ -131,6 +132,41 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteScrap(int hnNo) {
 		return memberDao.deleteScrap(hnNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> psMemManage(SearchVO searchVO) {
+		return memberDao.psMemManage(searchVO);
+	}
+
+	@Override
+	public List<Map<String, Object>> cmMemManage(SearchVO searchVO) {
+		return memberDao.cmMemManage(searchVO);
+	}
+
+	@Override
+	public int psMemTotalCount(SearchVO searchVO) {
+		return memberDao.psMemTotalCount(searchVO);
+	}
+
+	@Override
+	public int cmMemTotalCount(SearchVO searchVO) {
+		return memberDao.cmMemTotalCount(searchVO);
+	}
+
+	@Override
+	public int psMemDelete(int memNo) {
+		return memberDao.psMemDelete(memNo);
+	}
+
+	@Override
+	public int cmMemDelete(int cmNo) {
+		return memberDao.cmMemDelete(cmNo);
+	}
+
+	@Override
+	public int empSupCount(int memNo) {
+		return memberDao.empSupCount(memNo);
 	}
 
 }

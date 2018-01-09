@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hy.assj.common.SearchVO;
 import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 
 @Repository
@@ -77,6 +78,49 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int deleteScrap(int hnNo) {
 		return getSqlSession().delete(namespace+".deleteScrap",hnNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> psMemManage(SearchVO searchVO) {
+		return getSqlSession().selectList(namespace+".psMemManage",searchVO);
+	}
+
+	@Override
+	public List<Map<String, Object>> cmMemManage(SearchVO searchVO) {
+		return getSqlSession().selectList(namespace+".cmMemManage",searchVO);
+	}
+
+	@Override
+	public int psMemTotalCount(SearchVO searchVO) {
+		return getSqlSession().selectOne(namespace+".psMemTotalCount",searchVO);
+	}
+
+	@Override
+	public int cmMemTotalCount(SearchVO searchVO) {
+		return getSqlSession().selectOne(namespace+".cmMemTotalCount",searchVO);
+	}
+
+	@Override
+	public int psMemDelete(int memNo) {
+		return getSqlSession().delete(namespace+".psMemDelete",memNo);
+	}
+
+	@Override
+	public int cmMemDelete(int cmNo) {
+		return getSqlSession().delete(namespace+".cmMemDelete",cmNo);
+	}
+	public int countResumeByMemNo(int memNo) {
+		return getSqlSession().selectOne(namespace + ".countResumeByMemNo", memNo);
+	}
+
+	@Override
+	public int countScrapByMemNo(int memNo) {
+		return getSqlSession().selectOne(namespace + ".countScrapByMemNo", memNo);
+	}
+
+	@Override
+	public int empSupCount(int memNo) {
+		return getSqlSession().selectOne(namespace+".empSupCount",memNo);
 	}
 	
 }
