@@ -13,14 +13,26 @@
 <script type="text/javascript">
 
 </script>
+<style>
+	.container fieldset{
+		padding:50px;
+		background-color:#ffff;
+	}
+	.container table th{
+		background-color:#dedbdb;
+		text-align:center;
+	}
+	.container table td{
+		text-align:center;
+	}
+	.divBtn{
+		text-align: right;
+	}
+</style>
 </head>
 <body>
 
 <c:import url="../../index/top.jsp" /> 
-
-
-
-
 
 <div class="container">
    
@@ -29,7 +41,11 @@
 <c:import url="../boardSide.jsp"></c:import>
    
    		<div class="col-lg-9 col-md-9">
-         	<table class="table">
+   			<fieldset>
+   			<h1>자유게시판</h1>
+   			<br>
+   			<hr>
+         	<table class="table table-hover">
 			<colgroup>
 				<col style="width:10%">
 				<col style="width:40%">
@@ -70,8 +86,9 @@
 		</tbody>
    			</table>
    			<div class="divBtn">
-    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
-</div>
+		    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
+			</div>
+		</fieldset>
         </div>
    </div>  	
  
