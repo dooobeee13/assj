@@ -13,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hy.assj.cmMember.model.CmMemberService;
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.common.PaginationInfo;
 import com.hy.assj.common.SearchVO;
 import com.hy.assj.common.Utility;
@@ -22,6 +25,8 @@ import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.hirenoti.model.HireNotiVO;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
+import com.hy.assj.question.model.QuestionService;
+import com.hy.assj.question.model.QuestionVO;
 
 @Controller
 @RequestMapping("/member/menu")
@@ -32,10 +37,45 @@ public class MenuController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private CmMemberService cmMemberService;
+	
+	@Autowired
+	private QuestionService questionServicce;
+	
 	@RequestMapping(value="/onenone.do",method=RequestMethod.GET)
-	public String onenone_get() {
-		logger.info("1:1이메일문의 화면");
+	public String onenone_get(HttpSession session,Model model) {
+		logger.info("1:1이메일문의 화면(get)");
+		
+		if(session.getAttribute("memberVO")!=null) {			
+			MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+			MemberVO vo=memberService.selectMember(memberVO.getMemId());
+			model.addAttribute("vo",vo);
+		}else if(session.getAttribute("cmMemberVO")!=null) {
+			CmMemberVO cmMemberVO=(CmMemberVO) session.getAttribute("cmMemberVO");
+			CmMemberVO cmVo=cmMemberService.selectMember(cmMemberVO.getCmId());
+			model.addAttribute("cmVo",cmVo);
+		}
+		
 		return "member/menu/onenone";	
+	}
+	
+	@RequestMapping(value="/onenone.do",method=RequestMethod.POST)
+	public String onenone_post(@ModelAttribute QuestionVO questionVo,Model model) {
+		logger.info("이메일 문의(post) 파라미터 questionVO={}",questionVo);
+		
+		int cnt=questionServicce.insertQuestion(questionVo);
+		
+		String msg="이메일 문의 실패했습니다",url="/member/menu/onenone.do";
+		if(cnt>0) {
+			msg="빠른 답변해드리도록 최선을 다하겠습니다.감사합니다";
+			url="/index.do";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 	@RequestMapping("/psService.do")
@@ -136,6 +176,88 @@ public class MenuController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 
+		return "common/message";
+	}
+	
+	@RequestMapping("/psMemManage.do")
+	public String psMemManage(@ModelAttribute SearchVO searchVO,Model model) {
+		logger.info("개인회원 관리");
+		
+		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
+		pagingInfo.setTotalRecord(memberService.psMemTotalCount(searchVO)); //총 레코드 수
+		
+		//SearchVo에 값 셋팅
+		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("searchVO 최종값 : {}", searchVO);
+		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
+						
+		List<Map<String,Object>> list= memberService.psMemManage(searchVO);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo",pagingInfo);
+
+		return "member/menu/psMemManage";
+	}
+	
+	@RequestMapping("/cmMemManage.do")
+	public String cmMemManage(@ModelAttribute SearchVO searchVO,Model model) {
+		logger.info("기업회원 관리");
+		
+		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
+		pagingInfo.setTotalRecord(memberService.cmMemTotalCount(searchVO)); //총 레코드 수
+		
+		//SearchVo에 값 셋팅
+		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("searchVO 최종값 : {}", searchVO);
+		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
+						
+		List<Map<String,Object>> list= memberService.cmMemManage(searchVO);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingInfo",pagingInfo);
+
+		return "member/menu/cmMemManage";
+	}
+	
+	@RequestMapping("/psMemDelete.do")
+	public String psMemDelete(@RequestParam int memNo,Model model) {
+		logger.info("개인회원 삭제 파라미터 memNo={}",memNo);
+		
+		int cnt=memberService.psMemDelete(memNo);
+		String msg="개인회원 삭제실패",url="/member/menu/psMemManage.do";
+		if(cnt>0) {
+			msg="개인회원 삭제성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+	}
+
+	@RequestMapping("/cmMemDelete.do")
+	public String cmMemDelete(@RequestParam int cmNo,Model model) {
+		logger.info("기업회원 삭제 파라미터 cmNo={}",cmNo);
+		
+		int cnt=memberService.cmMemDelete(cmNo);
+		String msg="기업회원 삭제실패",url="/member/menu/cmMemManage.do";
+		if(cnt>0) {
+			msg="기업회원 삭제성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
 		return "common/message";
 	}
 }

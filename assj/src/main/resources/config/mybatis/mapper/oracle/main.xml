@@ -6,7 +6,8 @@
 	<select id="selectHireNotiList" resultType="MHireNotiVO">
 		select h.hn_no, c.CM_HOMEPAGE, c.CM_LOGO, c.cm_name, h.HN_NOTITITLE, h.hn_deadline - trunc(sysdate) dday
 		from hire_noti h join comp_member c on h.cm_no = c.cm_no
-		where h.hn_deadline - trunc(sysdate) >= 0
+		where h.hn_deadline - trunc(sysdate) >= 0 and sysdate > h.hn_start
+		order by h.hn_no desc
 	</select>
 </mapper>
 

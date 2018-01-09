@@ -76,7 +76,7 @@
 	<c:forEach var='i' begin='${pagingInfo.firstPage}' 
 		end='${pagingInfo.lastPage}'>
 		<c:if test='${i==pagingInfo.currentPage}'>
-			<li><a href="javascript:void(0)" style="background-color:#607D8B; color:white">${i }</a></li>
+			<li><a href="javascript:void(0)" style="background-color:#337ab7; color:white">${i }</a></li>
 		</c:if>
 		<c:if test='${i!=pagingInfo.currentPage}'>
 			<li><a href="javascript:void(0)" onclick="pageFunc(${i })">${i }</a></li>

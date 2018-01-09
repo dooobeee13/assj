@@ -48,6 +48,50 @@ $(function(){
 		});
 	});
 	
+	
+	
+	//관리자 채팅
+	$('#insertChat').click(function(){
+		var content=$('#chatContent').val();
+		if(content==''){
+			alert('내용이 입력되지 않았습니다.');
+			return false;
+		}
+		$.ajax({
+			type:"POST",
+			url:"<c:url value='/administrator/adminChat.do'/>",
+			data:{"userid":adminid,
+				"content":content	
+			},
+			success:function(data){
+				
+			},
+			error:function(){
+				
+			}
+		});
+		
+	});
+	
+	//첫 목록 가져오기
+	$.ajax({
+		url:"<c:url value='/administrator/firstChatList.do'/>",
+		type:"get",
+		success:function(data){
+			$.each(data,function(idx, item){
+				addChat(this.ADMIN_NAME,this.CHAT_CONTENT,adminid);
+				lastNo=this.CHAT_NO;
+			});
+		},
+		error:function(){
+			
+		}
+	});
+	
+	setInterval(function(){
+		LastChat(lastNo);
+	},300)
+	
 	//관리자 생성 클릭 window.open 형식
 	$('.CreateAdmin').click(function(){
 		window.open('<c:url value="/administrator/login/createadmin.do"/>','CreateAdminAccount','width=500, height=400, top=300, left=650, location=no,menubar=no, status=no, toolbar=no');
@@ -56,7 +100,7 @@ $(function(){
 	//로고 글릭
 	$('.MainLogo').click(function(){
 		location.href='<c:url value="/administrator/adminmain.do"/>';
-	})
+	});
 	
 	
 	//채팅 모달
@@ -86,6 +130,7 @@ $(function(){
 
 	    object.css({'width':w,'height':h}); 
 	    object.fadeIn(500); 
+	    $('.ChatList').scrollTop($('.ChatList')[0].scrollHeight);
 	}
 	function bgLayerClear(){
 	    var object = $('.bgLayer');
@@ -102,8 +147,9 @@ $(function(){
 		$(this).css('opacity','1');
 	});
 });
-
+var adminid = '${sessionScope.adminid}';
 window.onload=function(){
+	
 	//기업 통계 데이터
 	var pieData = {
 			  대기업:26,
@@ -128,6 +174,10 @@ window.onload=function(){
 		});
 	
 	//회원 통계
+	var date = new Date();
+	var month = date.getMonth()+1;
+	var day= date.getDay();
+	var today = month+"/"+day;
 	var chart = c3.generate({
 		  bindto: "#chart",
 		  data: {
@@ -136,8 +186,14 @@ window.onload=function(){
 		      ['가입자 수', 50, 20, 133, 76, 102, 67],
 		      ['탈퇴 수', 27, 34, 12, 43, 52, 39]
 		    ]
-		  }
+		  },axis: {
+		        x: {
+		            type: 'category',
+		            categories: ['12/31', month+"/"+(day-4), month+"/"+(day-3), month+"/"+(day-2), month+"/"+(day-1), month+"/"+day ]
+		        }
+		    }
 		});
+	
 }
 function openNav() {
     document.getElementById("mySidenav").style.left = "83%";
@@ -147,10 +203,67 @@ function closeNav() {
     document.getElementById("mySidenav").style.left = "100%";
 }
 
-//모달쪽
+function getDay(number){
+	var date = new Date();
+	var month = date.getMonth()+1;
+}
 
+function LastChat(no){
+	$.ajax({
+		url:"<c:url value='/administrator/LastChat.do'/>",
+		type:"post",
+		data:{"lastNo":no},
+		success:function(data){
+			$.each(data,function(){
+				addChat(this.ADMIN_NAME,this.CHAT_CONTENT,'${sessionScope.adminid}');
+				lastNo=this.CHAT_NO;
+			});
+		},
+		error:function(){
+			
+		}
+	});
+}
+
+function addChat(userid, content,admin){
+	var addList="";
+	if(admin==userid){
+		addList+='<div class="chatInnerDiv">'+
+		'<h2 style="font-size:1em; text-align:right;font-weight: bold;margin-top:0;">내가 보낸 메세지</h2>'+
+		'<p class="Mycontent">'+content+'</p>'+
+		'</div>';
+	}else{
+		addList+='<div class="chatInnerDiv">'+
+		'<div class="chatInnerTitle"><img src="${pageContext.request.contextPath}/icon/beb42.jpeg"  style="float:left;"><h2>'+userid+'</h2></div>'+
+		'<p class="chatInnerContent">'+content+'</p>'+
+		'</div>';
+	}
+	
+	$('.ChatList').append(addList);
+	$('#chatContent').val("");
+	$('.ChatList').scrollTop($('.ChatList')[0].scrollHeight);
+}
+function EnterPress(){
+	var content=$('#chatContent').val();
+	if(content==''){
+		alert('내용이 입력되지 않았습니다.');
+		return false;
+	}
+	$.ajax({
+		type:"POST",
+		url:"<c:url value='/administrator/adminChat.do'/>",
+		data:{"userid":adminid,
+			"content":content	
+		},
+		success:function(data){
+			
+		},
+		error:function(){
+			
+		}
+	});
+}
 </script>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -196,14 +309,14 @@ function closeNav() {
 					</ul>
 					<li class="col-li-1-nb s3" style="cursor: pointer;"><div class="col-div-80-100">회원관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o3">
-						<li>일반회원</li>
-						<li>기업회원</li>
+						<li><a href="/assj/member/menu/psMemManage.do">개인회원</a></li>
+						<li><a href="/assj/member/menu/cmMemManage.do">기업회원</a></li>
 					</ul>
 					<li class="col-li-1-nb s4" style="cursor: pointer;"><div class="col-div-80-100">커뮤니티관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o4">
-						<li>게시판</li>
-						<li><a href="/assj/member/menu/noticeEditOut.do">공지글</a></li>
-						<li>일반글</li>
+						<li><a href="/assj/member/menu/noticeEditOut.do">공지게시판</a></li>
+						<li><a href="/assj/member/menu/adminQna.do">Q&A게시판</a></li>
+						<li><a href="/assj/member/menu/question.do">이메일문의</a></li>
 						<li><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
 						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
 					</ul>
@@ -304,7 +417,7 @@ function closeNav() {
 		  <a href="#"></a>
 		  <a href="<c:url value='/index.do'/>">공채 홈페이지 가기</a>
 		  <a href="#" class="CreateAdmin">새로운 관리자 생성</a>
-		  <a href="#">로그아웃</a>
+		  <a href="<c:url value='/administrator/login/adminLogout.do'/>">로그아웃</a>
 		</div>
 	</article>
 	<div id="modalLayer">
@@ -316,34 +429,19 @@ function closeNav() {
 				<h2 class="divMainbox-title" style="padding-left:1em; text-align:center;">관리자 채팅</h2>
 			</div>
 		  		<!-- 채팅용 화면 -->
-		    	<div style="width:93%;height:80%;overflow-y:scroll; border:1px solid #b8b8b8;padding: 1em; background:white; overflow-x:hidden;">
-		    	<!-- 개인 채팅 내용 -->
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<h2 style="font-size:1em; text-align:right;font-weight: bold;margin-top:0;">내가 보낸 메세지</h2>
-		    			<p class="Mycontent">하앍 여러분이 굳이 말 안해도 전 다 사랑해옇ㅎㅎㅎㅎㅎㅎ</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
-		    		<div class="chatInnerDiv">
-		    			<div class="chatInnerTitle"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="float:left;"><h2>정채연</h2></div>
-		    			<p class="chatInnerContent">여러분 갓기찬은 제꺼니까 건들지 마세여 다들 늙다리 주제에</p>
-		    		</div>
+		    	<div class="ChatList" style="width:93%;height:80%;overflow-y:scroll; border:1px solid #b8b8b8;padding: 1em; background:white; overflow-x:hidden;">
+			    	<!-- 개인 채팅 내용 -->
+
 		    	</div>
 		    	
 		    	<!-- 채팅판 -->
-		    	<div style="width:93%; padding:1em;">
-		    		<div class="col-div-70-100">
-		    			<textarea rows="7" cols="37" style="resize: none;"></textarea>
-		    		</div>
-		    		<div class="col-div-30-100" style="float:right;">
-		    			<input class="one-button" style="float:right; padding:0.4em; width:60px" type="button" value=" 전 송 ">
-		    		</div>
+		    	<div style="width:93%; padding:1em;">	    	
+			    	<div class="col-div-70-100">
+			    		<textarea id="chatContent" rows="7" cols="37" style="resize: none;" onkeypress="if(event.keyCode==13) {EnterPress();}"></textarea>
+			    	</div>
+			    	<div class="col-div-30-100" style="float:right;">
+			    		<input id="insertChat" class="one-button" style="float:right; padding:0.4em; width:60px" type="button" value=" 전 송 ">
+			    	</div>
 		    	</div>
 		  </div>
 	  	</div>

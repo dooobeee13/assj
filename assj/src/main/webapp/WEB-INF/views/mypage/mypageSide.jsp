@@ -18,20 +18,13 @@
  		
  	 /* 사이드바 스타일 */
   #sidebar-wrapper {
-    /* position:absolute;
-    width: 190px;
-    height: 63%; */
     background: #ffff;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 580px;
+    /* height: 580px; */
   } 
-  
-  
+
    .sidebar-nav {
-   /*  width: 250px;
-    margin: 0;
-    padding: 0; */
     list-style: none;
   }
   

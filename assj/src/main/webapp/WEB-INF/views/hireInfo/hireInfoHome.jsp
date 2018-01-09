@@ -331,8 +331,26 @@
 			var target = label.data('top'); 
 			$('.occu .category.top label[data-top='+ target +']').trigger('click');
 			label.trigger('click');
+		} else if (type == 'topOccu') {
+			$('.sCategory.occu .sCateTitle').trigger('click');
+			$('.sCategory.occu .chklabel[data-top='+val+']').trigger('click');
+		} else if (type == 'topSec') {
+			$('.sCategory.sec .sCateTitle').trigger('click');
+			$('.sCategory.sec .chklabel[data-top='+val+']').trigger('click');
+		} else if (type == 'cs') {
+			$('.sCategory.cs .sCateTitle').trigger('click');
+			$('.sCategory.cs .chklabel[for=cs-'+val+']').trigger('click');
+		} else if (type == 'major') {
+			$('.sCategory.major .sCateTitle').trigger('click');
+			var label = $('.chklabel[for="major-' + val + '"]');
+			var target = label.data('top'); 
+			$('.major .category.top label[data-top='+ target +']').trigger('click');
+			label.trigger('click');
+		} else if (type == 'edu') {
+			$('.sCategory.edu .sCateTitle').trigger('click');
+			$('.sCategory.edu .chklabel[for=education-'+val+']').trigger('click');
 		}
-		
+		$('#searchBtn').trigger('click');
 	})
 </script>
 
@@ -365,15 +383,15 @@
 							<c:import url="/hireInfo/areaList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory top">
+						<div class="col-md-3 sCategory top career">
 							<c:import url="/hireInfo/careerList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory top">
+						<div class="col-md-3 sCategory top edu">
 							<c:import url="/hireInfo/educationList.do" />
 						</div>
 						<div class="clearfix"></div>
-						<div class="col-md-3 sCategory bottom">
+						<div class="col-md-3 sCategory bottom sec">
 							<c:import url="/hireInfo/sectorsList.do" />
 						</div>
 						
@@ -381,11 +399,11 @@
 							<c:import url="/hireInfo/rankList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory bottom">
+						<div class="col-md-3 sCategory bottom major">
 							<c:import url="/hireInfo/majorList.do" />
 						</div>
 						
-						<div class="col-md-3 sCategory bottom">
+						<div class="col-md-3 sCategory bottom cs">
 							<c:import url="/hireInfo/compScaleList.do" />
 						</div>
 						</form>

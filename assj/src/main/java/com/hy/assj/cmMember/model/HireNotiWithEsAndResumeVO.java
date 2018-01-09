@@ -9,8 +9,9 @@ public class HireNotiWithEsAndResumeVO {
 	private String hnNotititle;
 	private Date hnStart;
 	private Date hnDeadline;
+	private String deadlineStatus;
 	
-	private List<CResumeVO> cResumeVoList;
+	private List<CEsWithResumeVO> cEsWithResumeList;
 
 	public int getHnNo() {
 		return hnNo;
@@ -44,18 +45,27 @@ public class HireNotiWithEsAndResumeVO {
 		this.hnDeadline = hnDeadline;
 	}
 
-	public List<CResumeVO> getcResumeVoList() {
-		return cResumeVoList;
+	public String getDeadlineStatus() {
+		return deadlineStatus;
 	}
 
-	public void setcResumeVoList(List<CResumeVO> cResumeVoList) {
-		this.cResumeVoList = cResumeVoList;
+	public void setDeadlineStatus(String deadlineStatus) {
+		this.deadlineStatus = deadlineStatus;
+	}
+
+	public List<CEsWithResumeVO> getcEsWithResumeList() {
+		return cEsWithResumeList;
+	}
+
+	public void setcEsWithResumeList(List<CEsWithResumeVO> cEsWithResumeList) {
+		this.cEsWithResumeList = cEsWithResumeList;
 	}
 
 	@Override
 	public String toString() {
 		return "HireNotiWithEsAndResumeVO [hnNo=" + hnNo + ", hnNotititle=" + hnNotititle + ", hnStart=" + hnStart
-				+ ", hnDeadline=" + hnDeadline + ", cResumeVoList=" + cResumeVoList + "]";
+				+ ", hnDeadline=" + hnDeadline + ", deadlineStatus=" + deadlineStatus + ", cEsWithResumeList="
+				+ cEsWithResumeList + "]";
 	}
 
 }

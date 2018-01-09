@@ -46,7 +46,9 @@
 		vertical-align: bottom;
 		width:60px;
 	}
-	
+	.red{
+		color:red;
+	}
 	 /* 사이드바 스타일 */
   #sidebar-wrapper {
     /* position:absolute;
@@ -153,12 +155,12 @@
 				
 				<c:if test="${!empty param.searchKeyword }">
 					<!-- 검색의 경우 -->
-					<p>검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건 
+					<p><span class="glyphicon glyphicon-search"></span> 검색어 : ${searchVO.searchKeyword}, ${pagingInfo.totalRecord }건 
 						검색되었습니다.</p>
 				</c:if>
 				<c:if test="${empty param.searchKeyword }">
 					<!-- 전체 조회의 경우 -->
-					<p>전체 조회 결과, ${pagingInfo.totalRecord }건 조회되었습니다.</p>
+					<p><span class="glyphicon glyphicon-search"></span> 전체 조회 결과, ${pagingInfo.totalRecord }건 조회되었습니다.</p>
 				</c:if>
 				
 				<div class="divSearch">
@@ -224,7 +226,14 @@
 							</c:if>  
 					 </c:if> 
 					</td>
-					<td>${reboardVO.name}</td>
+					<td>
+						<c:if test="${reboardVO.name=='관리자'}">
+							<span class="red">${reboardVO.name}</span>
+						</c:if>
+						<c:if test="${reboardVO.name!='관리자'}">
+							${reboardVO.name}						
+						</c:if>
+					</td>
 					<td><fmt:formatDate value="${reboardVO.regdate}" 
 						pattern="yyyy-MM-dd" /> </td>
 					<td>${reboardVO.readCount}</td>		

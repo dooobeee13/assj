@@ -54,7 +54,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==4  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -66,7 +66,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==3  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -78,7 +78,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==2  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -90,7 +90,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==5  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -102,7 +102,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==6  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -114,7 +114,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==9  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -126,7 +126,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==10  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -138,7 +138,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==8  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>
@@ -150,7 +150,7 @@
 					<c:forEach var="vo" items="${Sectorslist }">
 						<c:if test="${vo.SEC_TOP_NO==7  }">
 						<li class="col-li-4-nb" value="${vo.SEC_NO }"><div>
-							<label><input type="checkbox">${vo.SEC_NAME}</label>
+							<label><input type="checkbox" value="${vo.SEC_NAME }">${vo.SEC_NAME}</label>
 						</div></li>
 						</c:if>
 					</c:forEach>

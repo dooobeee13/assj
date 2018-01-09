@@ -25,7 +25,7 @@
 		</div>
 		<div class="col-div-80-100" style="padding-left: 6em;">
 			<select id="resumeSalStart" class="one-list">
-				<option value="0">전체</option>
+				<option value="">전체</option>
 				<option value="1400">1400만원 이상</option>
 				<option value="1600">1600만원 이상</option>
 				<option value="1800">1800만원 이상</option>
@@ -36,7 +36,7 @@
 				<option value="6000">6000만원 이상</option>
 				<option value="9000">9000만원 이상</option>
 			</select> ~ <select id="resumeSalEnd" class="one-list">
-				<option value="0">전체</option>
+				<option value="">전체</option>
 				<option value="1400">1400만원 이하</option>
 				<option value="1600">1600만원 이하</option>
 				<option value="1800">1800만원 이하</option>
@@ -46,10 +46,8 @@
 				<option value="5000">5000만원 이하</option>
 				<option value="6000">6000만원 이하</option>
 				<option value="9000">9000만원 이하</option>
-			</select>&nbsp;&nbsp; <input type="checkbox" id="desi"><label
-				for="desi" style="vertical-align: super;">면접 후 결정</label>&nbsp; <input
-				type="checkbox" id="frole"><label for="frole"
-				style="vertical-align: super;">회사 내규에 따름</label>
+			</select>&nbsp;&nbsp;<label style="vertical-align: super;"><input class="HopeSalsDesi" type="checkbox" value="면접 후 결정">면접 후 결정</label>&nbsp;
+				<label style="vertical-align: super;"><input class="HopeSalsDesi" type="checkbox"value="회사내규에 따름">회사 내규에 따름</label>
 		</div>
 	</div>
 </div>

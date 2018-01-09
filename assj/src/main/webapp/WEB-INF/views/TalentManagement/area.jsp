@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="TStopion_div option_flo area"
 	style="width: 1189px; margin-left: 4em; margin-bottom: 4em; overflow-y: auto;">
 	<div style="height: 100%; width: 20%; float: left;">
@@ -55,7 +56,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==1 }">
+						<c:if test="${vo.AREA_TOP_NO==1 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -72,7 +73,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==2 }">
+						<c:if test="${vo.AREA_TOP_NO==2 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -88,7 +89,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==3 }">
+						<c:if test="${vo.AREA_TOP_NO==3 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -104,7 +105,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==4 }">
+						<c:if test="${vo.AREA_TOP_NO==4 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -120,7 +121,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==5 }">
+						<c:if test="${vo.AREA_TOP_NO==5 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -136,7 +137,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==6 }">
+						<c:if test="${vo.AREA_TOP_NO==6 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -152,7 +153,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==7 }">
+						<c:if test="${vo.AREA_TOP_NO==7 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -168,7 +169,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==8 }">
+						<c:if test="${vo.AREA_TOP_NO==8 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -184,7 +185,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==9 }">
+						<c:if test="${vo.AREA_TOP_NO==9 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -200,7 +201,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==10 }">
+						<c:if test="${vo.AREA_TOP_NO==10 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -216,7 +217,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==11 }">
+						<c:if test="${vo.AREA_TOP_NO==11 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -232,7 +233,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==12 }">
+						<c:if test="${vo.AREA_TOP_NO==12 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -248,7 +249,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==13 }">
+						<c:if test="${vo.AREA_TOP_NO==13 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -264,7 +265,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==14 }">
+						<c:if test="${vo.AREA_TOP_NO==14 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -280,7 +281,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==15 }">
+						<c:if test="${vo.AREA_TOP_NO==15 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -296,7 +297,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==16 }">
+						<c:if test="${vo.AREA_TOP_NO==16 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -312,7 +313,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==17 }">
+						<c:if test="${vo.AREA_TOP_NO==17 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
@@ -328,7 +329,7 @@
 				style="text-align: left; overflow-y: scroll; border-left: 1px solid #b8b8b8;">
 				<ul class="col-ul-100-100">
 					<c:forEach var="vo" items="${Arealist }">
-						<c:if test="${vo.AREA_TOP_NO==18 }">
+						<c:if test="${vo.AREA_TOP_NO==18 && !fn:contains(vo.AREA_NAME,'전체') }">
 							<li class="col-li-4-nb"><label><input class="mini-checkbox"
 						type="checkbox" name="AreaSelectBox"  value="${vo.AREA_NAME }" id="a1-1">${vo.AREA_NAME }</label></li>
 						</c:if>
