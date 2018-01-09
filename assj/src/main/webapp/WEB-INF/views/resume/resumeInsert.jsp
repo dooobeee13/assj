@@ -86,7 +86,7 @@ function OntextCheck(obj)
 				 <a class="navbar-brand" style="color: white;margin-left: 10px; " href="<c:url value='/mypageMain.do' />">My 홈</a>
 				
 				
-				  
+				   
 			</div>
 
 			<!-- 데스크탑에서 메뉴가 나오는 부분-->

@@ -168,7 +168,7 @@
 	
 	
 	<select id="selectResumeByResumeNo" parameterType="int" resultType="map">
-		select r.*,et.et_name,a.area_name,edu.edu_name,occu.occu_name,sec.sec_name,car.CAREER_NAME
+		select r.*,et.et_name,a.area_name,edu.edu_name,occu.occu_name,sec.sec_name,car.CAREER_NAME,to_char(sysdate,'yyyy') - to_char(r.RESUME_BIRTH,'yyyy') as "age"
 		from resume r join emp_type et
 		on r.ET_NO = et.et_no
 		join area a

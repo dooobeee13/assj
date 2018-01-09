@@ -1,6 +1,7 @@
 package com.hy.assj.resume.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -444,25 +445,7 @@ public class ResumeController {
 		
 		Map<String,Object> map = resumeService.selectResumeByResumeNo(resumeNo);
 		
-		Date d = (Date) map.get("RESUME_BIRTH");
 		
-		Calendar cal = Calendar.getInstance();
-		
-		int currentYear = cal.get(Calendar.YEAR);
-		int currentMonth = cal.get(Calendar.MONTH)+1;
-		int currentDay = cal.get(Calendar.DAY_OF_MONTH);
-		
-		cal.setTime(d);
-		
-		int birthYear = cal.get(Calendar.YEAR);
-		int birthMonth = cal.get(Calendar.MONTH)+1;
-		int birthDay = cal.get(Calendar.DAY_OF_MONTH);
-		
-		int age = currentYear - birthYear;
-		
-		 if (birthMonth * 100 + birthDay > currentMonth * 100 + currentDay) {
-			 age--;			 
-		 }
 		
 		 List<SchoolHistoryVO> shList = resumeService.selectSHByResumeNo(resumeNo);
 		 logger.info("학력 가져오기 사이즈, shList.size()={}",shList.size());
@@ -485,7 +468,6 @@ public class ResumeController {
 		 List<PortfolioVO> portList = resumeService.selectPortByResumeNo(resumeNo);
 		 logger.info("포트폴리오 가져오기 사이즈, portList.size()={}",portList.size());
 		 
-		model.addAttribute("age", age);
 		model.addAttribute("map", map);
 		model.addAttribute("shList", shList);
 		model.addAttribute("ehList", ehList);
