@@ -322,6 +322,11 @@
 		    <artifactId>mail</artifactId>
 		    <version>1.4.7</version>
 		</dependency>
+		
+		
+		
+		
+	
 		     
 	</dependencies>
 	
@@ -336,7 +341,14 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>https://maven.atlassian.com/3rdparty/</url>
 		</repository>	
+		 
 	</repositories>
+	
+
+
+
+	
+	
     <build>
         <plugins>
             <plugin>

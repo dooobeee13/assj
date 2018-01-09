@@ -10,9 +10,23 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/ckeditor/ckeditor.js' />"></script>
+<script type="text/javascript" src="<c:url value='/ck/ckeditor/ckeditor.js' />"></script>
 <script type="text/javascript">
-
+	$(function(){
+		$('#frmWrite').submit(function(){
+			var contents = CKEDITOR.instances.fbContent.getData();
+			if($('#fbTitle').val()==""){
+				alert('제목을 입력하세요');
+				$('#fbTitle').focus();
+				return false;
+			}else if(contents==""){
+				alert('내용을 입력하세요');
+				$('#fbContent').focus();
+				return false;
+			}
+			
+		});
+	});
 </script>
 </head>
 <body>
@@ -31,49 +45,36 @@
 
 			<div class="col-lg-9 col-md-9">
 
-				<form name="frmWrite" method="post"
-					action="<c:url value='/board/freeBoardWrite.do'/>"
+				<form name="frmWrite" id="frmWrite" method="post" action="<c:url value='/board/freeBoardWrite.do'/>"
 					enctype="multipart/form-data">
+					<input type="hidden" name="" id="" value="">
+					
 					<fieldset>
 						<legend>글쓰기</legend>
 						<div class="firstDiv">
-							<label for="title">제목</label> <input type="text" id="title"
-								name="title" />
+							<label for="title">제목</label> 
+							<input type="text" id="fbTitle" name="fbTitle" class="form-control" />
 						</div>
-						
+						<br>
 						<div>
 							<label for="content">내용</label>
-							<textarea id="content" name="content" rows="12" cols="40"></textarea>
+							<textarea id="fbContent" name="fbContent"></textarea>
 							 
 							<script type="text/JavaScript">
 
 
 								window.onload = function() {
 
-									CKEDITOR.replace(
-
-									'content'
-
-									, {
-										skin : 'office2003',
-										enterMode : '2',
-										shiftEnterMode : '3',
-										width : '90%',
-										height : '200px'
-									});
+									CKEDITOR.replace('fbContent');
 
 								};
 							</script>
 						</div>
 						
 						
-						<div>
-							<label for="upfile">첨부파일</label> <input type="file" id="upfile"
-								name="upfile" />
-						</div>
 						<div class="center">
-							<input type="submit" value="등록" /> <input type="Button"
-								value="글목록"
+							<input type="submit" value="등록" />
+							 <input type="Button" value="글목록"
 								onclick="location.href='<c:url value="/board/freeBoardList.do"/>'" />
 						</div>
 					</fieldset>
@@ -83,9 +84,6 @@
 		</div>  	
  
  
-</div>
-<div class="divBtn">
-    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
 </div>
 
 	<c:import url="../../index/footer.jsp" /> 
