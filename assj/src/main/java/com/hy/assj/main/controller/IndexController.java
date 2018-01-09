@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.hireInfo.model.HireInfoService;
+import com.hy.assj.hirenoti.model.HireNotiSearchVO;
 import com.hy.assj.main.model.MHireNotiVO;
 import com.hy.assj.main.model.MNewsVO;
 import com.hy.assj.main.model.MNoticeVO;
@@ -93,7 +94,7 @@ public class IndexController {
 		if(result==MemberService.LOGIN_OK) {
 			//로그인 성공
 			MemberVO memberVO=memberService.selectMember(vo.getMemId());
-			
+	
 			//[1] 세션에 저장
 			HttpSession session=request.getSession();
 
@@ -109,6 +110,7 @@ public class IndexController {
 				ck.setMaxAge(0);   //쿠키 삭제
 				response.addCookie(ck);				
 			}
+
 			
 			msg=memberVO.getMemName()+"님 로그인되었습니다.";
 			url="/index.do";

@@ -200,7 +200,7 @@
 					</c:if> 
 					<c:if test="${empty param.searchKeyword }">
 						<!-- 전체 조회의 경우 -->
-						<p>조회 결과, <span id="resultSize">${pagingInfo.totalRecord }</span>건 조회되었습니다.</p>
+						<p><span class="glyphicon glyphicon-search"></span> 조회 결과, <span id="resultSize">${pagingInfo.totalRecord }</span>건 조회되었습니다.</p>
 					</c:if> 
 					
 					

@@ -54,7 +54,7 @@
 		background-color:#ffff;
 	}
 	#scrap {
-		height:1120px;
+		/* height:1120px; */
    		padding:20px; 
    		margin:0 auto;	
    		background-color:#ffff;
@@ -134,13 +134,7 @@
 				<form name="frmList" id="frmList">
 					<p>
 					전체 ${pagingInfo.totalRecord }건 | <a href="#" id="btDeleteMulti"><span class="glyphicon glyphicon-remove"></span>선택삭제</a> 
-					<%-- <span id="rtMenu"><a href="">스크랩일순<span class="glyphicon glyphicon-chevron-up"></span></a> | 마감일순
-					<select id="status">
-						<option>전체</option>
-						<option>진행중</option>
-						<option>마감</option>
-					</select>
-					</span>--%></p> 
+					</p> 
 						<table class="table table hover">
 							<colgroup>
 								<col style="width:2%">

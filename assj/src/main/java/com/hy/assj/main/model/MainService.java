@@ -6,7 +6,7 @@ import com.hy.assj.recruit.model.RHireNotiVO;
 
 public interface MainService {
 
-	//List<MHireNotiVO> selectHireNotiList();
+	List<MHireNotiVO> selectHnSummaryList();
 	List<RHireNotiVO> selectHireNotiList();
 	int countCurrHireNoti(int cmNo);
 	int countUnopendEs(int cmNo);

@@ -84,4 +84,8 @@ public class MainServiceImpl implements MainService {
 		return recruitDao.selectHireNotiByKeyword(keyword);
 	}
 	
+	public List<MHireNotiVO> selectHnSummaryList() {
+		return mainDao.selectHireNotiList();
+	}
+	
 }

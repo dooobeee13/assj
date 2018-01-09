@@ -309,13 +309,13 @@ function EnterPress(){
 					</ul>
 					<li class="col-li-1-nb s3" style="cursor: pointer;"><div class="col-div-80-100">회원관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o3">
-						<li>일반회원</li>
-						<li>기업회원</li>
+						<li><a href="/assj/member/menu/psMemManage.do">개인회원</a></li>
+						<li><a href="/assj/member/menu/cmMemManage.do">기업회원</a></li>
 					</ul>
 					<li class="col-li-1-nb s4" style="cursor: pointer;"><div class="col-div-80-100">커뮤니티관리</div><div class="col-div-20-100"><img class="open1" src="<c:url value='/icon/open.png'/>"><img class="close1" src="<c:url value='/icon/close.png'/>"></div></li>
 					<ul class="col-li-1-option o4">
-						<li><a href="/assj/member/menu/adminQna.do">Q&A게시판</a></li>
 						<li><a href="/assj/member/menu/noticeEditOut.do">공지게시판</a></li>
+						<li><a href="/assj/member/menu/adminQna.do">Q&A게시판</a></li>
 						<li><a href="/assj/member/menu/question.do">이메일문의</a></li>
 						<li><a href="<c:url value='/administrator/news/updatenews.do'/>">공채 뉴스 작성</a></li>
 						<li><a href="<c:url value='/administrator/news/newsList.do'/>">공채 뉴스 관리</a></li>
