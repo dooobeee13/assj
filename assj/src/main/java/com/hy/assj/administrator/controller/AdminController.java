@@ -70,6 +70,7 @@ public class AdminController {
 		if(fileName==null) {
 			fileName=" ";
 		}
+		vo.setNewsContent(vo.getNewsContent().replaceAll("&", "chr(38)"));
 
 		vo.setNewsUrl(fileName);
 		vo.setNewsWriter("뉴스관리자");
