@@ -29,6 +29,9 @@ public class CmRegisterController {
 		
 		logger.info("회원가입 화면(post) 파라미터 vo={} ", vo);
 		
+		if(vo.getCmLogo()==null) {
+			vo.setCmLogo("");
+		}
 		int result=cmMemberService.insertCmMemMember(vo);
 		
 		String msg="",url="/index.do";

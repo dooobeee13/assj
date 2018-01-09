@@ -134,7 +134,7 @@ function pageFunc(curPage){
 						</c:if>						
 					</td>	
 					<td>
-						<a href="<c:url value='/member/menu/cmMemDelete.do?cmNo=${map.CM_NO}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn">삭제</button></a><br>
+						<a href="<c:url value='/member/menu/cmMemDelete.do?cmNo=${map.CM_NO}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn" style="background-color:#e3eceb">삭제</button></a><br>
 					</td>	
 				</tr> 
 		  	</c:forEach>
