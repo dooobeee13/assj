@@ -24,6 +24,10 @@ import com.hy.assj.cmMember.model.CmMemberService;
 import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.hireInfo.model.HireInfoService;
 import com.hy.assj.main.model.MHireNotiVO;
+import com.hy.assj.main.model.MNewsVO;
+import com.hy.assj.main.model.MNoticeVO;
+import com.hy.assj.main.model.MOccupationVO;
+import com.hy.assj.main.model.MSectorsVO;
 import com.hy.assj.main.model.MainService;
 import com.hy.assj.member.model.MemberService;
 import com.hy.assj.member.model.MemberVO;
@@ -51,6 +55,8 @@ public class IndexController {
 		logger.info("메인페이지 요청(get)");
 		//List<MHireNotiVO> hnList = mainService.selectHireNotiList();
 		List<RHireNotiVO> hnList = mainService.selectHireNotiList();
+		List<MNoticeVO> noticeList = mainService.getRecentNoticeList();
+		List<MNewsVO> newsList = mainService.getRecentNews();
 		
 		MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
 		CmMemberVO cmVo = (CmMemberVO) session.getAttribute("cmMemberVO");
@@ -68,6 +74,8 @@ public class IndexController {
 		}
 		
 		model.addAttribute("hnList", hnList);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
 		return "index";
 	}
 	
@@ -237,5 +245,30 @@ public class IndexController {
 		return  "index/cateArea";
 	}
 	
+	@RequestMapping(value = "search.do", method = RequestMethod.POST)
+	public String search(@RequestParam(required=false, defaultValue="") String keyword,
+			Model model) {
+		if (keyword.equals("")) {
+			model.addAttribute("msg","검색어를 입력해 주세요");
+			model.addAttribute("url","/index.do");
+			return "common/message";
+		} 
+		List<MNewsVO> newsList = mainService.selectNewsByKeyword(keyword);
+		List<MOccupationVO> occuList = mainService.selectOccuByKeyword(keyword);
+		List<MSectorsVO> secList = mainService.selectSecByKeyword(keyword);
+		List<RHireNotiVO> hnList = mainService.selectHireNotiByKeyword(keyword);
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("occuList", occuList);
+		model.addAttribute("secList", secList);
+		model.addAttribute("hnList", hnList);
+		
+		System.out.println(newsList);
+		System.out.println(occuList);
+		System.out.println(secList);
+		System.out.println(hnList);
+		
+		return "index/search";
+	}
 	
 }

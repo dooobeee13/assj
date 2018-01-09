@@ -331,6 +331,12 @@
 			var target = label.data('top'); 
 			$('.occu .category.top label[data-top='+ target +']').trigger('click');
 			label.trigger('click');
+		} else if (type == 'sec') {
+			$('.sCategory.sec .sCateTitle').trigger('click');
+			var label = $('.chklabel[for="sectors-' + val + '"]');
+			var target = label.data('top'); 
+			$('.sec .category.top label[data-top='+ target +']').trigger('click');
+			label.trigger('click');
 		} else if (type == 'topOccu') {
 			$('.sCategory.occu .sCateTitle').trigger('click');
 			$('.sCategory.occu .chklabel[data-top='+val+']').trigger('click');

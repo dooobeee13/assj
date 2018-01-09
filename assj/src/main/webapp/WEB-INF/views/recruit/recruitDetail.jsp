@@ -363,9 +363,9 @@
 		
 		 
 		
-		$('#rModiBtn').click(function(){
+		/* $('#rModiBtn').click(function(){
 			alert('이력서 수정 누름');
-		});
+		}); */
 		/* $('#applyBtn').click(function(){
 			$.ajax({
 				url : '<c:url value="/recruit/apply.do?"/>',
@@ -679,7 +679,7 @@
 							<input class="btn btn-default btn-block add" type="button" id="scrapBtn" onclick="scrap(this)" value="스크랩 하기"> 
 						</c:if>
 						</div>
-						<input class="btn btn-default btn-block" type="button" id="rModiBtn" value="내 이력서 수정">
+						<a href="/assj/resume/resumeList.do" class="btn btn-default btn-block" id="rModiBtn">내 이력서 수정</a>
 						<div class="posApply">
 						<c:if test="${containApply == true}">
 							<div class="text-center" style="padding: 10px 0">이미 지원한 공고입니다. <a onclick="apply(this)" class="del" href="javascript:void(0)">취소하기</a></div>

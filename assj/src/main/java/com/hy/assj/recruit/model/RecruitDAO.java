@@ -20,4 +20,6 @@ public interface RecruitDAO {
 	int deleteEmpSup(Map<String, Integer> empSupMap);
 	
 	List<RHireNotiVO> selectHireNoti();
+	
+	List<RHireNotiVO> selectHireNotiByKeyword(String keyword);
 }
