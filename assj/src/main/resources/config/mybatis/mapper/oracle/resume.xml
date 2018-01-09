@@ -5,7 +5,7 @@
 <mapper namespace="config.mybatis.mapper.oracle.resume">
 
 	<select id="selectAllAreaTop" resultType="AreaVO">
-		 select * from area where area_no between 2 and 18			
+		 select * from area where area_no between 1 and 18			
 	</select>
 	
 	<select id="selectAllAreaDetail" resultType="AreaVO" parameterType="int">

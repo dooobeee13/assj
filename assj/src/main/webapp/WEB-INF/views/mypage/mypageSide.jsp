@@ -78,20 +78,15 @@
 				<li><h5><b>이력서 관리</b></h5></li>
 				<li><a href="<c:url value='/resume/resumeInsert.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>이력서 등록</a></li>
 				<li><a href="<c:url value='/resume/resumeList.do' />"><span class="glyphicon glyphicon-chevron-right"></span>이력서 현황</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>자소서 관리</a></li>
 			</ul>
-			<hr>
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><h5><b>맞춤채용 정보</b></h5></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>맞춤채용 설정</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>나의 맞춤채용 정보</a></li>
-			</ul>
+			
 			<hr>
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h5><b>스크랩한 공고</b></h5></li>
 				<li><a href="<c:url value='/member/menu/scrap.do'/>"><span class="glyphicon glyphicon-chevron-right"></span>스크랩 공고</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span>관심기업정보</a></li>
 			</ul>
+			
+			<hr>
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><h5><b>개인정보 관리</b></h5></li>
 				<li><a href="<c:if test="${!empty sessionScope.memberVO.memId}"><c:url value='/member/edit/psMemEdit.do'/></c:if><c:if test="${!empty sessionScope.cmMemberVO.cmId}"><c:url value='/member/edit/cmMemEdit.do'/></c:if>"><span class="glyphicon glyphicon-chevron-right"></span>개인정보 수정</a></li>
