@@ -859,10 +859,10 @@ $(function(){
 				<span class="chbox-span" style=" color:#5B5B5B; padding-top:0.4em;">최근 본 공고</span>&nbsp;&nbsp;<span class="chbox-span" style="cursor: pointer; color:#ff3c00;">0건</span>
 			</div>
 			<div class="col-div-80-20 side-manu" style="text-align:center;background:#92a2f4; border-radius: 1em; color:white; padding-top:1.1em; border:1px solid #6b80f1; cursor: pointer;">
-				<span>기업회원로그인</span>
+				<a href="<c:url value='/member/login/psMemLogin.do'/>"><span>기업회원로그인</span></a>
 			</div>
 			<div class="col-div-80-20 side-manu" style="text-align:center;background:#45b7ad; border-radius: 1em; color:white; padding-top:1.1em; cursor: pointer;">
-				<span>일반회원로그인</span>
+				<a href="<c:url value='/member/login/psMemLogin.do'/>"><span>일반회원로그인</span></a>
 			</div>
 		</div><!-- TSside -->
 	</div><!--TScontent  -->

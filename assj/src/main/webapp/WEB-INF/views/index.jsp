@@ -62,8 +62,11 @@
 									<a href="#new_noti" aria-controls="home" role="tab" data-toggle="tab">취업속보</a>
 								</li>
 								<li role="presentation">
-									<a href="#jobInterview" aria-controls="profile" role="tab" data-toggle="tab">직무분석</a>
+									<a href="#notice" aria-controls="profile" role="tab" data-toggle="tab">공지사항</a>
 								</li>
+<!-- 								<li role="presentation">
+									<a href="#jobInterview" aria-controls="profile" role="tab" data-toggle="tab">직무분석</a>
+								</li> -->
 								<li role="presentation">
 									<a href="#jobFair" aria-controls="messages" role="tab" data-toggle="tab">채용박람회</a>
 								</li>
@@ -77,8 +80,11 @@
 									<c:import url="index/new_notification.jsp" />
 								</div>
 
-								<div role="tabpanel" class="tab-pane" id="jobInterview">
+								<%-- <div role="tabpanel" class="tab-pane" id="jobInterview">
 									<c:import url="index/jobInterview.jsp" />
+								</div> --%>
+								<div role="tabpanel" class="tab-pane" id="notice">
+									<c:import url="index/notice.jsp" />
 								</div>
 
 								<div role="tabpanel" class="tab-pane" id="jobFair">

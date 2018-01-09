@@ -36,6 +36,7 @@ public interface MemberService {
 	public List<Map<String,Object>> cmMemManage(SearchVO searchVO);
 	public int cmMemTotalCount(SearchVO searchVO);
 	public int cmMemDelete(int cmNo);
+	public int empSupCount(int memNo);
 	
 	public MemberVO naverLogin(Map<String, String> map);
 }

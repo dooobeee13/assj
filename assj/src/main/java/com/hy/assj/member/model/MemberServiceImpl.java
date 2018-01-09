@@ -164,4 +164,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.cmMemDelete(cmNo);
 	}
 
+	@Override
+	public int empSupCount(int memNo) {
+		return memberDao.empSupCount(memNo);
+	}
+
 }

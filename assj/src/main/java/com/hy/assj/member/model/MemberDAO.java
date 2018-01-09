@@ -17,6 +17,7 @@ public interface MemberDAO {
 	public List<Map<String, Object>> scrapList(HireNotiSearchVO hireNotiSearchVO);
 	public int scrapTotalRecordCount(HireNotiSearchVO hireNotiSearchVO);
 	public int deleteScrap(int hnNo);
+	public int empSupCount(int memNo);
 		
 	//네이버로그인
 	public MemberVO selectMemberBySns(Map<String, String> map);

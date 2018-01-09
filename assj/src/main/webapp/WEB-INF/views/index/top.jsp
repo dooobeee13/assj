@@ -142,16 +142,18 @@
 					</a>
 				</div>
 				<!-- <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3"> -->
+				<form action="/assj/search.do" method="post">
 				<div class="col-md-4 col-sm-6">
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+						<input type="text" name="keyword" class="form-control" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<button class="btn btn-default" type="submit">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</span>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</header>

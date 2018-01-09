@@ -1381,3 +1381,28 @@ h2{
 .main-stati span, .main-stati strong{
 	font-size: 12px;
 }
+
+.analy_box{
+	position: relative;
+	display: inline-block;
+	width:263px; 
+	height:132px;
+	margin:10px;
+	float: left;
+	box-sizing: border-box;
+	background:#FBFFFF;
+	box-shadow: 2px 2px 2px #b8b8b8;
+	border-radius: 12px 12px 0 0;
+}
+.analy_box_big{
+	position: relative;
+	display: inline-block;
+	width:515px; 
+	height:515px;
+	margin:10px;
+	float: left;
+	box-sizing: border-box;
+	background:#FBFFFF;
+	box-shadow: 2px 2px 2px #b8b8b8;
+	border-radius: 12px 12px 0 0;
+}

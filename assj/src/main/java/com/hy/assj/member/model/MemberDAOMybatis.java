@@ -117,5 +117,10 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	public int countScrapByMemNo(int memNo) {
 		return getSqlSession().selectOne(namespace + ".countScrapByMemNo", memNo);
 	}
+
+	@Override
+	public int empSupCount(int memNo) {
+		return getSqlSession().selectOne(namespace+".empSupCount",memNo);
+	}
 	
 }

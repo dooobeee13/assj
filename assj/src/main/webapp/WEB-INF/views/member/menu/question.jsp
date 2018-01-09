@@ -92,7 +92,7 @@ function pageFunc(curPage){
 				<col style="width:6%">
 				<col style="width:8%">
 				<col style="width:17%">
-				<col style="width:15%">
+				<col style="width:17%">
 				<col style="width:*%">
 				<col style="width:14%">
 			</colgroup>

@@ -128,7 +128,10 @@
 		select count(*) from scrap
 		where mem_no = #{memNo}
 	</select>
-
+	
+	<select id="empSupCount" parameterType="int" resultType="int">
+		select count(*) from emp_sup where mem_no=#{memNo}
+	</select>
 	
 </mapper>
 
