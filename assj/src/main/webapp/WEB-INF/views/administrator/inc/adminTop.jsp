@@ -90,7 +90,7 @@ $(function(){
 	
 	setInterval(function(){
 		LastChat(lastNo);
-	},300)
+	},50000)
 	
 	//관리자 생성 클릭 window.open 형식
 	$('.CreateAdmin').click(function(){
@@ -149,51 +149,8 @@ $(function(){
 });
 var adminid = '${sessionScope.adminid}';
 window.onload=function(){
-	
-	//기업 통계 데이터
-	var pieData = {
-			  대기업:26,
-			  중견기업: 76,
-			  중소기업: 317,
-			  공기업: 12,
-			  벤처기업: 56
-			};
-	//기업 통계 
-	var chartDonut = c3.generate({
-		  bindto: "#PieData",
-		  data: {
-		    json: [pieData],
-		    keys: {
-		      value: Object.keys(pieData),
-		    },
-		    type: "donut",
-		  },
-		  donut: {
-		    title: "487개의 공채 중 기업당 비율 ",
-		  },
-		});
-	
-	//회원 통계
-	var date = new Date();
-	var month = date.getMonth()+1;
-	var day= date.getDay();
-	var today = month+"/"+day;
-	var chart = c3.generate({
-		  bindto: "#chart",
-		  data: {
-		    columns: [
-		      ['총 회원 수', 9750, 9770, 9803, 9843, 9945, 10223],
-		      ['가입자 수', 50, 20, 133, 76, 102, 67],
-		      ['탈퇴 수', 27, 34, 12, 43, 52, 39]
-		    ]
-		  },axis: {
-		        x: {
-		            type: 'category',
-		            categories: ['12/31', month+"/"+(day-4), month+"/"+(day-3), month+"/"+(day-2), month+"/"+(day-1), month+"/"+day ]
-		        }
-		    }
-		});
-	
+
+
 }
 function openNav() {
     document.getElementById("mySidenav").style.left = "83%";
@@ -324,7 +281,7 @@ function EnterPress(){
 					<ul class="col-li-1-option o5">
 						<li>일반회원</li>
 						<li>기업회원</li>
-						<li>게시글</li>
+						<li><a href="<c:url value='/administrator/analytic/totalAnaly.do'/>">게시글</a></li>
 					</ul>
 				</ul>
 			</div>

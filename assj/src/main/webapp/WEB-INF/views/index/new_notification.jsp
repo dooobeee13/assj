@@ -11,7 +11,7 @@
 
 		<div class="media-body">
 			<div class="media-heading">
-				<a href="#">${vo.hnNotititle }</a> &nbsp;
+				<a target="_blank" href='<c:url value="/recruit/recruitDetail.do?hnNo=${vo.hnNo}"/>'>${vo.hnNotititle }</a> &nbsp;
 				<c:if test="${vo.dday == 0}">
 				<span class="label label-danger">오늘 마감</span>
 				</c:if>

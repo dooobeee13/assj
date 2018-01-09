@@ -108,15 +108,15 @@ $(function(){
 					'</colgroup>'+
 					'<tbody>'+
 					'<tr style="height:15%; margin-bottom:1em;">'+
-					'<td style="background: #696969; color:white; height:100%; padding:4px;">'+data.newsTitle+'</td>'+
+					'<td style="background: #B0CEEC; color:black; height:100%; padding: 12px;;">'+data.newsTitle+'</td>'+
 					'</tr>';
 					if(data.newsUrl!=" "){
 					input+='<tr style="height:40%;">'+
-					'<td style="background:#F4FFFE; padding:0"><img width="300px;" style="padding:2px; background:#B0CEEC; margin:0 auto; margin-top:30px;margin-bottom:30px; border:2px solid #2e6da4;border-radius:15px" src="${pageContext.request.contextPath}/imageTest/'+data.newsUrl+'"/></td>'+
+					'<td style="background:white; padding:0"><img width="300px;" style="padding:2px; margin:0 auto; margin-top:30px;margin-bottom:30px; border:2px solid #2e6da4;border-radius:15px" src="${pageContext.request.contextPath}/imageTest/'+data.newsUrl+'"/></td>'+
 					'</tr>';
 					}
 					input+= '<tr style="height:30%;">'+
-					'<td style="background:#F4FFFE; padding: 10px;word-break:break-all;">'+data.newsContent+'</td>'+
+					'<td style="background:white; padding: 10px;word-break:break-all;">'+data.newsContent+'</td>'+
 					'</tr>'+
 					'</tbody>'+
 					'</table>';

@@ -90,7 +90,7 @@ $(function(){
 	
 	setInterval(function(){
 		LastChat(lastNo);
-	},300)
+	},50000)
 	
 	//관리자 생성 클릭 window.open 형식
 	$('.CreateAdmin').click(function(){
