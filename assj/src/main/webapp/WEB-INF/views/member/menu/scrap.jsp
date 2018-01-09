@@ -81,9 +81,9 @@
 	}
 	
     /* 사이드바 스타일 */
-  #sidebar-wrapper {
-    height: 1120px;
-  } 
+   #sidebar-wrapper {
+    height:750px;
+  }  
 
 </style>
 </head>
