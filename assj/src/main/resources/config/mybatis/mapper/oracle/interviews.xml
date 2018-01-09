@@ -34,7 +34,7 @@
 	<update id="updateInterviewerStatus" parameterType="map">
 		update interview_views
 		set es_status = #{interviewKinds}
-		where hn_no=#{interviewMember} and mem_name=#{interviewer}
+		where hn_no=3 and mem_name=#{interviewer}
 	</update>
 	
 	<select id="selectCalendar" parameterType="int" resultType="map">

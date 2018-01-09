@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hy.assj.administrator.model.AdminService;
+import com.hy.assj.analytics.model.AnalyticsService;
 import com.hy.assj.common.FileuploadUtil;
 import com.hy.assj.vo.NewsVO;
 
@@ -34,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private AnalyticsService analyService;
 	
 	@RequestMapping("/adminmain.do")
 	public void AdminMain(Model model) {
@@ -232,6 +236,29 @@ public class AdminController {
 		logger.info("마지막 채팅의 20개까지 셀렉, 결과={}",chatlist.size());
 		
 		return chatlist;
+	}
+	
+	@RequestMapping("/analytic/totalAnaly.do")
+	public void TestAnalytics(Model model) {
+		int todayMem = analyService.selectTotalMemCountNotToday();
+		int notTodayMem = analyService.selectTotalMemCountToday();
+		int visitorCount = analyService.totalCount();
+		int news = analyService.selectTotalNews();
+		int introduction = analyService.selectTotalIntroduction();
+		int resume = analyService.selectTotalResume();
+		int hireNoti = analyService.selectTotalHireNoti();
+		List<Map<String, Object>> Cslist = analyService.selectTotalCompanyScale();
+		
+		model.addAttribute("Cslist",Cslist);
+		
+		model.addAttribute("news",news);
+		model.addAttribute("introduction",introduction);
+		model.addAttribute("resume",resume);
+		model.addAttribute("hireNoti",hireNoti);
+		
+		model.addAttribute("visitorCount",visitorCount);
+		model.addAttribute("todayMem",todayMem);
+		model.addAttribute("notTodayMem",notTodayMem);
 	}
 	
 	
