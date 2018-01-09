@@ -197,7 +197,7 @@
 					<tr>
 						<td class="titleTD">채용 완료했는데도<br>계속 들어오는 이력서<br><span><b>→ 채용공고 마감</b></span></td>
 						<td>인재를 채용했는데도 이력서가 계속 들어온다면,<br>등록된 채용정보를 마감으로 변경해주세요.</td>
-						<td><button type="button" class="btn btn-primary">채용정보 관리<br>바로가기</button></td>
+						<td><a href='<c:url value="/hire_noti/hire1.do" />'><button type="button" class="btn btn-primary">채용정보 관리<br>바로가기</button></a></td>
 					</tr>
 					<tr>
 						<td class="titleTD">기업에서 개인으로<br>아이디 변경 <br><span><b>→ 탈퇴보다는 재가입</b></span></td>
@@ -209,12 +209,12 @@
 						<td class="titleTD">복잡한 채용정보 입력 <br><span><b>→ 필수 항목만 작성하기</b></span></td>
 						<td>채용정보에 입력할 항목이 너무 많아 복잡하게 느껴지셨나요?<br>
 							선택항목을 '작성안함(비공개)'로 바꾸시면 채용정보를 간편하게 등록하실수 있습니다.</td>
-						<td><button type="button" class="btn btn-primary">채용정보 등록<br>바로가기</button></td>
+						<td><a href='<c:url value="/hire_noti/hire1.do" />'><button type="button" class="btn btn-primary">채용정보 등록<br>바로가기</button></a></td>
 					</tr>					
 				</table><br><br>
 				<div id="btnDiv">
 					<a href="<c:url value='/member/out/cmMemOut2.do'/>"><button type="button" class="btn btn-primary btn-lg">탈퇴하기</button></a>
-					<button type="button" class="btn btn-default btn-lg">취소</button>
+					<a href="<c:url value='/index.do'/>"><button type="button" class="btn btn-default btn-lg">취소</button></a>
 				</div>
 				<br><br><br><br>
 			</fieldset>

@@ -175,7 +175,7 @@ public class IndexController {
 		logger.info("로그아웃 처리");
 
 		session.removeAttribute("memberVO");// session 삭제
-
+		session.invalidate();
 		return "redirect:/index.do";
 	}
 
@@ -184,7 +184,7 @@ public class IndexController {
 		logger.info("로그아웃 처리");
 
 		session.removeAttribute("cmMemberVO");
-
+		session.invalidate();
 		return "redirect:/index.do";
 	}
 

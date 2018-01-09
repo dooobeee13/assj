@@ -60,7 +60,7 @@ function delchk(){
 						<td><a href="#" 
 	onclick="window.open('<c:url value='/resume/resumeView.do?resumeNo=${vo.resumeNo}'/>','new','resizable=no','width=300px','height=500');return false" 
 						class="goResumeDetail">${vo.resumeTitle}</a></td>					
-						<td>포트폴리오 갯수</td>					
+						<td>1</td>					
 						<td>on / off</td>					
 						<td><a href="<c:url value='/resume/resumeUpdate.do?resumeNo=${vo.resumeNo }' />" >수정</a> / 
 						<a href="<c:url value='/resume/resumeDelete.do?resumeNo=${vo.resumeNo }' />" onclick="return delchk();" >삭제</a></td>

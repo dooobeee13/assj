@@ -201,12 +201,12 @@ $(function(){
 		<!--  페이지 번호 끝 -->
 		</ul>
 		</div>
+		<a href="<c:url value='/member/menu/question.do'/>"><span style="vertical-align:middle" class="glyphicon glyphicon-arrow-left"> 이전으로</span></a>
 		
 			  </div>
 	  	</div>
 	  	</div>
-	  	</article>
-	  	</div>
+
 	  	
 </body>
 </html>

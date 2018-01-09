@@ -254,7 +254,10 @@
 				
 				<div class="">
 					<div class="btnLine">
-						<button class="btn btn-default">지원자목록 엑셀저장</button>
+						<form action="<c:url value='/excel.do' />" method="post">
+						<input type="hidden" name="hnNo" value="${param.hnNo}">
+						<button class="btn btn-default" type="submit">지원자목록 엑셀저장</button>
+						</form>
 					</div>
 					<table class="table table-hover">
 						<colgroup>

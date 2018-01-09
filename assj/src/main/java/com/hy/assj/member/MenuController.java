@@ -185,13 +185,13 @@ public class MenuController {
 		
 		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
 		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);              //블럭당 보여질 페이지 수(8)
+		pagingInfo.setRecordCountPerPage(8);                  //pageSize 페이지당 보여질 레코드수(10)
 		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
 		pagingInfo.setTotalRecord(memberService.psMemTotalCount(searchVO)); //총 레코드 수
 		
 		//SearchVo에 값 셋팅
-		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setRecordCountPerPage(8);    //pageSize 페이지당 보여질 레코드수(8)
 		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("searchVO 최종값 : {}", searchVO);
 		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());
@@ -211,12 +211,12 @@ public class MenuController {
 		//Paging 처리에 필요한 변수를 계산해주는 PaginationInfo 생성
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);                                       //블럭당 보여질 페이지 수(5)
-		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);                  //pageSize 페이지당 보여질 레코드수(10)
+		pagingInfo.setRecordCountPerPage(8);                  //pageSize 페이지당 보여질 레코드수(8)
 		pagingInfo.setCurrentPage(searchVO.getCurrentPage());                     //현재 페이지
 		pagingInfo.setTotalRecord(memberService.cmMemTotalCount(searchVO)); //총 레코드 수
 		
 		//SearchVo에 값 셋팅
-		searchVO.setRecordCountPerPage(Utility.RECORD_COUNT_PER_PAGE);    //pageSize 페이지당 보여질 레코드수(10)
+		searchVO.setRecordCountPerPage(8);    //pageSize 페이지당 보여질 레코드수(8)
 		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("searchVO 최종값 : {}", searchVO);
 		logger.info("pagingInfo currentPage : {}", pagingInfo.getCurrentPage());

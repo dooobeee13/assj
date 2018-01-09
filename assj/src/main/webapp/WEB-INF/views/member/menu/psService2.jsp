@@ -119,7 +119,7 @@
 				다양한 서비스를 만나보세요.</h4>
 				<br>
 				<img src="<c:url value='/images/이력서등록.png'/>" alt="이력서등록" class="diagram"><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">이력서 등록</button></a>
+				<a href="<c:url value='/resume/resumeInsert.do'/>"><button type="button" class="btn btn-default btn-lg">이력서 등록</button></a>
 				<br><br><br>
 				<hr>
 				<br><br>
@@ -127,7 +127,7 @@
 				<h4>합격자소서, 내 자소서 보관함, 채용공고가 한 번에! <br>
 					자소서를 작성해보세요!</h4><br>
 				<img src="<c:url value='/images/자소서작성.png'/>" alt="자소서작성"  class="diagram"><br><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">자소서 작성</button><br><br></a>
+				<a href="<c:url value='/resume/resumeInsert.do'/>"><button type="button" class="btn btn-default btn-lg">자소서 작성</button><br><br></a>
 				<br><br>	
 			</fieldset>
 			<fieldset id="step3" class="col-md-12">
@@ -139,7 +139,7 @@
 				공채의 명가를 확인하세요.</h4>
 				<br>
 				<img src="<c:url value='/images/공채의명가.png'/>" alt="공채의명가" id="imgSol"><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">공채의 명가</button></a>
+				<a href="<c:url value='/TalentManagement/final-main.do'/>"><button type="button" class="btn btn-default btn-lg">공채의 명가</button></a>
 				<br><br><br>
 				<hr>
 				<br><br>
@@ -147,16 +147,8 @@
 				<h4>업·직종, 지역, 경력, 학력 등 <br>
 					조건에 맞는 채용정보를 검색하세요.</h4><br>
 				<img src="<c:url value='/images/채용정보.png'/>" alt="채용정보"  class="diagram"><br><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">채용정보 상세검색</button><br><br></a>
+				<a href='<c:url value="/hireInfo/home.do" />'><button type="button" class="btn btn-default btn-lg">채용정보 상세검색</button><br><br></a>
 				<br>
-				<hr>
-				<br><br>
-				<h1>03<span class="col">맞춤채용 정보</span></h1><br>
-				<h4>원하시는 조건을 입력하면<br>
-					선택한 조건에 맞는 공고만 보여드려요.</h4><br>
-				<img src="<c:url value='/images/맞춤채용정보.png'/>" alt="맞춤채용정보"  class="diagram"><br><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">맞춤채용정보</button><br><br></a>
-				<br><br>	
 			</fieldset>
 			<fieldset id="step4" class="col-md-12">
 				<h4>PC, 모바일 어디서나! <br> 
@@ -178,7 +170,7 @@
 				입사지원 현황에서 관리해보세요.</h4>
 				<br>
 				<img src="<c:url value='/images/입사지원관리.png'/>" alt="입사지원관리" class="diagram"><br><br><br>
-				<a href=""><button type="button" class="btn btn-default btn-lg">입사지원현황</button></a>
+				<a href="<c:url value='/mypageMain.do' />"><button type="button" class="btn btn-default btn-lg">입사지원현황</button></a>
 				<br><br><br>
 			</fieldset>
 			<fieldset id="step6" class="col-md-12">

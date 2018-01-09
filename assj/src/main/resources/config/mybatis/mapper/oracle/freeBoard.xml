@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.freeBoard">
+
+	<insert id="insertFB" parameterType="FreeBoardVO">
+		<selectKey keyProperty="fbNo" resultType="int" order="BEFORE">
+			SELECT FREE_BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO FREE_BOARD 
+		(fb_no,mem_no,fb_title,fb_image,fb_content)
+		VALUES(
+			#{fbNo},#{memNo},#{fbTitle},#{fbImage},#{fbContent}			
+		)
+	</insert>
+	
+	<select id="selectFB" parameterType="int" resultType="map">
+		select  fb.* , mem.MEM_NAME
+		from free_board fb join member mem
+		on fb.MEM_NO = mem.MEM_NO
+		where fb_no = #{fbNo}
+	</select>
+	
+	<select id="selectAllFB" resultType="map">
+		select  fb.* , mem.MEM_NAME
+		from free_board fb join member mem
+		on fb.MEM_NO = mem.MEM_NO
+		order by fb.FB_NO desc
+	</select>
+	
+	<select id="selectFBByNo" parameterType="int" resultType="FreeBoardVO">
+		select * from free_board where fb_no = #{fbNo}
+	</select>
+	
+	<update id="updateFB" parameterType="FreeBoardVO">
+		update free_board set 
+		fb_title=#{fbTitle}, fb_content=#{fbContent}
+		where fb_no = #{fbNo}
+	</update>
+	
+	<delete id="deleteFBByNo" parameterType="int">
+		delete from free_board where fb_no = #{fbNo}
+	</delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+

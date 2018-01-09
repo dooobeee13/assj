@@ -245,7 +245,7 @@
 				<br>
 				<div id="btnDiv">
 					<button type="submit" class="btn btn-primary btn-lg" id="sendBtn">보내기</button>
-					<button type="button" class="btn btn-default btn-lg" id="cancelBtn">취소</button>
+					<a href="<c:url value='/index.do'/>"><button type="button" class="btn btn-default btn-lg" id="cancelBtn">취소</button></a>
 				</div>
 				</form>
 			</fieldset>

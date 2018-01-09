@@ -56,8 +56,8 @@
 							<a href="<c:url value='/member/menu/AdminCountUpdate.do?no=${map.NO}'/>">${map.TITLE}</a>
 						</td>
 						<td>
-							<a href="<c:url value='/member/menu/noticeEdit.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >수정</button></a>&nbsp;
-							<a href="<c:url value='/member/menu/noticeOut.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >삭제</button></a><br>
+							<a href="<c:url value='/member/menu/noticeEdit.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" style="background-color:#e3eceb">수정</button></a>&nbsp;
+							<a href="<c:url value='/member/menu/noticeOut.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" style="background-color:#e3eceb" >삭제</button></a><br>
 						</td>
 					</tr>
 				</c:forEach> 

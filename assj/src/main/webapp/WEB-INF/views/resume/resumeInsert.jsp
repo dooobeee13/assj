@@ -98,27 +98,25 @@ function OntextCheck(obj)
 						<ul class="dropdown-menu">
 							<li><a href="<c:url value='/resume/resumeInsert.do'/>">이력서 등록</a></li>
 							<li><a href="<c:url value='/resume/resumeList.do' />">이력서 현황</a></li>
-							<li><a href="#">자소서 관리</a></li>
-							<li><a href="#">내 이력서 열람기업</a></li>
-							<li><a href="#">내 이력서 열람제한 설정</a></li>
-						</ul></li>
-					<li class="dropdown"><a class="nav-link"
-						class="dropdown-toggle" data-toggle="dropdown" href="#">입사지원
-							관리</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">입사지원 현황</a></li>
-						</ul></li>
-					<li class="nav-item"><a class="nav-link" href="#">아바타서치</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">맞춤채용 정보</a>
+						</ul>
 					</li>
+					
+					
 					<li class="dropdown"><a class="nav-link"
-						class="dropdown-toggle" data-toggle="dropdown" href="#">스크랩/최근
-							본 공고</a>
+						class="dropdown-toggle" data-toggle="dropdown" href="#">스크랩</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">스크랩한 공고</a></li>
-							<li><a href="#">최근 본 공고</a></li>
-							<li><a href="#">관심기업정보</a></li>
-						</ul></li>
+							<li><a href="<c:url value='/member/menu/scrap.do'/>">스크랩한 공고</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown"><a class="nav-link"
+						class="dropdown-toggle" data-toggle="dropdown" href="#">개인정보 관리</a>
+						<ul class="dropdown-menu">
+							<li><a href="<c:url value='/member/edit/psMemEdit.do'/>">개인정보 수정</a></li>
+							<li><a href="<c:url value='/member/trans/pwdTrans.do'/>">비밀번호 변경</a></li>
+						</ul>
+					</li>
+					
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

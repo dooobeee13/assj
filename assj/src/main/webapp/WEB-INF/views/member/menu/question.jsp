@@ -83,7 +83,6 @@ function pageFunc(curPage){
 						<br>
 						<div class="align_right">
 							<a href="<c:url value='/member/menu/replySearch.do'/>"><input type="button" class="form-control" value="답변확인"></a>
-							<input type="button" class="form-control" value="전체메일">
 						</div>
 						<br><br><br>
 				<table class='table table-bordered'>
@@ -132,8 +131,8 @@ function pageFunc(curPage){
 							<td>${map.QUESTION_TITLE}</td>
 							<td><a href="<c:url value='/member/menu/questionDetail.do?no=${map.NO}'/>">${map.TITLE}</a></td>
 							<td>
-								<a href="<c:url value='/member/menu/questionReply.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >답변</button></a>&nbsp;
-								<a href="<c:url value='/member/menu/questionDelete.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >삭제</button></a><br>
+								<a href="<c:url value='/member/menu/questionReply.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" style="background-color:#dde7e6">답변</button></a>&nbsp;
+								<a href="<c:url value='/member/menu/questionDelete.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" style="background-color:#dde7e6">삭제</button></a><br>
 							</td>
 						</tr>
 						</c:forEach> 

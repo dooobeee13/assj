@@ -67,7 +67,7 @@ function pageFunc(curPage){
 		<div class="col-div-80-100" style="margin-left:1em; width:83%; font-size:0.7em;">
 			<div class="col-div-100-20">
 			<!-- 페이징 처리에 필요한 form 태그 -->
-			<form name="frmPage" method="post" 
+			<form name="frmPage" id="frmPage" method="post" 
 				action="<c:url value='/member/menu/psMemManage.do'/>">
 				<input type="hidden" name="searchKeyword" 
 					value="${param.searchKeyword }">
@@ -142,7 +142,7 @@ function pageFunc(curPage){
 						</c:if>	
 					</td>
 					<td>
-						<a href="<c:url value='/member/menu/psMemDelete.do?memNo=${map.MEM_NO}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn">삭제</button></a><br>
+						<a href="<c:url value='/member/menu/psMemDelete.do?memNo=${map.MEM_NO}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn" style="background-color:#e3eceb">삭제</button></a><br>
 					</td>
 				</tr> 
 		  	</c:forEach>

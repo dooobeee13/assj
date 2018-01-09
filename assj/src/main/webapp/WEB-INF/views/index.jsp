@@ -164,10 +164,10 @@
 												<input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인" id="loginBtn">
 											</div>
 											<div style="margin-bottom: 10px">
-												<div>
+												<div style="margin-bottom: 5px">
 													<a href="#"> 
 														<img class="img-responsive" id="naverLogin" style="width: 150px" 
-															src="<c:url value='/images/naver_white.PNG' />">
+															src="<c:url value='/images/naver_green.PNG' />">
 													</a>
 												</div>
 												<div>

@@ -157,6 +157,43 @@ public class HireNotiManagementController {
 			+ ", \"failCnt\": " + dto.getFailCnt() + ", \"passPaperCnt\": " + dto.getPassPaperCnt() + ", \"dontReadCnt\": " + dto.getDontReadCnt() + "}";*/
 	}
 	
+	@RequestMapping("/excel.do")
+	public String excel(int hnNo, Model model) {
+		HireNotiWithEsAndResumeVO vo = hnManageService.getHireNotiByhnNo(hnNo);
+		List<CEsWithResumeVO> resumeList = vo.getcEsWithResumeList();
+		HashMap<String,Object> row = new HashMap<String, Object>();
+		HashMap<String,String> cell = null;
+		List<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+		if (resumeList != null && resumeList.size() != 0) {
+			int rowName = 1;
+			for (int i=0; i< resumeList.size(); i++) {
+				CEsWithResumeVO resume = resumeList.get(i);
+				cell = new HashMap<>();
+				
+				cell.put("row" + rowName +"_cell1", resume.getName());
+				cell.put("row" + rowName +"_cell2", resume.getGender());
+				cell.put("row" + rowName + "_cell3", String.valueOf(resume.getAge()));
+				cell.put("row" + rowName + "_cell4", resume.getSchoolName());
+				cell.put("row" + rowName +"_cell5", resume.getMajor());
+				cell.put("row" + rowName + "_cell6", resume.getStatus());
+				list.add(cell);
+				rowName++;
+			}
+			row.put("dataList", list);//데이터목록
+			row.put("dataLength", 6);//엑셀셀갯수
+
+		  	String labels[] = { "이름", "성별", "나이", "학교", "전공", "지원상태" };//셀타이틀 
+		  	int columnWidth[] = { 15, 10, 10, 30, 30, 15 };//셀크기 가로
+		  
+		  	model.addAttribute("columnWidth", columnWidth);
+		  	model.addAttribute("sheetName", vo.getHnNotititle() + " 지원자 목록");//시트명
+		  	model.addAttribute("labels", labels);//셀타이틀 
+
+		  	model.addAttribute("dataMap", row);
+		}
+		
+		return "excelXlsx";
+	}
 	
 	
 	

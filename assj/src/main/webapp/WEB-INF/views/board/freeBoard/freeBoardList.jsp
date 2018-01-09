@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,27 +55,29 @@
 			</tr>
 			</c:if>
 			<c:if test="${!empty list}">
-				<c:forEach var="vo" items="${list}">
+				<c:forEach var="map" items="${list}">
 					<tr>
-						<td></td>					
-						<td></td>					
-						<td></td>					
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${map['FB_NO'] }</td>					
+						<td><a href="<c:url value="/board/freeBoardView.do?fbNo=${map['FB_NO'] }" />">${map['FB_TITLE'] }</a></td>					
+						<td>${map['MEM_NAME'] }</td>
+						<fmt:formatDate var="regdate" value="${map['FB_REGDATE'] }" pattern="yyyy-MM-dd"/>					
+						<td>${regdate }</td>
+						<td>${map['FB_VIEW'] }</td>
+						<td>${map['FB_RECM'] }</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
    			</table>
+   			<div class="divBtn">
+    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
+</div>
         </div>
    </div>  	
  
  
 </div>
-<div class="divBtn">
-    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
-</div>
+
 
 	<c:import url="../../index/footer.jsp" /> 
 
