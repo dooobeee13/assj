@@ -40,7 +40,7 @@ $(function(){
 	});
 	
 	$('#deleteNews').click(function(){
-		if($('input[name=Editselect]').val()==''){
+		if(!$('input[name=Editselect]').is(':checked')){
 			alert('뉴스가 아무것도 선택되지 않았습니다.');
 			return false;
 		}
@@ -49,6 +49,22 @@ $(function(){
 			location.href='<c:url value="/administrator/news/newsDelete.do?newsNo='+newsNo+'"/>';			
 		}
 		
+	});
+	
+	$('#EditNews').click(function(){
+		if(!$('input[name=Editselect]').is(':checked')){
+			alert('뉴스가 아무것도 선택되지 않았습니다.');
+			return false;
+		}
+		
+		$('.ChoiceNewsPage').hide();
+		$('.EditNewsPage').show();
+	});
+	
+	$('#ChoiceBack').click(function(){
+	
+		$('.EditNewsPage').hide();
+		$('.ChoiceNewsPage').show();
 	});
 });
 
@@ -66,8 +82,9 @@ $(function(){
 }
 </style>
 		<!-- 뉴스 부분 시작 -->
+		<!-- <div style="position: absolute; margin-left:80px; width:80px; height:28px; background:#607D8B; color:white;">EditNews</div> -->
 			<div class="col-div-100-100" style="padding-left: 2em; font-size:1em;">
-				<div class="col-div-100">
+				<div class="col-div-100 ChoiceNewsPage">
 					<table class="newsList"style="width: 90%; border:1px solid #b8b8b8;">
 						<colgroup>
 							<col style="width: 10%">
@@ -89,8 +106,10 @@ $(function(){
 									<td colspan="4" style="text-align: center;">데이터가 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
-							<c:if test="${!empty list }">							
+							<c:if test="${!empty list }">
+								<c:set var="i" value="0" />							
 								<c:forEach var="map" items="${list }">
+								<c:set var="i" value="${i+1 }" />	
 									<tr style="height:3.5em;">
 										<td style="text-align: center;"><input type="radio" name="Editselect" value="${map['NEWS_NO'] }"></td>
 										<td style="text-align: center;">${map['NEWS_NO'] }</td>
@@ -108,9 +127,10 @@ $(function(){
 						</tbody>
 
 					</table>
-					<input id="deleteNews" type="button" value="삭제" style="margin-left:12px; margin-top:1em;">
+					<input id="deleteNews" type="button" value="삭제" style="margin-left:12px; margin-top:1em;margin-bottom:3em;">
+					<input id="EditNews" type="button" value="수정" style="margin-left:12px; margin-top:1em;margin-bottom:3em;">
 				</div>
-				<div class="col-div-100">
+				<div class="col-div-100 EditNewsPage" style="display: none;">
 					<form class="col-div-100-100" style="height:60%; margin-top:1em;" name="newssubmit" method="post"
 					 action="<c:url value='/administrator/news/newsEdit.do'/>">
 					<table class="col-div-90-90 newsform">
@@ -133,6 +153,7 @@ $(function(){
 						</tbody>
 					</table>
 					<div class="col-div-100-10" style="padding-right:10em; padding-top:2em;">
+						<input id="ChoiceBack" style="float:left;" type="button" value="뒤로가기">
 						<input id="newsEdit" style="float:right;" type="submit" value="수정하기">
 					</div>
 				</form>
