@@ -39,4 +39,5 @@ public interface MemberService {
 	public int empSupCount(int memNo);
 	
 	public MemberVO naverLogin(Map<String, String> map);
+	public MemberVO kakaoLogin(Map<String, String> map);
 }

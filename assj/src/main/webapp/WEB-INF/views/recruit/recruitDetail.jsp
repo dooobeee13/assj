@@ -1036,14 +1036,14 @@
 				          			<p class="head" style="padding-left: 15px;">성별</p>
 				          			<div class="item itemMen">
 										<div class="label">남자</div>
-										<div class="value">${dto.manCnt/dto.totalCnt*100}%</div>
+										<div class="value"><fmt:formatNumber value="${dto.manCnt/dto.totalCnt*100}" pattern="0"/>%</div>
 										<div class="bar" aria-hidden="true">
 											<div class="progressbar" style="width:${dto.manCnt/dto.totalCnt*100}%"></div>
 										</div>
 									</div>
 									<div class="item itemWomen">
 										<div class="label">여자</div>
-										<div class="value"><strong>${dto.womenCnt/dto.totalCnt*100}%</strong></div>
+										<div class="value"><strong><fmt:formatNumber value="${dto.womenCnt/dto.totalCnt*100}" pattern="0"/>%</strong></div>
 										<div class="bar" aria-hidden="true">
 											<div class="progressbar" style="width:${dto.womenCnt/dto.totalCnt*100}%"></div>
 										</div>
@@ -1086,8 +1086,10 @@
 				          		    series: [{
 				          		    	showInLegend: false,
 				          		    	color: '#ff8759',
-				          		        data: [${dto.e20/dto.totalCnt*100}, ${dto.b21e25/dto.totalCnt*100}, ${dto.b26e30/dto.totalCnt*100}, ${dto.b31e35/dto.totalCnt*100}, 
-				          		        	${dto.b36e40/dto.totalCnt*100}, ${dto.b41e45/dto.totalCnt*100}, ${dto.b46e50/dto.totalCnt*100}, ${dto.b51/dto.totalCnt*100}]
+				          		        data: [<fmt:formatNumber value="${dto.e20/dto.totalCnt*100}" pattern="0"/>, <fmt:formatNumber value="${dto.b21e25/dto.totalCnt*100}" pattern="0"/>,
+				          		        	<fmt:formatNumber value="${dto.b26e30/dto.totalCnt*100}" pattern="0"/>, <fmt:formatNumber value="${dto.b31e35/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.b36e40/dto.totalCnt*100}" pattern="0"/>, <fmt:formatNumber value="${dto.b41e45/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.b46e50/dto.totalCnt*100}" pattern="0"/>, <fmt:formatNumber value="${dto.b51/dto.totalCnt*100}" pattern="0"/>]
 				          		    }]
 				          		})
 				          		</script>
@@ -1105,42 +1107,42 @@
 				          				</tr>
 				          				<tr>
 				          					<td>20세 이하</td>
-				          					<td>${dto.e20/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.e20/dto.totalCnt*100}" pattern="0" />%</td>
 				          					<td>${dto.e20}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>21세 ~ 25세</td>
-				          					<td>${dto.b21e25/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber  value="${dto.b21e25/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b21e25}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>26 ~ 30세</td>
-				          					<td>${dto.b26e30/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b26e30/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b26e30}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>31 ~ 35세</td>
-				          					<td>${dto.b31e35/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b31e35/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b31e35}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>36 ~ 40세</td>
-				          					<td>${dto.b36e40/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b36e40/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b36e40}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>41 ~ 45세</td>
-				          					<td>${dto.b41e45/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b41e45/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b41e45}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>46 ~ 50세</td>
-				          					<td>${dto.b46e50/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b46e50/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b46e50}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>51세 이상</td>
-				          					<td>${dto.b51/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.b51/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.b51}</td>
 				          				</tr>
 				          				<tr>
@@ -1189,8 +1191,11 @@
 				          		    series: [{
 				          		    	showInLegend: false,
 				          		    	color: '#ff8759',
-				          		        data: [${dto.highSchool/dto.totalCnt*100}, ${dto.college/dto.totalCnt*100}, ${dto.university/dto.totalCnt*100},
-				          		        	${dto.master/dto.totalCnt*100}, ${dto.doctor/dto.totalCnt*100}]
+				          		        data: [ <fmt:formatNumber value="${dto.highSchool/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.college/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.university/dto.totalCnt*100}" pattern="0"/>,
+				          		        	<fmt:formatNumber value="${dto.master/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.doctor/dto.totalCnt*100}" pattern="0"/>]
 				          		    }]
 				          		})
 				          		</script>
@@ -1208,27 +1213,27 @@
 				          				</tr>
 				          				<tr>
 				          					<td>고졸</td>
-				          					<td>${dto.highSchool/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.highSchool/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.highSchool}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>초대졸</td>
-				          					<td>${dto.college/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.college/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.college}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>대졸</td>
-				          					<td>${dto.university/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.university/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.university}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>석사</td>
-				          					<td>${dto.master/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.master/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.master}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>박사</td>
-				          					<td>${dto.doctor/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.doctor/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.doctor}</td>
 				          				</tr>
 				          				<tr>
@@ -1277,8 +1282,11 @@
 				          		    series: [{
 				          		    	showInLegend: false,
 				          		    	color: '#ff8759',
-				          		        data: [${dto.c0/dto.totalCnt*100}, ${dto.c1to3/dto.totalCnt*100}, ${dto.c3to5/dto.totalCnt*100}, ${dto.c5to10/dto.totalCnt*100},
-				          		        	${dto.c10/dto.totalCnt*100}]
+				          		        data: [<fmt:formatNumber value="${dto.c0/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.c1to3/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.c3to5/dto.totalCnt*100}" pattern="0"/>, 
+				          		        	<fmt:formatNumber value="${dto.c5to10/dto.totalCnt*100}" pattern="0"/>,
+				          		        	<fmt:formatNumber value="${dto.c10/dto.totalCnt*100}" pattern="0"/>]
 				          		    }]
 				          		})
 				          		</script>
@@ -1296,27 +1304,27 @@
 				          				</tr>
 				          				<tr>
 				          					<td>신입(1년 미만)</td>
-				          					<td>${dto.c0/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.c0/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.c0}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>1 ~ 3년</td>
-				          					<td>${dto.c1to3/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.c1to3/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.c1to3}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>3 ~ 5년</td>
-				          					<td>${dto.c3to5/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.c3to5/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.c3to5}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>5 ~ 10년</td>
-				          					<td>${dto.c5to10/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.c5to10/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.c5to10}</td>
 				          				</tr>
 				          				<tr>
 				          					<td>10년 이상</td>
-				          					<td>${dto.c10/dto.totalCnt*100}%</td>
+				          					<td><fmt:formatNumber value="${dto.c10/dto.totalCnt*100}" pattern="0"/>%</td>
 				          					<td>${dto.c10}</td>
 				          				</tr>
 				          				<tr>
@@ -1331,14 +1339,14 @@
 				          	
 				          	<div class="row">
 				          		<p class="head" style="padding-left: 15px"><span class="glyphicon glyphicon-usd"></span> 희망연봉</p>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal1800/dto.totalCnt*100}" data-num="${dto.sal1800}" data-title="1800미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal2200/dto.totalCnt*100}" data-num="${dto.sal2200}" data-title="2200미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal2600/dto.totalCnt*100}" data-num="${dto.sal2600}" data-title="2600미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal3000/dto.totalCnt*100}" data-num="${dto.sal3000}" data-title="3000미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal3400/dto.totalCnt*100}" data-num="${dto.sal3400}" data-title="3400미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal4000/dto.totalCnt*100}" data-num="${dto.sal4000}" data-title="4000미만"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal4000up/dto.totalCnt*100}" data-num="${dto.sal4000up}" data-title="4000이상"></div>
-				          		<div class="col-md-3 salchart" data-pct="${dto.sal0/dto.totalCnt*100}" data-num="${dto.sal0}" data-title="면접 후 결정"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal1800/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal1800}" data-title="1800미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal2200/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal2200}" data-title="2200미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal2600/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal2600}" data-title="2600미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal3000/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal3000}" data-title="3000미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal3400/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal3400}" data-title="3400미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal4000/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal4000}" data-title="4000미만"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal4000up/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal4000up}" data-title="4000이상"></div>
+				          		<div class="col-md-3 salchart" data-pct="<fmt:formatNumber value='${dto.sal0/dto.totalCnt*100}' pattern='0'/>" data-num="${dto.sal0}" data-title="면접 후 결정"></div>
 				        	</div>
 				          	<script>
 				          	var colors = ['#38cbca', '#d5dddd'];

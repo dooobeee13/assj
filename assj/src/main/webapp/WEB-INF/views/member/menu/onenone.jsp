@@ -175,12 +175,12 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;(평일 17시 이후 : 다음날 /주말 : 다음주 월요일)</h4><br><br>
 				<form role="form" class="form-inline" method="post" action="<c:url value='/member/menu/onenone.do'/>">
 					<c:if test="${!empty vo.memId}">
-						<input type="text" name="id" id="id" value="${vo.memId}">
-						<input type="text" name="email" id="email" value="${vo.memEmail}">
+						<input type="hidden" name="id" id="id" value="${vo.memId}">
+						<input type="hidden" name="email" id="email" value="${vo.memEmail}">
 					</c:if>
 					<c:if test="${!empty cmVo.cmId}">
-						<input type="text" name="id" id="id" value="${cmVo.cmId}">
-						<input type="text" name="email" id="email" value="${cmVo.cmEmail}">
+						<input type="hidden" name="id" id="id" value="${cmVo.cmId}">
+						<input type="hidden" name="email" id="email" value="${cmVo.cmEmail}">
 					</c:if>		
 					<table id="email">
 						<tr>
@@ -245,7 +245,7 @@
 				<br>
 				<div id="btnDiv">
 					<button type="submit" class="btn btn-primary btn-lg" id="sendBtn">보내기</button>
-					<button type="button" class="btn btn-default btn-lg" id="cancelBtn">취소</button>
+					<a href="<c:url value='/index.do'/>"><button type="button" class="btn btn-default btn-lg" id="cancelBtn">취소</button></a>
 				</div>
 				</form>
 			</fieldset>

@@ -337,7 +337,7 @@
 								</tr>
 								<tr>
 									<td class="titleTD">&nbsp;&nbsp;&nbsp;&nbsp;회사 로고/사진등록</td>
-									<td><input type="file" class="form-control" name="cmLogo">
+									<td><input type="file" class="form-control" name="Logo">
 									</td>
 								</tr>
 								<tr>

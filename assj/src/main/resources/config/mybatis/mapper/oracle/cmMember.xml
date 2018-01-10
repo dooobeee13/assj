@@ -63,7 +63,7 @@
 	<sql id="selectHireNotiWithApplicants">
 		select 	h.HN_NO, h.cm_no, h.HN_NOTITITLE, h.HN_START, h.HN_DEADLINE, 
 		        case when sysdate &lt; h.HN_START then '대기' 
-		             when sysdate &lt; h.HN_DEADLINE then '진행'
+		             when sysdate &lt; (h.HN_DEADLINE + 1) then '진행'
 		             else '마감' end as deadlineStatus, es.*	
 		from hire_noti h 
 		left outer join (select es_no, hn_no, e.es_status as status, r.RESUME_NO, r.RESUME_NAME as name, r.edu_no,

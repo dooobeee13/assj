@@ -213,13 +213,13 @@
 						
 					    <div style="padding: 0 20%; display: inline">
 					    <a target="_blank" class="btn btn-default" href="/assj/recruit/recruitDetail.do?hnNo=${vo.hnNo}">공고보기</a>
-					    <div class="dropdown" style="display: inline-block;">
+					    <!-- <div class="dropdown" style="display: inline-block;">
 					    	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">공고관리</button>
 					    	<ul class="dropdown-menu dropdown-menu-right manage">
 					      		<li><a href="#">공고 수정</a></li>
 					      		<li><a href="#">공고 삭제</a></li>
 					    	</ul>
-					    </div>
+					    </div> -->
 					    </div>
 					</div>
 					<hr>
@@ -254,7 +254,12 @@
 				
 				<div class="">
 					<div class="btnLine">
-						<button class="btn btn-default">지원자목록 엑셀저장</button>
+						<form action="<c:url value='/excel.do' />" method="post">
+						<input type="hidden" name="hnNo" value="${param.hnNo}">
+						<c:if test="${!empty vo.cEsWithResumeList}">
+							<button class="btn btn-default" type="submit">지원자목록 엑셀저장</button>
+						</c:if>
+						</form>
 					</div>
 					<table class="table table-hover">
 						<colgroup>
