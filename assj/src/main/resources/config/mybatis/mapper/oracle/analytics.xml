@@ -58,6 +58,10 @@
 		select sum(pageview) from analytics
 	</select>
 	
+	<select id="selectTotalMemCount" resultType="int">
+		select count(*) from member
+	</select>
+	
 	<select id="selectTotalMemCountNotToday" resultType="int">
 		select count(*) from member
 		<![CDATA[where mem_regdate<to_date(sysdate,'yy-MM-dd')]]>
@@ -70,6 +74,7 @@
 	
 	<select id="selectTotalHireNoti" resultType="int">
 		select count(*) from hire_noti
+		where to_date(hn_deadline,'yyyy-MM-dd') >= to_date(sysdate,'yyyy-MM-dd')
 	</select>
 	
 	<select id="selectTotalResume" resultType="int">
@@ -90,6 +95,26 @@
 		left join hire_noti h
 		on h.CM_NO = cm.CM_NO
 		group by cs.CS_NAME
+	</select>
+	
+	<select id="selectTotalReboard" resultType="int">
+		select count(*) from reboard
+		where delflag = 'N'
+	</select>
+	
+	<select id="selectTodayReboard" resultType="int">
+		select count(*) from reboard
+		where regdate = to_date(sysdate,'yyyy-MM-dd') and delflag = 'N'
+	</select>
+	
+	<select id="selectDeadlineHN" resultType="int">
+		select count(*) from hire_noti
+		where to_date(hn_deadline,'yyyy-MM-dd') = to_date(sysdate,'yyyy-MM-dd')
+	</select>
+	
+	<select id="selectTotalHN" resultType="int">
+		select count(*) from hire_noti
+		where to_date(hn_deadline,'yyyy-MM-dd') > to_date(sysdate,'yyyy-MM-dd')
 	</select>
 	
 </mapper>

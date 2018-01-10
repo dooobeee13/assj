@@ -28,4 +28,5 @@ public interface AdminService {
 	public int questionDelete(int no);
 	public QuestionViewVO selectByquestion(int no);
 	public int UpdateReplyFlag(int no);
+	public Map<String, Object> selectAdminInfo(String userid);
 }

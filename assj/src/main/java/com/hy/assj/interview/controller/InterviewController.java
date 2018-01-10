@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hy.assj.cmMember.model.CmMemberVO;
 import com.hy.assj.interview.model.InterviewService;
 
 @Controller
@@ -27,27 +30,31 @@ public class InterviewController {
 	private InterviewService interService;
 	
 	@RequestMapping("/oncalendar.do")
-	public void Interview_cal(Model model) {
-		List<Map<String, Object>> list = interService.selectCalendar(3);
+	public void Interview_cal(HttpSession session ,Model model) {
+		CmMemberVO vo = (CmMemberVO)session.getAttribute("cmMemberVO");
+		List<Map<String, Object>> list = interService.selectCalendar(vo.getCmNo());
 
 		logger.info("면접 대상자 list.size()={}",list.size());
 		
+		model.addAttribute("topIndex",4);
 		model.addAttribute("list",list);
 	}
 	
 	@RequestMapping(value="/forinterview.do",method=RequestMethod.GET)
-	public String Interview_for(Model model ) {
-		List<Map<String, Object>> list = interService.selectInview(3);
+	public String Interview_for(HttpSession session , Model model ) {
+		CmMemberVO vo = (CmMemberVO)session.getAttribute("cmMemberVO");
+		List<Map<String, Object>> list = interService.selectInview(vo.getCmNo());
 		logger.info("interview 결과 list.size()={}",list.size());
 		model.addAttribute("list",list);
-		
+		model.addAttribute("topIndex",4);
 		return "Interviews/forinterview";
 	}
 	
 	//면접 등록 미니 페이지
 	@RequestMapping("/interviewdate.do")
-	public void InterSelect(Model model) {
-		List<Map<String, Object>> list = interService.selectByHireNotice(3);
+	public void InterSelect(HttpSession session, Model model) {
+		CmMemberVO vo = (CmMemberVO)session.getAttribute("cmMemberVO");
+		List<Map<String, Object>> list = interService.selectByHireNotice(vo.getCmNo());
 		logger.info("면접 등록 페이지 면접명 결과 list.size()={}",list.size());
 		
 		model.addAttribute("list",list);

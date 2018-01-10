@@ -95,11 +95,13 @@ window.onload=function(){
 	scheduler.init('scheduler_here', new Date(), "month");
 
 	scheduler.parse([
-		<c:forEach var="i" begin="0" end="${fn:length(list)-1}" step="1">
-			<c:set var="vo" value="${list[i]}"/>
-			{ start_date: "${vo['INTERV_START']}", end_date: "${vo['INTERV_END']}",  title: "${vo['HN_NOTITITLE']} 부분", content:"${vo['ES_STATUS']}", text: "${vo['MEM_NAME']} 님,  ${vo['INTERV_LOC']}", df: "${vo['INTERV_REMARK']}" }
-			<c:if test="${i!=fn:length(list)-1}">,</c:if>
-		</c:forEach>
+		<c:if test="${!empty list}">
+			<c:forEach var="i" begin="0" end="${fn:length(list)-1}" step="1">
+				<c:set var="vo" value="${list[i]}"/>
+				{ start_date: "${vo['INTERV_START']}", end_date: "${vo['INTERV_END']}",  title: "${vo['HN_NOTITITLE']} 부분", content:"${vo['ES_STATUS']}", text: "${vo['MEM_NAME']} 님,  ${vo['INTERV_LOC']}", df: "${vo['INTERV_REMARK']}" }
+				<c:if test="${i!=fn:length(list)-1}">,</c:if>
+			</c:forEach>
+		</c:if>
 	], "json");
 	
 };
@@ -167,7 +169,7 @@ window.onload=function(){
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../index/top.jsp" %>
+<%@include file="../company/cTop.jsp" %>
 <link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
 <div class="interview-container" style="margin-bottom:20em;">
 	<div class="none-select"style="width:20%; height:70px; border-bottom:1px solid black; float:left;">

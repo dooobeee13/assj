@@ -105,4 +105,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.UpdateReplyFlag(no);
 	}
 
+	@Override
+	public Map<String, Object> selectAdminInfo(String userid) {
+		// TODO Auto-generated method stub
+		return adminDao.selectAdminInfo(userid);
+	}
+
 }

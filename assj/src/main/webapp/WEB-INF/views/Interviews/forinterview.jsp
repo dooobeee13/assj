@@ -31,7 +31,8 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../index/top.jsp" %>
+<%@include file="../company/cTop.jsp" %>
+
 <link rel="stylesheet" href="<c:url value='/css/Search-TS.css'/>">
 <div class="interview-container" style="overflow: hidden; border: none; margin-bottom:2em;">
 	<div class="none-select"style="width:20%; height:70px; border-bottom:1px solid black; float:left;">

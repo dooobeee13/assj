@@ -36,7 +36,6 @@
 			<mapping path="/administrator/*"/>
 			<mapping path="/administrator/*/*"/>
 			<beans:ref bean="adminLoginInterceptor"/>
-		<!--<beans:bean class="com.herb.app.controller.AdminLoginInterceptor" /> -->
 		</interceptor>
 	</interceptors>
 	

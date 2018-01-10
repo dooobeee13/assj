@@ -95,5 +95,11 @@ public class AdminDAOMybatis extends SqlSessionDaoSupport implements AdminDAO{
 	public int UpdateReplyFlag(int no) {
 		return getSqlSession().update(adminspace+".UpdateReplyFlag",no);
 	}
+
+	@Override
+	public Map<String, Object> selectAdminInfo(String userid) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne(adminspace+".selectAdminInfo",userid);
+	}
 	
 }

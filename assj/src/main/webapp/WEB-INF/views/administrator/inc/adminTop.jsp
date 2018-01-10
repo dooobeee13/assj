@@ -240,7 +240,7 @@ function EnterPress(){
 				<div class="col-div-100-80" style="background-image: url('<c:url value="/icon/adminMain.jpg"/>'); background-size: cover;">
 					<div class="col-div-100-70">
 						<div class="col-div-30-100"><img src="<c:url value='/icon/beb42.jpeg'/>"  style="border-radius: 25px; margin-top:4em;"></div>
-						<div class="col-div-70-100" style="color:#607D8B; font-weight: bold; padding-left:0.3em; font-size: 12px;"><p style="margin-top:4.5em;margin-bottom:6px;">관리자1</p><p style="margin-top:0;">testAdmin@naver.com</p></div>
+						<div class="col-div-70-100" style="color:#607D8B; font-weight: bold; padding-left:0.3em; font-size: 12px;"><p style="margin-top:4.5em;margin-bottom:6px;">ID = ${sessionScope.adminid }</p><p style="margin-top:0;">${sessionScope.adminname } 님 접속완료.</p></div>
 					</div>
 					<div class="col-div-100-30">
 						<a href="#" style="margin-left:1em; color:#607D8B;">관리자 정보 보기</a>

@@ -153,6 +153,9 @@ public class AdminController {
 		if(cnt==AdminService.LOGIN_OK) {
 			url="/administrator/adminmain.do";
 			msg="로그인 성공";
+			Map<String, Object> adminInfo = adminService.selectAdminInfo(userid);
+			session.setAttribute("adminname", adminInfo.get("ADMIN_NAME"));
+			logger.info("어드민 계정 이름 = {}",adminInfo.get("ADMIN_NAME"));
 			session.setAttribute("adminid", userid);
 		}else if(cnt==AdminService.NOT_EXITST) {
 			msg="존재하지 않는 아이디입니다.";
@@ -243,11 +246,20 @@ public class AdminController {
 	public void TestAnalytics(Model model) {
 		int todayMem = analyService.selectTotalMemCountNotToday();
 		int notTodayMem = analyService.selectTotalMemCountToday();
+		int totalMem = analyService.selectTotalMemCount();
 		int visitorCount = analyService.totalCount();
 		int news = analyService.selectTotalNews();
 		int introduction = analyService.selectTotalIntroduction();
 		int resume = analyService.selectTotalResume();
 		int hireNoti = analyService.selectTotalHireNoti();
+		int totalReboard = analyService.selectTotalReboard();
+		int todayReboard = analyService.selectTodayReboard();
+		
+		int todayViewPage = analyService.totalPageview();
+		
+		int DeadLineHN = analyService.selectDeadlineHN();
+		int totalHN = analyService.selectTotalHN();
+		
 		List<Map<String, Object>> Cslist = analyService.selectTotalCompanyScale();
 		
 		model.addAttribute("Cslist",Cslist);
@@ -260,7 +272,18 @@ public class AdminController {
 		model.addAttribute("visitorCount",visitorCount);
 		model.addAttribute("todayMem",todayMem);
 		model.addAttribute("notTodayMem",notTodayMem);
+		model.addAttribute("totalMem",totalMem);
+		
+		model.addAttribute("totalReboard",totalReboard);
+		model.addAttribute("todayReboard",todayReboard);
+		model.addAttribute("todayViewPage",todayViewPage);
+		
+		model.addAttribute("DeadLineHN",DeadLineHN);
+		model.addAttribute("totalHN",totalHN);
 	}
 	
-	
+	@RequestMapping("/GATEST/apiTest.do")
+	public void testApi() {
+		
+	}
 }
