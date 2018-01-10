@@ -218,6 +218,7 @@ public class HireNotiController {
 /*		model.addAttribute("pagingInfo",pagingInfo);*/
 		
 		return "hnmanage";
+		//
 	
 	}
 
