@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/ck/ckeditor/ckeditor.js' />"></script>
+<script type="text/javascript" src="<c:url value='/ckeditor/ckeditor.js' />"></script>
 <script type="text/javascript">
 	$(function(){
 		$('#frmWrite').submit(function(){
@@ -63,11 +63,12 @@
 							<script type="text/JavaScript">
 
 
-								window.onload = function() {
+							
+									CKEDITOR.replace('fbContent',{
+										filebrowserImageUploadUrl: '${pageContext.request.contextPath}/ckeditor/upload.do'
+									});
 
-									CKEDITOR.replace('fbContent');
-
-								};
+								
 							</script>
 						</div>
 						

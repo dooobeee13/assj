@@ -32,6 +32,7 @@ public class FileuploadUtil {
 	public static final int RESUME_PHOTO=3; // 이력서 사진
 	public static final int RESUME_PORTFOLIO=4; // 이력서 포트폴리오 자료
 	public static final int FREEBOARDIMAGE=6; // 자유게시판 첨부 자료
+	public static final int FREEBOARDIMAGE2=7; // 자유게시판 첨부 자료
 	
 
 	@Resource(name="fileUploadProperties")
@@ -150,6 +151,10 @@ public class FileuploadUtil {
 				upPath
 				=fileProperties.getProperty("freeBoardImage.upload.path.test");
 			}
+			else if(uploadGb==FREEBOARDIMAGE2) {
+				upPath
+				=fileProperties.getProperty("freeBoardImage2.upload.path.test");
+			}
 			
 			logger.info("test 경로:"+ upPath);
 		}else {
@@ -162,14 +167,16 @@ public class FileuploadUtil {
 				upPath=fileProperties.getProperty("newsFile.upload.path");
 			}else if(uploadGb==RESUME_PHOTO) {
 				upPath
-				=fileProperties.getProperty("resumePhoto.upload.path.test");
+				=fileProperties.getProperty("resumePhoto.upload.path");
 			}else if(uploadGb==RESUME_PORTFOLIO) {
 				upPath
-				=fileProperties.getProperty("resumePortfolio.upload.path.test");
-			}
-			else if(uploadGb==FREEBOARDIMAGE) {
+				=fileProperties.getProperty("resumePortfolio.upload.path");
+			}else if(uploadGb==FREEBOARDIMAGE) {
 				upPath
-				=fileProperties.getProperty("freeBoardImage.upload.path.test");
+				=fileProperties.getProperty("freeBoardImage.upload.path");
+			}else if(uploadGb==FREEBOARDIMAGE2) {
+				upPath
+				=fileProperties.getProperty("freeBoardImage2.upload.path");
 			}
 			logger.info("배포시 경로:"+ upPath);
 			
