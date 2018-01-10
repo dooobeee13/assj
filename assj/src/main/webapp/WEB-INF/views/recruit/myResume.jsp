@@ -18,7 +18,7 @@
 		<tr>
 			<td>
 				<div class="radio">
-					<label> <input type="radio" name="resumeNo" value="1" <c:if test="${status.first}">checked</c:if>> 
+					<label> <input type="radio" name="resumeNo" value="${resume.resumeNo}" <c:if test="${status.first}">checked</c:if>> 
 						${resume.resumeTitle}
 					</label>
 				</div>

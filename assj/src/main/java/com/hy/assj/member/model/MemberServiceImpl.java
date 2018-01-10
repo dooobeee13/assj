@@ -169,4 +169,31 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.empSupCount(memNo);
 	}
 
+	@Override
+	public MemberVO kakaoLogin(Map<String, String> map) {
+		//아이디 체크해서 없을때 insert
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("id", map.get("id"));
+		searchMap.put("type", "kakao");
+		int cnt = memberDao.countMemberBySns(searchMap);
+		
+		if (cnt == 0) {
+			String id = map.get("id");
+			String email = map.get("email");
+			String image = map.get("profile_image");
+			String name = map.get("name");
+			MemberVO vo = new MemberVO();
+			vo.setMemName(name);
+			vo.setMemEmail(email);
+			vo.setMemGender("");
+			vo.setMemSnsType("kakao");
+			vo.setMemSnsId(id);
+			vo.setMemPhoto(image);
+			
+			memberDao.insertMemberBySns(vo);
+		}
+		
+		return memberDao.selectMemberBySns(searchMap); 
+	}
+
 }

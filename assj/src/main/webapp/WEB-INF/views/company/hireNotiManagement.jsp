@@ -143,9 +143,9 @@
 										<fmt:formatDate value="${map.vo.hnStart}" pattern="yyyy.MM.dd"/> ~
 										<fmt:formatDate value="${map.vo.hnDeadline}" pattern="yyyy.MM.dd"/> 
 									</span>
-									<a href="javascript:void(0);" data-hnno="1" class="manage" data-toggle="popover" >
+									<!-- <a href="javascript:void(0);" data-hnno="1" class="manage" data-toggle="popover" >
 									공고관리</a>
-									<a href="javascript:void(0);" data-hnno="1" class="statistics">지원자 통계</a> 
+									<a href="javascript:void(0);" data-hnno="1" class="statistics">지원자 통계</a>  -->
 								</div>
 								<div class="col-md-6 text-center stats">
 									<div class="col-xs-3">
@@ -179,6 +179,7 @@
 		container:'body', 
 		html:true, 
 		content:'<div><a href="#">공고보기</a></div><div><a href="#">공고수정</a></div><div><a href="#">공고삭제</a></div>',
+/* 		content:'<div><a href="#">공고보기</a></div><div><a href="#">공고수정</a></div><div><a href="#">공고삭제</a></div>', */
 		placement: 'bottom',
 		trigger:'focus'});   
 	</script>
