@@ -147,7 +147,7 @@ function pageFunc(curPage){
 							 <!-- 24시간 이내의 글인 경우 -->
 							</a>
 							<c:if test="${reboardVO.newImgTerm<24 }">
-								<img style="text-align:left" src='<c:url value="/images/new.gif"/>' 
+								<img style="text-align:left; display: inline;" src='<c:url value="/images/new.gif" />' 
 								alt="new 이미지">
 							</c:if>  
 					 </c:if> 
