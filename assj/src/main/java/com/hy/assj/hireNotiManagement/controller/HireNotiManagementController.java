@@ -190,7 +190,7 @@ public class HireNotiManagementController {
 		  	model.addAttribute("labels", labels);//셀타이틀 
 
 		  	model.addAttribute("dataMap", row);
-		}
+		} 
 		
 		return "excelXlsx";
 	}
