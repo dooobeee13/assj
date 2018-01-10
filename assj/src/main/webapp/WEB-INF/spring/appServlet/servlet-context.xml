@@ -26,6 +26,8 @@
 	     <beans:property name="order" value="0" />
 	</beans:bean>
 	
+	<beans:bean id="excelXlsx"  class="com.hy.assj.hireNotiManagement.model.ExcelXlsxDownloadView"/>
+	
 	<context:component-scan base-package="com.hy.assj" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller" 
 		type="annotation"/>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,14 +13,26 @@
 <script type="text/javascript">
 
 </script>
+<style>
+	.container fieldset{
+		padding:50px;
+		background-color:#ffff;
+	}
+	.container table th{
+		background-color:#dedbdb;
+		text-align:center;
+	}
+	.container table td{
+		text-align:center;
+	}
+	.divBtn{
+		text-align: right;
+	}
+</style>
 </head>
 <body>
 
 <c:import url="../../index/top.jsp" /> 
-
-
-
-
 
 <div class="container">
    
@@ -29,7 +41,11 @@
 <c:import url="../boardSide.jsp"></c:import>
    
    		<div class="col-lg-9 col-md-9">
-         	<table class="table">
+   			<fieldset>
+   			<h1>자유게시판</h1>
+   			<br>
+   			<hr>
+         	<table class="table table-hover">
 			<colgroup>
 				<col style="width:10%">
 				<col style="width:40%">
@@ -55,27 +71,30 @@
 			</tr>
 			</c:if>
 			<c:if test="${!empty list}">
-				<c:forEach var="vo" items="${list}">
+				<c:forEach var="map" items="${list}">
 					<tr>
-						<td></td>					
-						<td></td>					
-						<td></td>					
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${map['FB_NO'] }</td>					
+						<td><a href="<c:url value="/board/freeBoardView.do?fbNo=${map['FB_NO'] }" />">${map['FB_TITLE'] }</a></td>					
+						<td>${map['MEM_NAME'] }</td>
+						<fmt:formatDate var="regdate" value="${map['FB_REGDATE'] }" pattern="yyyy-MM-dd"/>					
+						<td>${regdate }</td>
+						<td>${map['FB_VIEW'] }</td>
+						<td>${map['FB_RECM'] }</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
    			</table>
+   			<div class="divBtn">
+		    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
+			</div>
+		</fieldset>
         </div>
    </div>  	
  
  
 </div>
-<div class="divBtn">
-    <a href="<c:url value='/board/freeBoardWrite.do'/>">글쓰기</a>
-</div>
+
 
 	<c:import url="../../index/footer.jsp" /> 
 

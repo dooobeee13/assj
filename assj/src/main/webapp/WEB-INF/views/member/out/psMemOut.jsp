@@ -195,7 +195,7 @@
 						<td>내 이력서를 누가 볼까 불안하신가요?<br>
 							이력서를 인재정보 미등록으로 설정하시면, 회원님을 제외한<br>
 							그 누구도 이력서를 볼 수 없어 안심하셔도 좋습니다.</td>
-						<td><button type="button" class="btn btn-primary">이력서 변경&nbsp;&nbsp;&nbsp;<br>바로가기</button></td>
+						<td><a href="<c:url value='/resume/resumeInsert.do'/>"><button type="button" class="btn btn-primary">이력서 변경&nbsp;&nbsp;&nbsp;<br>바로가기</button></a></td>
 					</tr>
 					<tr>
 						<td class="titleTD">개인정보 때문에 <br>사이트마다 탈퇴 감행 중 <br><span><b>→ 비밀번호 변경</b></span></td>
@@ -207,7 +207,7 @@
 				</table><br><br>
 				<div id="btnDiv">
 					<a href="<c:url value='/member/out/psMemOut2.do'/>"><button type="button" class="btn btn-primary btn-lg" id="outBtn">탈퇴하기</button></a>
-					<button type="button" class="btn btn-default btn-lg">취소</button>
+					<a href="<c:url value='/index.do'/>"><button type="button" class="btn btn-default btn-lg">취소</button></a>
 				</div>
 				<br><br><br><br>
 			</fieldset>

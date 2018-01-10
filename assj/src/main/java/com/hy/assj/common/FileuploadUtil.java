@@ -31,6 +31,8 @@ public class FileuploadUtil {
 	public static final int NEWS_IMAGE=5; //뉴스에 들어가는 이미지 업로드인 경우
 	public static final int RESUME_PHOTO=3; // 이력서 사진
 	public static final int RESUME_PORTFOLIO=4; // 이력서 포트폴리오 자료
+	public static final int FREEBOARDIMAGE=6; // 자유게시판 첨부 자료
+	
 
 	@Resource(name="fileUploadProperties")
 	private Properties fileProperties;
@@ -144,6 +146,9 @@ public class FileuploadUtil {
 			}else if(uploadGb==RESUME_PORTFOLIO) {
 				upPath
 				=fileProperties.getProperty("resumePortfolio.upload.path.test");
+			}else if(uploadGb==FREEBOARDIMAGE) {
+				upPath
+				=fileProperties.getProperty("freeBoardImage.upload.path.test");
 			}
 			
 			logger.info("test 경로:"+ upPath);
@@ -161,6 +166,10 @@ public class FileuploadUtil {
 			}else if(uploadGb==RESUME_PORTFOLIO) {
 				upPath
 				=fileProperties.getProperty("resumePortfolio.upload.path.test");
+			}
+			else if(uploadGb==FREEBOARDIMAGE) {
+				upPath
+				=fileProperties.getProperty("freeBoardImage.upload.path.test");
 			}
 			logger.info("배포시 경로:"+ upPath);
 			

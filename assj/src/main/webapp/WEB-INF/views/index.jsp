@@ -164,14 +164,15 @@
 												<input type="submit" class="btn btn-primary btn-sm btn-block" value="로그인" id="loginBtn">
 											</div>
 											<div style="margin-bottom: 10px">
-												<div>
+												<div style="margin-bottom: 5px">
 													<a href="#"> 
 														<img class="img-responsive" id="naverLogin" style="width: 150px" 
-															src="<c:url value='/images/naver_white.PNG' />">
+															src="<c:url value='/images/naver_green.PNG' />">
 													</a>
 												</div>
 												<div>
-													<a href="javascript:loginWithKakao()"> 
+													<!-- <a href="javascript:loginWithKakao()">  -->
+													<a href="https://kauth.kakao.com/oauth/authorize?client_id=e7a7a838c3daff237d66d1209dab8b43&redirect_uri=http://localhost:9090/assj/kakaologin.do&response_type=code"> 
 														<img class="img-responsive" style="width: 150px" src="<c:url value='/images/kakaoLogin.png' />">
 													</a>
 													<script>

@@ -162,7 +162,7 @@ $(function(){
 							</td>
 							<td>${map.ID}</td>
 							<td>${map.QUESTION_TITLE}</td>
-							<td><a href="">${map.TITLE}</a></td>
+							<td><a href="#">${map['TITLE']}</a></td>
 							<td>
 								<a href="<c:url value='/member/menu/replyDelete.do?no=${map.NO}'/>"><button type="button" class="btn btn-default btn-sm" >삭제</button></a><br>
 							</td>
@@ -201,12 +201,12 @@ $(function(){
 		<!--  페이지 번호 끝 -->
 		</ul>
 		</div>
+		<a href="<c:url value='/member/menu/question.do'/>"><span style="vertical-align:middle" class="glyphicon glyphicon-arrow-left"> 이전으로</span></a>
 		
 			  </div>
 	  	</div>
 	  	</div>
-	  	</article>
-	  	</div>
+
 	  	
 </body>
 </html>

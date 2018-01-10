@@ -94,18 +94,38 @@
 	</delete>
 	
 	<select id="psMemManage" resultType="map" parameterType="searchVO">
-		select * from member 
-		where mem_id like '%' || #{searchKeyword} || '%'
-		order by mem_no desc
+		select *
+			from
+			(
+			    select rownum as RNUM, blist.*
+			    from(
+			      	select * from member 
+					where mem_id like '%' || #{searchKeyword} || '%'
+					order by mem_no desc		        
+			    ) blist
+			) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]>  
 	</select>	
 	<select id="psMemTotalCount" resultType="int" parameterType="searchVO">
 		select count(*) from member 
 		where mem_id like '%' || #{searchKeyword} || '%'
 	</select>
 	<select id="cmMemManage" resultType="map" parameterType="searchVO">
-		select * from comp_member 
-		where cm_id like '%' || #{searchKeyword} || '%'
-		order by cm_no desc
+		select *
+			from
+			(
+			    select rownum as RNUM, blist.*
+			    from(
+				    select * from comp_member 
+					where cm_id like '%' || #{searchKeyword} || '%'
+					order by cm_no desc	        
+			    ) blist
+			) 
+		<![CDATA[
+		where RNUM > #{firstRecordIndex} 
+		and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage} ]]> 
 	</select>
 	<select id="cmMemTotalCount" resultType="int" parameterType="searchVO">
 		select count(*) from comp_member 
@@ -119,12 +139,12 @@
 		delete from comp_member where cm_no=#{cmNo}
 	</delete>
 
-	<select id="countResumeByMemNo" resultType="_int">
+	<select id="countResumeByMemNo" resultType="int">
 		select count(*) from resume
 		where mem_no = #{memNo}
 	</select>
 	
-	<select id="countScrapByMemNo" resultType="_int">
+	<select id="countScrapByMemNo" resultType="int">
 		select count(*) from scrap
 		where mem_no = #{memNo}
 	</select>

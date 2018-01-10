@@ -33,11 +33,11 @@ function pageFunc(curPage){
 		background-color: #ffff;
 		height:820px;
 	}
-	table{
-		text-align:center;
+	#frame table{
+		text-align:center; 
 	}
 	table th{
-		text-align:center;
+		text-align:center; 
 		background-color: #6adf6f;
 	}
 	.btnDiv{
@@ -138,16 +138,16 @@ function pageFunc(curPage){
 							</c:if>
 <a href="<c:url value='/member/menu/AdminQnaDetail.do?no=${reboardVO.no}'/>">
 								<!-- 제목이 긴 경우 일부만 보여주기 -->
-								<c:if test="${fn:length(reboardVO.title)>30 }">
+							<c:if test="${fn:length(reboardVO.title)>30 }">
 									${fn:substring(reboardVO.title,0,30) }...
 								</c:if>
 								<c:if test="${fn:length(reboardVO.title)<=30 }">						
 									${reboardVO.title}
 								</c:if>
-							</a>
 							 <!-- 24시간 이내의 글인 경우 -->
+							</a>
 							<c:if test="${reboardVO.newImgTerm<24 }">
-								<img src='<c:url value="/images/new.gif"/>' 
+								<img style="text-align:left; display: inline;" src='<c:url value="/images/new.gif" />' 
 								alt="new 이미지">
 							</c:if>  
 					 </c:if> 
@@ -164,8 +164,8 @@ function pageFunc(curPage){
 						pattern="yyyy-MM-dd" /> </td>
 					<td>${reboardVO.readCount}</td>	
 					<td>
-						<a href="<c:url value='/member/menu/adminQnaReply.do?no=${reboardVO.no}'/>"><button type="button" class="btn btn-default btn-sm" >답변</button></a>&nbsp;
-						<a href="<c:url value='/member/menu/adminQnaDelete.do?no=${reboardVO.no}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn">삭제</button></a><br>
+						<a href="<c:url value='/member/menu/adminQnaReply.do?no=${reboardVO.no}'/>"><button type="button" class="btn btn-default btn-sm" style="background-color:#e3eceb">답변</button></a>&nbsp;
+						<a href="<c:url value='/member/menu/adminQnaDelete.do?no=${reboardVO.no}'/>"><button type="button" class="btn btn-default btn-sm" id="delBtn" style="background-color:#e3eceb">삭제</button></a><br> 
 					</td>	
 				</tr> 
 		  	</c:forEach>

@@ -574,7 +574,7 @@
 			
 	
 	<div id="news" class="row" style="margin-right:0;margin-left:0">
-	<div class="header" style="border-radius: 4px 4px 16px 16px;background-color:#9ecff5"><img src="<c:url value='/icon/newsInfos.png'/>">&nbsp; 공 채 뉴 스</div>  
+	<div class="header" style="border-radius: 4px 4px 16px 16px;background-color:#66cfff"><img src="<c:url value='/icon/newsInfos.png'/>">&nbsp; 공 채 뉴 스</div>  
 	<br>
 	 <fieldset>
 	  <div class="column line-1">
