@@ -173,7 +173,7 @@ public class HireNotiController {
 		String msg="", url="";
 		if(cnt>0) {
 			msg="공고등록 처리되었습니다.";
-			url="/hire_noti/hire2.do";
+			url="/hnmanage.do";
 		}else {
 			msg="공고등록 실패";
 			url="/hire_noti/hire1.do";			
@@ -217,7 +217,7 @@ public class HireNotiController {
 		model.addAttribute("list",list);
 /*		model.addAttribute("pagingInfo",pagingInfo);*/
 		
-		return "hire_noti/hire2";
+		return "hnmanage";
 	
 	}
 
