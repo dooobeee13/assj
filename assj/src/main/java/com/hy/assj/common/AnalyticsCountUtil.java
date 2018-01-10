@@ -46,10 +46,8 @@ public class AnalyticsCountUtil extends HttpServlet implements HttpSessionListen
 		logger.info("오늘 통계처리용 디비 존재 여부 = {}",todayList.size());
 		if(todayList.size()==0) {
 			analyService.newAnalytics();
-			analyService.updateTotalCount();
 			analyService.updateCountView();
 		}else {
-			analyService.updateTotalCount();
 			analyService.updateCountView();
 		}
 

@@ -163,6 +163,7 @@ function bgLayerClear(){
 	<div class="header" style="border-radius: 4px 4px 16px 16px;"><img src="<c:url value='/icon/newsInfos.png'/>">&nbsp; 공 채 뉴 스</div>
 	<div class="row">
 	  <div class="column line-1">
+	  	<c:if test="${!empty list }">
 	    	<c:forEach var="i" begin="0" end="${fn:length(list)-1 }" step="4">
 					<c:set var="map" value="${list[i] }"></c:set>
 						<div class="col-y"><input type="hidden" value="${map['NEWS_NO'] }"><div class="col-title">${map['NEWS_TITLE'] }</div>
@@ -170,8 +171,10 @@ function bgLayerClear(){
 							 <img src="<c:url value='/imageTest/${map["NEWS_URL"] }'/>" style="width:100%">
 						</c:if></div>
 			</c:forEach>
+	  	</c:if>
 	  </div>
 	  <div class="column line-2">
+	  	<c:if test="${!empty list }">	  	
 	    	<c:forEach var="i" begin="1" end="${fn:length(list)-1 }" step="4">
 					<c:set var="map" value="${list[i] }"></c:set>
 						<div class="col-y"><input type="hidden" value="${map['NEWS_NO'] }"><div class="col-title">${map['NEWS_TITLE'] }</div>
@@ -179,17 +182,21 @@ function bgLayerClear(){
 							 <img src="<c:url value='/imageTest/${map["NEWS_URL"] }'/>" style="width:100%">
 						</c:if></div>
 			</c:forEach>
+	  	</c:if>
 	  </div>
 	 <div class="column line-3">
-	   	<c:forEach var="i" begin="2" end="${fn:length(list)-1 }" step="4">
+	 	<c:if test="${!empty list }">	  	
+	   		<c:forEach var="i" begin="2" end="${fn:length(list)-1 }" step="4">
 					<c:set var="map" value="${list[i] }"></c:set>
 						<div class="col-y"><input type="hidden" value="${map['NEWS_NO'] }"><div class="col-title">${map['NEWS_TITLE'] }</div>
 						<c:if test="${map['NEWS_URL']!=' ' }">
 							 <img src="<c:url value='/imageTest/${map["NEWS_URL"] }'/>" style="width:100%">
 						</c:if></div>
 			</c:forEach>
+	  	</c:if>
 	  </div>
 	   <div class="column line-4">
+	   	<c:if test="${!empty list }">	  	
 	   		<c:forEach var="i" begin="3" end="${fn:length(list)-1 }" step="4">
 					<c:set var="map" value="${list[i] }"></c:set>
 						<div class="col-y"><input type="hidden" value="${map['NEWS_NO'] }"><div class="col-title">${map['NEWS_TITLE'] }</div>
@@ -197,6 +204,7 @@ function bgLayerClear(){
 							 <img src="<c:url value='/imageTest/${map["NEWS_URL"] }'/>" style="width:100%">
 						</c:if></div>
 			</c:forEach>
+	  	</c:if>
 	  </div>
 </div>
 <div id="modalLayer">

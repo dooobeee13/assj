@@ -119,7 +119,7 @@
 	        <li <c:if test="${topIndex == 1}">class="active"</c:if>><a href="/assj/hire_noti/hire1.do">공고등록</a></li>
 	        <li <c:if test="${topIndex == 2}">class="active"</c:if>><a href="/assj/hnmanage.do">공고·지원자관리</a></li>
 	        <li <c:if test="${topIndex == 3}">class="active"</c:if>><a href="#">인재검색</a></li>
-	        <li <c:if test="${topIndex == 4}">class="active"</c:if>><a href="#">면접관리</a></li>
+	        <li <c:if test="${topIndex == 4}">class="active"</c:if>><a href="<c:url value='/Interviews/forinterview.do'/>">면접관리</a></li>
 	      </ul>
 	      <!-- <ul class="nav navbar-nav navbar-right">
 	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 예비용 버튼</a></li>

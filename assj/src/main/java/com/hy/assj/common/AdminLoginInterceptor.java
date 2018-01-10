@@ -1,4 +1,4 @@
-package com.hy.assj.administrator.controller;
+package com.hy.assj.common;
 
 import java.io.PrintWriter;
 

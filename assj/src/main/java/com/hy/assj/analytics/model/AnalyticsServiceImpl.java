@@ -109,4 +109,34 @@ public class AnalyticsServiceImpl implements AnalyticsService{
 		// TODO Auto-generated method stub
 		return analyDao.selectTotalCompanyScale();
 	}
+
+	@Override
+	public int selectTotalMemCount() {
+		// TODO Auto-generated method stub
+		return analyDao.selectTotalMemCount();
+	}
+
+	@Override
+	public int selectTotalReboard() {
+		// TODO Auto-generated method stub
+		return analyDao.selectTotalReboard();
+	}
+
+	@Override
+	public int selectTodayReboard() {
+		// TODO Auto-generated method stub
+		return analyDao.selectTodayReboard();
+	}
+
+	@Override
+	public int selectDeadlineHN() {
+		// TODO Auto-generated method stub
+		return analyDao.selectDeadlineHN();
+	}
+
+	@Override
+	public int selectTotalHN() {
+		// TODO Auto-generated method stub
+		return analyDao.selectTotalHN();
+	}
 }

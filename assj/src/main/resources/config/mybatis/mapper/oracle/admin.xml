@@ -17,6 +17,10 @@
 		values(adminchat_seq.nextval,#{userid},#{content},sysdate)
 	</insert>
 	
+	<select id="selectAdminInfo" parameterType="string" resultType="map">
+		select * from admin where admin_id=#{userid}
+	</select>
+	
 	<select id="selectByLastChatNo" parameterType="int" resultType="map">
 		
 		select * from adminchat

@@ -127,7 +127,7 @@ window.onload=function(){
 					</div>
 					<div class="col-div-65-80" style="padding-top:2em;">
 						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>총 회원 수 : </span><strong>${todayMem }명</strong></li>
+							<li style="border-left:1.5px solid #b8b8b8;"><span>총 회원 수 : </span><strong>${totalMem}명</strong></li>
 							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>오늘 가입자 수 : </span><strong>${notTodayMem }명</strong></li>
 						</ul>
 					</div>
@@ -142,6 +142,7 @@ window.onload=function(){
 					<div class="col-div-65-80" style="padding-top:3em;">
 						<ul>
 							<li style="border-left:1.5px solid #b8b8b8;"><span>오늘의 방문객 : </span><strong>${visitorCount } 명</strong></li>
+							<li style="border-left:1.5px solid #b8b8b8;"><span>오늘 페이지뷰 : </span><strong>${todayViewPage } 번</strong></li>
 						</ul>
 					</div>
 				</div>
@@ -154,9 +155,8 @@ window.onload=function(){
 					</div>
 					<div class="col-div-65-80" style="padding-top:2em;">
 						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>오늘의 총 문의 : </span><strong>120개 </strong></li>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>새로운 문의 : </span><strong>36개 </strong></li>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>기다리는 문의 : </span><strong>14개</strong></li>
+							<li style="border-left:1.5px solid #b8b8b8;"><span>총 문의 : </span><strong>${totalReboard }개 </strong></li>
+							<li style="border-left:1.5px solid #b8b8b8;"><span>오늘 새로운 문의 : </span><strong>${todayReboard }개 </strong></li>
 						</ul>
 					</div>
 				</div>
@@ -169,8 +169,8 @@ window.onload=function(){
 					</div>
 					<div class="col-div-65-80" style="padding-top:2em;">
 						<ul>
-							<li style="border-left:1.5px solid #b8b8b8;"><span>총 공고 수 : </span><strong>1,400 개</strong></li>
-							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>새로 등록된 공고 : </span><strong>14 개</strong></li>
+							<li style="border-left:1.5px solid #b8b8b8;"><span>공고 수 : </span><strong>${totalHN } 개</strong></li>
+							<li style="border-left:1.5px solid #b8b8b8; padding-top:0.6em;"><span>오늘 마감 공고 : </span><strong>${DeadLineHN } 개</strong></li>
 						</ul>
 					</div>
 				</div>

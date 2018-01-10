@@ -21,4 +21,9 @@ public interface AnalyticsService {
 	public int selectTotalNews();
 	public int selectTotalIntroduction();
 	public List<Map<String, Object>> selectTotalCompanyScale();
+	public int selectTotalMemCount();
+	public int selectTotalReboard();
+	public int selectTodayReboard();
+	public int selectDeadlineHN();
+	public int selectTotalHN();
 }

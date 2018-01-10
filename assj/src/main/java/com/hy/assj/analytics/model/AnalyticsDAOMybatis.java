@@ -104,4 +104,33 @@ public class AnalyticsDAOMybatis extends SqlSessionDaoSupport implements Analyti
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList(namespace+".selectTotalCompanyScale");
 	}
+
+	@Override
+	public int selectTotalMemCount() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne(namespace+".selectTotalMemCount");
+	}
+
+	@Override
+	public int selectTotalReboard() {
+		return getSqlSession().selectOne(namespace+".selectTotalReboard");
+	}
+
+	@Override
+	public int selectTodayReboard() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne(namespace+".selectTodayReboard");
+	}
+
+	@Override
+	public int selectDeadlineHN() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne(namespace+".selectDeadlineHN");
+	}
+
+	@Override
+	public int selectTotalHN() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne(namespace+".selectTotalHN");
+	}
 }

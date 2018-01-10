@@ -40,4 +40,6 @@ public interface AdminDAO {
 	public QuestionViewVO selectByquestion(int no);
 	
 	public int UpdateReplyFlag(int no);
+	
+	public Map<String, Object> selectAdminInfo(String userid);
 }
